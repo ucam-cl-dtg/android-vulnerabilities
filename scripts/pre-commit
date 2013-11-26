@@ -1,0 +1,9 @@
+#/bin/bash
+
+#Verify json is syntactically correct
+set -e
+
+for json in vulnerabilities/*.json
+do
+  cat $json | python -mjson.tool > /dev/null
+done
