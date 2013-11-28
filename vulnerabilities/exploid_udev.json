@@ -1,27 +1,25 @@
 {
-"exploid udev" : {
+  "name" : "exploid udev",
   "CVE" : [["CVE-2009-1185"]],
-  "Responsibly diclosed" : false,
+  "Responsibly_diclosed" : false,
   "Details" : [["udev before 1.4.1 does not verify whether a NETLINK message originates from kernel space, which allows local users to gain privileges by sending a NETLINK message from user space.","CVE-2009-1185"]],
-  "Discovered by" : ["Sebastian ???", "c-skills-android-trickery"],
-  "Discovered on" : {"date":"2010-07-15","bound":"before","ref":"c-skills-android-trickery"},
-  "Submitted by" : ["drt24"],
-  "Submitted on" : ["2013-09-04"],
-  "Reported on" : ["2010-07-15","c-skills-android-trickery"],
-  "Fixed on" : ["2011-04-18","netd-udev-fix"],
-  "Fix released on" : ["2011-07-25","sprint-2.3.5-release"],
-  "Affected versions" : ["1.0-2.3.4"],
-  "Affected devices" : ["all"],
-  "Affected versions regexp" : ["(1\\.[0-9]\\.[0-9])|(2\\.([0-2]\\.[0-9])|(3\\.[0-4]))"],
-  "Affected manufactures" : ["all"],
-  "Fixed versions" : ["2.3.5_r1","netd-udev-fix"]
-},
-
-"references" : {
-  "CVE-2009-1185" : {"url":"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1185"},
-  "c-skills-android-trickery" : {"url":"http://c-skills.blogspot.co.uk/2010/07/android-trickery.html"},
-  "netd-udev-fix" : {"url":"https://android.googlesource.com/platform/system/netd/+/79b579c92afc08ab12c0a5788d61f2dd2934836f", "commit":"79b579c92afc08ab12c0a5788d61f2dd2934836f","component":"platform/system/netd/"},
-  "sprint-2.3.5-release":{"url":["http://community.sprint.com/baw/community/sprintblogs/announcements/blog/2011/07/22/software-update-roll-out-begins-on-july-25-to-boost-nexus-s-4g-data-speeds","http://community.sprint.com/baw/thread/72067?start=21"]}
-}
+  "Discovered_by" : ["Sebastian ???", "c-skills-android-trickery"],
+  "Discovered_on" : {"date":"2010-07-15","bound":"before","ref":"c-skills-android-trickery"},
+  "Submitted_by" : ["drt24"],
+  "Submitted_on" : ["2013-09-04"],
+  "Reported_on" : ["2010-07-15","c-skills-android-trickery"],
+  "Fixed_on" : ["2011-04-18","netd-udev-fix"],
+  "Fix_released_on" : ["2011-07-25","sprint-2.3.5-release"],
+  "Affected_versions" : ["1.0-2.3.4"],
+  "Affected_devices" : ["all"],
+  "Affected_versions_regexp" : ["(1\\.[0-9]\\.[0-9])|(2\\.([0-2]\\.[0-9])|(3\\.[0-4]))"],
+  "Affected_manufactures" : ["all"],
+  "Fixed_versions" : ["2.3.5_r1","netd-udev-fix"],
+  "references" : {
+    "CVE-2009-1185" : {"url":"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1185"},
+    "c-skills-android-trickery" : {"url":"http://c-skills.blogspot.co.uk/2010/07/android-trickery.html"},
+    "netd-udev-fix" : {"url":"https://android.googlesource.com/platform/system/netd/+/79b579c92afc08ab12c0a5788d61f2dd2934836f", "commit":"79b579c92afc08ab12c0a5788d61f2dd2934836f","component":"platform/system/netd/"},
+    "sprint-2.3.5-release":{"url":["http://community.sprint.com/baw/community/sprintblogs/announcements/blog/2011/07/22/software-update-roll-out-begins-on-july-25-to-boost-nexus-s-4g-data-speeds","http://community.sprint.com/baw/thread/72067?start=21"]}
+  }
 
 }

@@ -1,19 +1,21 @@
 {
-"template" : {
+  "name" : "",
   "CVE" : [],
-  "Responsibly disclosed" : false,
+  "Responsibly_disclosed" : false,
   "Details" : [],
-  "Discovered by" : [],
-  "Discovered on" : [],
-  "Submitted by" : [],
-  "Submitted on" : [],
-  "Reported on" : [],
-  "Fixed on" : [],
-  "Fix released on" : [],
-  "Affected versions" : [],
-  "Affected devices" : [],
-  "Affected versions regexp" : [],
-  "Affected manufactures" : [],
-  "Fixed versions" : []
-}
+  "Discovered_by" : [],
+  "Discovered_on" : [],
+  "Submitted_by" : [],
+  "Submitted_on" : [],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufactures" : [],
+  "Fixed_versions" : [],
+  "references" : {
+    
+  }
 }
