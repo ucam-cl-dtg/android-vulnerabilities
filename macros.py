@@ -2,14 +2,31 @@
 # Do the parsing required to get all the vulnerabilities as objects in memory so that we can generate the pages.
 import json
 import os
+import dateutil.parser
 from collections import defaultdict
 
 # Class definition for a vulnerability
 class Vulnerability:
+	year_fields = ['Discovered_on','Submitted_on','Reported_on','Fixed_on','Fix_released_on']
 	def __init__(self,jsn):
 		self.jsn = jsn
+		self.name = jsn['name']
 	def years(self):
-		return []#TODO
+		yrs = []
+		for year_field in self.year_fields:
+			field = self.jsn[year_field]
+			if None == field:
+				continue
+			if isinstance(field, dict):
+				datestring = field['date']
+			elif isinstance(field, list):
+				datestring = field[0]
+			else:
+				print("Unexpected type of field %s: %s" % (year_field, field))
+				continue
+			date = dateutil.parser.parse(datestring)
+			yrs.append(str(date.year))
+		return yrs
 	def versions(self):
 		return []#TODO
 	def manufacturers(self):
@@ -39,4 +56,4 @@ for filename in os.listdir('vulnerabilities'):
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
 
-print(vulnerabilities)
+print(by_year)
