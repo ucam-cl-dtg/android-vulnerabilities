@@ -1,9 +1,9 @@
 {
   "name" : "exploid udev",
   "CVE" : [["CVE-2009-1185"]],
-  "Responsibly_diclosed" : false,
+  "Responsibly_disclosed" : false,
   "Details" : [["udev before 1.4.1 does not verify whether a NETLINK message originates from kernel space, which allows local users to gain privileges by sending a NETLINK message from user space.","CVE-2009-1185"]],
-  "Discovered_by" : ["Sebastian ???", "c-skills-android-trickery"],
+  "Discovered_by" : [["Sebastian ???", "c-skills-android-trickery"]],
   "Discovered_on" : {"date":"2010-07-15","bound":"before","ref":"c-skills-android-trickery"},
   "Submitted_by" : ["drt24"],
   "Submitted_on" : ["2013-09-04"],
@@ -13,7 +13,7 @@
   "Affected_versions" : ["1.0-2.3.4"],
   "Affected_devices" : ["all"],
   "Affected_versions_regexp" : ["(1\\.[0-9]\\.[0-9])|(2\\.([0-2]\\.[0-9])|(3\\.[0-4]))"],
-  "Affected_manufactures" : ["all"],
+  "Affected_manufacturers" : ["all"],
   "Fixed_versions" : ["2.3.5_r1","netd-udev-fix"],
   "references" : {
     "CVE-2009-1185" : {"url":"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1185"},
