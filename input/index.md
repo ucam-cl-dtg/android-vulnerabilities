@@ -1,5 +1,5 @@
 
-title: home
+title: Home
 menu-position: 0
 ---
 
