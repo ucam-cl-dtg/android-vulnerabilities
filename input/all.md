@@ -1,5 +1,6 @@
 
 title: All vulnerabilities
+menu-position: 1
 ---
 
 {%
