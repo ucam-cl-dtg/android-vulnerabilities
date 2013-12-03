@@ -88,6 +88,13 @@ class Vulnerability:
 	def __repr__(self):
 		return self.__str__()
 
+def print_by_page(vulndict):
+	for key, vulns in vulndict.items():
+		print("##{key}\n\n".format(key=key))
+		for vuln in vulns:
+			print(vuln)
+
+
 vulnerabilities = []
 # Key to list of vulnerability dicts
 # TODO these need sorting
