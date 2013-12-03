@@ -77,6 +77,7 @@ class Vulnerability:
 
 	def __str__(self):
 		return """### [{name}](/vulnerabilities/{urlname})
+([json](vulnerabilities/{urlname}.json))
 
 * CVE numbers: {cve}
 * Responsibly disclosed?: {responsibly}
