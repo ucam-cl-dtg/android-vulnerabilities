@@ -64,7 +64,7 @@ class Vulnerability:
 				if len(itemref) == 2:
 					itemstr += " " + self._str_reference(itemref[1])
 			else:
-				print("Unknown type of itemref:", type(itemref))
+				raise ValueError("Unknown type of itemref:" + str(type(itemref)) + " - "+ str(itemref))
 			#if isinstance(itemref, dict):
 				#TODO we don't use this yet
 			answer.append(itemstr)
@@ -77,13 +77,30 @@ class Vulnerability:
 * Responsibly disclosed?: {responsibly}
 * Details: {details}
 * Discovered by: {discovered_by} on: {discovered_on}
-* 
+* Reported on: {reported_on}
+* Fixed on: {fixed_on}
+* Fix released on: {fix_released_on}
+* Affected versions: {affected_versions} regex: {affected_versions_regexp}
+* Affected devices: {affected_devices}
+* Affected manufacturers: {affected_manufacturers}
+* Fixed versions: {fixed_versions}
+* Submitted by: {submitted_by} on: {submitted_on}
 """.format(name=self.name,
 		cve=self._print_ref_list(self.jsn['CVE']),
 		responsibly=self.jsn['Responsibly_disclosed'],
 		details=self._print_ref_list(self.jsn['Details'], separator="\n"),
 		discovered_by=self._print_ref_list(self.jsn['Discovered_by']),
-		discovered_on=DateRef(self.jsn['Discovered_on'], self)
+		discovered_on=DateRef(self.jsn['Discovered_on'], self),
+		reported_on=DateRef(self.jsn['Reported_on'], self),
+		fixed_on=DateRef(self.jsn['Fixed_on'], self),
+		fix_released_on=DateRef(self.jsn['Fix_released_on'], self),
+		affected_versions=self._print_ref_list(self.jsn['Affected_versions']),
+		affected_versions_regexp=", ".join(self.jsn['Affected_versions_regexp']),
+		affected_devices=self._print_ref_list(self.jsn['Affected_devices']),
+		affected_manufacturers=self._print_ref_list(self.jsn['Affected_manufacturers']),
+		fixed_versions=self._print_ref_list(self.jsn['Fixed_versions']),
+		submitted_by=", ".join(self.jsn['Submitted_by']),
+		submitted_on=", ".join(self.jsn['Submitted_on'])
 		)
 	def __repr__(self):
 		return self.__str__()
@@ -114,7 +131,7 @@ for filename in os.listdir('vulnerabilities'):
 		for version in vulnerability.versions():
 			by_version[version].append(vulnerability)
 		for manufacturer in vulnerability.manufacturers():
-			by_manufacturer[manufacturer].append(vulnerability)
+			by_manufacturer[manufacturer[0]].append(vulnerability)
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
 
