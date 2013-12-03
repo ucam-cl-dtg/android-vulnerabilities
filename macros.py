@@ -3,7 +3,7 @@
 import json
 import os
 import dateutil.parser
-from collections import defaultdict
+from collections import defaultdict,OrderedDict
 
 class DateRef:
 	def __init__(self, field, vuln):
@@ -135,3 +135,7 @@ for filename in os.listdir('vulnerabilities'):
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
 
+by_year = OrderedDict(sorted(by_year.items()))
+by_version = OrderedDict(sorted(by_version.items()))
+by_manufacturer = OrderedDict(sorted(by_manufacturer.items()))
+by_submitter = OrderedDict(sorted(by_submitter.items()))
