@@ -124,7 +124,7 @@ by_version = defaultdict(list)
 by_manufacturer = defaultdict(list)
 by_submitter = defaultdict(list)
 
-for filename in os.listdir('vulnerabilities'):
+for filename in os.listdir('input/vulnerabilities'):
 	if filename == 'template.json':# skip over template
 		continue
 	with open('input/vulnerabilities/' + filename) as f:
