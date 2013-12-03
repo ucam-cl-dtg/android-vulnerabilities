@@ -25,7 +25,7 @@ class DateRef:
 	def __str__(self):
 		string = self.datestring
 		if self.ref is not None:
-			string += self.vuln._str_reference(self.ref)
+			string += ' ' + self.vuln._str_reference(self.ref)
 		return string
 	
 # Class definition for a vulnerability
@@ -55,7 +55,7 @@ class Vulnerability:
 	def _get_reference_url(self,reference):
 		return self.jsn['references'][reference]['url']
 	def _str_reference(self,reference):
-		return "[{reference}]({url})".format(reference=reference,url=self._get_reference_url(reference))
+		return "\\[[{reference}]({url})\\]".format(reference=reference,url=self._get_reference_url(reference))
 	def _print_ref_list(self,reflist,separator=","):
 		answer = []
 		for itemref in reflist:
