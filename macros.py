@@ -135,4 +135,3 @@ for filename in os.listdir('vulnerabilities'):
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
 
-print(by_year)
