@@ -26,6 +26,8 @@ class DateRef:
 		string = self.datestring
 		if self.ref is not None:
 			string += ' ' + self.vuln._str_reference(self.ref)
+		else:
+			string += ' \\[citation-needed\\]'
 		return string
 	
 # Class definition for a vulnerability
@@ -63,6 +65,8 @@ class Vulnerability:
 				itemstr = itemref[0]
 				if len(itemref) == 2:
 					itemstr += " " + self._str_reference(itemref[1])
+				else:
+					itemstr += ' \\[citation-needed\\]'
 			else:
 				raise ValueError("Unknown type of itemref:" + str(type(itemref)) + " - "+ str(itemref))
 			#if isinstance(itemref, dict):
