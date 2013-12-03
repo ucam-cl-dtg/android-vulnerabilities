@@ -3,7 +3,7 @@
 #Verify json is syntactically correct
 set -e
 
-for json in vulnerabilities/*.json
+for json in input/vulnerabilities/*.json
 do
   cat $json | python -mjson.tool > /dev/null
 done

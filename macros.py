@@ -123,7 +123,7 @@ by_submitter = defaultdict(list)
 for filename in os.listdir('vulnerabilities'):
 	if filename == 'template.json':# skip over template
 		continue
-	with open('vulnerabilities/' + filename) as f:
+	with open('input/vulnerabilities/' + filename) as f:
 		vulnerability = Vulnerability(json.load(f))
 		vulnerabilities.append(vulnerability)
 		for year in vulnerability.years():
