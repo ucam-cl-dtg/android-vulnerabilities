@@ -36,6 +36,7 @@ class Vulnerability:
 	def __init__(self,jsn):
 		self.jsn = jsn
 		self.name = jsn['name']
+		self.urlname = self.name.replace(' ','_')
 	def years(self):
 		yrs = []
 		for year_field in self.year_fields:
@@ -75,7 +76,7 @@ class Vulnerability:
 		return separator.join(answer)
 
 	def __str__(self):
-		return """### {name}
+		return """### [{name}](/vulnerabilities/{urlname})
 
 * CVE numbers: {cve}
 * Responsibly disclosed?: {responsibly}
@@ -89,7 +90,7 @@ class Vulnerability:
 * Affected manufacturers: {affected_manufacturers}
 * Fixed versions: {fixed_versions}
 * Submitted by: {submitted_by} on: {submitted_on}
-""".format(name=self.name,
+""".format(name=self.name, urlname=self.urlname,
 		cve=self._print_ref_list(self.jsn['CVE']),
 		responsibly=self.jsn['Responsibly_disclosed'],
 		details=self._print_ref_list(self.jsn['Details'], separator="\n"),
@@ -143,3 +144,9 @@ by_year = OrderedDict(sorted(by_year.items()))
 by_version = OrderedDict(sorted(by_version.items()))
 by_manufacturer = OrderedDict(sorted(by_manufacturer.items()))
 by_submitter = OrderedDict(sorted(by_submitter.items()))
+
+# Create a page for each vulnerability
+def hook_preconvert_vulnpages():
+	for vulnerability in vulnerabilities:
+		p = Page("vulnerabilities/{name}.md".format(name=vulnerability.urlname),virtual=str(vulnerability),title=vulnerability.name)
+		pages.append(p)
