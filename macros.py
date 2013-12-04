@@ -13,13 +13,17 @@ class DateRef:
 			self.datestring = field['date']
 			self.ref = field['ref']
 		elif isinstance(field, list):
+			if len(field) == 0:
+				raise ValueError("No field to process")
 			self.datestring = field[0]
 			if len(field) == 2:
 				self.ref = field[1]
 			else:
 				self.ref = None
 		else:
-			raise ValueError("Unexpected type of field %s: %s" % (year_field, field))
+			raise ValueError("Unexpected type of field %s" % (field))
+		if not isinstance(self.datestring,basestring):
+			raise ValueError("Date string not a string: " + str(type(self.datestring)) + " - " + str(self.datestring))
 		self.date = dateutil.parser.parse(self.datestring)
 		self.vuln = vuln
 	def __str__(self):
@@ -37,16 +41,23 @@ class Vulnerability:
 		self.jsn = jsn
 		self.name = jsn['name']
 		self.urlname = self.name.replace(' ','_')
-	def years(self):
-		yrs = []
-		for year_field in self.year_fields:
-			field = self.jsn[year_field]
+	def _years_append(self,yrs,field):
 			try:
 				dateref = DateRef(field, self)
 			except ValueError as e:
 				print e #TODO stderr
-				continue
+				return
 			yrs.append(str(dateref.date.year))
+	def years(self):
+		yrs = []
+		for year_field in self.year_fields:
+			field = self.jsn[year_field]
+			if len(field) > 0:
+				if isinstance(field,list) and isinstance(field[0],list):
+					for entry in field:
+						self._years_append(yrs,entry)
+				else:
+					self._years_append(yrs,field)
 		return set(yrs)
 	def versions(self):
 		return []#TODO
