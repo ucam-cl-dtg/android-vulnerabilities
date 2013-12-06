@@ -14,7 +14,7 @@ class DateRef:
 			self.ref = field['ref']
 		elif isinstance(field, list):
 			if len(field) == 0:
-				raise ValueError("No field to process")
+				raise ValueError("No field to process: " + str(field))
 			self.datestring = field[0]
 			if len(field) == 2:
 				self.ref = field[1]
@@ -33,10 +33,25 @@ class DateRef:
 		else:
 			string += ' \\[citation-needed\\]'
 		return string
-	
+
+def get_submitters(submission_list):
+	submitters = []
+	for submission in submission_list:
+		submitters.append(submission['by'])
+	return submitters
+
+class Submission:
+	def __init__(self,jsn):
+		self.by = jsn['by']
+		self.on = jsn['on']
+	def __str__(self):
+		return "by: {by}, on: {on}".format(by=self.by,on=self.on)
+	def __repr__(self):
+		return self.__str__()
+
 # Class definition for a vulnerability
 class Vulnerability:
-	year_fields = ['Discovered_on','Reported_on','Fixed_on','Fix_released_on']#'Submitted_on',
+	year_fields = ['Discovered_on','Reported_on','Fixed_on','Fix_released_on']
 	def __init__(self,jsn):
 		self.jsn = jsn
 		self.name = jsn['name']
@@ -64,7 +79,7 @@ class Vulnerability:
 	def manufacturers(self):
 		return self.jsn['Affected_manufacturers']
 	def submitters(self):
-		submitterslist = self.jsn['Submitted_by']
+		submitterslist = get_submitters(self.jsn['Submission'])
 		return submitterslist
 	def _get_reference_url(self,reference):
 		return self.jsn['references'][reference]['url']
@@ -85,7 +100,18 @@ class Vulnerability:
 				#TODO we don't use this yet
 			answer.append(itemstr)
 		return separator.join(answer)
-
+	def _dateref(self,jsn):
+		"""Try and turn json into a DateRef or a string representing a list of DateRefs but if that fails Return 'Unknown'"""
+		if len(jsn) == 0:
+			return "Unknown"
+		elif isinstance(jsn,list):
+			if isinstance(jsn[0],list):
+				return ", ".join(map(lambda x : str(DateRef(x[0],x[1])),zip(jsn,[self]*len(jsn))))
+		try:
+			return DateRef(jsn,self)
+		except ValueError as e:
+			print(e)
+			return "Unknown"
 	def __str__(self):
 		return """### [{name}](/vulnerabilities/{urlname})
 ([json](vulnerabilities/{urlname}.json))
@@ -101,23 +127,22 @@ class Vulnerability:
 * Affected devices: {affected_devices}
 * Affected manufacturers: {affected_manufacturers}
 * Fixed versions: {fixed_versions}
-* Submitted by: {submitted_by} on: {submitted_on}
+* Submission: {submission_list}
 """.format(name=self.name, urlname=self.urlname,
 		cve=self._print_ref_list(self.jsn['CVE']),
 		responsibly=self.jsn['Responsibly_disclosed'],
 		details=self._print_ref_list(self.jsn['Details'], separator="\n"),
 		discovered_by=self._print_ref_list(self.jsn['Discovered_by']),
-		discovered_on=DateRef(self.jsn['Discovered_on'], self),
-		reported_on=DateRef(self.jsn['Reported_on'], self),
-		fixed_on=DateRef(self.jsn['Fixed_on'], self),
-		fix_released_on=DateRef(self.jsn['Fix_released_on'], self),
+		discovered_on=self._dateref(self.jsn['Discovered_on']),
+		reported_on=self._dateref(self.jsn['Reported_on']),
+		fixed_on=self._dateref(self.jsn['Fixed_on']),
+		fix_released_on=self._dateref(self.jsn['Fix_released_on']),
 		affected_versions=self._print_ref_list(self.jsn['Affected_versions']),
 		affected_versions_regexp=", ".join(self.jsn['Affected_versions_regexp']),
 		affected_devices=self._print_ref_list(self.jsn['Affected_devices']),
 		affected_manufacturers=self._print_ref_list(self.jsn['Affected_manufacturers']),
 		fixed_versions=self._print_ref_list(self.jsn['Fixed_versions']),
-		submitted_by=", ".join(self.jsn['Submitted_by']),
-		submitted_on=", ".join(self.jsn['Submitted_on'])
+		submission_list="; ".join(map(str,map(Submission,self.jsn['Submission']))),
 		)
 	def __repr__(self):
 		return self.__str__()
