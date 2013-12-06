@@ -49,6 +49,16 @@ class Submission:
 	def __repr__(self):
 		return self.__str__()
 
+class Submitter:
+	def __init__(self,jsn):
+		self.ID = jsn['id']
+		self.name = jsn['name']
+		self.email = jsn['name']
+		self.url = jsn['url']
+		self.fingerprints = jsn['fingerprints']
+		self.show_photo = jsn['photo']
+
+
 # Class definition for a vulnerability
 class Vulnerability:
 	year_fields = ['Discovered_on','Reported_on','Fixed_on','Fix_released_on']
@@ -179,6 +189,15 @@ for filename in os.listdir('input/vulnerabilities'):
 			by_manufacturer[manufacturer[0]].append(vulnerability)
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
+
+submitters = []
+for filename in os.listdir('input/submitters'):
+	if not filename.endswith('.json'):
+		continue
+	with open('input/submitters/' + filename,'r') as f:
+		print("processing: " + filename)
+		submitter = Submitter(json.load(f))
+		submitters.append(submitter)
 
 by_year = OrderedDict(sorted(by_year.items()))
 by_version = OrderedDict(sorted(by_version.items()))
