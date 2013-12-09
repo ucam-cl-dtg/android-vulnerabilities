@@ -137,7 +137,7 @@ class Vulnerability:
 		if len(jsn) == 0:
 			return "Unknown"
 		try:
-			return ", ".join(self._rawdateref(jsn))
+			return ", ".join(map(str,self._rawdateref(jsn)))
 		except ValueError as e:
 			print("Error in _dateref: " + str(e))
 			return "Unknown"
