@@ -5,7 +5,7 @@
   "Details" : [["adb fails to check setuid return code and this can be caused to fail by the shell user already having RLIMIT_NPROC processes."]],
   "Discovered_by" : [],
   "Discovered_on" : [],
-  "Submission" : [],
+  "Submission" : [{"by" : "drt24", "on" : "2013-09-05"}],
   "Reported_on" : [],
   "Fixed_on" : [],
   "Fix_released_on" : [],
