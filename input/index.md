@@ -3,6 +3,8 @@ title: Home
 menu-position: 0
 ---
 
+## Work in progress: This is not finished yet
+
 ![Proportion of devices affected by root vulnerabilities](images/nvulnerabilities.png)
 
 Devices running vulnerable versions of Android
