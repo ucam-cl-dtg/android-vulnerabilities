@@ -45,7 +45,7 @@ class Submission:
 		self.by = jsn['by']
 		self.on = jsn['on']
 	def __str__(self):
-		return "by: {by}, on: {on}".format(by=self.by,on=self.on)
+		return "by: [{name}](submitters/{by}), on: {on}".format(name=submitters[self.by].name,by=self.by,on=self.on)
 	def __repr__(self):
 		return self.__str__()
 
