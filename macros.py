@@ -53,10 +53,26 @@ class Submitter:
 	def __init__(self,jsn):
 		self.ID = jsn['id']
 		self.name = jsn['name']
-		self.email = jsn['name']
+		self.email = jsn['email']
 		self.url = jsn['url']
 		self.fingerprints = jsn['fingerprints']
 		self.show_photo = jsn['photo']
+	def __str__(self):
+		if self.show_photo:
+			photostring = "![Photo of {name}](images/people/{ID}.jpg)".format(name=self.name,ID=self.ID)
+		else:
+			photostring=""
+		return """#{name} ({ID})
+
+* Name: {name}
+* Email: {email}
+* Website: {url}
+* GPG fingerprints: {fingerprints}
+
+{photo}
+""".format(name=self.name,ID=self.ID,email=self.email,url=self.url,fingerprints=", ".join(self.fingerprints),photo=photostring)
+	def __repr__(self):
+		return self.__str__()
 
 
 # Class definition for a vulnerability
@@ -190,14 +206,14 @@ for filename in os.listdir('input/vulnerabilities'):
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
 
-submitters = []
+submitters = dict()
 for filename in os.listdir('input/submitters'):
 	if not filename.endswith('.json'):
 		continue
 	with open('input/submitters/' + filename,'r') as f:
 		print("processing: " + filename)
 		submitter = Submitter(json.load(f))
-		submitters.append(submitter)
+		submitters[submitter.ID] = submitter
 
 by_year = OrderedDict(sorted(by_year.items()))
 by_version = OrderedDict(sorted(by_version.items()))
@@ -208,4 +224,8 @@ by_submitter = OrderedDict(sorted(by_submitter.items()))
 def hook_preconvert_vulnpages():
 	for vulnerability in vulnerabilities:
 		p = Page("vulnerabilities/{name}.md".format(name=vulnerability.urlname),virtual=str(vulnerability),title=vulnerability.name)
+		pages.append(p)
+def hook_preconvert_submitterpages():
+	for ID, submitter in submitters.items():
+		p = Page("submitters/{ID}.md".format(ID=ID),virtual=str(submitter),title="{name} ({ID})".format(name=submitter.name,ID=ID))
 		pages.append(p)
