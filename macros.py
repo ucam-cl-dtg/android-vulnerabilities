@@ -84,11 +84,12 @@ class Vulnerability:
 		self.urlname = self.name.replace(' ','_')
 	def _years_append(self,yrs,field):
 			try:
-				dateref = DateRef(field, self)
+				daterefs = self._rawdateref(field)
 			except ValueError as e:
 				print e #TODO stderr
 				return
-			yrs.append(str(dateref.date.year))
+			for dateref in daterefs:
+				yrs.append(str(dateref.date.year))
 	def years(self):
 		yrs = []
 		for year_field in self.year_fields:
@@ -126,17 +127,19 @@ class Vulnerability:
 				#TODO we don't use this yet
 			answer.append(itemstr)
 		return separator.join(answer)
+	def _rawdateref(self,jsn):
+		if isinstance(jsn,list):
+			if isinstance(jsn[0],list) or isinstance(jsn[0],dict):
+				return map(lambda x : DateRef(x[0],x[1]),zip(jsn,[self]*len(jsn)))
+		return [DateRef(jsn,self)]
 	def _dateref(self,jsn):
 		"""Try and turn json into a DateRef or a string representing a list of DateRefs but if that fails Return 'Unknown'"""
 		if len(jsn) == 0:
 			return "Unknown"
-		elif isinstance(jsn,list):
-			if isinstance(jsn[0],list):
-				return ", ".join(map(lambda x : str(DateRef(x[0],x[1])),zip(jsn,[self]*len(jsn))))
 		try:
-			return DateRef(jsn,self)
+			return ", ".join(self._rawdateref(jsn))
 		except ValueError as e:
-			print(e)
+			print("Error in _dateref: " + str(e))
 			return "Unknown"
 	def __str__(self):
 		return """### [{name}](/vulnerabilities/{urlname})
