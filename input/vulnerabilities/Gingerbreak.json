@@ -1,0 +1,54 @@
+{
+  "name" : "Gingerbreak",
+  "CVE" : [["CVE-2011-1823","CVE-2011-1823"]],
+  "Responsibly_disclosed" : false,
+  "Details" : [["The vold volume manager daemon on Android 3.0 and 2.x before 2.3.4 trusts messages that are received from a PF_NETLINK socket, which allows local users to execute arbitrary code and gain root privileges"]],
+  "Discovered_by" : [["The Android Exploid Crew"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"drt24","on":"2013-09-02"}],
+  "Reported_on" : [["2011-04-21","c-skills-gingerbreak"],["2011-04-21","xda-forum-gingerbreak"]],
+  "Fixed_on" : [["2011-04-18","patch-vold-gingerbreak"],["2011-04-18","patch-netd-gingerbreak"],["2011-04-18","patch-core-gingerbreak"]],
+  "Fix_released_on" : [["2011-04-29","productforums-ard-2.3.4"]],
+  "Affected_versions" : [["2.2, 2.3, 2.3.1, 3.0"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [["2.3.4","tag-android-2.3.4_r1"],["3.1","ard-dev-3.1-release"]],
+  "references" : {
+    "CVE-2011-1823" : {
+      "url" : "http://www.cvedetails.com/cve/CVE-2011-1823/"
+    },
+    "c-skills-gingerbreak" : {
+      "url" : "http://c-skills.blogspot.co.uk/2011/04/yummy-yummy-gingerbreak.html"
+    },
+    "xda-forum-gingerbreak" : {
+      "url" : "http://forum.xda-developers.com/showthread.php?t=1044765"
+    },
+    "patch-vold-gingerbreak" : {
+      "url" : "https://android.googlesource.com/platform/system/vold/+/c51920c82463b240e2be0430849837d6fdc5352e",
+      "commit" : "c51920c82463b240e2be0430849837d6fdc5352e",
+      "component" : "platform/system/vold"
+    },
+    "patch-netd-gingerbreak" : {
+      "url" : "https://android.googlesource.com/platform/system/netd/+/79b579c92afc08ab12c0a5788d61f2dd2934836f",
+      "commit" : "79b579c92afc08ab12c0a5788d61f2dd2934836f",
+      "component" : "platform/system/netd"
+    },
+    "patch-core-gingerbreak" : {
+      "url" : "https://android.googlesource.com/platform/system/core/+/b620a0b1c7ae486e979826200e8e441605b0a5d6",
+      "commit" : "b620a0b1c7ae486e979826200e8e441605b0a5d",
+      "component" : "platform/system/core"
+    },
+    "productforums-ard-2.3.4" : {
+      "url" : "http://productforums.google.com/forum/#!topic/mobile/yXzTapQlOso"
+    },
+    "tag-android-2.3.4_r1" : {
+      "url" : "https://android.googlesource.com/platform/system/core/+/android-2.3.4_r1",
+      "tag" : "android-2.3.4_r1",
+      "component" : "platform/system/core"
+    },
+    "ard-dev-3.1-release" : {
+      "url" : "http://android-developers.blogspot.co.uk/2011/05/android-31-platform-new-sdk-tools.html"
+    }
+  }
+}
