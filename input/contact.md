@@ -11,3 +11,7 @@ This is a project run by Daniel Thomas and Alastair Beresford.
 </div>
 
 We can be reached at contact@androidvulnerabilities.org.
+
+This is a research project being run from the [Computer Laboratory](https://www.cl.cam.ac.uk/) of the [University of Cambridge](http://www.cam.ac.uk).
+
+![University of Cambridge logo](images/uc-cmyk.png)
