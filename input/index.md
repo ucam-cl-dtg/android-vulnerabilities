@@ -17,6 +17,9 @@ This allows for analysis of what proportion of Android devices are vulnerable to
 It should also allow us to compare different manufacturers and network operators in terms of the time it takes them to supply updates to customers.
 This work is being coordinated by [Daniel Thomas](submitters/drt24).
 
+At the moment we are only tracking 'root equivalent vulnerabilities' which an application could exploit.
+This means vulnerabilities which allow an application (malicious or compromised) to either directly gain root or gain privlieges which can then be used to obtain root.
+
 ## [List of vulnerabilities](all)
 * [by manufacturer](by/manufacturer)
 * [by year](by/year)
