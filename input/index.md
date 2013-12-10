@@ -5,9 +5,10 @@ menu-position: 0
 
 ## Work in progress: This is not finished yet
 
-![Proportion of devices affected by root vulnerabilities](images/nvulnerabilities.png)
-
-Devices running vulnerable versions of Android
+<div id="graph">
+<img src="images/nvulnerabilities.png" alt="Proportion of devices affected by root vulnerabilities"/>
+<p>Devices running vulnerable versions of Android</p>
+</div>
 
 ## [List of vulnerabilities](all)
 * [by manufacturer](by/manufacturer)
