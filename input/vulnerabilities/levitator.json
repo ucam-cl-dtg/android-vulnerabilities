@@ -1,0 +1,33 @@
+{
+  "name" : "levitator",
+  "CVE" : [["CVE-2011-1350"],["CVE-2011-1352"]],
+  "Responsibly_disclosed" : true,
+  "Details" : [["Improper bounds checking in the PowerVR driver as used in versions of Android prior to 2.3.6 when copying user data to kernel memory allows a malicious local application to write to the same area of memory referenced in CVE-2011-1350, potentially allowing for arbitrary code execution and privilege escalation."]],
+  "Discovered_by" : [["Geremy Condra","security-focus-57900"]],
+  "Discovered_on" : [{"date":"2011-03-10", "bound":"before", "ref":"CVE-2011-1350"}],
+  "Submission" : [{"by":"drt24", "on":"2013-09-02"}],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [["2011-09-02","w-ard-ver-hist"],["2011-09-29","tag-android-2.3.6_r1"]],
+  "Affected_versions" : [["1.0 -- 2.3.5"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [["2.3.6"]],
+  "references" : {
+    "security-focus-57900" : {
+      "url" : "http://www.securityfocus.com/bid/57900/info"
+    },
+    "CVE-2011-1350" : {
+      "url" : "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1350"
+    },
+    "w-ard-ver-hist" : {
+      "url" : "http://en.wikipedia.org/w/index.php?title=Android_version_history&oldid=448202085"
+    },
+    "tag-android-2.3.6_r1" : {
+      "url" : "https://android.googlesource.com/platform/libcore/+/android-2.3.6_r1",
+      "component" : "platform/libcore/",
+      "tag" : "android-2.3.6_r1"
+    }
+  }
+}
