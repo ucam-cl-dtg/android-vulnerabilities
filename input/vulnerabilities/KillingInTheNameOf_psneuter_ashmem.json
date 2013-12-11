@@ -1,7 +1,7 @@
 {
   "name" : "KillingInTheNameOf psneuter ashmem",
   "CVE" : [["CVE-2011-1149"]],
-  "Responsibly_disclosed" : "false",
+  "Responsibly_disclosed" : false,
   "Details" : [["Android before 2.3 does not properly restrict access to the system property space, which allows local applications to bypass the application sandbox and gain privileges"]],
   "Discovered_by" : [],
   "Discovered_on" : [],

@@ -1,7 +1,7 @@
 {
   "name" : "RageAgainstTheCage zygote",
   "CVE" : [["ANDROID-3176774"]],
-  "Responsibly_disclosed" : [false],
+  "Responsibly_disclosed" : false,
   "Details" : [],
   "Discovered_by" : [],
   "Discovered_on" : [],
