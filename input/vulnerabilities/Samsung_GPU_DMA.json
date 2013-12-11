@@ -1,0 +1,22 @@
+{
+  "name" : "Samsung GPU DMA",
+  "CVE" : [],
+  "Responsibly_disclosed" : true,
+  "Details" : [["","talks.cam-46303"]],
+  "Discovered_by" : [["Janis Danisevskis <janis@sec.t-labs.tu-berlin.de> from Technische Universität Berlin"]],
+  "Discovered_on" : [["2012-09-30"]],
+  "Submission" : [],
+  "Reported_on" : [["2013-04-04"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Samsung"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "talks.cam-46303" : {
+      "url" : "http://talks.cam.ac.uk/talk/index/46303"
+    }
+  }
+}
