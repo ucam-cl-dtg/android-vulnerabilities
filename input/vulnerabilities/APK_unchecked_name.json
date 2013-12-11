@@ -1,0 +1,33 @@
+{
+  "name" : "APK unchecked name",
+  "CVE" : [["ANDROID-9950697"]],
+  "Responsibly_disclosed" : false,
+  "Details" : [["APK signature verification does not check name lengths correctly, creating a difference between how the zip files are verified compared with how they are extracted which allows files in an existing APK to be replaced with new files.","saurik-19"]],
+  "Discovered_by" : [["Jay Freeman (saurik)","saurik-19"],["Elliott Hughes <enh@google.com>","android-issue-57851"]],
+  "Discovered_on" : [{"date":"2013-06-30", "bound":"before", "ref":"saurik-19"}],
+  "Submission" : [{"by":"drt24","on":"2013-11-14"}],
+  "Reported_on" : [["2013-11-01","saurik-19"],["2013-11-01","CydiaImpactor-396439244782067713"]],
+  "Fixed_on" : [["2013-07-21","patch-unchecked-name"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["4.3 and earlier"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [["4.4","patch-unchecked-name"]],
+  "references" : {
+    "saurik-19" : {
+      "url" : "http://www.saurik.com/id/19"
+    },
+    "android-issue-57851" : {
+      "url" : "https://code.google.com/p/android/issues/detail?id=57851"
+    },
+    "CydiaImpactor-396439244782067713" : {
+      "url" : "https://twitter.com/CydiaImpactor/status/396439244782067713"
+    },
+    "patch-unchecked-name" : {
+      "url" : "https://android.googlesource.com/platform/libcore/+/2da1bf57a6631f1cbd47cdd7692ba8743c993ad9%5E%21/",
+      "component" : "platform/libcore",
+      "commit" : "2da1bf57a6631f1cbd47cdd7692ba8743c993ad9"
+    }
+  }
+}
