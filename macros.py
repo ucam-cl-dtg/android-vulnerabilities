@@ -1,5 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # Do the parsing required to get all the vulnerabilities as objects in memory so that we can generate the pages.
+from __future__ import absolute_import, division, print_function, unicode_literals
+# Evil hack to make UTF-8 default
+import sys
+reload(sys)
+sys.setdefaultencoding("UTF-8")
 import json
 import os
 import dateutil.parser
@@ -14,7 +20,7 @@ class DateRef:
 			self.ref = field['ref']
 		elif isinstance(field, list):
 			if len(field) == 0:
-				raise ValueError("No field to process: " + str(field))
+				raise ValueError("No field to process: " + unicode(field))
 			self.datestring = field[0]
 			if len(field) == 2:
 				self.ref = field[1]
@@ -23,7 +29,7 @@ class DateRef:
 		else:
 			raise ValueError("Unexpected type of field %s" % (field))
 		if not isinstance(self.datestring,basestring):
-			raise ValueError("Date string not a string: " + str(type(self.datestring)) + " - " + str(self.datestring))
+			raise ValueError("Date string not a string: " + unicode(type(self.datestring)) + " - " + unicode(self.datestring))
 		self.date = dateutil.parser.parse(self.datestring)
 		self.vuln = vuln
 	def __str__(self):
@@ -86,10 +92,10 @@ class Vulnerability:
 			try:
 				daterefs = self._rawdateref(field)
 			except ValueError as e:
-				print e #TODO stderr
+				print(e)#TODO stderr
 				return
 			for dateref in daterefs:
-				yrs.append(str(dateref.date.year))
+				yrs.append(unicode(dateref.date.year))
 	def years(self):
 		yrs = []
 		for year_field in self.year_fields:
@@ -122,7 +128,7 @@ class Vulnerability:
 				else:
 					itemstr += ' \\[citation-needed\\]'
 			else:
-				raise ValueError("Unknown type of itemref:" + str(type(itemref)) + " - "+ str(itemref))
+				raise ValueError("Unknown type of itemref:" + unicode(type(itemref)) + " - "+ unicode(itemref))
 			#if isinstance(itemref, dict):
 				#TODO we don't use this yet
 			answer.append(itemstr)
@@ -139,7 +145,7 @@ class Vulnerability:
 		try:
 			return ", ".join(map(str,self._rawdateref(jsn)))
 		except ValueError as e:
-			print("Error in _dateref: " + str(e))
+			print("Error in _dateref: " + unicode(e))
 			return "Unknown"
 	def __str__(self):
 		return """### [{name}](/vulnerabilities/{urlname})
@@ -226,9 +232,9 @@ by_submitter = OrderedDict(sorted(by_submitter.items()))
 # Create a page for each vulnerability
 def hook_preconvert_vulnpages():
 	for vulnerability in vulnerabilities:
-		p = Page("vulnerabilities/{name}.md".format(name=vulnerability.urlname),virtual=str(vulnerability),title=vulnerability.name)
+		p = Page("vulnerabilities/{name}.md".format(name=vulnerability.urlname),virtual=unicode(vulnerability),title=vulnerability.name)
 		pages.append(p)
 def hook_preconvert_submitterpages():
 	for ID, submitter in submitters.items():
-		p = Page("submitters/{ID}.md".format(ID=ID),virtual=str(submitter),title="{name} ({ID})".format(name=submitter.name,ID=ID))
+		p = Page("submitters/{ID}.md".format(ID=ID),virtual=unicode(submitter),title="{name} ({ID})".format(name=submitter.name,ID=ID))
 		pages.append(p)
