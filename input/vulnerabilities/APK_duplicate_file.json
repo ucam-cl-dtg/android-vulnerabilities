@@ -1,0 +1,30 @@
+{
+  "name" : "APK duplicate file",
+  "CVE" : [["ANDROID-8219321"],["CVE-2013-4787"]],
+  "Responsibly_disclosed" : true,
+  "Details" : [["Android does not properly check cryptographic signatures for applications, which allows attackers to execute arbitrary code via an application package file (APK) that is modified in a way that does not violate the cryptographic signature. Android security bug 8219321."]],
+  "Discovered_by" : [["Jeff Forristal of Bluebox security","bluebox-master-key"]],
+  "Discovered_on" : [{"date":"2013-02-18", "bound":"before", "ref":"bluebox-master-key"}],
+  "Submission" : [{"by":"drt24","on":"2013-09-02"}],
+  "Reported_on" : [["2013-07-03","bluebox-master-key"]],
+  "Fixed_on" : [["2013-02-18","patch-apk-dup-file"]],
+  "Fix_released_on" : [["2013-07-24","verge-android-4.3"]],
+  "Affected_versions" : [["1.6-4.2"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [["4.3_r0.9","patch-apk-dup-file"]],
+  "references" : {
+    "bluebox-master-key" : {
+      "url" : "http://bluebox.com/corporate-blog/bluebox-uncovers-android-master-key/"
+    },
+    "patch-apk-dup-file" : {
+      "url" : "https://android.googlesource.com/platform/libcore/+/38cad1eb5cc0c30e034063c14c210912d97acb92",
+      "component" : "platform/libcore",
+      "commit" : "38cad1eb5cc0c30e034063c14c210912d97acb92"
+    },
+    "verge-android-4.3" : {
+      "url" : "http://www.theverge.com/2013/7/24/4550234/android-4-3-announcement"
+    }
+  }
+}
