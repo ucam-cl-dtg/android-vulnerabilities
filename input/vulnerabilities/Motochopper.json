@@ -1,0 +1,33 @@
+{
+  "name" : "Motochopper",
+  "CVE" : [["CVE-2013-2596"]],
+  "Responsibly_disclosed" : false,
+  "Details" : [["Integer overflow in the fb_mmap function in drivers/video/fbmem.c in the Linux kernel before 3.8.9 QCIR-2013-00004-1","QCIR-2013-00004-1"]],
+  "Discovered_by" : [["Dan Rosenberg"]],
+  "Discovered_on" : [["2013-04-08"]],
+  "Submission" : [{"by":"drt24","on":"2013-09-04"}],
+  "Reported_on" : [["2013-04-08","azimuth-unlock-moto-bootloader"]],
+  "Fixed_on" : [["2013-04-19","fb_mmap-patch"]],
+  "Fix_released_on" : [{"date":"2013-07-17","bound":"before","ref":"xda-developers-motochopper"}],
+  "Affected_versions" : [["4.1.2"]],
+  "Affected_devices" : [[["Atrix Hd", "Razr hd", "Razr M", "Qualcomm Msm8960"]]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Motorola"],["Qualcomm","QCIR-2013-00004-1"]],
+  "Fixed_versions" : [["4.1.2 build 9.8.1Q-79"]],
+  "references" : {
+    "QCIR-2013-00004-1" : {
+      "url" : "https://www.codeaurora.org/projects/security-advisories/integer-overflow-range-check-when-mapping-framebuffer-memory-cve-2013-2596"
+    },
+    "azimuth-unlock-moto-bootloader" : {
+      "url" : ["http://blog.azimuthsecurity.com/2013/04/unlocking-motorola-bootloader.html","http://www.droidrzr.com/index.php/topic/15208-root-motochopper-yet-another-android-root-exploit-412/?pid=244281#entry244281"]
+    },
+    "fb_mmap-patch" : {
+      "url" : "https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=fc9bbca8f650e5f738af8806317c0a041a48ae4a",
+      "component" : "linux/kernel/git/torvalds/linux.git",
+      "commit" : "fc9bbca8f650e5f738af8806317c0a041a48ae4a"
+    },
+    "xda-developers-motochopper" : {
+      "url" : "http://forum.xda-developers.com/showthread.php?p=43960995"
+    }
+  }
+}
