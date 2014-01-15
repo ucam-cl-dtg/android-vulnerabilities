@@ -1,5 +1,5 @@
 {
-  "name" : "LG_Sprite_backup",
+  "name" : "LG Sprite backup",
   "CVE" : [["CVE-2013-3685"]],
   "Responsibly_disclosed" : false,
   "Details" : [["Race condition in Sprite Software's backup software, installed by OEM on LG Android devices.","fulldisclosure-2013-06-196"]],
