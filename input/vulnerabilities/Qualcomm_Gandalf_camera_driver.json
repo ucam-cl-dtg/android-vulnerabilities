@@ -1,0 +1,28 @@
+{
+  "name" : "Qualcomm Gandalf camera driver",
+  "CVE" : [["CVE-2013-2595","QCIR-2013-00001-1"]],
+  "Responsibly_disclosed" : true,
+  "Details" : [["The camera driver provides several interfaces to user space clients. The user space clients communicate to the kernel via syscalls such as ioctl or mmap. The camera driver provides an uncontrolled mmap interface that allows an application with access to the device file to map physical memory exceeding the camera driver's memory into user space. A locally installed, unprivileged application can use this flaw to escalate privileges.","QCIR-2013-00001-1"]],
+  "Discovered_by" : [["alephzain <alephzain1@gmail.com>","QCIR-2013-00001-1"]],
+  "Discovered_on" : [{"date":"2013-03-15","bound":"before","ref":"CVE-2013-2595"}],
+  "Submission" : [{"by":"drt24","on":"2013-11-06"}],
+  "Reported_on" : [["2013-05-01","xda-developers-gandalf"]],
+  "Fixed_on" : [["2013-05-01","QCIR-2013-00001-1"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Qualcomm"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "QCIR-2013-00001-1" : {
+      "url" : "https://www.codeaurora.org/projects/security-advisories/uncontrolled-memory-mapping-camera-driver-cve-2013-2595"
+    },
+    "CVE-2013-2595" : {
+      "url" : "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2595"
+    },
+    "xda-developers-gandalf" : {
+      "url" : "http://forum.xda-developers.com/showthread.php?p=40936861&highlight=gandalf#post40936861"
+    }
+  }
+}
