@@ -1,0 +1,25 @@
+{
+  "name" : "Qualcomm acdb audio buffer overflow",
+  "CVE" : [["CVE-2013-2597","QCIR-2013-00002-1"]],
+  "Responsibly_disclosed" : false,
+  "Details" : [["The acdb audio driver provides an ioctl system call interface to user space clients for communication. When processing arguments passed to the ioctl handler, a user space supplied size is used to copy as many bytes from user space to a local stack buffer without proper bounds checking. An application with access to the /dev/msm_acdb device file (audio or system group) can use this flaw to, e.g., elevate privileges. QCIR-2013-00002-1","QCIR-2013-00002-1"]],
+  "Discovered_by" : [["@fi01_IS01","QCIR-2013-00002-1"],["Xuxian Jiang","QCIR-2013-00002-1"]],
+  "Discovered_on" : [{"date":"2013-05-08","bound":"before","ref":"twitter-fi01_IS01"}],
+  "Submission" : [{"by":"drt24","on":"2013-11-08"}],
+  "Reported_on" : [["2013-05-08","twitter-fi01_IS01"]],
+  "Fixed_on" : [["2013-06-21","QCIR-2013-00002-1"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Qualcomm","QCIR-2013-00002-1"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "QCIR-2013-00002-1" : {
+      "url" : "https://www.codeaurora.org/projects/security-advisories/stack-based-buffer-overflow-acdb-audio-driver-cve-2013-2597"
+    },
+    "twitter-fi01_IS01" : {
+      "url" : "https://twitter.com/fi01_IS01/statuses/332055753181519872"
+    }
+  }
+}
