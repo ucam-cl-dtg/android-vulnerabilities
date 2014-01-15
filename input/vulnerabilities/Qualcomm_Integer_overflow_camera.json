@@ -1,0 +1,40 @@
+{
+  "name" : "Qualcomm Integer overflow camera",
+  "CVE" : [["CVE-2013-4736","QCIR-2013-00005-1"]],
+  "Responsibly_disclosed" : false,
+  "Details" : [["Integer overflow and signedness issue in camera JPEG engines (CVE-2013-4736) QCIR-2013-00005-1: The JPEG engines that are part of the camera driver provide an ioctl system call interface to user space clients for communication. When processing hardware commands ioctl calls, the drivers are incorrectly handling the number of commands included in the user space payload. This can lead to an integer overflow which subsequently results in the driver attempting to process hardware commands from out-of-bounds memory which can cause the kernel to crash. The same code also suffered from incorrectly treating the number of hardware commands as signed.","QCIR-2013-00005-1"],["Gemini JPEG encoder, Mercury JPEG decoder, and Jpeg1.0 common encoder/decoder contain an unspecified integer overflow condition during the handling of hardware command IOCTL calls that may allow a local attacker to cause a denial of service or potentially execute of arbitrary code.","osvdb-96924"]],
+  "Discovered_by" : [["alephzain <alephzain1@gmail.com>","QCIR-2013-00005-1"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"drt24","on":"2013-11-14"}],
+  "Reported_on" : [["2013-08-29","QCIR-2013-00005-1"]],
+  "Fixed_on" : [["2013-07-31","jpeg-integer-overflow-patch"],["2013-06-28","overflow-ioctl_hw_cmds-patch"],["2013-06-11","signedness-hw_exec_cmds-patch"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Qualcomm","QCIR-2013-00005-1"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "QCIR-2013-00005-1" : {
+      "url" : "https://www.codeaurora.org/projects/security-advisories/integer-overflow-and-signedness-issue-camera-jpeg-engines-cve-2013-4736"
+    },
+    "osvdb-96924" : {
+      "url" : "http://osvdb.org/96924"
+    },
+    "jpeg-integer-overflow-patch" : {
+      "url":"https://www.codeaurora.org/cgit/quic/la/kernel/msm/commit/?id=fab0bc54f4b70fd1d85300731822379a487d66ca",
+      "compoent":"quic/la/kernel/msm",
+      "commit":"fab0bc54f4b70fd1d85300731822379a487d66ca"
+    },
+    "overflow-ioctl_hw_cmds-patch" : {
+      "url":"https://www.codeaurora.org/cgit/quic/la//kernel/msm/commit/?id=8c5300aec8cd9882b89e9d169680221541da0d7f",
+      "component":"quic/la/kernel/msm",
+      "commit":"8c5300aec8cd9882b89e9d169680221541da0d7f"
+    },
+    "signedness-hw_exec_cmds-patch" : {
+      "url" : "https://www.codeaurora.org/cgit/quic/la//kernel/msm/commit/?id=81947189009afcfac17d1106101260c660421265",
+      "component" : "quic/la/kernel/msm",
+      "commit" : "81947189009afcfac17d1106101260c660421265"
+    }
+  }
+}
