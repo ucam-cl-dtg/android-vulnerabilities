@@ -1,0 +1,32 @@
+{
+  "name" : "Qualcomm stack buffer overflow camera",
+  "CVE" : [["CVE-2013-4738","QCIR-2013-00008-1"],["CVE-2013-4739","QCIR-2013-00008-1"]],
+  "Responsibly_disclosed" : true,
+  "Details" : [["Stack-based buffer overflow and memory disclosure in camera driver QCIR-2013-00008-1: A stack-based buffer overflow and a kernel memory disclosure vulnerability have been discovered in the system call handlers of the camera driver.","QCIR-2013-00008-1"]],
+  "Discovered_by" : [["Jonathan Salwan of the Sysdream Security Lab","QCIR-2013-00008-1"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"drt24","on":"2013-11-20"}],
+  "Reported_on" : [["2013-10-15","QCIR-2013-00008-1"]],
+  "Fixed_on" : [["2013-07-31","msm-camera-dequeue-patch"],["2013-08-09","msm-bound-check-patch"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Qualcomm"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "QCIR-2013-00008-1" : {
+      "url" : "https://www.codeaurora.org/projects/security-advisories/stack-based-buffer-overflow-and-memory-disclosure-camera-driver-cve-2013-4738-cve-2013-4739"
+    },
+    "msm-camera-dequeue-patch" : {
+      "url" : "https://www.codeaurora.org/cgit/quic/la/kernel/msm/commit/?id=c9c81836ee44db9974007d34cf2aaeb1a51a8d45",
+      "component" : "quic/la/kernel/msm",
+      "commit" : "c9c81836ee44db9974007d34cf2aaeb1a51a8d45"
+    },
+    "msm-bound-check-patch" : {
+      "url" : "https://www.codeaurora.org/cgit/quic/la/kernel/msm/commit/?id=28385b9c3054c91dca1aa194ffa750550c50f3ce",
+      "component" : "quic/la/kernel/msm",
+      "commit" : "28385b9c3054c91dca1aa194ffa750550c50f3ce"
+    }
+  }
+}
