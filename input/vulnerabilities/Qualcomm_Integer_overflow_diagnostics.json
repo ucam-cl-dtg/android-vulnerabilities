@@ -4,16 +4,16 @@
   "Responsibly_disclosed" : false,
   "Details" : [["QCIR-2012-00001-1: Multiple security vulnerabilities have been discovered in the handling of the diagchar_ioctl() and kgsl_ioctl() system call parameters for the diagnostics (DIAG) and KGSL graphics kernel drivers for Android.","QCIR-2012-00001-1"]],
   "Discovered_by" : [["<giantpune@gmail.com>","QCIR-2012-00001-1"]],
-  "Discovered_on" : [[]],
+  "Discovered_on" : [],
   "Submission" : [{"by":"drt24", "on":"2013-09-02"}],
   "Reported_on" : [["2012-11-15","QCIR-2012-00001-1"]],
   "Fixed_on" : [["2012-11-16","QCIR-2012-00001-1"]],
-  "Fix_released_on" : [[]],
+  "Fix_released_on" : [],
   "Affected_versions" : [["2.3 -- 4.2 released from CAF","QCIR-2012-00001-1"]],
-  "Affected_devices" : [[]],
+  "Affected_devices" : [],
   "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [[]],
-  "Fixed_versions" : [[]],
+  "Affected_manufacturers" : [],
+  "Fixed_versions" : [],
   "references" : {
     "CVE-2012-4220" : {
       "url" : "http://www.cvedetails.com/cve/CVE-2012-4220/"
