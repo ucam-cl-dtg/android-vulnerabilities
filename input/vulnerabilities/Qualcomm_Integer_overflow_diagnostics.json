@@ -12,7 +12,7 @@
   "Affected_versions" : [["2.3 -- 4.2 released from CAF","QCIR-2012-00001-1"]],
   "Affected_devices" : [],
   "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [],
+  "Affected_manufacturers" : [["Qualcomm","QCIR-2012-00001-1"]],
   "Fixed_versions" : [],
   "references" : {
     "CVE-2012-4220" : {
