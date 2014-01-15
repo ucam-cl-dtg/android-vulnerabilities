@@ -123,6 +123,8 @@ class Vulnerability:
 		for itemref in reflist:
 			if isinstance(itemref, list):
 				itemstr = itemref[0]
+				if isinstance(itemstr, list):
+					itemstr = '(' + ', '.join(itemstr) + ')'
 				if len(itemref) == 2:
 					itemstr += " " + self._str_reference(itemref[1])
 				else:
