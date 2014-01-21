@@ -209,7 +209,6 @@ def print_by_page(vulndict):
 
 vulnerabilities = []
 # Key to list of vulnerability dicts
-# TODO these need sorting
 by_year = defaultdict(list)
 by_version = defaultdict(list)
 by_manufacturer = defaultdict(list)
