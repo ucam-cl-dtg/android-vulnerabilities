@@ -239,7 +239,17 @@ def hook_preconvert_vulnpages():
 	for vulnerability in vulnerabilities:
 		p = Page("vulnerabilities/{name}.md".format(name=vulnerability.urlname),virtual=unicode(vulnerability),title=vulnerability.name)
 		pages.append(p)
+
 def hook_preconvert_submitterpages():
 	for ID, submitter in submitters.items():
 		p = Page("submitters/{ID}.md".format(ID=ID),virtual=unicode(submitter),title="{name} ({ID})".format(name=submitter.name,ID=ID))
 		pages.append(p)
+
+def hook_preconvert_manufacturerpages():
+	for manufacturer,vulns in by_manufacturer.items():
+		vstring = "#{manufacturer}\n\n".format(manufacturer=manufacturer)
+		for vuln in vulns:
+			vstring += unicode(vuln) + '\n'
+		p = Page("by/manufacturer/{manufacturer}.md".format(manufacturer=manufacturer),virtual=vstring,title=manufacturer)
+		pages.append(p)
+
