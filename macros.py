@@ -11,6 +11,9 @@ import os
 import dateutil.parser
 from collections import defaultdict,OrderedDict
 
+def warning(*objs):
+	print(*objs, file=sys.stderr)
+
 class DateRef:
 	def __init__(self, field, vuln):
 		if None == field:
@@ -92,7 +95,7 @@ class Vulnerability:
 			try:
 				daterefs = self._rawdateref(field)
 			except ValueError as e:
-				print(e)#TODO stderr
+				warning(e)
 				return
 			for dateref in daterefs:
 				yrs.append(unicode(dateref.date.year))
@@ -147,7 +150,7 @@ class Vulnerability:
 		try:
 			return ", ".join(map(str,self._rawdateref(jsn)))
 		except ValueError as e:
-			print("Error in _dateref: " + unicode(e))
+			warning("Error in _dateref: " + unicode(e))
 			return "Unknown"
 	def __str__(self):
 		return """### [{name}](/vulnerabilities/{urlname})
