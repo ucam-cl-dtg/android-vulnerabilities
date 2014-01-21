@@ -6,7 +6,7 @@
   "Discovered_by" : [["Jonathan Salwan of the Sysdream Security Lab","QCIR-2013-00009-1"]],
   "Discovered_on" : [],
   "Submission" : [{"by":"drt24","on":"2013-11-20"}],
-  "Reported_on" : [["2013:11-07","QCIR-2013-00009-1"]],
+  "Reported_on" : [["2013-11-07","QCIR-2013-00009-1"]],
   "Fixed_on" : [["2013-09-23","msm-goodix-patch"]],
   "Fix_released_on" : [],
   "Affected_versions" : [],
