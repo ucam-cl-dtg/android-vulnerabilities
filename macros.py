@@ -138,6 +138,19 @@ class Vulnerability:
 				#TODO we don't use this yet
 			answer.append(itemstr)
 		return separator.join(answer)
+	def _print_manufacturer_list(self,reflist,separator=","):
+		answer = []
+                for itemref in reflist:
+                        if isinstance(itemref, list):
+                                itemstr = "[{manufacturer}](by/manufacturer/{manufacturer})".format(manufacturer=itemref[0])
+                                if len(itemref) == 2:
+                                        itemstr += " " + self._str_reference(itemref[1])
+                                else:
+                                        itemstr += ' \\[citation-needed\\]'
+                        else:
+                                raise ValueError("Unknown type of itemref:" + unicode(type(itemref)) + " - "+ unicode(itemref))
+                        answer.append(itemstr)
+                return separator.join(answer)
 	def _rawdateref(self,jsn):
 		if isinstance(jsn,list):
 			if isinstance(jsn[0],list) or isinstance(jsn[0],dict):
@@ -180,7 +193,7 @@ class Vulnerability:
 		affected_versions=self._print_ref_list(self.jsn['Affected_versions']),
 		affected_versions_regexp=", ".join(self.jsn['Affected_versions_regexp']),
 		affected_devices=self._print_ref_list(self.jsn['Affected_devices']),
-		affected_manufacturers=self._print_ref_list(self.jsn['Affected_manufacturers']),
+		affected_manufacturers=self._print_manufacturer_list(self.jsn['Affected_manufacturers']),
 		fixed_versions=self._print_ref_list(self.jsn['Fixed_versions']),
 		submission_list="; ".join(map(str,map(Submission,self.jsn['Submission']))),
 		)
