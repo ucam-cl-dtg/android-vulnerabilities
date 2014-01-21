@@ -258,11 +258,23 @@ def hook_preconvert_submitterpages():
 		p = Page("submitters/{ID}.md".format(ID=ID),virtual=unicode(submitter),title="{name} ({ID})".format(name=submitter.name,ID=ID))
 		pages.append(p)
 
-def hook_preconvert_manufacturerpages():
-	for manufacturer,vulns in by_manufacturer.items():
-		vstring = "#{manufacturer}\n\n".format(manufacturer=manufacturer)
+def hook_preconvert_bypages():
+	by_pages(by_year,'year')
+	by_pages(by_version,'version')
+	by_pages(by_manufacturer,'manufacturer')
+	by_pages(by_submitter,'submitter')
+
+def by_pages(vulndict,by):
+	bypagestring = '\n'#Can't be the empty string or empty pages will cause errors
+	for key, vulns in vulndict.items():
+		bypagestring += "##[{key}](by/{by}/{key})\n\n".format(key=key,by=by)
+		vstring = "#{key}\n\n".format(key=key)
 		for vuln in vulns:
-			vstring += unicode(vuln) + '\n'
-		p = Page("by/manufacturer/{manufacturer}.md".format(manufacturer=manufacturer),virtual=vstring,title=manufacturer)
+			vulnstring = unicode(vuln) + '\n'
+			vstring += vulnstring
+			bypagestring += vulnstring
+		p = Page("by/{by}/{key}.md".format(key=key,by=by),virtual=vstring,title=key)
 		pages.append(p)
+	p = Page("by/{by}/index.md".format(by=by),virtual=bypagestring,title="By {by}".format(by=by))
+	pages.append(p)
 
