@@ -3,8 +3,6 @@ title: Home
 menu-position: 0
 ---
 
-## Work in progress: This is not finished yet
-
 <div id="graph">
 <img src="images/norm_versionsecurity.png" alt="Proportion of devices affected by root vulnerabilities"/>
 <p>Proportion of devices running vulnerable versions of Android</p>
