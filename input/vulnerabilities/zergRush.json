@@ -9,7 +9,7 @@
   "Reported_on" : [["2011-11-09","android-issue-21681"]],
   "Fixed_on" : [["2011-11-09","android-issue-21681"]],
   "Fix_released_on" : [["2011-11-21","tag-android-2.2.3_r1"]],
-  "Affected_versions" : [["Android 2.2.* up to and including to 2.2.2, Android 2.3.* up to and including to 2.3.6"]],
+  "Affected_versions" : [["Android 2.2.x up to and including to 2.2.2, Android 2.3.x up to and including to 2.3.6"]],
   "Affected_devices" : [["all"]],
   "Affected_versions_regexp" : [],
   "Affected_manufacturers" : [["all"]],
