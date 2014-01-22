@@ -11,7 +11,7 @@
   "Fix_released_on" : [],
   "Affected_versions" : [["4.3 and earlier"]],
   "Affected_devices" : [["all"]],
-  "Affected_versions_regexp" : [],
+  "Affected_versions_regexp" : ["([1-3]\\.[0-9]\\.[0-9])|(4\\.[0-3]\\.[0-9])"],
   "Affected_manufacturers" : [["all"]],
   "Fixed_versions" : [["4.4","patch-unchecked-name"]],
   "references" : {
