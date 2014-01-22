@@ -121,7 +121,7 @@ class Vulnerability:
 		return self.jsn['references'][reference]['url']
 	def _str_reference(self,reference):
 		return "\\[[{reference}]({url})\\]".format(reference=reference,url=self._get_reference_url(reference))
-	def _print_ref_list(self,reflist,separator=","):
+	def _print_ref_list(self,reflist,separator=", "):
 		answer = []
 		for itemref in reflist:
 			if isinstance(itemref, list):
@@ -138,7 +138,7 @@ class Vulnerability:
 				#TODO we don't use this yet
 			answer.append(itemstr)
 		return separator.join(answer)
-	def _print_manufacturer_list(self,reflist,separator=","):
+	def _print_manufacturer_list(self,reflist,separator=", "):
 		answer = []
                 for itemref in reflist:
                         if isinstance(itemref, list):
