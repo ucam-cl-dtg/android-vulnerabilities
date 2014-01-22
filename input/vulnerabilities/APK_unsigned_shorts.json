@@ -11,7 +11,7 @@
   "Fix_released_on" : [["2013-07-24","verge-android-4.3"]],
   "Affected_versions" : [["1.6-4.2"]],
   "Affected_devices" : [["all"]],
-  "Affected_versions_regexp" : [],
+  "Affected_versions_regexp" : ["([1-3]\\.[0-9]\\.[0-9])|(4\\.[0-2]\\.[0-9])"],
   "Affected_manufacturers" : [["all"]],
   "Fixed_versions" : [["4.3_r1","patch-unsigned-shorts"]],
   "references" : {

@@ -11,7 +11,7 @@
   "Fix_released_on" : [["2010-12-06"]],
   "Affected_versions" : [["1.5 -- 2.2.2"]],
   "Affected_devices" : [["all"]],
-  "Affected_versions_regexp" : [],
+  "Affected_versions_regexp" : ["(1\\.[5-9]\\.[0-9])|(2\\.([0-1]\\.[0-9])|(2\\.[0-9]))"],
   "Affected_manufacturers" : [["all"]],
   "Fixed_versions" : [["2.3"]],
   "references" : {
