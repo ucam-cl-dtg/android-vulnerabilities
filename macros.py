@@ -33,7 +33,7 @@ class DateRef:
 			raise ValueError("Unexpected type of field %s" % (field))
 		if not isinstance(self.datestring,basestring):
 			raise ValueError("Date string not a string: " + unicode(type(self.datestring)) + " - " + unicode(self.datestring))
-		self.date = dateutil.parser.parse(self.datestring)
+		self.date = dateutil.parser.parse(self.datestring).date()
 		self.vuln = vuln
 	def __str__(self):
 		string = self.datestring
@@ -110,6 +110,30 @@ class Vulnerability:
 				else:
 					self._years_append(yrs,field)
 		return set(yrs)
+	def _dates_append(self,dates,field):
+		try:
+			daterefs = self._rawdateref(field)
+		except ValueError as e:
+			warning(e)
+			return
+		for dateref in daterefs:
+			dates.append(dateref.date)
+	def _dates(self):
+		dates = []
+		for year_field in self.year_fields:
+			field = self.jsn[year_field]
+                        if len(field) > 0:
+				if isinstance(field,list) and isinstance(field[0],list):
+					for entry in field:
+						self._dates_append(dates,entry)
+				else:
+					self._dates_append(dates,field)
+		return sorted(dates)
+	def raw_vulnerability(self):
+		dates = self._dates()
+		regex = self.jsn['Affected_versions_regexp']
+		if len(regex) > 0:#TODO regex is a list but we are not treating it as one.
+			return (regex[0],unicode(dates[0].isoformat()),self.name)
 	def versions(self):
 		return []#TODO
 	def manufacturers(self):
@@ -213,6 +237,7 @@ by_year = defaultdict(list)
 by_version = defaultdict(list)
 by_manufacturer = defaultdict(list)
 by_submitter = defaultdict(list)
+raw_vulnerabilities = []
 
 for filename in os.listdir('input/vulnerabilities'):
 	if filename == 'template.json':# skip over template
@@ -231,6 +256,10 @@ for filename in os.listdir('input/vulnerabilities'):
 			by_manufacturer[manufacturer[0]].append(vulnerability)
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
+		raw_vulnerability = vulnerability.raw_vulnerability()
+		if raw_vulnerability != None:
+			raw_vulnerabilities.append(raw_vulnerability)
+print(raw_vulnerabilities)
 
 submitters = dict()
 for filename in os.listdir('input/submitters'):
