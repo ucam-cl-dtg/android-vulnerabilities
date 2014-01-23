@@ -252,8 +252,11 @@ for filename in os.listdir('input/vulnerabilities'):
 			by_year[year].append(vulnerability)
 		for version in vulnerability.versions():
 			by_version[version].append(vulnerability)
+		manufacturers = vulnerability.manufacturers()
 		for manufacturer in vulnerability.manufacturers():
 			by_manufacturer[manufacturer[0]].append(vulnerability)
+		if len(manufacturers) == 0:
+			by_manufacturer['none'].append(vulnerability)
 		for submitter in vulnerability.submitters():
 			by_submitter[submitter].append(vulnerability)
 		raw_vulnerability = vulnerability.raw_vulnerability()
