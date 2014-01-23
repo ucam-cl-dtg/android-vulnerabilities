@@ -92,13 +92,13 @@ class Vulnerability:
 		self.name = jsn['name']
 		self.urlname = self.name.replace(' ','_')
 	def _years_append(self,yrs,field):
-			try:
-				daterefs = self._rawdateref(field)
-			except ValueError as e:
-				warning(e)
-				return
-			for dateref in daterefs:
-				yrs.append(unicode(dateref.date.year))
+		try:
+			daterefs = self._rawdateref(field)
+		except ValueError as e:
+			warning(e)
+			return
+		for dateref in daterefs:
+			yrs.append(unicode(dateref.date.year))
 	def years(self):
 		yrs = []
 		for year_field in self.year_fields:
