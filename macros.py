@@ -74,8 +74,8 @@ class Submitter:
 		return """#{name} ({ID})
 
 * Name: {name}
-* Email: {email}
-* Website: {url}
+* Email: <{email}>
+* Website: <{url}>
 * GPG fingerprints: {fingerprints}
 
 {photo}
