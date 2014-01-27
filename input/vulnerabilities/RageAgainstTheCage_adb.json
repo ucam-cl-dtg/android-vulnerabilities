@@ -7,14 +7,26 @@
   "Discovered_on" : [],
   "Submission" : [{"by" : "drt24", "on" : "2013-09-05"}],
   "Reported_on" : [],
-  "Fixed_on" : [],
+  "Fixed_on" : ["2010-08-27","rageagainstthecage-adb-patch"],
   "Fix_released_on" : [],
   "Affected_versions" : [],
   "Affected_devices" : [],
   "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [],
-  "Fixed_versions" : [],
+  "Affected_manufacturers" : ["all","rageagainstthecage-adb-patch"],
+  "Fixed_versions" : [["2.2.2 and greater","android-security-2010-EASY-patches"],["2.2_r8, 2.3_r1","rageagainstthecage-adb-patch"]],
   "references" : {
-    
+    "android-security-2010-EASY-patches" : {
+      "url" : "https://groups.google.com/forum/#!topic/android-security-discuss/G6hyT7LU6bs"
+    },
+    "rageagainstthecage-adb-patch" : {
+      "url" : "https://android.googlesource.com/platform/system/core/+/44db990d3a4ce0edbdd16fa7ac20693ef601b723%5E%21/",
+      "component" : "platform/system/core",
+      "commit" : "44db990d3a4ce0edbdd16fa7ac20693ef601b723"
+    },
+    "rageagainstthecage-adb-backport-patch" : {
+      "url" : "https://android.googlesource.com/platform/system/core/+/2ad6067ce491446ab22f59a363d36575a942f5c7%5E%21/",
+      "component" : "platform/system/core",
+      "commit" : "2ad6067ce491446ab22f59a363d36575a942f5c7"
+    }
   }
 }
