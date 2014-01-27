@@ -3,11 +3,11 @@ title: Contact
 
 ---
 
-This is a project run by Daniel Thomas and Alastair Beresford.
+This is a project run by Daniel Thomas and [Alastair Beresford](https://www.cl.cam.ac.uk/~arb33/).
 
 <div id="contactpeople">
 <img src="images/people/drt24.jpg" alt="Picture of Daniel Thomas"/>
-<img src="images/people/arb33.jpg" alt="Picture of Alastair Beresford"/>
+<a href="https://www.cl.cam.ac.uk/~arb33/"><img src="images/people/arb33.jpg" alt="Picture of Alastair Beresford"/></a>
 </div>
 
 We can be reached at <contact@androidvulnerabilities.org>.
