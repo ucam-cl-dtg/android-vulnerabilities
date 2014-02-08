@@ -1,11 +1,11 @@
 {
   "name" : "LG Sprite backup",
   "CVE" : [["CVE-2013-3685"]],
-  "Responsibly_disclosed" : false,
+  "Responsibly_disclosed" : true,
   "Details" : [["Race condition in Sprite Software's backup software, installed by OEM on LG Android devices.","fulldisclosure-2013-06-196"]],
   "Discovered_by" : [["Justin Case <jcase@cunninglogic.com>","fulldisclosure-2013-06-196"]],
   "Discovered_on" : [{"date":"2013-06-24","bound":"before","ref":"fulldisclosure-2013-06-196"}],
-  "Submission" : [{"by":"drt24","on":"2013-08-28"}],
+  "Submission" : [{"by":"drt24","on":"2013-08-28"},{"by":"jcase","on":"2014-02-08"}],
   "Reported_on" : [["2013-06-24","fulldisclosure-2013-06-196"]],
   "Fixed_on" : [],
   "Fix_released_on" : [],
