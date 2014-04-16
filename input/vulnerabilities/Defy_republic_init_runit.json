@@ -5,7 +5,7 @@
   "Details" : [["A certain configuration of Android 2.3.7 on the Motorola Defy XT phone for Republic Wireless uses init to create a /dev/socket/init_runit socket that listens for shell commands, which allows local users to gain privileges by interacting with a LocalSocket object.","CVE-2013-4777"],["Stack-based buffer overflow in the sub_E110 function in init in a certain configuration of Android 2.3.7 on the Motorola Defy XT phone for Republic Wireless allows local users to gain privileges or cause a denial of service (memory corruption) by writing a long string to the /dev/socket/init_runit socket that is inconsistent with a certain length value that was previously written to this socket.","CVE-2013-5933"]],
   "Discovered_by" : [["Justin Case","plus-jcase-defy-republic"]],
   "Discovered_on" : [{"date":"2013-07-09","bound":"before","ref":"plus-jcase-defy-republic"}],
-  "Submission" : [{"by":"drt24","on":"2013-11-06"}],
+  "Submission" : [{"by":"drt24","on":"2013-11-06"}, {"by":"lmrs2","on":"2013-10-07"}],
   "Reported_on" : [["2013-09-24","plus-jcase-defy-republic"]],
   "Fixed_on" : [],
   "Fix_released_on" : [],
