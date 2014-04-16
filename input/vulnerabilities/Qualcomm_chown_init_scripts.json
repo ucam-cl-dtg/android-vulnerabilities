@@ -1,0 +1,45 @@
+{
+  "name" : "Qualcomm chown init scripts",
+  "CVE" : [["CVE-2013-6124","QCIR-2014-00002-1"]],
+  "Responsibly_disclosed" : true,
+  "Details" : [["Insecure owner/permission changes in init shell scripts (CVE-2013-6124): During the device start-up phase, several init shell scripts are executed with root privileges to configure various aspects of the system. During this process, standard toolchain commands such as chown or chmod are used to, e.g., change the owner of the sensor settings file to the system user. As these commands follow symbolic links (symlinks), an attacker with write access to these resources is able to conduct symlink attacks and thus change for example the owner of an arbitrary file to system. This flaw can be used to, e.g., elevate privileges.","QCIR-2014-00002-1"]],
+  "Discovered_by" : [["Jon Sawyer","QCIR-2014-00002-1"]],
+  "Discovered_on" : [{"date":"2013-10-15","bound":"before","ref":"CVE-2013-6124"}],
+  "Submission" : [{"by":"drt24","on":"2014-04-16"}],
+  "Reported_on" : [["2014-02-19","QCIR-2014-00002-1"]],
+  "Fixed_on" : [["2013-11-14","init-symlink-patch"],["2013-10-30","chown-symlink-patch"],["2013-12-14","chmod-symlink-patch"],["2013-12-16","chmod-args-patch"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Qualcomm","QCIR-2014-00002-1"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "QCIR-2014-00002-1" : {
+      "url" : "https://www.codeaurora.org/projects/security-advisories/insecure-ownerpermission-changes-init-shell-scripts-cve-2013-6124"
+    },
+    "CVE-2013-6124" : {
+      "url" : "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6124"
+    },
+    "init-symlink-patch" : {
+      "url" : "https://www.codeaurora.org/cgit/quic/la//device/qcom/common/commit/?id=2e2d79df934fdb733adaaed060da5b19658af000",
+      "commit" : "2e2d79df934fdb733adaaed060da5b19658af000",
+      "component" : "quic/la/device/qcom/common"
+    },
+    "chown-symlink-patch" : {
+      "url" : "https://www.codeaurora.org/cgit/quic/la//platform/system/core/commit/?id=2419cf9e63d3a8532b2984196d759157569c2fef",
+      "commit" : "2419cf9e63d3a8532b2984196d759157569c2fef",
+      "component" : "quic/la/platform/system/core"
+    },
+    "chmod-symlink-patch" : {
+      "url" : "https://www.codeaurora.org/cgit/quic/la//platform/system/core/commit/?id=cf514a3bbb028c84c7357bd5502013823ede9e4a",
+      "commit" : "cf514a3bbb028c84c7357bd5502013823ede9e4a",
+      "component" : "quic/la/platform/system/core"
+    },
+    "chmod-args-patch" : {
+      "url" : "https://www.codeaurora.org/cgit/quic/la//platform/system/core/commit/?id=fd256a79a77b53e785fb4a0251efc910e8062c09",
+      "commit" : "fd256a79a77b53e785fb4a0251efc910e8062c09",
+      "component" : "quic/la/platform/system/core"
+    }
+  }
+}
