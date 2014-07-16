@@ -144,6 +144,11 @@ class Vulnerability:
 	def _get_reference_url(self,reference):
 		return self.jsn['references'][reference]['url']
 	def _str_reference(self,reference):
+		if isinstance(reference, list):
+			answer = ""
+			for refentry in reference:
+				answer += self._str_reference(refentry)
+			return answer
 		return "\\[[{reference}]({url})\\]".format(reference=reference,url=self._get_reference_url(reference))
 	def _print_ref_list(self,reflist,separator=", "):
 		answer = []
