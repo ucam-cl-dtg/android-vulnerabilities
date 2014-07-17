@@ -1,0 +1,26 @@
+{
+  "name" : "TwerkMyMoto",
+  "CVE" : [],
+  "Responsibly_disclosed" : false,
+  "Details" : [["Motorola Razr I (x86) 4.1.2 root exploit, silly permissions bug. symlink /data/logs/core to uevent_helper","plus-jcase-twerkmymoto"]],
+  "Discovered_by" : [["Justin Case (jcase)","plus-jcase-twerkmymoto"]],
+  "Discovered_on" : [["2013-11-24","twerk-my-moto-commit"]],
+  "Submission" : [{"by" : "drt24", "on" : "2014-07-17"}, {"by" : "lmrs2", "on" : "2014-06-05"}],
+  "Reported_on" : [["2013-11-24","plus-jcase-twerkmymoto"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["4.1.2","plus-jcase-twerkmymoto"]],
+  "Affected_devices" : [["Motorola Razr I (x86)","plus-jcase-twerkmymoto"]],
+  "Affected_versions_regexp" : ["4\\.1\\.2"],
+  "Affected_manufacturers" : [["Motorola","plus-jcase-twerkmymoto"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "plus-jcase-twerkmymoto" : {
+      "url" : "https://plus.google.com/+JustinCaseAndroid/posts/eGwzSATrmqY"
+    }
+  , "twerk-my-moto-commit" : {
+      "url" : "https://github.com/CunningLogic/TwerkMyMoto/commit/0fc76a59720ca166f9e0febe73974ed5a77e75c5",
+      "commit" : "0fc76a59720ca166f9e0febe73974ed5a77e75c5"
+    }
+  }
+}
