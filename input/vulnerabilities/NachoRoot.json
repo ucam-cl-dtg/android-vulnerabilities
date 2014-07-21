@@ -1,0 +1,28 @@
+{
+  "name" : "NachoRoot",
+  "CVE" : [],
+  "Responsibly_disclosed" : false,
+  "Details" : [["On ASUS Transformer Pime /data/sensors/AMI304_Config.ini is set world writable on boot and so a /data/local.prop symlink attack can be mounted","gh-cunninglogic-nachoroot-sh"]],
+  "Discovered_by" : [["Justin Case (jcase)","gh-cunninglogic-nachoroot-sh"]],
+  "Discovered_on" : [["2012-01-03","gh-cunninglogic-nachoroot"]],
+  "Submission" : [{"by" : "drt24", "on" : "2014-07-21"}, {"by" : "thomas.coudray", "on" : "2014-03-07"}],
+  "Reported_on" : [["2012-01-03","xda-nachoroot"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["ASUS Transformer Prime","gh-cunninglogic-nachoroot" ]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["ASUS","gh-cunninglogic-nachoroot" ]],
+  "Fixed_versions" : [],
+  "references" : {
+    "gh-cunninglogic-nachoroot-sh" : {
+      "url" : "https://github.com/CunningLogic/NachoRoot/blob/master/nachoroot.sh"
+    }
+  , "gh-cunninglogic-nachoroot" : {
+      "url" : "https://github.com/CunningLogic/NachoRoot"
+    }
+  , "xda-nachoroot" : {
+      "url" : "http://forum.xda-developers.com/showthread.php?t=1426280"
+    }
+  }
+}
