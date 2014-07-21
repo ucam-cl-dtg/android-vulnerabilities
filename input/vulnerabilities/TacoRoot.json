@@ -1,0 +1,32 @@
+{
+  "name" : "TacoRoot",
+  "CVE" : [],
+  "Responsibly_disclosed" : false,
+  "Details" : [["HTC recovery log on some devices is world writable and so can be deleted and symlinked to /data/local.prop to allow root on reboot, this is a appears to be a unstable exploit and requires the user to reboot into recovery mode","gh-cunninglogic-tacoroot"]],
+  "Discovered_by" : [["Justin Case (jcase) and Dan Rosenberg","gh-cunninglogic-tacoroot-sh"]],
+  "Discovered_on" : [{"date":"2012-01-01", "bound":"before","ref": "gh-cunninglogic-tacoroot-fc"}],
+  "Submission" : [{"by":"drt24", "on" : "2014-07-21"},{"by":"thomas.coudray","on":"2014-03-07"}],
+  "Reported_on" : [["2011-12-29","rootzwiki-tacoroot"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["HTC","rootzwiki-tacoroot"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "gh-cunninglogic-tacoroot" : {
+      "url" : "https://github.com/CunningLogic/TacoRoot"
+    }
+  , "gh-cunninglogic-tacoroot-sh" : {
+      "url" : "https://github.com/CunningLogic/TacoRoot/blob/master/tacoroot.sh"
+    }
+  , "gh-cunninglogic-tacoroot-fc" : {
+      "url" : "https://github.com/CunningLogic/TacoRoot/commit/057c99234214ca3e147c0a81a2f915a277258b76"
+    , "commit" : "057c99234214ca3e147c0a81a2f915a277258b76"
+    }
+  , "rootzwiki-tacoroot" : {
+      "url" : "http://rootzwiki.com/topic/13713-tacoroot-htc-universal-root-exploit-12-30-2011/"
+    }
+  }
+}
