@@ -149,7 +149,15 @@ class Vulnerability:
 			for refentry in reference:
 				answer += self._str_reference(refentry)
 			return answer
-		return "\\[[{reference}]({url})\\]".format(reference=reference,url=self._get_reference_url(reference))
+		url = self._get_reference_url(reference)
+		if isinstance(url, list):
+			answer = ""
+			index = 0
+			for urlelement in url:
+				answer += "\\[[{reference}#{index}]({url})\\]".format(reference=reference,index=index,url=urlelement)
+				index += 1
+			return answer
+		return "\\[[{reference}]({url})\\]".format(reference=reference,url=url)
 	def _print_ref_list(self,reflist,separator=", "):
 		answer = []
 		for itemref in reflist:
