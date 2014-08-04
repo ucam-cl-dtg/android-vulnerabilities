@@ -11,7 +11,7 @@
   "Fix_released_on" : [["2011-11-21","tag-android-2.2.3_r1"]],
   "Affected_versions" : [["Android 2.2.x up to and including to 2.2.2, Android 2.3.x up to and including to 2.3.6"]],
   "Affected_devices" : [["all"]],
-  "Affected_versions_regexp" : ["(2\\.([0-1]\\.[0-9])|(2\\.[0-2])|(3\\.[0-6]))"],
+  "Affected_versions_regexp" : ["2\\.(([0-1]\\.[0-9])|(2\\.[0-2])|(3\\.[0-6]))"],
   "Affected_manufacturers" : [["all"]],
   "Fixed_versions" : [["2.2.3, 2.3.7, 3.x+"]],
   "references" : {

@@ -11,7 +11,7 @@
   "Fix_released_on" : [["2014-06-02", "android-4.4.3_r1"]],
   "Affected_versions" : [["2.2.1_r1-4.4.2",["vold-asec-implementation","cassidian-vold-asec"]]],
   "Affected_devices" : [["Motorola devices", "xda-developers-pie-exploit"],["Proper SEAndroid policies do block this, Nexus 5, Samsung S4/5/Note3, LG Flex, Sony Z2 devices etc should have this mitigated. Nexus 4 if it hasn't been updated to 4.4.3 nor reset since OTA to 4.4","plus-jcase-pie"]],
-  "Affected_versions_regexp" : ["(2\\.(2\\.[1-9])|([3-9]\\.[0-9]))|(3\\.[0-9]\\.[0-9])|(4\\.([0-3]\\.[0-9])|(4\\.[0-2]))"],
+  "Affected_versions_regexp" : ["(2\\.((2\\.[1-9])|([3-9]\\.[0-9])))|(3\\.[0-9]\\.[0-9])|(4\\.(([0-3]\\.[0-9])|(4\\.[0-2])))"],
   "Affected_manufacturers" : [["all","vold-asec-implementation"]],
   "Fixed_versions" : [["4.4.3","cassidian-vold-asec"]],
   "references" : {
