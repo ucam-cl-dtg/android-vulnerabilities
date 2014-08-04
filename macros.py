@@ -322,3 +322,14 @@ def by_pages(vulndict,by):
 	p = Page("by/{by}/index.md".format(by=by),virtual=bypagestring,title="By {by}".format(by=by))
 	pages.append(p)
 
+def hook_preconvert_releases():
+	with open('input/release_dates.json') as f:
+		rjson = json.load(f)
+		rlist = []
+		for version, info in rjson.items():
+			date = info[0]
+			if len(date) == 0 or '?' in date:
+				continue
+			rlist.append([version,date])
+		rlist = sorted(rlist,key=lambda x : x[0])
+		print(rlist)
