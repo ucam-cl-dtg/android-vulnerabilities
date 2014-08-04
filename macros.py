@@ -120,20 +120,23 @@ class Vulnerability:
 			dates.append(dateref.date)
 	def _dates(self):
 		dates = []
+		fields = []
 		for year_field in self.year_fields:
 			field = self.jsn[year_field]
-                        if len(field) > 0:
+			if len(field) > 0:
 				if isinstance(field,list) and isinstance(field[0],list):
 					for entry in field:
 						self._dates_append(dates,entry)
 				else:
 					self._dates_append(dates,field)
-		return sorted(dates)
+				while len(dates) > len(fields):
+					fields.append(year_field)
+		return zip(*sorted(zip(dates,fields), key=lambda x : x[0]))
 	def raw_vulnerability(self):
-		dates = self._dates()
+		dates, fields = self._dates()
 		regex = self.jsn['Affected_versions_regexp']
 		if len(regex) > 0:#TODO regex is a list but we are not treating it as one.
-			return (regex[0],unicode(dates[0].isoformat()),self.name)
+			return (regex[0],unicode(dates[0].isoformat()),self.name, fields[0].replace('_',' '))
 	def versions(self):
 		return []#TODO
 	def manufacturers(self):
@@ -275,6 +278,7 @@ for filename in os.listdir('input/vulnerabilities'):
 		raw_vulnerability = vulnerability.raw_vulnerability()
 		if raw_vulnerability != None:
 			raw_vulnerabilities.append(raw_vulnerability)
+raw_vulnerabilities = sorted(raw_vulnerabilities, key=lambda x:x[1])
 print(raw_vulnerabilities)
 
 submitters = dict()
