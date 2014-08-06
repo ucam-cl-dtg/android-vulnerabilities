@@ -337,3 +337,11 @@ def hook_preconvert_releases():
 			rlist.append([version,date])
 		rlist = sorted(rlist,key=lambda x : x[0])
 		print(rlist)
+def hook_preconvert_os_to_api():
+	with open('input/os_to_api.json') as f:
+		rjson = json.load(f)
+		rlist = []
+		for version, api in rjson.items():
+			rlist.append([version,int(api)])
+		rlist = sorted(rlist,key=lambda x : x[0])
+		print(rlist)
