@@ -9,10 +9,49 @@ sys.setdefaultencoding("UTF-8")
 import json
 import os
 import dateutil.parser
+import uncertainties
 from collections import defaultdict,OrderedDict
 
 def warning(*objs):
 	print(*objs, file=sys.stderr)
+
+def set_latex_value(key, value, t=None):
+    # \newcommand{\avo$key}{$value}
+    # Get the file
+    filename = 'output/latex.tex'
+    if not os.path.exists(filename):
+        open(filename,'a').close()# Create file if it does not exist
+    with open(filename) as rf:
+        sf = rf.read()
+    # Mangle the value
+    if t == 'perc':
+        if isinstance(value, float):
+            svalue = '{:.2f}\%'.format(value)
+        elif isinstance(value, uncertainties.UFloat):
+            svalue = '${:.2L}\%$'.format(value)
+        else:
+            raise ValueError("Not a percentage")
+    else:
+        if isinstance(value, float):
+            svalue = '{:.2f}'.format(value)
+        elif isinstance(value, uncertainties.UFloat):
+            svalue = '${:.2L}$'.format(value)
+        else:
+            svalue = str(value)
+    # Set the contents
+    kv_line = r'\newcommand{\avo' + key + r'}{' + svalue + r'}'
+    k_part = r'\newcommand{\avo' + key + r'}'
+    start_index = sf.find(k_part)
+    if start_index >=0:# if already set, update
+        startofvalue = start_index + len(k_part) + 1 #1 for the {
+        endofvalue = sf.find('}\n',startofvalue)
+        sf = sf[:startofvalue] + svalue + sf[endofvalue:]
+    else:
+        sf += kv_line + '\n'
+    # Write the updated file
+    with open(filename, 'w') as wf:
+        wf.write(sf)
+
 
 class DateRef:
 	def __init__(self, field, vuln):
@@ -337,6 +376,7 @@ def hook_preconvert_releases():
 			rlist.append([version,date])
 		rlist = sorted(rlist,key=lambda x : x[0])
 		print(rlist)
+
 def hook_preconvert_os_to_api():
 	with open('input/os_to_api.json') as f:
 		rjson = json.load(f)
@@ -345,3 +385,17 @@ def hook_preconvert_os_to_api():
 			rlist.append([version,int(api)])
 		rlist = sorted(rlist,key=lambda x : x[0])
 		print(rlist)
+
+def hook_preconvert_stats():
+    set_latex_value('NumVulnerabilities', len(vulnerabilities))
+    num_vuln_all_android = 0
+    num_vuln_specific = 0
+    for vuln in vulnerabilities:
+        manufacturers = vuln.manufacturers()
+        print(manufacturers)
+        if 'all' in map(lambda x : x[0],manufacturers):
+            num_vuln_all_android += 1
+        else:
+            num_vuln_specific += 1
+    set_latex_value('NumVulnAllAndroid', num_vuln_all_android)
+    set_latex_value('NumVulnSpecific', num_vuln_specific)
