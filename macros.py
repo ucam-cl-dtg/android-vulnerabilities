@@ -183,6 +183,8 @@ class Vulnerability:
 	def submitters(self):
 		submitterslist = get_submitters(self.jsn['Submission'])
 		return submitterslist
+	def submissions(self):
+		return map(Submission,self.jsn['Submission'])
 	def _get_reference_url(self,reference):
 		return self.jsn['references'][reference]['url']
 	def _str_reference(self,reference):
@@ -274,7 +276,7 @@ class Vulnerability:
 		affected_devices=self._print_ref_list(self.jsn['Affected_devices']),
 		affected_manufacturers=self._print_manufacturer_list(self.jsn['Affected_manufacturers']),
 		fixed_versions=self._print_ref_list(self.jsn['Fixed_versions']),
-		submission_list="; ".join(map(str,map(Submission,self.jsn['Submission']))),
+		submission_list="; ".join(map(str,self.submissions())),
 		)
 	def __repr__(self):
 		return self.__str__()
@@ -390,12 +392,26 @@ def hook_preconvert_stats():
     set_latex_value('NumVulnerabilities', len(vulnerabilities))
     num_vuln_all_android = 0
     num_vuln_specific = 0
+    first_submission = None
+    last_submission = None
     for vuln in vulnerabilities:
         manufacturers = vuln.manufacturers()
-        print(manufacturers)
         if 'all' in map(lambda x : x[0],manufacturers):
             num_vuln_all_android += 1
         else:
             num_vuln_specific += 1
+        for submission in vuln.submissions():
+            on = submission.on
+            if first_submission == None:
+                first_submission = on
+                last_submission = on
+            else:
+                if on < first_submission:
+                    first_submission = on
+                elif on > last_submission:
+                    last_submission = on
     set_latex_value('NumVulnAllAndroid', num_vuln_all_android)
     set_latex_value('NumVulnSpecific', num_vuln_specific)
+    set_latex_value('StartDate', first_submission)
+    set_latex_value('EndDate', last_submission)
+
