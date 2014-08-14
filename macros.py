@@ -55,6 +55,9 @@ def set_latex_value(key, value, t=None):
     with open(filename, 'w') as wf:
         wf.write(sf)
 
+python_export_file_contents = '''#!/usr/bin/env python
+# Exported data from androidvulnerabilities.org for easy inclusion in python scripts
+'''
 
 class DateRef:
 
@@ -363,7 +366,8 @@ for filename in os.listdir('input/vulnerabilities'):
         if raw_vulnerability != None:
             raw_vulnerabilities.append(raw_vulnerability)
 raw_vulnerabilities = sorted(raw_vulnerabilities, key=lambda x: x[1])
-print(raw_vulnerabilities)
+
+python_export_file_contents += '\nraw_vulnerabilities = ' + str(raw_vulnerabilities) + '\n'
 
 submitters = dict()
 for filename in os.listdir('input/submitters'):
@@ -421,6 +425,7 @@ def by_pages(vulndict, by):
 
 
 def hook_preconvert_releases():
+    global python_export_file_contents
     with open('input/release_dates.json') as f:
         rjson = json.load(f)
         rlist = []
@@ -430,17 +435,18 @@ def hook_preconvert_releases():
                 continue
             rlist.append([version, date])
         rlist = sorted(rlist, key=lambda x: x[0])
-        print(rlist)
+        python_export_file_contents += '\nrelease_dates = ' + str(rlist) + '\n'
 
 
 def hook_preconvert_os_to_api():
+    global python_export_file_contents
     with open('input/os_to_api.json') as f:
         rjson = json.load(f)
         rlist = []
         for version, api in rjson.items():
             rlist.append([version, int(api)])
         rlist = sorted(rlist, key=lambda x: x[0])
-        print(rlist)
+        python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
 
 
 def hook_preconvert_stats():
@@ -469,3 +475,7 @@ def hook_preconvert_stats():
     set_latex_value('NumVulnSpecific', num_vuln_specific)
     set_latex_value('StartDate', first_submission)
     set_latex_value('EndDate', last_submission)
+
+def hook_postconvert_python_export():
+    with open('output/avo.py', 'w') as f:
+        f.write(python_export_file_contents.replace("u'","'"))
