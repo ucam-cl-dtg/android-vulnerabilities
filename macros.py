@@ -1,12 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Do the parsing required to get all the vulnerabilities as objects in
 # memory so that we can generate the pages.
-from __future__ import absolute_import, division, print_function, unicode_literals
-# Evil hack to make UTF-8 default
+
 import sys
-reload(sys)
-sys.setdefaultencoding("UTF-8")
 import json
 import os
 import dateutil.parser
@@ -107,7 +104,7 @@ class DateRef:
             self.ref = field['ref']
         elif isinstance(field, list):
             if len(field) == 0:
-                raise ValueError("No field to process: " + unicode(field))
+                raise ValueError("No field to process: " + str(field))
             self.datestring = field[0]
             if len(field) == 2:
                 self.ref = field[1]
@@ -115,9 +112,9 @@ class DateRef:
                 self.ref = None
         else:
             raise ValueError("Unexpected type of field %s" % (field))
-        if not isinstance(self.datestring, basestring):
-            raise ValueError("Date string not a string: " + unicode(
-                type(self.datestring)) + " - " + unicode(self.datestring))
+        if not isinstance(self.datestring, str):
+            raise ValueError("Date string not a string: " + str(
+                type(self.datestring)) + " - " + str(self.datestring))
         self.date = dateutil.parser.parse(self.datestring).date()
         self.vuln = vuln
 
@@ -197,7 +194,7 @@ class Vulnerability:
             warning(e)
             return
         for dateref in daterefs:
-            yrs.append(unicode(dateref.date.year))
+            yrs.append(str(dateref.date.year))
 
     def years(self):
         yrs = []
@@ -233,13 +230,13 @@ class Vulnerability:
                     self._dates_append(dates, field)
                 while len(dates) > len(fields):
                     fields.append(year_field)
-        return zip(*sorted(zip(dates, fields), key=lambda x: x[0]))
+        return list(zip(*sorted(zip(dates, fields), key=lambda x: x[0])))
 
     def raw_vulnerability(self):
         dates, fields = self._dates()
         regex = self.jsn['Affected_versions_regexp']
         if len(regex) > 0:  # TODO regex is a list but we are not treating it as one.
-            return (regex[0], unicode(dates[0].isoformat()), self.name, fields[0].replace('_', ' '))
+            return (regex[0], str(dates[0].isoformat()), self.name, fields[0].replace('_', ' '))
 
     def versions(self):
         return []  # TODO
@@ -252,7 +249,7 @@ class Vulnerability:
         return submitterslist
 
     def submissions(self):
-        return map(Submission, self.jsn['Submission'])
+        return list(map(Submission, self.jsn['Submission']))
 
     def _get_reference_url(self, reference):
         return self.jsn['references'][reference]['url']
@@ -286,8 +283,8 @@ class Vulnerability:
                 else:
                     itemstr += ' \\[citation-needed\\]'
             else:
-                raise ValueError("Unknown type of itemref:" + unicode(
-                    type(itemref)) + " - " + unicode(itemref))
+                raise ValueError("Unknown type of itemref:" + str(
+                    type(itemref)) + " - " + str(itemref))
             # if isinstance(itemref, dict):
                 # TODO we don't use this yet
             answer.append(itemstr)
@@ -304,15 +301,15 @@ class Vulnerability:
                 else:
                     itemstr += ' \\[citation-needed\\]'
             else:
-                raise ValueError("Unknown type of itemref:" + unicode(
-                    type(itemref)) + " - " + unicode(itemref))
+                raise ValueError("Unknown type of itemref:" + str(
+                    type(itemref)) + " - " + str(itemref))
             answer.append(itemstr)
         return separator.join(answer)
 
     def _rawdateref(self, jsn):
         if isinstance(jsn, list):
             if isinstance(jsn[0], list) or isinstance(jsn[0], dict):
-                return map(lambda x: DateRef(x[0], x[1]), zip(jsn, [self] * len(jsn)))
+                return [DateRef(x[0], x[1]) for x in zip(jsn, [self] * len(jsn))]
         return [DateRef(jsn, self)]
 
     def _dateref(self, jsn):
@@ -322,7 +319,7 @@ class Vulnerability:
         try:
             return ", ".join(map(str, self._rawdateref(jsn)))
         except ValueError as e:
-            warning("Error in _dateref: " + unicode(e))
+            warning("Error in _dateref: " + str(e))
             return "Unknown"
 
     def __str__(self):
@@ -366,7 +363,7 @@ class Vulnerability:
 
 
 def print_by_page(vulndict):
-    for key, vulns in vulndict.items():
+    for key, vulns in list(vulndict.items()):
         print("##{key}\n\n".format(key=key))
         for vuln in vulns:
             print(vuln)
@@ -427,13 +424,13 @@ by_submitter = OrderedDict(sorted(by_submitter.items()))
 def hook_preconvert_vulnpages():
     for vulnerability in vulnerabilities:
         p = Page("vulnerabilities/{name}.md".format(
-            name=vulnerability.urlname), virtual=unicode(vulnerability), title=vulnerability.name)
+            name=vulnerability.urlname), virtual=str(vulnerability), title=vulnerability.name)
         pages.append(p)
 
 
 def hook_preconvert_submitterpages():
-    for ID, submitter in submitters.items():
-        p = Page("submitters/{ID}.md".format(ID=ID), virtual=unicode(
+    for ID, submitter in list(submitters.items()):
+        p = Page("submitters/{ID}.md".format(ID=ID), virtual=str(
             submitter), title="{name} ({ID})".format(name=submitter.name, ID=ID))
         pages.append(p)
 
@@ -447,11 +444,11 @@ def hook_preconvert_bypages():
 
 def by_pages(vulndict, by):
     bypagestring = '\n'  # Can't be the empty string or empty pages will cause errors
-    for key, vulns in vulndict.items():
+    for key, vulns in list(vulndict.items()):
         bypagestring += "##[{key}](by/{by}/{key})\n\n".format(key=key, by=by)
         vstring = "#{key}\n\n".format(key=key)
         for vuln in vulns:
-            vulnstring = unicode(vuln) + '\n'
+            vulnstring = str(vuln) + '\n'
             vstring += vulnstring
             bypagestring += vulnstring
         p = Page("by/{by}/{key}.md".format(
@@ -467,7 +464,7 @@ def hook_preconvert_releases():
     with open('input/release_dates.json') as f:
         rjson = json.load(f)
         rlist = []
-        for version, info in rjson.items():
+        for version, info in list(rjson.items()):
             date = info[0]
             if len(date) == 0 or '?' in date:
                 continue
@@ -481,7 +478,7 @@ def hook_preconvert_os_to_api():
     with open('input/os_to_api.json') as f:
         rjson = json.load(f)
         rlist = []
-        for version, api in rjson.items():
+        for version, api in list(rjson.items()):
             rlist.append([version, int(api)])
         rlist = sorted(rlist, key=lambda x: x[0])
         python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
@@ -492,7 +489,7 @@ def hook_preconvert_linux_versions():
     with open('input/linux_versions.json') as f:
         rjson = json.load(f)
         rlist = []
-        for version, kernelref in rjson.items():
+        for version, kernelref in list(rjson.items()):
             kernel = kernelref[0]
             if len(kernel) > 0 and not '?' in kernel:
                 rlist.append([version, kernel])
@@ -509,7 +506,7 @@ def hook_preconvert_stats():
     last_submission = None
     for vuln in vulnerabilities:
         manufacturers = vuln.manufacturers()
-        if 'all' in map(lambda x: x[0], manufacturers):
+        if 'all' in [x[0] for x in manufacturers]:
             num_vuln_all_android += 1
         else:
             num_vuln_specific += 1
