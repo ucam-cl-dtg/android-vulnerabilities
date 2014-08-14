@@ -1,0 +1,3 @@
+[submodule "latex_value"]
+	path = latex_value
+	url = git@code.dtg.cl.cam.ac.uk:lib/latex_value
