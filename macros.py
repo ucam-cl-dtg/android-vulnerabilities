@@ -55,8 +55,46 @@ def set_latex_value(key, value, t=None):
     with open(filename, 'w') as wf:
         wf.write(sf)
 
-python_export_file_contents = '''#!/usr/bin/env python
+python_export_file_contents = r'''#!/usr/bin/env python
 # Exported data from androidvulnerabilities.org for easy inclusion in python scripts
+
+import re
+import dateutil
+from collections import OrderedDict
+
+def expand_raw_vulnerabilities(rawvulns, vulns, vuln_nms):
+    for versions, date, name, how_known in rawvulns:
+        try:
+            vulns.append((re.compile("\A(%s)$"%versions),dateutil.parser.parse(date).date(),name))
+        except sre_constants.error as e:
+            warning(versions)
+            warning(e)
+    for _, _, name in vulns:
+        vuln_nms.append(name)
+
+
+def expand_release_dates(release_dates):
+    n_release_dates = OrderedDict()
+    for version, release_date in release_dates:
+        n_release_dates[version] = dateutil.parser.parse(release_date).date()
+    return n_release_dates
+
+
+def expand_api_to_os(os_to_api, release_dates):
+    api_to_os = OrderedDict()
+    api_release_dates = OrderedDict()
+    for version, api in os_to_api.items():
+        if not api in api_to_os:
+            api_to_os[api] = [version]
+            if version in release_dates:
+                api_release_dates[api] = release_dates[version]
+        else:
+            api_to_os[api].append(version)
+            if version in release_dates:
+                release_date = release_dates[version]
+                if release_date < api_release_dates[api]:
+                    api_release_dates[api] = release_date
+    return api_to_os, api_release_dates
 '''
 
 class DateRef:
@@ -475,6 +513,11 @@ def hook_preconvert_stats():
     set_latex_value('NumVulnSpecific', num_vuln_specific)
     set_latex_value('StartDate', first_submission)
     set_latex_value('EndDate', last_submission)
+    vuln_table = r'\begin{table} \centering \begin{tabular}{l|c|l} Vulnerability & Date known & How known \\ \hline'
+    for versions, date, name, how_known in raw_vulnerabilities:
+            vuln_table += r' {} & {} & {} \\'.format(name, date, how_known)
+    vuln_table += r'\end{tabular} \caption{Root equivalent vulnerabilities in Android} \label{tab:andvulns} \end{table}'
+    set_latex_value('TabAndVulns', vuln_table)
 
 def hook_postconvert_python_export():
     with open('output/avo.py', 'w') as f:
