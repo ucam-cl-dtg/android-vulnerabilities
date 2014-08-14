@@ -487,6 +487,20 @@ def hook_preconvert_os_to_api():
         python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
 
 
+def hook_preconvert_linux_versions():
+    global python_export_file_contents
+    with open('input/linux_versions.json') as f:
+        rjson = json.load(f)
+        rlist = []
+        for version, kernelref in rjson.items():
+            kernel = kernelref[0]
+            if len(kernel) > 0 and not '?' in kernel:
+                rlist.append([version, kernel])
+        rlist = sorted(rlist, key=lambda x: x[0])
+        python_export_file_contents += '\nos_to_kernel = ' + str(rlist) + '\n'
+
+
+
 def hook_preconvert_stats():
     set_latex_value('NumVulnerabilities', len(vulnerabilities))
     num_vuln_all_android = 0
