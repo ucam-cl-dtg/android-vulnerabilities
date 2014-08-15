@@ -8,6 +8,7 @@ import json
 import os
 import dateutil.parser
 import uncertainties
+import re
 from collections import defaultdict, OrderedDict
 
 sys.path.append('')# So that we find latex_value
@@ -467,6 +468,32 @@ def hook_preconvert_linux_versions():
         rlist = sorted(rlist, key=lambda x: x[0])
         python_export_file_contents += '\nos_to_kernel = ' + str(rlist) + '\n'
 
+
+tag_matcher = re.compile('android-([0-9.]+)_.*')
+shortversionp = re.compile("\A[1-4]\.[0-9]$")
+def tag_to_version(tag):
+    '''Turn an Android git tag into the corresponding Android version'''
+    match = tag_matcher.match(tag)
+    if not match:
+        return None
+    version = match.group(1)
+    if shortversionp.match(version):
+        version += '.0'
+    return version
+
+
+def hook_preconvert_openssl_versions():
+    global python_export_file_contents
+    with open('input/tag_to_openssl_version.json') as f:
+        rjson = json.load(f)
+        rlist = []
+        for tag, openssl_version in list(rjson.items()):
+            version = tag_to_version(tag)
+            if version != None:
+                rlist.append((version, openssl_version))
+        # Make the list unique and then sort it
+        rlist = sorted(set(rlist), key=lambda x: x[0])
+        python_export_file_contents += '\nos_to_openssl_version = ' + str(rlist) + '\n'
 
 
 def hook_preconvert_stats():
