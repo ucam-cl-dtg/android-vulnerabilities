@@ -496,6 +496,20 @@ def hook_preconvert_openssl_versions():
         python_export_file_contents += '\nos_to_openssl_version = ' + str(rlist) + '\n'
 
 
+def hook_preconvert_bouncycastle_versions():
+    global python_export_file_contents
+    with open('input/tag_to_bouncycastle_version.json') as f:
+        rjson = json.load(f)
+        rlist = []
+        for tag, bouncycastle_version in list(rjson.items()):
+            version = tag_to_version(tag)
+            if version != None:
+                rlist.append((version, bouncycastle_version[0] + '.' + bouncycastle_version[1:]))
+        # Make the list unique and then sort it
+        rlist = sorted(set(rlist), key=lambda x: x[0])
+        python_export_file_contents += '\nos_to_bouncycastle_version = ' + str(rlist) + '\n'
+
+
 def hook_preconvert_stats():
     set_latex_value('NumVulnerabilities', len(vulnerabilities))
     num_vuln_all_android = 0
