@@ -503,6 +503,20 @@ def tag_versions(name):
         rlist = sorted(set(rlist), key=lambda x: x[0])
         python_export_file_contents += '\nos_to_' + name + '_version = ' + str(rlist) + '\n'
 
+def hook_preconvert_external_linecount():
+    global python_export_file_contents
+    project_lines = dict()
+    with open('input/external_lines_of_code.json') as f:
+        rjson = json.load(f)
+        for project, lines in rjson.items():
+            if len(project) > 0 and len(lines) > 0:
+                project_lines[project] = int(lines)
+    sorted_pl = sorted(project_lines.items(), key=lambda x : x[1])
+    total_lines = sum(project_lines.values())
+    set_latex_value('TotalExternalLines', total_lines)
+    python_export_file_contents += '\ntotal_external_lines = ' + str(total_lines) + '\n'
+    python_export_file_contents += '\nexternal_project_lines = ' + str(sorted_pl) + '\n'
+
 
 def hook_preconvert_stats():
     set_latex_value('NumVulnerabilities', len(vulnerabilities))
