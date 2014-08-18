@@ -482,32 +482,26 @@ def tag_to_version(tag):
     return version
 
 
-def hook_preconvert_openssl_versions():
+def hook_preconvert_tag_versions():
     global python_export_file_contents
-    with open('input/tag_to_openssl_version.json') as f:
-        rjson = json.load(f)
-        rlist = []
-        for tag, openssl_version in list(rjson.items()):
-            version = tag_to_version(tag)
-            if version != None:
-                rlist.append((version, openssl_version))
-        # Make the list unique and then sort it
-        rlist = sorted(set(rlist), key=lambda x: x[0])
-        python_export_file_contents += '\nos_to_openssl_version = ' + str(rlist) + '\n'
+    upstreams = ['openssl', 'bouncycastle', 'libogg', 'libxml2', 'openssh']
+    for upstream in upstreams:
+        tag_versions(upstream)
+    python_export_file_contents += '\nupstreams = ' + str(upstreams) + '\n'
 
 
-def hook_preconvert_bouncycastle_versions():
+def tag_versions(name):
     global python_export_file_contents
-    with open('input/tag_to_bouncycastle_version.json') as f:
+    with open('input/tag_to_{}_version.json'.format(name)) as f:
         rjson = json.load(f)
         rlist = []
-        for tag, bouncycastle_version in list(rjson.items()):
-            version = tag_to_version(tag)
-            if version != None:
-                rlist.append((version, bouncycastle_version[0] + '.' + bouncycastle_version[1:]))
+        for tag, upstream_version in list(rjson.items()):
+            android_version = tag_to_version(tag)
+            if android_version != None and upstream_version != None and len(upstream_version) > 0:
+                rlist.append((android_version, upstream_version))
         # Make the list unique and then sort it
         rlist = sorted(set(rlist), key=lambda x: x[0])
-        python_export_file_contents += '\nos_to_bouncycastle_version = ' + str(rlist) + '\n'
+        python_export_file_contents += '\nos_to_' + name + '_version = ' + str(rlist) + '\n'
 
 
 def hook_preconvert_stats():
