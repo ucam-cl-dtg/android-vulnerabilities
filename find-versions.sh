@@ -18,7 +18,10 @@ $version_finder&tcpdump&version.c&version
 $define_version_finder&freetype&include/freetype/freetype.h&FREETYPE_&s/\s/./g
 $define_version_finder&libnfc-nxp&src/phHal4Nfc.h&\(PH_HAL4NFC_VERSION\)\|\(PH_HAL4NFC_REVISION\)\|\(PH_HAL4NFC_PATCH\)\|\(PH_HAL4NFC_BUILD\)&s/\s/./g
 $define_version_finder&elfutils&elfutils/version.h£version.h£config.h&\(_ELFUTILS_VERSION\s\)\|\(PACKAGE_VERSION\)&s/^\([0-9]\+\)$/0.\1/
-$apache_version_finder&apache-xml&src/main/java/org/apache/xalan/Version.java"
+$apache_version_finder&apache-xml&src/main/java/org/apache/xalan/Version.java
+$define_version_finder&stlport&stlport/stl/_stlport_version.h&_STLPORT_VERSION\s&s/0x\([0-9]\)\([0-9]\)\([0-9]\)/\1.\2.\3/
+$version_finder&linux-tools-perf&PERF-VERSION-FILE&PERF_VERSION
+$define_version_finder&e2fsprogs&version.h&E2FSPROGS_VERSION"
 
 for entry in $entries
 do
