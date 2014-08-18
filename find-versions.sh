@@ -3,8 +3,10 @@
 set -e
 
 android_external=~/git/upstreams/android/external/
-version_finder=`dirname $(readlink -f $0)`"/version-finder.sh"
-define_version_finder=`dirname $(readlink -f $0)`"/define-version-finder.sh"
+basedir=`dirname $(readlink -f $0)`
+version_finder="$basedir/version-finder.sh"
+define_version_finder="$basedir/define-version-finder.sh"
+apache_version_finder="$basedir/apache-version-finder.sh"
 
 entries="$version_finder&openssl
 $version_finder&bouncycastle&bouncycastle.version&BOUNCYCASTLE_VERSION&s/\([0-9]\)\([0-9]\+\)/\1.\2/
@@ -15,7 +17,8 @@ $define_version_finder&sonivox&arm-fm-22k/host_src/eas.h&LIB_VERSION&s/MAKE_LIB_
 $version_finder&tcpdump&version.c&version
 $define_version_finder&freetype&include/freetype/freetype.h&FREETYPE_&s/\s/./g
 $define_version_finder&libnfc-nxp&src/phHal4Nfc.h&\(PH_HAL4NFC_VERSION\)\|\(PH_HAL4NFC_REVISION\)\|\(PH_HAL4NFC_PATCH\)\|\(PH_HAL4NFC_BUILD\)&s/\s/./g
-$define_version_finder&elfutils&elfutils/version.h£version.h£config.h&\(_ELFUTILS_VERSION\s\)\|\(PACKAGE_VERSION\)&s/^\([0-9]\+\)$/0.\1/"
+$define_version_finder&elfutils&elfutils/version.h£version.h£config.h&\(_ELFUTILS_VERSION\s\)\|\(PACKAGE_VERSION\)&s/^\([0-9]\+\)$/0.\1/
+$apache_version_finder&apache-xml&src/main/java/org/apache/xalan/Version.java"
 
 for entry in $entries
 do
