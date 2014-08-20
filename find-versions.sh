@@ -21,7 +21,8 @@ $define_version_finder&elfutils&elfutils/version.h£version.h£config.h&\(_ELFUT
 $apache_version_finder&apache-xml&src/main/java/org/apache/xalan/Version.java
 $define_version_finder&stlport&stlport/stl/_stlport_version.h&_STLPORT_VERSION\s&s/0x\([0-9]\)\([0-9]\)\([0-9]\)/\1.\2.\3/
 $version_finder&linux-tools-perf&PERF-VERSION-FILE&PERF_VERSION
-$define_version_finder&e2fsprogs&version.h&E2FSPROGS_VERSION"
+$define_version_finder&e2fsprogs&version.h&E2FSPROGS_VERSION
+$define_version_finder&eigen&Eigen/src/Core/util/Macros.h&\(EIGEN_WORLD_VERSION\)\|\(EIGEN_MAJOR_VERSION\)\|\(EIGEN_MINOR_VERSION\)&s/\s/./g&cat"
 
 for entry in $entries
 do

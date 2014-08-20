@@ -9,6 +9,12 @@ project_id=$1
 version_file=$2
 project_key="$3"
 version_sed=$4
+if [ -n "$5" ]
+then
+	uniq_replacement=$5
+else
+	uniq_replacement=uniq
+fi
 
 #echo $project_id $version_file $project_key $version_sed
 
@@ -21,13 +27,14 @@ do
 	# support multiple possible version file locations
 	for real_version_file in `echo $version_file | tr '£' ' '`
 	do
+#	echo $real_version_file
 	if [ -f "${real_version_file}" ] &&  grep "$project_key" $real_version_file >/dev/null
 	then
-		version=`cat "${real_version_file}" | grep -e "\s$project_key" | tr -s ' ' | tr '	' ' ' | sed 's/, /,/g' | cut -d' ' -f 3 | sed 's/"//g' | grep -e '[0-9]' | uniq`
+		version=`cat "${real_version_file}" | grep -e "\s$project_key" | tr -s ' ' | tr '	' ' ' | sed 's/, /,/g' | cut -d' ' -f 3 | sed 's/"//g' | grep '[0-9]' | $uniq_replacement`
 #		echo $version $version_sed
 		if [ -n "$version_sed" ]
 		then
-			version=`echo $version | sed $version_sed`
+			version=`echo $version | sed "$version_sed"`
 		fi
 		version=`echo $version | grep '\.' | sed 's/\s//g'`
 		if [ -n "$version" ]
