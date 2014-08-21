@@ -31,9 +31,10 @@ echo '{' > $output
 for tag in `git tag`
 do
 	git checkout --quiet $tag
+	#echo $tag
 	if [ -f $version_file ]
 	then
-		version=`cat $version_file | grep $project_key | cut -d'=' -f 2 | grep -v '#' | tr --delete '"; ' |  grep -e '^[0-9.a-z]\+$'`
+		version=`cat $version_file | grep $project_key | cut -d'=' -f 2 | grep -v '#' | tr --delete '"; ' |  grep -e '^[0-9.ABMEa-z]\+$'`
 		if [ -n "$version_sed" ]
 		then
 			version=`echo $version | sed $version_sed`
