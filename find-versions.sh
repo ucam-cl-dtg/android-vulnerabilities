@@ -7,6 +7,7 @@ basedir=`dirname $(readlink -f $0)`
 version_finder="$basedir/version-finder.sh"
 define_version_finder="$basedir/define-version-finder.sh"
 apache_version_finder="$basedir/apache-version-finder.sh"
+pom_version_finder="$basedir/pom-version-finder.sh"
 
 entries="$version_finder&openssl
 $version_finder&bouncycastle&bouncycastle.version&BOUNCYCASTLE_VERSION&s/\([0-9]\)\([0-9]\+\)/\1.\2/
@@ -23,7 +24,14 @@ $define_version_finder&stlport&stlport/stl/_stlport_version.h&_STLPORT_VERSION\s
 $version_finder&linux-tools-perf&PERF-VERSION-FILE&PERF_VERSION
 $define_version_finder&e2fsprogs&version.h&E2FSPROGS_VERSION
 $define_version_finder&eigen&Eigen/src/Core/util/Macros.h&\(EIGEN_WORLD_VERSION\)\|\(EIGEN_MAJOR_VERSION\)\|\(EIGEN_MINOR_VERSION\)&s/\s/./g&cat
-$version_finder&jmonkeyengine&engine/src/core/com/jme3/system/JmeVersion.java&FULL_NAME&s/jMonkeyEngine\(.*\)/\1/"
+$version_finder&jmonkeyengine&engine/src/core/com/jme3/system/JmeVersion.java&FULL_NAME&s/jMonkeyEngine\(.*\)/\1/
+$define_version_finder&protobuf&android/config.h&PACKAGE_VERSION
+$define_version_finder&opencv&cxcore/include/cvver.h&CV_VERSION
+$pom_version_finder&guava
+$define_version_finder&sqlite&dist/sqlite3.h&SQLITE_VERSION\s
+$define_version_finder&antlr&build.gradle&version
+$define_version_finder&bison&linux-lib/config.h£config.h&PACKAGE_VERSION
+$define_version_finder&libvpx&x86/vpx_version.h£vpx_version.h£generic/vpx_version.h&VERSION_STRING_NOSP&s/v\([0-9.]*\)\(-.*\)\?/\1/"
 
 for entry in $entries
 do
