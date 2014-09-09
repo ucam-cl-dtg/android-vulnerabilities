@@ -490,13 +490,14 @@ def hook_preconvert_tag_versions():
         'protobuf', 'opencv', 'guava', 'libxml2', 'bluetooth', 'sqlite', 'antlr', 'bison', 'libvpx', 'wpa_supplicant_8', 'compiler-rt', 'libcxx', 'skia', 'openssl', 'qemu', 'vixl', 'icu', 'valgrind', 'mesa3d', 'llvm', 'clang', 'chromium', 'chromium_org']
     existing_upstreams = upstreams[
         :]  # May need to remove ones for which we lack data
+    data = dict()
     for upstream in upstreams:
-        tag_versions(upstream, existing_upstreams)
-    python_export_file_contents += '\nupstreams = ' + str(upstreams) + '\n'
+        tag_versions(upstream, existing_upstreams, data)
+    python_export_file_contents += '\nupstreams = ' + str(existing_upstreams) + '\n'
+    python_export_file_contents += '\nos_to_project = ' + str(data) + '\n'
 
 
-def tag_versions(name, existing_upstreams):
-    global python_export_file_contents
+def tag_versions(name, existing_upstreams, data):
     filename = 'input/tag_to/tag_to_{}_version.json'.format(name)
     if not os.path.isfile(filename):
         existing_upstreams.remove(name)
@@ -514,7 +515,7 @@ def tag_versions(name, existing_upstreams):
                 rlist.append((android_version, upstream_version))
         # Make the list unique and then sort it
         rlist = sorted(set(rlist), key=lambda x: x[0])
-        python_export_file_contents += '\nos_to_' + name + '_version = ' + str(rlist) + '\n'
+        data[name] = OrderedDict(rlist)
 
 def hook_preconvert_external_linecount():
     global python_export_file_contents
