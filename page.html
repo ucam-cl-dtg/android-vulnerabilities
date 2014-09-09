@@ -1,79 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="ie ie7" lang="en" xml:lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en" xml:lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html lang="en" xml:lang="en"> <!--<![endif]-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset={{ __encoding__ }}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" charset="utf-8" />
     <title>{{ hx(page["title"]) }} - Android Vulnerabilities</title>
     <meta name="description" content="{{ hx(page.get("description", "Root vulnerabilities affecting Android")) }}" />
     <meta name="keywords" content="{{ hx(page.get("keywords", "root,vulerability,android,exploit,CVE")) }}" />
-    <style type="text/css">
-        body {
-            font-family: sans;
-            width: 800px;
-            margin: 1em auto;
-            color: #2e3436;
-        }
-        div#box {
-        }
-        div#header, div#menu, div#content, div#footer {
-            padding: 1em;
-        }
-        div#menu {
-            background-color: #eeeeec;
-            padding: 0.6em 0 0.6em 0;
-        }
-        #menu span {
-            font-weight: bold;
-            padding: 0.6em;
-        }
-        #menu span.current {
-            background-color: #ffffff;
-            border: 1px solid #eeeeec;
-        }
-        #menu a {
-            color: #000000;
-            text-decoration: none;
-        }
-        div#footer {
-            color: gray;
-            text-align: center;
-            font-size: small;
-        }
-        div#footer a {
-            color: gray;
-            text-decoration: none;
-        }
-        pre {
-            border: dotted black 1px;
-            background: #eeeeec;
-            font-size: small;
-            padding: 1em;
-        }
-        div#contactpeople {
-            text-align: center;
-        }
-        div#graph {
-             text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <div id="box">
-    <div id="header">
+    <div id="content-wrap">
+    <header class="container">
+
+    <hgroup>
          <h1>Android Vulnerabilities</h1>
          <h2>{{hx(page["title"])}}</h2>
-    </div>
-    <div id="menu">
+    </hgroup>
+    <nav id="nav-wrap" class="cf">
+    <ul id="menu">
     <!--%
         mpages = [p for p in pages if "menu-position" in p]
         mpages.sort(key=lambda p: int(p["menu-position"]))
-        entry = '<span class="%s"><a href="%s">%s</a></span>'
+        entry = '<li class="%s"><a href="%s">%s</a></li>'
         for p in mpages:
             style = "current" if p["title"] == page["title"] else ""
             print(entry % (style, p["url"], hx(p["title"])))
     %-->
+    </ul>
+    </nav>
+    </header>
+
+    <div id="content" class="container">{{ __content__ }}</div>
     </div>
-    <div id="content">{{ __content__ }}</div>
-    </div>
+    <footer class="container">
     <div id="footer">
         <a href="terms">Terms and conditions</a>
         &middot;
@@ -81,5 +45,6 @@
         &middot;
         <a href="https://github.com/ucam-cl-dtg/android-vulnerabilities">Source code</a>
     </div>
+    </footer>
 </body>
 </html>
