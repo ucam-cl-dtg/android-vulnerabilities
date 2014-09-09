@@ -18,7 +18,7 @@ fi
 
 #echo $project_id $version_file $project_key $version_sed
 
-output=`dirname $(readlink -f $0)`"/input/tag_to_${project_id}_version.json"
+output=`dirname $(readlink -f $0)`"/input/tag_to/tag_to_${project_id}_version.json"
 echo '{' > $output 
 for tag in `git tag`
 do

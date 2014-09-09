@@ -14,7 +14,7 @@ else
     version_file=$2
 fi
 
-output=`dirname $(readlink -f $0)`"/input/tag_to_${project_id}_version.json"
+output=`dirname $(readlink -f $0)`"/input/tag_to/tag_to_${project_id}_version.json"
 
 
 echo '{' > $output 

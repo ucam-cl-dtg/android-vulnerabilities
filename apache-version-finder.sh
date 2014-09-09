@@ -9,7 +9,7 @@ project_id=$1
 
 version_file=$2
 
-output=`dirname $(readlink -f $0)`"/input/tag_to_${project_id}_version.json"
+output=`dirname $(readlink -f $0)`"/input/tag_to/tag_to_${project_id}_version.json"
 
 #echo $project_id $version_file $project_key $version_sed $output
 
