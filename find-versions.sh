@@ -31,7 +31,14 @@ $pom_version_finder&guava
 $define_version_finder&sqlite&dist/sqlite3.h&SQLITE_VERSION\s
 $define_version_finder&antlr&build.gradle&version
 $define_version_finder&bison&linux-lib/config.h£config.h&PACKAGE_VERSION
-$define_version_finder&libvpx&x86/vpx_version.h£vpx_version.h£generic/vpx_version.h&VERSION_STRING_NOSP&s/v\([0-9.]*\)\(-.*\)\?/\1/"
+$define_version_finder&libvpx&x86/vpx_version.h£vpx_version.h£generic/vpx_version.h&VERSION_STRING_NOSP&s/v\([0-9.]*\)\(-.*\)\?/\1/
+$define_version_finder&wpa_supplicant_8&src/common/version.h&VERSION_STR
+$define_version_finder&libcxx&include/__config&_LIBCPP_VERSION&s/\(\d\+\)/\1./
+$define_version_finder&skia&include/core/SkTypes.h&SKIA_VERSION&s/\([0-9]\)\s\([0-9]\)\s\([0-9]\)/\1.\2.\3/&cat
+$define_version_finder&qemu&android/config/linux-x86/config-host.h&QEMU_VERSION
+$define_version_finder&valgrind&main/config.h&PACKAGE_VERSION
+$define_version_finder&mesa3d&src/mesa/main/version.h&MESA_VERSION_STRING
+$define_version_finder&llvm&host/include/llvm/Config/config.h&PACKAGE_VERSION"
 
 for entry in $entries
 do
