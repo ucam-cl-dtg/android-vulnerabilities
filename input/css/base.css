@@ -26,9 +26,9 @@ e. Others
 /* a. Webfonts
 /* ------------------------------------------------------------------ */
 
-@import url(http://fonts.googleapis.com/css?family=Noticia+Text:400,400italic,700,700italic);
-@import url(http://fonts.googleapis.com/css?family=Domine:400,700);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+@import url(../fonts/Noticia.css);
+@import url(../fonts/Domine.css);
+@import url(../fonts/OpenSans.css);
 
 /* ------------------------------------------------------------------ */
 /* b. Reset

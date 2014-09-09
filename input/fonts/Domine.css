@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Domine';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Domine'), local('Domine-Regular'), url(Domine-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Domine';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Domine Bold'), local('Domine-Bold'), url(Domine-Bold.ttf) format('truetype');
+}
