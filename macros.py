@@ -485,15 +485,28 @@ def tag_to_version(tag):
 def hook_preconvert_tag_versions():
     global python_export_file_contents
     upstreams = ['openssl', 'bouncycastle', 'libogg', 'libxml2', 'openssh']
+    upstreams = [
+        'aac', 'kernel-headers', 'bouncycastle', 'sonivox', 'tcpdump', 'freetype', 'libnfc-nxp', 'srec', 'elfutils', 'apache-xml', 'openssh', 'stlport', 'linux-tools-perf', 'e2fsprogs', 'apache-harmony', 'eigen', 'jmonkeyengine',
+        'protobuf', 'opencv', 'guava', 'libxml2', 'bluetooth', 'sqlite', 'antlr', 'bison', 'libvpx', 'wpa_supplicant_8', 'compiler-rt', 'libcxx', 'skia', 'openssl', 'qemu', 'vixl', 'icu', 'valgrind', 'mesa3d', 'llvm', 'clang', 'chromium', 'chromium_org']
+    existing_upstreams = upstreams[
+        :]  # May need to remove ones for which we lack data
     for upstream in upstreams:
-        tag_versions(upstream)
+        tag_versions(upstream, existing_upstreams)
     python_export_file_contents += '\nupstreams = ' + str(upstreams) + '\n'
 
 
-def tag_versions(name):
+def tag_versions(name, existing_upstreams):
     global python_export_file_contents
-    with open('input/tag_to_{}_version.json'.format(name)) as f:
-        rjson = json.load(f)
+    filename = 'input/tag_to/tag_to_{}_version.json'.format(name)
+    if not os.path.isfile(filename):
+        existing_upstreams.remove(name)
+        return
+    with open(filename) as f:
+        try:
+            rjson = json.load(f)
+        except ValueError as e:
+            warning(filename)
+            raise e
         rlist = []
         for tag, upstream_version in list(rjson.items()):
             android_version = tag_to_version(tag)
