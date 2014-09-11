@@ -7,7 +7,6 @@ import sys
 import json
 import os
 import dateutil.parser
-import uncertainties
 import re
 from collections import defaultdict, OrderedDict
 
