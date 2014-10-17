@@ -1,11 +1,11 @@
 {
   "name" : "Qualcomm Integer oveflow diagnostics",
   "CVE" : [["CVE-2012-4220","CVE-2012-4220"], ["CVE-2012-4221","CVE-2012-4221"], ["CVE-2012-4222","CVE-2012-4222"]],
-  "Responsibly_disclosed" : false,
+  "Responsibly_disclosed" : true,
   "Details" : [["QCIR-2012-00001-1: Multiple security vulnerabilities have been discovered in the handling of the diagchar_ioctl() and kgsl_ioctl() system call parameters for the diagnostics (DIAG) and KGSL graphics kernel drivers for Android.","QCIR-2012-00001-1"]],
   "Discovered_by" : [["<giantpune@gmail.com>","QCIR-2012-00001-1"]],
-  "Discovered_on" : [],
-  "Submission" : [{"by":"drt24", "on":"2013-09-02"}],
+  "Discovered_on" : ["2012-04-30","giantpune-email0"],
+  "Submission" : [{"by":"drt24", "on":"2013-09-02"}, {"by":"giantpune", "on":"2014-10-17"}],
   "Reported_on" : [["2012-11-15","QCIR-2012-00001-1"]],
   "Fixed_on" : [["2012-11-16","QCIR-2012-00001-1"]],
   "Fix_released_on" : [],
@@ -26,6 +26,9 @@
     },
     "QCIR-2012-00001-1" : {
       "url" : "https://www.codeaurora.org/projects/security-advisories/multiple-issues-diagkgsl-system-call-handling-cve-2012-4220-cve-2012"
+    },
+    "giantpune-email0" : {
+      "url" : ""
     }
   }
 }
