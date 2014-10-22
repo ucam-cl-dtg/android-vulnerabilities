@@ -8,7 +8,9 @@ import json
 import os
 import dateutil.parser
 import re
+import statistics
 from collections import defaultdict, OrderedDict
+from uncertainties import ufloat
 
 sys.path.append('')# So that we find latex_value
 import latex_value
@@ -383,6 +385,7 @@ for filename in os.listdir('input/submitters'):
         print("processing: " + filename)
         submitter = Submitter(json.load(f))
         submitters[submitter.ID] = submitter
+set_latex_value('NumSubmitters', len(submitters))
 
 by_year = OrderedDict(sorted(by_year.items()))
 by_version = OrderedDict(sorted(by_version.items()))
@@ -483,17 +486,34 @@ def tag_to_version(tag):
 
 def hook_preconvert_tag_versions():
     global python_export_file_contents
-    upstreams = ['openssl', 'bouncycastle', 'libogg', 'libxml2', 'openssh']
+    #upstreams = ['openssl', 'bouncycastle', 'libogg', 'libxml2', 'openssh']
     upstreams = [
         'aac', 'kernel-headers', 'bouncycastle', 'sonivox', 'tcpdump', 'freetype', 'libnfc-nxp', 'srec', 'elfutils', 'apache-xml', 'openssh', 'stlport', 'linux-tools-perf', 'e2fsprogs', 'apache-harmony', 'eigen', 'jmonkeyengine',
         'protobuf', 'opencv', 'guava', 'libxml2', 'bluetooth', 'sqlite', 'antlr', 'bison', 'libvpx', 'wpa_supplicant_8', 'compiler-rt', 'libcxx', 'skia', 'openssl', 'qemu', 'vixl', 'icu', 'valgrind', 'mesa3d', 'llvm', 'clang', 'chromium', 'chromium_org']
+    set_latex_value('NumBigExternalProjects',len(upstreams))
     existing_upstreams = upstreams[
         :]  # May need to remove ones for which we lack data
     data = dict()
     for upstream in upstreams:
         tag_versions(upstream, existing_upstreams, data)
+    set_latex_value('NumBigExternalProjectsAnalysed', len(existing_upstreams))
+    count_versions(data)
     python_export_file_contents += '\nupstreams = ' + str(existing_upstreams) + '\n'
     python_export_file_contents += '\nos_to_project = ' + str(data) + '\n'
+
+
+def count_versions(data):
+    total = 0
+    totals = []
+    for project, values in data.items():
+        values_set = set(map(lambda x : x[1], values.items()))
+        num_values = len(values_set)
+        total += num_values
+        totals.append(num_values)
+    totals = sorted(totals)
+    set_latex_value('BigExternalMedianVersions', statistics.median(totals))
+    set_latex_value('BigExternalMeanVersions', ufloat(statistics.mean(totals), statistics.stdev(totals)))
+    set_latex_value('BigExternalTotalVersions', total)
 
 
 def tag_versions(name, existing_upstreams, data):
@@ -524,9 +544,13 @@ def hook_preconvert_external_linecount():
         for project, lines in rjson.items():
             if len(project) > 0 and len(lines) > 0:
                 project_lines[project] = int(lines)
-    sorted_pl = sorted(project_lines.items(), key=lambda x : x[1])
+    sorted_pl = sorted(project_lines.items(), key=lambda x : x[1])#Sort by lines of code
     total_lines = sum(project_lines.values())
     set_latex_value('TotalExternalLines', total_lines)
+    set_latex_value('NumExternalProjects', len(sorted_pl))
+    big_total_lines = sum(map(lambda x : x[1], sorted_pl[40:]))#TODO factor this 40 out
+    set_latex_value('NumBigExternalLinesOfCode', big_total_lines)
+    set_latex_value('BigExternalLinesOfCodePerc', big_total_lines/total_lines, t='perc')
     python_export_file_contents += '\ntotal_external_lines = ' + str(total_lines) + '\n'
     python_export_file_contents += '\nexternal_project_lines = ' + str(sorted_pl) + '\n'
 
