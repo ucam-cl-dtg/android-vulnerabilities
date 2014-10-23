@@ -14,7 +14,7 @@ from uncertainties import ufloat
 
 sys.path.append('')# So that we find latex_value
 import latex_value
-from latex_value import set_latex_value
+from latex_value import set_latex_value, num2word
 latex_value.latex_value_filename('output/latex.tex')
 latex_value.latex_value_prefix('avo')
 sys.path.remove('')
@@ -546,10 +546,10 @@ def hook_preconvert_external_linecount():
                 project_lines[project] = int(lines)
     sorted_pl = sorted(project_lines.items(), key=lambda x : x[1])#Sort by lines of code
     total_lines = sum(project_lines.values())
-    set_latex_value('TotalExternalLines', total_lines)
+    set_latex_value('TotalExternalLines', num2word(total_lines))
     set_latex_value('NumExternalProjects', len(sorted_pl))
     big_total_lines = sum(map(lambda x : x[1], sorted_pl[40:]))#TODO factor this 40 out
-    set_latex_value('NumBigExternalLinesOfCode', big_total_lines)
+    set_latex_value('NumBigExternalLinesOfCode', num2word(big_total_lines))
     set_latex_value('BigExternalLinesOfCodePerc', big_total_lines/total_lines, t='perc')
     python_export_file_contents += '\ntotal_external_lines = ' + str(total_lines) + '\n'
     python_export_file_contents += '\nexternal_project_lines = ' + str(sorted_pl) + '\n'
