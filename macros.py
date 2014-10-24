@@ -211,6 +211,14 @@ class Vulnerability:
         if len(regex) > 0:  # TODO regex is a list but we are not treating it as one.
             return (regex[0], str(dates[0].isoformat()), self.name, fields[0].replace('_', ' '))
 
+    def first_date(self):
+        dates, fields = self._dates()
+        return dates[0]
+
+    def last_date(self):
+        dates, fields = self._dates()
+        return dates[-1]
+
     def versions(self):
         return []  # TODO
 
@@ -484,6 +492,26 @@ def tag_to_version(tag):
     return version
 
 
+project_lines = dict()
+total_lines = 0
+def hook_preconvert_external_linecount():
+    global python_export_file_contents, total_lines
+    with open('input/external_lines_of_code.json') as f:
+        rjson = json.load(f)
+        for project, lines in rjson.items():
+            if len(project) > 0 and len(lines) > 0:
+                project_lines[project] = int(lines)
+    sorted_pl = sorted(project_lines.items(), key=lambda x : x[1])#Sort by lines of code
+    total_lines = sum(project_lines.values())
+    set_latex_value('TotalExternalLines', num2word(total_lines))
+    set_latex_value('NumExternalProjects', len(sorted_pl))
+    big_total_lines = sum(map(lambda x : x[1], sorted_pl[40:]))#TODO factor this 40 out
+    set_latex_value('NumBigExternalLinesOfCode', num2word(big_total_lines))
+    set_latex_value('BigExternalLinesOfCodePerc', big_total_lines/total_lines, t='perc')
+    python_export_file_contents += '\ntotal_external_lines = ' + str(total_lines) + '\n'
+    python_export_file_contents += '\nexternal_project_lines = ' + str(sorted_pl) + '\n'
+
+
 def hook_preconvert_tag_versions():
     global python_export_file_contents
     #upstreams = ['openssl', 'bouncycastle', 'libogg', 'libxml2', 'openssh']
@@ -496,7 +524,12 @@ def hook_preconvert_tag_versions():
     data = dict()
     for upstream in upstreams:
         tag_versions(upstream, existing_upstreams, data)
-    set_latex_value('NumBigExternalProjectsAnalysed', len(existing_upstreams))
+    set_latex_value('NumAnalysedExternalProjects', len(existing_upstreams))
+    analysed_lines_of_code = 0
+    for upstream in existing_upstreams:
+        analysed_lines_of_code += project_lines[upstream]
+    set_latex_value('NumAnalysedExternalLinesOfCode', num2word(analysed_lines_of_code))
+    set_latex_value('AnalysedExternalLinesOfCodePerc', analysed_lines_of_code/total_lines, t='perc')
     count_versions(data)
     python_export_file_contents += '\nupstreams = ' + str(existing_upstreams) + '\n'
     python_export_file_contents += '\nos_to_project = ' + str(data) + '\n'
@@ -536,24 +569,6 @@ def tag_versions(name, existing_upstreams, data):
         rlist = sorted(set(rlist), key=lambda x: x[0])
         data[name] = OrderedDict(rlist)
 
-def hook_preconvert_external_linecount():
-    global python_export_file_contents
-    project_lines = dict()
-    with open('input/external_lines_of_code.json') as f:
-        rjson = json.load(f)
-        for project, lines in rjson.items():
-            if len(project) > 0 and len(lines) > 0:
-                project_lines[project] = int(lines)
-    sorted_pl = sorted(project_lines.items(), key=lambda x : x[1])#Sort by lines of code
-    total_lines = sum(project_lines.values())
-    set_latex_value('TotalExternalLines', num2word(total_lines))
-    set_latex_value('NumExternalProjects', len(sorted_pl))
-    big_total_lines = sum(map(lambda x : x[1], sorted_pl[40:]))#TODO factor this 40 out
-    set_latex_value('NumBigExternalLinesOfCode', num2word(big_total_lines))
-    set_latex_value('BigExternalLinesOfCodePerc', big_total_lines/total_lines, t='perc')
-    python_export_file_contents += '\ntotal_external_lines = ' + str(total_lines) + '\n'
-    python_export_file_contents += '\nexternal_project_lines = ' + str(sorted_pl) + '\n'
-
 
 def hook_preconvert_stats():
     set_latex_value('NumVulnerabilities', len(vulnerabilities))
@@ -561,6 +576,8 @@ def hook_preconvert_stats():
     num_vuln_specific = 0
     first_submission = None
     last_submission = None
+    first_date = None
+    last_date = None
     for vuln in vulnerabilities:
         manufacturers = vuln.manufacturers()
         if 'all' in [x[0] for x in manufacturers]:
@@ -577,10 +594,22 @@ def hook_preconvert_stats():
                     first_submission = on
                 elif on > last_submission:
                     last_submission = on
+        first = vuln.first_date()
+        last = vuln.last_date()
+        if first_date == None:
+            first_date = first
+            last_date = last
+        else:
+            if first < first_date:
+                first_date = first
+            if last > last_date:
+                last_date = last
     set_latex_value('NumVulnAllAndroid', num_vuln_all_android)
     set_latex_value('NumVulnSpecific', num_vuln_specific)
     set_latex_value('StartDate', first_submission)
     set_latex_value('EndDate', last_submission)
+    set_latex_value('FirstDataDate', first_date)
+    set_latex_value('LastDataDate', last_date)
     vuln_table = r'\begin{table} \centering \begin{tabular}{l|c|l} Vulnerability & Date known & How known \\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
             vuln_table += r' {} & {} & {} \\'.format(name, date, how_known)
