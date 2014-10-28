@@ -7,10 +7,12 @@ import sys
 import json
 import os
 import dateutil.parser
+import datetime
 import re
 import statistics
 from collections import defaultdict, OrderedDict
 from uncertainties import ufloat
+from math import sqrt
 
 sys.path.append('')# So that we find latex_value
 import latex_value
@@ -610,6 +612,7 @@ def hook_preconvert_stats():
     set_latex_value('EndDate', last_submission)
     set_latex_value('FirstDataDate', first_date)
     set_latex_value('LastDataDate', last_date)
+    set_latex_value('VulnsPerYear', (ufloat(len(vulnerabilities),sqrt(len(vulnerabilities)))/((last_date - first_date)/datetime.timedelta(1)))*365)
     vuln_table = r'\begin{table} \centering \begin{tabular}{l|c|l} Vulnerability & Date known & How known \\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
             vuln_table += r' {} & {} & {} \\'.format(name, date, how_known)
