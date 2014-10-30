@@ -613,6 +613,7 @@ def hook_preconvert_stats():
     set_latex_value('FirstDataDate', first_date)
     set_latex_value('LastDataDate', last_date)
     set_latex_value('VulnsPerYear', (ufloat(len(vulnerabilities),sqrt(len(vulnerabilities)))/((last_date - first_date)/datetime.timedelta(1)))*365)
+    set_latex_value('VulnsPerYearAllAndroid', (ufloat(num_vuln_all_android,sqrt(num_vuln_all_android))/((last_date - first_date)/datetime.timedelta(1)))*365)
     vuln_table = r'\begin{table} \centering \begin{tabular}{l|c|l} Vulnerability & Date known & How known \\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
             vuln_table += r' {} & {} & {} \\'.format(name, date, how_known)
