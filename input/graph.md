@@ -3,7 +3,7 @@ title: Graph
 ---
 
 <div id="graph">
- <p>Proportion of devices running vulnerable versions of Android</p>
+ <h2>Proportion of devices running vulnerable versions of Android</h2>
  <img src="images/norm_versionsecurity.png" width="800px" height="600px" alt="Proportion of devices affected by root vulnerabilities"/>
 </div>
 This figure shows our estimate of the proportion of Android devices running *insecure*, *maybe secure* and *secure* versions of Android over time.
@@ -19,7 +19,7 @@ We have used data from 21,713 devices taking part in the [Device Analyzer](https
 In particular, we have recorded the Android OS version strings (e.g. "2.3.5") and build strings (e.g. "GRJ22") from each device every day.
 We believe data from Device Analyzer provides an optimistic view of Android security because the distribution of supported Android API levels in the Device Analyzer data set demonstrates that Device Analyzer devices are running more recent OS versions than the API distribution levels published by Google for the Google Play app store would suggest is true for the wider Android ecosystem.
 It is possible that we provide a pessimistic view.
-This would occur if devices running Device Analyzer see many fewer updates than Android devices moregenerally. We believe this is unlikely.
+This would occur if devices running Device Analyzer see many fewer updates than Android devices more generally.
 
 We separate out updates which might represent a [backport](https://en.wikipedia.org/wiki/Backporting) which fixes a vulnerability,  from those updates which cannot fix a vulnerability.
 To do so we collect two pieces of information:
