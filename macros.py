@@ -9,7 +9,7 @@ import os
 import dateutil.parser
 import datetime
 import re
-import statistics
+import numpy
 from collections import defaultdict, OrderedDict
 from uncertainties import ufloat
 from math import sqrt
@@ -546,8 +546,8 @@ def count_versions(data):
         total += num_values
         totals.append(num_values)
     totals = sorted(totals)
-    set_latex_value('BigExternalMedianVersions', statistics.median(totals))
-    set_latex_value('BigExternalMeanVersions', ufloat(statistics.mean(totals), statistics.stdev(totals)))
+    set_latex_value('BigExternalMedianVersions', numpy.median(numpy.array(totals)))
+    set_latex_value('BigExternalMeanVersions', ufloat(numpy.mean(numpy.array(totals)), numpy.std(numpy.array(totals))))
     set_latex_value('BigExternalTotalVersions', total)
 
 
