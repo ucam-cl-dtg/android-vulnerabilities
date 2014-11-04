@@ -4,8 +4,11 @@ menu-position: 0
 ---
 
 <div id="graph">
-<img src="images/norm_versionsecurity.png" alt="Proportion of devices affected by root vulnerabilities"/>
-<p>Proportion of devices running vulnerable versions of Android</p>
+ <p>Proportion of devices running vulnerable versions of Android</p>
+ <img src="images/norm_versionsecurity.png" width="800px" height="600px" alt="Proportion of devices affected by root vulnerabilities"/>
+ <p>This figure shows our estimate of the proportion of Android devices running <em>insecure</em>, <em>maybe secure</em> and <em>secure</em> versions of Android over time.
+<a href="graph">More details</a>.
+ </p>
 </div>
 
 ## Why?
