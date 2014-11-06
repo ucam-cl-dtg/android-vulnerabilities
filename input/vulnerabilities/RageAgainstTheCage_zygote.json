@@ -12,7 +12,7 @@
   "Affected_versions" : [],
   "Affected_devices" : [],
   "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [],
+  "Affected_manufacturers" : [["all"]],
   "Fixed_versions" : [["2.3.1_r1","dalvik-zygote"]],
   "references" : {
     "dalvik-zygote" : {"url" : "https://android.googlesource.com/platform/dalvik/+/f36b57235b765c9eec3c001773b34c59cdefd87a", "commit" : "f36b57235b765c9eec3c001773b34c59cdefd87a", "component" : "platform/dalvik/"},
