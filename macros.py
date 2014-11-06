@@ -211,7 +211,9 @@ class Vulnerability:
     def raw_vulnerability(self):
         dates, fields = self._dates()
         regex = self.jsn['Affected_versions_regexp']
-        if len(regex) > 0:  # TODO regex is a list but we are not treating it as one.
+        manufacturers = self.manufacturers()
+        affects_all = 'all' in  map(lambda x : x[0], manufacturers)
+        if len(regex) > 0 and affects_all:  # TODO regex is a list but we are not treating it as one.
             return (regex[0], str(dates[0].isoformat()), self.name, fields[0].replace('_', ' '))
 
     def first_date(self):
