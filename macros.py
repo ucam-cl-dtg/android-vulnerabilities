@@ -32,7 +32,7 @@ python_export_file_contents = r'''#!/usr/bin/env python
 # Exported data from androidvulnerabilities.org for easy inclusion in python scripts
 
 import re
-import dateutil
+import dateutil.parser
 from collections import OrderedDict
 
 def expand_raw_vulnerabilities(rawvulns, vulns, vuln_nms):
