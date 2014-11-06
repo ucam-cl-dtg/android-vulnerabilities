@@ -12,6 +12,11 @@ This is also available as a [CSV file](play/androiddevolperdashboardhistory.csv)
 
 Google also [publishes some additional information about build numbers and code names](https://source.android.com/source/build-numbers.html).
 
+<div id="graph">
+ <h3>Proportion of devices using Google Play with different API versions</h3>
+ <img src="play/googleplayapi.png" width="800px" height="600px" alt="Proportion of devices affected by root vulnerabilities"/>
+</div>
+
 {%
 with open('input/play/androiddevolperdashboardhistory.csv') as csvfile:
 	reader = csv.reader(csvfile)
