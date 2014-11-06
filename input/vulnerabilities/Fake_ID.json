@@ -11,7 +11,7 @@
   "Fix_released_on" : [],
   "Affected_versions" : [["2.1 -- 4.4","ars-fake-id"]],
   "Affected_devices" : [],
-  "Affected_versions_regexp" : [],
+  "Affected_versions_regexp" : ["(2\\.[1-9]\\.[0-9])|(3\\.[0-9]\\.[0-9])|(4\\.[0-3]\\.[0-9])|(4\\.4\\.0)"],
   "Affected_manufacturers" : [["all","bluebox-fakeid"]],
   "Fixed_versions" : [["there is no single, specific “fixed” version of Android.  In fact, multiple vendors are maintaining the same prior version number, and only patching the functionality.  We have confirmed “fixed” versions existing within the ranges of 4.1, 4.2, 4.3, and 4.4", "bluebox-fakeid"]],
   "references" : {
