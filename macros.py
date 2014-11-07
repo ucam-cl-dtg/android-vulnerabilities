@@ -33,7 +33,11 @@ python_export_file_contents = r'''#!/usr/bin/env python
 
 import re
 import dateutil.parser
+import sre_constants
 from collections import OrderedDict
+
+def warning(*objs):
+    print(*objs, file=sys.stderr)
 
 def expand_raw_vulnerabilities(rawvulns, vulns, vuln_nms):
     for versions, date, name, how_known in rawvulns:
