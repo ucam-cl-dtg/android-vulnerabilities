@@ -27,7 +27,7 @@ To do so we collect two pieces of information:
 and (2) the date recorded in the Android Open Source Project (AOSP) when the vulnerability was first fixed (or failing that, the date of discovery of the vulnerability).
 If we see an OS version string and build string on any Device Analyzer device before the date of first fix (or discovery) for a vulnerability, we record this as an update which cannot fix that vulnerability; otherwise we record it as an update which might fix that vulnerability.
 
-The vulnerabilities we used to plot the figure, together with the dates when they were first fixed or discovered, are:
+The {% print(len(raw_vulnerabilities)) %} vulnerabilities we used to plot the figure, together with the dates when they were first fixed or discovered, are:
 
 {%
 for vulnerability in raw_vulnerabilities:
