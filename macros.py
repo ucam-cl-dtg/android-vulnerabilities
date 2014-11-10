@@ -217,7 +217,11 @@ class Vulnerability:
         regex = self.jsn['Affected_versions_regexp']
         manufacturers = self.manufacturers()
         affects_all = 'all' in  map(lambda x : x[0], manufacturers)
-        if len(regex) > 0 and affects_all:  # TODO regex is a list but we are not treating it as one.
+        if 'Severity' in self.jsn and 'uncertain' == self.jsn['Severity']:
+            uncertain = True
+        else:
+            uncertain = False
+        if len(regex) > 0 and affects_all and not uncertain:  # TODO regex is a list but we are not treating it as one.
             return (regex[0], str(dates[0].isoformat()), self.name, fields[0].replace('_', ' '))
 
     def first_date(self):
