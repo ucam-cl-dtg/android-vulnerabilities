@@ -628,7 +628,7 @@ def hook_preconvert_stats():
     vuln_table = r'\begin{table} \centering \begin{tabular}{l|l|c} Vulnerability & How known & Date \\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
             vuln_table += r' {} & {} & {} \\'.format(name, how_known, date)
-    vuln_table += r'\end{tabular} \caption{Root equivalent vulnerabilities in Android} \label{tab:andvulns} \end{table}'
+    vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
 def hook_postconvert_python_export():
