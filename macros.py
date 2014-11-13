@@ -17,7 +17,7 @@ from math import sqrt
 
 sys.path.append('')# So that we find latex_value
 import latex_value
-from latex_value import set_latex_value, num2word
+from latex_value import set_latex_value, num2word, try_shorten
 latex_value.latex_value_filename('output/latex.tex')
 latex_value.latex_value_prefix('avo')
 sys.path.remove('')
@@ -625,9 +625,9 @@ def hook_preconvert_stats():
     set_latex_value('LastDataDate', last_date)
     set_latex_value('VulnsPerYear', (ufloat(len(vulnerabilities),sqrt(len(vulnerabilities)))/((last_date - first_date)/datetime.timedelta(1)))*365)
     set_latex_value('VulnsPerYearAllAndroid', (ufloat(num_vuln_all_android,sqrt(num_vuln_all_android))/((last_date - first_date)/datetime.timedelta(1)))*365)
-    vuln_table = r'\begin{table} \centering \begin{tabular}{l|l|c} Vulnerability & How known & Date \\ \hline'
+    vuln_table = r'\begin{table} \centering \small \begin{tabular}{l|l|c} Vulnerability & How known & Date \\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
-            vuln_table += r' {} & {} & {} \\'.format(name, how_known, date)
+            vuln_table += r' {} & {} & {} \\'.format(try_shorten(name), how_known, date)
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
