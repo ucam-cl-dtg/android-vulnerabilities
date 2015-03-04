@@ -386,11 +386,18 @@ class Vulnerability:
         return self.__str__()
 
 
-def print_by_page(vulndict):
-    for key, vulns in list(vulndict.items()):
-        print("##{key}\n\n".format(key=key))
-        for vuln in vulns:
-            print(vuln)
+os_to_api = None
+
+def hook_preconvert_00_os_to_api():
+    global python_export_file_contents, os_to_api
+    with open('input/os_to_api.json') as f:
+        rjson = json.load(f)
+        rlist = []
+        for version, api in list(rjson.items()):
+            rlist.append([version, int(api)])
+        rlist = sorted(rlist, key=lambda x: x[0])
+        os_to_api = OrderedDict(rlist)
+        python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
 
 
 vulnerabilities = []
@@ -401,47 +408,55 @@ by_manufacturer = defaultdict(list)
 by_submitter = defaultdict(list)
 raw_vulnerabilities = []
 
-for filename in os.listdir('input/vulnerabilities'):
-    if filename == 'template.json':  # skip over template
-        continue
-    if not filename.endswith('.json'):
-        continue
-    with open('input/vulnerabilities/' + filename, 'r') as f:
-        print("processing: " + filename)
-        vulnerability = Vulnerability(json.load(f))
-        vulnerabilities.append(vulnerability)
-        for year in vulnerability.years():
-            by_year[year].append(vulnerability)
-        for version in vulnerability.versions():
-            by_version[version].append(vulnerability)
-        manufacturers = vulnerability.manufacturers()
-        for manufacturer in vulnerability.manufacturers():
-            by_manufacturer[manufacturer[0]].append(vulnerability)
-        if len(manufacturers) == 0:
-            by_manufacturer['none'].append(vulnerability)
-        for submitter in vulnerability.submitters():
-            by_submitter[submitter].append(vulnerability)
-        raw_vulnerability = vulnerability.raw_vulnerability()
-        if raw_vulnerability != None:
-            raw_vulnerabilities.append(raw_vulnerability)
-raw_vulnerabilities = sorted(raw_vulnerabilities, key=lambda x: x[1])
+def hook_preconvert_01_vulnerabilities():
+    global raw_vulnerabilities, python_export_file_contents
+    for filename in os.listdir('input/vulnerabilities'):
+        if filename == 'template.json':  # skip over template
+            continue
+        if not filename.endswith('.json'):
+          continue
+        with open('input/vulnerabilities/' + filename, 'r') as f:
+            print("processing: " + filename)
+            vulnerability = Vulnerability(json.load(f))
+            vulnerabilities.append(vulnerability)
+            for year in vulnerability.years():
+                by_year[year].append(vulnerability)
+            for version in vulnerability.versions():
+                by_version[version].append(vulnerability)
+            manufacturers = vulnerability.manufacturers()
+            for manufacturer in vulnerability.manufacturers():
+                by_manufacturer[manufacturer[0]].append(vulnerability)
+            if len(manufacturers) == 0:
+                by_manufacturer['none'].append(vulnerability)
+            for submitter in vulnerability.submitters():
+                by_submitter[submitter].append(vulnerability)
+            raw_vulnerability = vulnerability.raw_vulnerability()
+            if raw_vulnerability != None:
+                raw_vulnerabilities.append(raw_vulnerability)
+    raw_vulnerabilities = sorted(raw_vulnerabilities, key=lambda x: x[1])
 
-python_export_file_contents += '\nraw_vulnerabilities = ' + str(raw_vulnerabilities) + '\n'
+    python_export_file_contents += '\nraw_vulnerabilities = ' + str(raw_vulnerabilities) + '\n'
+
 
 submitters = dict()
-for filename in os.listdir('input/submitters'):
-    if not filename.endswith('.json'):
-        continue
-    with open('input/submitters/' + filename, 'r') as f:
-        print("processing: " + filename)
-        submitter = Submitter(json.load(f))
-        submitters[submitter.ID] = submitter
-set_latex_value('NumSubmitters', len(submitters))
 
-by_year = OrderedDict(sorted(by_year.items()))
-by_version = OrderedDict(sorted(by_version.items()))
-by_manufacturer = OrderedDict(sorted(by_manufacturer.items()))
-by_submitter = OrderedDict(sorted(by_submitter.items()))
+def hook_preconvert_02_submitters():
+    for filename in os.listdir('input/submitters'):
+        if not filename.endswith('.json'):
+            continue
+        with open('input/submitters/' + filename, 'r') as f:
+            print("processing: " + filename)
+            submitter = Submitter(json.load(f))
+            submitters[submitter.ID] = submitter
+    set_latex_value('NumSubmitters', len(submitters))
+
+
+def hook_preconvert_03_by():
+    global by_year, by_version, by_manufacturer, by_submitter
+    by_year = OrderedDict(sorted(by_year.items()))
+    by_version = OrderedDict(sorted(by_version.items()))
+    by_manufacturer = OrderedDict(sorted(by_manufacturer.items()))
+    by_submitter = OrderedDict(sorted(by_submitter.items()))
 
 # Create a page for each vulnerability
 
@@ -467,15 +482,21 @@ def hook_preconvert_bypages():
     by_pages(by_submitter, 'submitter')
 
 
+max_vulns_per_key = 10
+
 def by_pages(vulndict, by):
     bypagestring = '\n'  # Can't be the empty string or empty pages will cause errors
     for key, vulns in list(vulndict.items()):
         bypagestring += "##[{key}](by/{by}/{key})\n\n".format(key=key, by=by)
         vstring = "#{key}\n\n".format(key=key)
+        num_vulns = len(vulns)
         for vuln in vulns:
             vulnstring = str(vuln) + '\n'
             vstring += vulnstring
-            bypagestring += vulnstring
+            if num_vulns < max_vulns_per_key:
+                bypagestring += vulnstring
+            else:
+                bypagestring += '* [{name}](/vulnerabilities/{urlname})\n'.format(name=vuln.name, urlname=vuln.urlname)
         p = Page("by/{by}/{key}.md".format(
             key=key, by=by), virtual=vstring, title=key)
         pages.append(p)
@@ -497,16 +518,6 @@ def hook_preconvert_releases():
         rlist = sorted(rlist, key=lambda x: x[0])
         python_export_file_contents += '\nrelease_dates = ' + str(rlist) + '\n'
 
-
-def hook_preconvert_os_to_api():
-    global python_export_file_contents
-    with open('input/os_to_api.json') as f:
-        rjson = json.load(f)
-        rlist = []
-        for version, api in list(rjson.items()):
-            rlist.append([version, int(api)])
-        rlist = sorted(rlist, key=lambda x: x[0])
-        python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
 
 
 def hook_preconvert_linux_versions():
