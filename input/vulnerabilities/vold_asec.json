@@ -16,7 +16,7 @@
   "Fixed_versions" : [["4.4.3","cassidian-vold-asec"]],
   "references" : {
     "cassidian-vold-asec" : {
-      "url" : "blog.cassidiancybersecurity.com/post/2014/06/Android-4.4.3,-or-fixing-an-old-local-root"
+      "url" : "http://blog.cassidiancybersecurity.com/post/2014/06/Android-4.4.3,-or-fixing-an-old-local-root"
     },
     "android-4.4.3_r1" : {
       "url" : "https://android.googlesource.com/platform/build/+/android-4.4.3_r1",
