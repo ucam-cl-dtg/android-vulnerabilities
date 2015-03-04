@@ -10,6 +10,7 @@ import os
 import dateutil.parser
 import datetime
 import re
+import sre_constants
 import numpy
 from collections import defaultdict, OrderedDict
 from uncertainties import ufloat
@@ -169,6 +170,8 @@ class Vulnerability:
         self.jsn = jsn
         self.name = jsn['name']
         self.urlname = self.name.replace(' ', '_')
+        self._versions = None
+        self._str = None
 
     def _years_append(self, yrs, field):
         try:
@@ -235,8 +238,28 @@ class Vulnerability:
         dates, fields = self._dates()
         return dates[-1]
 
+    def regex(self):
+        affected_versions_regexp = self.jsn['Affected_versions_regexp']
+        if len(affected_versions_regexp) > 0:
+            re_string = r'\A(%s)$' % affected_versions_regexp[0]
+            try:
+                return re.compile(re_string)
+            except sre_constants.error as e:
+               warning(self.name, re_string)
+               raise e
+        else:
+            return re.compile('XXXXXXXX')
+
     def versions(self):
-        return []  # TODO
+        if self._versions != None:
+            return self._versions
+        versions = []
+        regex = self.regex()
+        for version in os_to_api.keys():
+            if regex.match(version):
+                versions.append(version)
+        self._versions = versions
+        return versions
 
     def manufacturers(self):
         return self.jsn['Affected_manufacturers']
@@ -320,7 +343,9 @@ class Vulnerability:
             return "Unknown"
 
     def __str__(self):
-        return """### [{name}](/vulnerabilities/{urlname})
+        if self._str != None:
+            return self._str
+        string = """### [{name}](/vulnerabilities/{urlname})
 ([json](vulnerabilities/{urlname}.json))
 
 * CVE numbers: {cve}
@@ -354,6 +379,8 @@ class Vulnerability:
            fixed_versions=self._print_ref_list(self.jsn['Fixed_versions']),
            submission_list="; ".join(map(str, self.submissions())),
            )
+        self._str = string
+        return string
 
     def __repr__(self):
         return self.__str__()
