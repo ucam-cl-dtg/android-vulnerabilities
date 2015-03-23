@@ -271,6 +271,9 @@ class Vulnerability:
     def submissions(self):
         return list(map(Submission, self.jsn['Submission']))
 
+    def categories(self):
+        return self.jsn['Categories']
+
     def _get_reference_url(self, reference):
         return self.jsn['references'][reference]['url']
 
@@ -364,7 +367,7 @@ class Vulnerability:
 """.format(name=self.name, urlname=self.urlname,
            cve=self._print_ref_list(self.jsn['CVE']),
            responsibly=self.jsn['Responsibly_disclosed'],
-           categories=', '.join(self.jsn['Categories']),
+           categories=', '.join(self.categories()),
            details=self._print_ref_list(self.jsn['Details'], separator="\n"),
            discovered_by=self._print_ref_list(self.jsn['Discovered_by']),
            discovered_on=self._dateref(self.jsn['Discovered_on']),
@@ -403,6 +406,7 @@ def hook_preconvert_00_os_to_api():
 
 
 vulnerabilities = []
+vuln_by_name = dict()
 # Key to list of vulnerability dicts
 by_year = defaultdict(list)
 by_version = defaultdict(list)
@@ -421,6 +425,7 @@ def hook_preconvert_01_vulnerabilities():
             print("processing: " + filename)
             vulnerability = Vulnerability(json.load(f))
             vulnerabilities.append(vulnerability)
+            vuln_by_name[vulnerability.name] = vulnerability
             for year in vulnerability.years():
                 by_year[year].append(vulnerability)
             for version in vulnerability.versions():
@@ -668,9 +673,9 @@ def hook_preconvert_stats():
     set_latex_value('LastDataDate', last_date)
     set_latex_value('VulnsPerYear', (ufloat(len(vulnerabilities),sqrt(len(vulnerabilities)))/((last_date - first_date)/datetime.timedelta(1)))*365)
     set_latex_value('VulnsPerYearAllAndroid', (ufloat(num_vuln_all_android,sqrt(num_vuln_all_android))/((last_date - first_date)/datetime.timedelta(1)))*365)
-    vuln_table = r'\begin{table} \centering \small \begin{tabular}{l|l|c} Vulnerability & How known & Date \\ \hline'
+    vuln_table = r'\begin{table} \centering \small \begin{tabular}{l|l|c|c} Vulnerability & How known & Date & Categories\\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
-            vuln_table += r' {} & {} & {} \\'.format(try_shorten(name), how_known, date)
+            vuln_table += r' {} & {} & {} & {}\\'.format(try_shorten(name), how_known, date, ", ".join(vuln_by_name[name].categories()))
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
