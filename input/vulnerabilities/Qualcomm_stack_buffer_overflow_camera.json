@@ -2,6 +2,7 @@
   "name" : "Qualcomm stack buffer overflow camera",
   "CVE" : [["CVE-2013-4738","QCIR-2013-00008-1"],["CVE-2013-4739","QCIR-2013-00008-1"]],
   "Responsibly_disclosed" : true,
+  "Categories" : ["kernel"],
   "Details" : [["Stack-based buffer overflow and memory disclosure in camera driver QCIR-2013-00008-1: A stack-based buffer overflow and a kernel memory disclosure vulnerability have been discovered in the system call handlers of the camera driver.","QCIR-2013-00008-1"]],
   "Discovered_by" : [["Jonathan Salwan of the Sysdream Security Lab","QCIR-2013-00008-1"]],
   "Discovered_on" : [],

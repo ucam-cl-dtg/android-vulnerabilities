@@ -350,6 +350,7 @@ class Vulnerability:
 
 * CVE numbers: {cve}
 * Responsibly disclosed?: {responsibly}
+* Categories: {categories}
 * Details: {details}
 * Discovered by: {discovered_by} on: {discovered_on}
 * Reported on: {reported_on}
@@ -363,6 +364,7 @@ class Vulnerability:
 """.format(name=self.name, urlname=self.urlname,
            cve=self._print_ref_list(self.jsn['CVE']),
            responsibly=self.jsn['Responsibly_disclosed'],
+           categories=', '.join(self.jsn['Categories']),
            details=self._print_ref_list(self.jsn['Details'], separator="\n"),
            discovered_by=self._print_ref_list(self.jsn['Discovered_by']),
            discovered_on=self._dateref(self.jsn['Discovered_on']),
