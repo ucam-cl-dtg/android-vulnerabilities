@@ -2,6 +2,7 @@
   "name" : "zergRush",
   "CVE" : [["CVE-2011-3874"]],
   "Responsibly_disclosed" : false,
+  "Categories" : ["system"],
   "Details" : [["","android-issue-21681"]],
   "Discovered_by" : [["[The Revolutionary development team](http://revolutionary.io/)"]],
   "Discovered_on" : [{"date" : "2011-10-06", "bound" : "before", "ref" : "github-zergrush"}],

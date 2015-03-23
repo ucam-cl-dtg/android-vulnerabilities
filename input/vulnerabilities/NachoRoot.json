@@ -2,6 +2,7 @@
   "name" : "NachoRoot",
   "CVE" : [],
   "Responsibly_disclosed" : false,
+  "Categories" : ["permissions"],
   "Details" : [["On ASUS Transformer Pime /data/sensors/AMI304_Config.ini is set world writable on boot and so a /data/local.prop symlink attack can be mounted","gh-cunninglogic-nachoroot-sh"]],
   "Discovered_by" : [["Justin Case (jcase)","gh-cunninglogic-nachoroot-sh"]],
   "Discovered_on" : [["2012-01-03","gh-cunninglogic-nachoroot"]],

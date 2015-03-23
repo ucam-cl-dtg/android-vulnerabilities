@@ -2,6 +2,7 @@
   "name" : "APK unchecked name",
   "CVE" : [["ANDROID-9950697"]],
   "Responsibly_disclosed" : false,
+  "Categories" : ["signature"],
   "Details" : [["APK signature verification does not check name lengths correctly, creating a difference between how the zip files are verified compared with how they are extracted which allows files in an existing APK to be replaced with new files.","saurik-19"], ["Exploited by RockMyMoto","androidpolice-rockmymoto"]],
   "Discovered_by" : [["Jay Freeman (saurik)","saurik-19"],["Elliott Hughes <enh@google.com>","android-issue-57851"]],
   "Discovered_on" : [{"date":"2013-06-30", "bound":"before", "ref":"saurik-19"}],

@@ -2,6 +2,7 @@
   "name" : "Fake ID",
   "CVE" : [],
   "Responsibly_disclosed" : true,
+  "Categories" : ["signature"],
   "Details" : [["The software does not properly validate an application's certificate chain. An application can supply a specially crafted application identity certificate to impersonate a privileged application and gain access to vendor-specific device administration extensions. The vulnerability resides in the createChain() and findCert() functions of the Android JarUtils class.", "securitytracker-1030654"],["Google bug 13678484","blackhat-briefing-fakeid"]],
   "Discovered_by" : [["Jeff Forristal of Bluebox","bluebox-fakeid"]],
   "Discovered_on" : [],

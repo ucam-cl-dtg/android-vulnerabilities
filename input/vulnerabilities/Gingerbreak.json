@@ -2,6 +2,7 @@
   "name" : "Gingerbreak",
   "CVE" : [["CVE-2011-1823","CVE-2011-1823"]],
   "Responsibly_disclosed" : false,
+  "Categories" : ["system"],
   "Details" : [["The vold volume manager daemon on Android 3.0 and 2.x before 2.3.4 trusts messages that are received from a PF_NETLINK socket, which allows local users to execute arbitrary code and gain root privileges"]],
   "Discovered_by" : [["The Android Exploid Crew"]],
   "Discovered_on" : [],

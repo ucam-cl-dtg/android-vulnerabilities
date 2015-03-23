@@ -2,6 +2,7 @@
   "name" : "Motochopper",
   "CVE" : [["CVE-2013-2596"]],
   "Responsibly_disclosed" : false,
+  "Categories" : ["kernel"],
   "Details" : [["Integer overflow in the fb_mmap function in drivers/video/fbmem.c in the Linux kernel before 3.8.9 QCIR-2013-00004-1","QCIR-2013-00004-1"]],
   "Discovered_by" : [["Dan Rosenberg"]],
   "Discovered_on" : [["2013-04-08"]],

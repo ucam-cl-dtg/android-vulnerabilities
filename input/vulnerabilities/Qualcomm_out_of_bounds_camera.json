@@ -2,6 +2,7 @@
   "name" : "Qualcomm out of bounds camera",
   "CVE" : [["CVE-2013-6123","QCIR-2014-00001-1"]],
   "Responsibly_disclosed" : true,
+  "Categories" : ["kernel"],
   "Details" : [["Out of bounds array access in camera driver (CVE-2013-6123): The camera driver provides an ioctl system call interface to user space clients for communication. When processing this communication, the msm_ioctl_server, msm_server_send_ctrl, and msm_ctrl_cmd_done functions use a user-supplied value as an index to the server_queue array for read and write operations without any boundary checks. A local application with access to the camera device nodes can use this flaw to, e.g., elevate privileges.","QCIR-2014-00001-1"]],
   "Discovered_by" : [["alephzain <alephzain1@gmail.com>","QCIR-2014-00001-1"]],
   "Discovered_on" : [{"date":"2013-10-10","bound":"before","ref":"msm-camera-valid-patch"}],

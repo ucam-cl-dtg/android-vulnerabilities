@@ -2,6 +2,7 @@
   "name" : "TwerkMyMoto",
   "CVE" : [],
   "Responsibly_disclosed" : false,
+  "Categories" : ["permissions"],
   "Details" : [["Motorola Razr I (x86) 4.1.2 root exploit, silly permissions bug. symlink /data/logs/core to uevent_helper","plus-jcase-twerkmymoto"]],
   "Discovered_by" : [["Justin Case (jcase)","plus-jcase-twerkmymoto"]],
   "Discovered_on" : [["2013-11-24","twerk-my-moto-commit"]],

@@ -2,6 +2,7 @@
   "name" : "APK unsigned shorts",
   "CVE" : [["ANDROID-9695860"]],
   "Responsibly_disclosed" : true,
+  "Categories" : ["signature"],
   "Details" : [["File offsets in zips are supposed to be unsigned but were interpreted as signed allowing different content to be verified from the content executed."]],
   "Discovered_by" : [],
   "Discovered_on" : [],

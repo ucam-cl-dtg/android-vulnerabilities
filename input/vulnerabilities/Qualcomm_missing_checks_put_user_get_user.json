@@ -2,6 +2,7 @@
   "name" : "Qualcomm missing checks put_user get_user",
   "CVE" : [["CVE-2013-6282","QCIR-2013-00010-1"]],
   "Responsibly_disclosed" : false,
+  "Categories" : ["kernel"],
   "Details" : [["Missing access checks in put_user/get_user kernel API (CVE-2013-6282 QCIR-2013-00010-1): The get_user and put_user API functions of the Linux kernel fail to validate the target address when being used on ARM v6k/v7 platforms. This functionality was originally implemented and controlled by the domain switching feature (CONFIG_CPU_USE_DOMAINS), which has been deprecated due to architectural changes. As a result, any kernel code using these API functions may introduce a security issue where none existed before. This allows an application to read and write kernel memory to, e.g., escalated privileges.","QCIR-2013-00010-1"]],
   "Discovered_by" : [["Unknown, used in vroot exploit","QCIR-2013-00010-1"]],
   "Discovered_on" : [{"date":"2013-09-06","bound":"before","ref":"xda-developers-vroot"}],

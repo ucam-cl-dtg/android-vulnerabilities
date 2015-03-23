@@ -2,6 +2,7 @@
   "name" : "vold asec",
   "CVE" : [],
   "Responsibly_disclosed" : true,
+  "Categories" : ["system"],
   "Details" : [["Insufficient paramter checking for asec container creation allows an asec container to be mounted over part of the filesystem using directory traversal if the app has the ASEC_* permissions such as ASEC_CREATE","cassidian-vold-asec"],["There is an adb tethered root explot for motorola phones","xda-developers-pie-exploit"]],
   "Discovered_by" : [],
   "Discovered_on" : [],

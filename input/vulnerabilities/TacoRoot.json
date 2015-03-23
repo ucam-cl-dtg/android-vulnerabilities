@@ -2,6 +2,7 @@
   "name" : "TacoRoot",
   "CVE" : [],
   "Responsibly_disclosed" : false,
+  "Categories" : ["permissions"],
   "Details" : [["HTC recovery log on some devices is world writable and so can be deleted and symlinked to /data/local.prop to allow root on reboot, this is a appears to be a unstable exploit and requires the user to reboot into recovery mode","gh-cunninglogic-tacoroot"]],
   "Discovered_by" : [["Justin Case (jcase) and Dan Rosenberg","gh-cunninglogic-tacoroot-sh"]],
   "Discovered_on" : [{"date":"2012-01-01", "bound":"before","ref": "gh-cunninglogic-tacoroot-fc"}],

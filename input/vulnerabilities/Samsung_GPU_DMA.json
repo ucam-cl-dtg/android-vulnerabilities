@@ -2,6 +2,7 @@
   "name" : "Samsung GPU DMA",
   "CVE" : [],
   "Responsibly_disclosed" : true,
+  "Categories" : ["kernel"],
   "Details" : [["","talks.cam-46303"]],
   "Discovered_by" : [["Janis Danisevskis <janis@sec.t-labs.tu-berlin.de> from Technische Universität Berlin"]],
   "Discovered_on" : [["2012-09-30"]],

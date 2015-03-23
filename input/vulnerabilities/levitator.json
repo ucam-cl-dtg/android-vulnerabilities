@@ -2,6 +2,7 @@
   "name" : "levitator",
   "CVE" : [["CVE-2011-1350"],["CVE-2011-1352"]],
   "Responsibly_disclosed" : true,
+  "Categories" : ["kernel"],
   "Details" : [["Improper bounds checking in the PowerVR driver as used in versions of Android prior to 2.3.6 when copying user data to kernel memory allows a malicious local application to write to the same area of memory referenced in CVE-2011-1350, potentially allowing for arbitrary code execution and privilege escalation."]],
   "Discovered_by" : [["Geremy Condra","security-focus-57900"]],
   "Discovered_on" : [{"date":"2011-03-10", "bound":"before", "ref":"CVE-2011-1350"}],

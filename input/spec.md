@@ -21,12 +21,17 @@ It contains a url key which lists the url for the reference and may also contain
 In the vulnerability json object dates are either lists of 1 or 2 elements (first being the ISO format date YYYY-MM-DD and second the reference) or they are a date object with a date key pointing to the ISO date string and optionally a bound and a ref key.
 
 Other elements are specified either as a string/list of strings (for authoritative facts like name and submission details) or as 1/2 element lists of value and reference id.
+
+### Keys
+
 Keys are as follows:
 
 * version="1.0"
 * name : string
 * CVE : list of string-refs
 * Responsibly_disclosed : list of bool-refs
+* Categories : list of strings from : 'kernel' (a kernel vulnerability), 'signature' (errors processing signatures on APKs), 'system' (a vulnerability in the system libraries or processes), 'network' (a vulnerability exploitable by a network attacker), 'permissions' (incorrect permissions on a file)
+* Severity : string
 * Details : list of string-refs
 * Discovered_by : list of date-refs
 * Discovered_on : list of date-refs
