@@ -673,6 +673,8 @@ def hook_preconvert_stats():
     set_latex_value('LastDataDate', last_date)
     set_latex_value('VulnsPerYear', (ufloat(len(vulnerabilities),sqrt(len(vulnerabilities)))/((last_date - first_date)/datetime.timedelta(1)))*365)
     set_latex_value('VulnsPerYearAllAndroid', (ufloat(num_vuln_all_android,sqrt(num_vuln_all_android))/((last_date - first_date)/datetime.timedelta(1)))*365)
+    set_latex_value('VulnsPerYearTwosf', (ufloat(len(vulnerabilities),sqrt(len(vulnerabilities)))/((last_date - first_date)/datetime.timedelta(1)))*365, sig_figs=2)
+    set_latex_value('VulnsPerYearAllAndroidTwosf', (ufloat(num_vuln_all_android,sqrt(num_vuln_all_android))/((last_date - first_date)/datetime.timedelta(1)))*365, sig_figs=2)
     vuln_table = r'\begin{table} \centering \small \begin{tabular}{l|l|c|c} Vulnerability & How known & Date & Categories\\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
             vuln_table += r' {} & {} & {} & {}\\'.format(try_shorten(name), how_known, date, ", ".join(vuln_by_name[name].categories()))
