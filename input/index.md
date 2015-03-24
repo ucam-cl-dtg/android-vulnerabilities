@@ -26,6 +26,7 @@ This means vulnerabilities which allow an application (malicious or compromised)
 * [by year](by/year)
 * [by Android version](by/version)
 * [by submitter](by/submitter)
+* [by category](by/category)
 
 ## [Submit a new vulnerability](submit)
 

@@ -412,6 +412,7 @@ by_year = defaultdict(list)
 by_version = defaultdict(list)
 by_manufacturer = defaultdict(list)
 by_submitter = defaultdict(list)
+by_category = defaultdict(list)
 raw_vulnerabilities = []
 
 def hook_preconvert_01_vulnerabilities():
@@ -437,6 +438,8 @@ def hook_preconvert_01_vulnerabilities():
                 by_manufacturer['none'].append(vulnerability)
             for submitter in vulnerability.submitters():
                 by_submitter[submitter].append(vulnerability)
+            for category in vulnerability.categories():
+                by_category[category].append(vulnerability)
             raw_vulnerability = vulnerability.raw_vulnerability()
             if raw_vulnerability != None:
                 raw_vulnerabilities.append(raw_vulnerability)
@@ -459,11 +462,12 @@ def hook_preconvert_02_submitters():
 
 
 def hook_preconvert_03_by():
-    global by_year, by_version, by_manufacturer, by_submitter
+    global by_year, by_version, by_manufacturer, by_submitter, by_category
     by_year = OrderedDict(sorted(by_year.items()))
     by_version = OrderedDict(sorted(by_version.items()))
     by_manufacturer = OrderedDict(sorted(by_manufacturer.items()))
     by_submitter = OrderedDict(sorted(by_submitter.items()))
+    by_category = OrderedDict(sorted(by_category.items()))
 
 # Create a page for each vulnerability
 
@@ -487,6 +491,7 @@ def hook_preconvert_bypages():
     by_pages(by_version, 'version')
     by_pages(by_manufacturer, 'manufacturer')
     by_pages(by_submitter, 'submitter')
+    by_pages(by_category, 'category')
 
 
 max_vulns_per_key = 10
