@@ -45,5 +45,8 @@
 	"4.4.2" : ["2013-12-09", "http://www.androidpolice.com/2013/12/09/android-4-4-2-kot49h-is-already-rolling-out-to-nexus-devices-here-are-the-ota-zip-links-for-manual-updating/"],
 	"4.4.3" : ["2014-06-02", "http://arstechnica.com/gadgets/2014/06/google-releases-android-4-4-3-to-nexus-devices/"],
 	"4.4.4" : ["2014-03-19", "http://www.droid-life.com/2014/06/19/whoa-android-4-4-4-factory-images-posted-as-build-kut84p/"],
-	"5.0.0" : ["2014-11-03", "http://www.expertreviews.co.uk/mobile-phones/1401595/android-50-lollipop-release-date-features-and-news-source-code-released-to"]
+	"5.0.0" : ["2014-11-03", "http://www.expertreviews.co.uk/mobile-phones/1401595/android-50-lollipop-release-date-features-and-news-source-code-released-to"],
+	"5.0.1" : ["2014-12-02", "http://www.zdnet.com/article/google-quietly-pushes-out-android-lollipop-5-0-1-images/"],
+	"5.0.2" : ["2014-12-19", "http://www.droid-life.com/2014/12/19/android-5-0-2-lrx22g-factory-image-for-nexus-7-wifi-randomly-shows-up/"],
+	"5.1.0" : ["2015-03-09", "http://officialandroid.blogspot.com/2015/03/android-51-unwrapping-new-lollipop.html"]
 }
