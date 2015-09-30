@@ -21,6 +21,7 @@ import latex_value
 from latex_value import set_latex_value, num2word, try_shorten
 latex_value.latex_value_filename('output/latex.tex')
 latex_value.latex_value_prefix('avo')
+from avohelpers import *
 sys.path.remove('')
 
 
