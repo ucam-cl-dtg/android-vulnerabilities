@@ -1,0 +1,31 @@
+{
+  "name" : "ObjectInputStream_deserializable",
+  "CVE" : [["CVE-2014-7911","fulldisclosure-ois"]],
+  "Responsibly_disclosed" : true,
+  "Categories" : ["system"],
+  "Details" : [["In Android <5.0, java.io.ObjectInputStream did not check whether the Object that is being deserialized is actually serializable. That issue was fixed in Android 5.0. This means that when ObjectInputStream is used on untrusted inputs, an attacker can cause an instance of any class with a non-private parameterless constructor to be created. All fields of that instance can be set to arbitrary values. The malicious object will then typically either be ignored or cast to a type to which it doesn't fit, implying that no methods will be called on it and no data from it will be used. However, when it is collected by the GC, the GC will call the object's finalize method.","fulldisclosure-ois"], ["luni/src/main/java/java/io/ObjectInputStream.java in the java.io.ObjectInputStream implementation in Android before 5.0.0 does not verify that deserialization will result in an object that met the requirements for serialization, which allows attackers to execute arbitrary code via a crafted finalize method for a serialized object in an ArrayMap Parcel within an intent sent to system_service, as demonstrated by the finalize method of android.os.BinderProxy, aka Bug 15874291.","CVE-2014-7911"]],
+  "Discovered_by" : [["Jann Horn","fulldisclosure-ois"]],
+  "Discovered_on" : [["2014-06-22","fulldisclosure-ois"]],
+  "Submission" : [{"by":"Jann Horn", "on":"2014-12-14"}],
+  "Reported_on" : [["2014-11-14","fulldisclosure-ois"]],
+  "Fixed_on" : [["2014-06-25","ois-fix"]],
+  "Fix_released_on" : [["2014-11-03"]],
+  "Affected_versions" : [["1.0-4.4.4","CVE-2014-7911"]],
+  "Affected_devices" : [["all","fulldisclosure-ois"]],
+  "Affected_versions_regexp" : ["([1-3]\\.[0-9]\\.[0-9])|(4\\.[0-3]\\.[0-9])|(4\\.4\\.[0-4])"],
+  "Affected_manufacturers" : [["all","fulldisclosure-ois"]],
+  "Fixed_versions" : [["5.0.0","CVE-2014-7911"]],
+  "references" : {
+    "fulldisclosure-ois" : {
+      "url" : "http://seclists.org/fulldisclosure/2014/Nov/51"
+    }
+  , "ois-fix" : {
+      "url" : "https://android.googlesource.com/platform/libcore/+/738c833d38d41f8f76eb7e77ab39add82b1ae1e2"
+    , "component" : "platform/libcore"
+    , "commit" : "38c833d38d41f8f76eb7e77ab39add82b1ae1e2"
+    }
+  , "CVE-2014-7911" : {
+      "url" : "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-7911"
+    }
+  }
+}
