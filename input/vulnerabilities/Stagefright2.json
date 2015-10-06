@@ -1,0 +1,29 @@
+{
+  "name" : "Stagefright2",
+  "CVE" : [["CVE-2015-6602","zimperium-stagefright2"], ["CVE-2015-3876","android-security-october"]],
+  "Responsibly_disclosed" : true,
+  "Categories" : ["system"],
+  "Details" : [["Meet Stagefright 2.0, a set of two vulnerabilities that manifest when processing specially crafted MP3 audio or MP4 video files. The first vulnerability (in libutils) impacts almost every Android device since version 1.0 released in 2008. We found methods to trigger that vulnerability in devices running version 5.0 and up using the second vulnerability (in libstagefright). Google assigned CVE-2015-6602 to vulnerability in libutils.","zimperium-stagefright2"]],
+  "Discovered_by" : [["Joshua J. Drake","zimperium-stagefright2"]],
+  "Discovered_on" : [["2015-08-15","zimperium-stagefright2"]],
+  "Submission" : [{"by":"drt24", "on":"2015-10-06"}, {"by":"lmrs2", "on":"2015-10-02"}, {"by":"arb33", "on":"2015-10-01"}],
+  "Reported_on" : [["2015-10-01","zimperium-stagefright2"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [["2015-10-05","register-stagefright2"]],
+  "Affected_versions" : [["5.1 and below","android-security-october"]],
+  "Affected_devices" : [["all","zimperium-stagefright2"]],
+  "Affected_versions_regexp" : ["([1-4]\\.[0-9]\\.[0-9])|(5\\.0]\\.[0-9])|(5\\.1\\.0)"],
+  "Affected_manufacturers" : [["all", "zimperium-stagefright2"]],
+  "Fixed_versions" : [["5.1.1, LMY48T or later, LMY48W", "android-security-october"]],
+  "references" : {
+    "zimperium-stagefright2" : {
+      "url" : "https://blog.zimperium.com/zimperium-zlabs-is-raising-the-volume-new-vulnerability-processing-mp3mp4-media/"
+    }
+  , "register-stagefright2" : {
+      "url" : "http://m.theregister.co.uk/2015/10/01/stagefright_two_point_oh_android/"
+    }
+  , "android-security-october" : {
+      "url" : "https://groups.google.com/forum/#!topic/android-security-updates/_Rm-lKnS2M8"
+    }
+  }
+}
