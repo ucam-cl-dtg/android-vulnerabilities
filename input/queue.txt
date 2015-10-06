@@ -1,0 +1,10 @@
+drt24, 2015-10-06: https://blog.exodusintel.com/2015/08/13/stagefright-mission-accomplished/
+drt24, 2015-10-06: https://groups.google.com/forum/#!topic/android-security-updates/_Rm-lKnS2M8
+lmrs2, 2015-06-16: https://www.nowsecure.com/blog/2015/06/16/remote-code-execution-as-system-user-on-samsung-phones/
+lmrs2, 2015-04-01: https://code.google.com/p/google-security-research/issues/detail?id=252
+lmrs2, 2015-04-01: https://code.google.com/p/google-security-research/issues/detail?id=234
+lmrs2, 2015-03-12: https://github.com/retme7/CVE-2014-4322_poc https://www.codeaurora.org/projects/security-advisories/memory-corruption-qseecom-driver-cve-2014-4322
+lmrs2, 2015-01-22: http://googleprojectzero.blogspot.co.uk/ /dev/nvmap world writable
+lmrs2, 2014-11-17: http://blog.quarkslab.com/abusing-samsung-knox-to-remotely-install-a-malicious-application-story-of-a-half-patched-vulnerability.html
+lmrs2, 2014-10-01: https://www.viaprotect.com/extract/community-edition/?utm_source=viaForensics+Subscribers&utm_campaign=5819764675-viaExtract_CE-Release-Email
+Adrian Taylor, 2013-10-02: http://www.xray.io/ http://vulnfactory.org/blog/ http://blog.azimuthsecurity.com/2013/02/re-visiting-exynos-memory-mapping-bug.html
