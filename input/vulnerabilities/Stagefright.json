@@ -14,7 +14,7 @@
   "Discovered_on" : [["2015-04-09","techworm-stagefright"]],
   "Submission" : [{"by":"lmrs2", "on":"2015-07-27"}],
   "Reported_on" : [["2015-07-21","zimperium-stagefright"]],
-  "Fixed_on" : [["2015-05-08","techworm-stagefright"]],
+  "Fixed_on" : [["2015-04-08","stagefright-fix-2"]],
   "Fix_released_on" : [["2015-08-03","androidpolice-sprint-update"]],
   "Affected_versions" : [["2.2-5.1.0","cert-kb-stagefright"]],
   "Affected_devices" : [["all","cert-kb-stagefright"]],
@@ -45,6 +45,21 @@
     }
   , "androidpolice-sprint-update" : {
       "url" : "http://www.androidpolice.com/2015/08/03/sprints-galaxy-note-4-gets-android-5-1-1-update-with-stagefright-fix/"
+    }
+  , "stagefright-fix-1" : {
+      "url" : "https://android.googlesource.com/platform/frameworks/av/+/030d8d0%5E!/"
+    , "component" : "platform/frameworks/av"
+    , "commit" : "030d8d0a557097b88d6ecbf6d04823213512b620"
+    }
+  , "stagefright-fix-2" : {
+      "url" : "https://android.googlesource.com/platform/frameworks/av/+/5c134e6%5E!/"
+    , "component" : "platform/frameworks/av"
+    , "commit" : "5c134e6b2047b10877f02a46f4bb293537269f00"
+    }
+  , "stagefright-fix-3" : {
+      "url" : "https://android.googlesource.com/platform/frameworks/av/+/0e4e5a8%5E!/"
+    , "component" : "platform/frameworks/av"
+    , "commit" : "0e4e5a8c09c63548f2a00c77ab5038b7703384bc"
     }
   }
 }
