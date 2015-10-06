@@ -1,3 +1,4 @@
+drt24, 2015-10-06: http://www.techworm.net/2015/07/silent-attack-vulnerability-can-make-500-million-android-smartphones-go-lifeless.html
 drt24, 2015-10-06: https://blog.exodusintel.com/2015/08/13/stagefright-mission-accomplished/
 drt24, 2015-10-06: https://groups.google.com/forum/#!topic/android-security-updates/_Rm-lKnS2M8
 lmrs2, 2015-06-16: https://www.nowsecure.com/blog/2015/06/16/remote-code-execution-as-system-user-on-samsung-phones/
