@@ -1,0 +1,50 @@
+{
+  "name" : "Stagefright",
+  "CVE" : [["CVE-2015-1538", "nakedsecurity-stagefright"],
+           ["CVE-2015-1539", "nakedsecurity-stagefright"],
+           ["CVE-2015-3824", "nakedsecurity-stagefright"],
+           ["CVE-2015-3826", "nakedsecurity-stagefright"],
+           ["CVE-2015-3827", "nakedsecurity-stagefright"],
+           ["CVE-2015-3828", "nakedsecurity-stagefright"],
+           ["CVE-2015-3829", "nakedsecurity-stagefright"]],
+  "Responsibly_disclosed" : true,
+  "Categories" : ["system"],
+  "Details" : [["Drake said that the vulnerabilities can be exploited by sending a single multimedia text message to an unpatched Android smartphone. While the exploit is deadly, in some cases, where phones parse the attack code prior to the message being opened, the exploits are silent and the user would have little chance of defending their data.","techworm-stagefright"], ["Stagefright is the media playback service for Android, introduced in Android 2.2 (Froyo). Stagefright in versions of Android prior to 5.1.1_r9 may contain multiple vulnerabilities, including several integer overflows, which may allow a remote attacker to execute code on the device.","cert-kb-stagefright"]],
+  "Discovered_by" : [["Joshua J. Drake","zimperium-stagefright"]],
+  "Discovered_on" : [["2015-04-09","techworm-stagefright"]],
+  "Submission" : [{"by":"lmrs2", "on":"2015-07-27"}],
+  "Reported_on" : [["2015-07-21","zimperium-stagefright"]],
+  "Fixed_on" : [["2015-05-08","techworm-stagefright"]],
+  "Fix_released_on" : [["2015-08-03","androidpolice-sprint-update"]],
+  "Affected_versions" : [["2.2-5.1.0","cert-kb-stagefright"]],
+  "Affected_devices" : [["all","cert-kb-stagefright"]],
+  "Affected_versions_regexp" : ["([1-4]\\.[0-9]\\.[0-9])|(5\\.0]\\.[0-9])|(5\\.1\\.0)"],
+  "Affected_manufacturers" : [["all","cert-kb-stagefright"]],
+  "Fixed_versions" : [["5.1.1_r9","cert-kb-stagefright"]],
+  "references" : {
+    "techworm-stagefright" : {
+      "url" : "http://www.techworm.net/2015/07/stagefright-attack-it-takes-only-a-single-text-message-to-hack-an-android-smartphone.html"
+    }
+  , "nakedsecurity-stagefright" : {
+      "url" : "https://nakedsecurity.sophos.com/2015/07/28/the-stagefright-hole-in-android-what-you-need-to-know/"
+    }
+  , "zimperium-stagefright" : {
+      "url" : "http://blog.zimperium.com/the-biggest-splash-at-blackhat-and-defcon-2015/"
+    }
+  , "cyanogenmod-stagefright-fix" : {
+      "url" : "https://github.com/CyanogenMod/android_frameworks_av/commit/57db9b42418b434751f609ac7e5539367e9f01a6"
+    }
+  , "zimperium-stagefright" : {
+      "url" : "http://blog.zimperium.com/experts-found-a-unicorn-in-the-heart-of-android/"
+    }
+  , "zimperium-stagefright-update" : {
+      "url" : "https://blog.zimperium.com/the-latest-on-stagefright-cve-2015-1538-exploit-is-now-available-for-testing-purposes/"
+    }
+  , "cert-kb-stagefright" : {
+      "url" : "https://www.kb.cert.org/vuls/id/924951"
+    }
+  , "androidpolice-sprint-update" : {
+      "url" : "http://www.androidpolice.com/2015/08/03/sprints-galaxy-note-4-gets-android-5-1-1-update-with-stagefright-fix/"
+    }
+  }
+}
