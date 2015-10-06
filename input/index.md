@@ -32,3 +32,6 @@ This means vulnerabilities which allow an application (malicious or compromised)
 
 ## [Submit a new vulnerability](submit)
 
+## Further information
+ * ["Security metrics for the Android ecosystem" by Daniel R. Thomas, Alastair R. Beresford and Andrew Rice in ACM CCS Workshop on Security and Privacy in Smartphones and Mobile Devices (SPSM) 2015](https://www.cl.cam.ac.uk/~drt24/papers/spsm-scoring.pdf)
+ * ["The lifetime of Android API vulnerabilities: case study on the JavaScript-to-Java interface" by Daniel R. Thomas, Alastair R. Beresford, Thomas Coudray, Tom Sutcliffe and Adrian Taylor in the Proceedings of the Security Protocols Workshop 2015](https://www.cl.cam.ac.uk/~drt24/papers/spw15-07-Thomas.pdf)
