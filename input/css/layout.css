@@ -976,4 +976,7 @@ a#imagelightbox-close:hover, a#imagelightbox-close:focus { color: #11ABB0; }
 		right: 1.25em; /* 20 */
 	}
 
-} 
+}
+table {
+  color : #000;
+}
