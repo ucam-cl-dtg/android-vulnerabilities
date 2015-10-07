@@ -1,29 +1,46 @@
 <!DOCTYPE html>
-<!--[if lt IE 8 ]><html class="ie ie7" lang="en" xml:lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en" xml:lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!--><html lang="en" xml:lang="en"> <!--<![endif]-->
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js ie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" charset="utf-8" />
     <title>{{ hx(page["title"]) }} - Android Vulnerabilities</title>
     <meta name="description" content="{{ hx(page.get("description", "Root vulnerabilities affecting Android")) }}" />
     <meta name="keywords" content="{{ hx(page.get("keywords", "root,vulerability,android,exploit,CVE")) }}" />
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
+   <!-- Mobile Specific Metas-->
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+   <!-- CSS -->
+   <link rel="stylesheet" href="css/default.css">
+   <link rel="stylesheet" href="css/layout.css">
+   <link rel="stylesheet" href="css/media-queries.css">
+   <link rel="stylesheet" href="css/animate.css">
+   <link rel="stylesheet" href="css/prettyPhoto.css">
+
+   <!-- Script -->
+	<script src="js/modernizr.js"></script>
+
+   <!-- Favicons -->
+   <link rel="shortcut icon" href="images/favicon.png" >
 </head>
 <body>
-    <div id="content-wrap">
-    <header class="container">
+    <header>
+     <div class="logo">
+         <a class="smoothscroll" href="#hero"><img alt="AndroidVulnerabilities.org" src="images/logo.png"></a>
+     </div>
 
-    <hgroup>
-         <h1>Android Vulnerabilities</h1>
-         <h2>{{hx(page["title"])}}</h2>
-    </hgroup>
-    <nav id="nav-wrap" class="cf">
-    <ul id="menu">
+    <nav id="nav-wrap">
+         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show Menu</a>
+	      <a class="mobile-btn" href="#" title="Hide navigation">Hide Menu</a>
+    <ul id="nav", class="nav">
     <!--%
+        if page["title"] == "Home":
+            print('''<li><a class="smoothscroll" href="#scores">Scores</a></li>
+                     <li><a class="smoothscroll" href="#stats">Stats</a></li>
+                     <li><a class="smoothscroll" href="#da">Help us</a></li>
+                     <li><a class="smoothscroll" href="#contact">Contact</a></li>''')
         mpages = [p for p in pages if "menu-position" in p]
         mpages.sort(key=lambda p: int(p["menu-position"]))
         entry = '<li class="%s"><a href="%s">%s</a></li>'
@@ -34,17 +51,39 @@
     </ul>
     </nav>
     </header>
+    <section id="title">
+    <hgroup>
+         <h1>Android Vulnerabilities</h1>
+         <h2>{{hx(page["title"])}}</h2>
+    </hgroup>
+    </section>
 
-    <div id="content" class="container">{{ __content__ }}</div>
-    </div>
-    <footer class="container">
-    <div id="footer">
-        <a href="terms">Terms and conditions</a>
+    <section style="padding: 90px 0 72px; background: #fff;">
+    <div class="row">{{ __content__ }}</div>
+    </section>
+
+    <footer>
+      <div class="row">
+         <p class="copyright"><a href="terms">Terms and conditions</a>
         &middot;
-        <a href="contact">Contact</a>
+        <a href="/#contact">Contact</a>
         &middot;
-        <a href="https://github.com/ucam-cl-dtg/android-vulnerabilities">Source code</a>
-    </div>
+        <a href="https://github.com/ucam-cl-dtg/android-vulnerabilities">Source code</a></p>
+         <div id="go-top">
+            <a class="smoothscroll" title="Back to Top" href="#hero"><i class="icon-up-open"></i></a>
+         </div>
+      </div> <!-- Row End -->
     </footer>
+
+   <!-- Java Script -->
+   <script src="js/jquery-1.10.2.min.js"></script>
+   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+   <script src="js/jquery.flexslider.js"></script>
+   <script src="js/waypoints.js"></script>
+   <script src="js/jquery.fittext.js"></script>
+   <script src="js/jquery.fitvids.js"></script>
+   <script src="js/imagelightbox.js"></script>
+   <script src="js/jquery.prettyPhoto.js"></script>   
+   <script src="js/main.js"></script>
 </body>
 </html>

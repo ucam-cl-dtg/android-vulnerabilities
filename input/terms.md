@@ -15,7 +15,7 @@ Please [inform](contact) us of any inaccuracies and tell us of any improvements 
 
 ## Copyright information
 
-Website design based on [Freshpick v2.0](http://www.styleshout.com/templates/preview/FreshPick20/) from [Styleshout](http://www.styleshout.com/) (horribly mutilated by Daniel Thomas).
+Website design based on [Woo](http://www.styleshout.com/free-templates/woo/) from [Styleshout](http://www.styleshout.com/) (horribly mutilated by Daniel Thomas).
 
 Website built using [Poole](https://bitbucket.org/obensonne/poole) and hosted by the [Student-Run Computing Facility](https://www.srcf.net/).
 
