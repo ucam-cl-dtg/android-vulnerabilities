@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+ <semantics>
+  <mrow>
+   <mi mathvariant="italic">FUM</mi>
+   <mrow>
+    <mi mathvariant="italic">score</mi>
+    <mo stretchy="false">=</mo>
+    <mrow>
+     <mrow>
+      <mn>4</mn>
+      <mo stretchy="false">⋅</mo>
+      <mi>f</mi>
+     </mrow>
+     <mo stretchy="false">+</mo>
+     <mrow>
+      <mn>3</mn>
+      <mo stretchy="false">⋅</mo>
+      <mi>u</mi>
+     </mrow>
+     <mo stretchy="false">+</mo>
+     <mrow>
+      <mn>3</mn>
+      <mo stretchy="false">⋅</mo>
+      <mfrac>
+       <mn>2</mn>
+       <mrow>
+        <mn>1</mn>
+        <mo stretchy="false">+</mo>
+        <msup>
+         <mi>e</mi>
+         <mi>m</mi>
+        </msup>
+       </mrow>
+      </mfrac>
+     </mrow>
+    </mrow>
+   </mrow>
+  </mrow>
+  <annotation encoding="StarMath 5.0">FUM score = 4 cdot f + 3 cdot u + 3 cdot {{2} over {1+e^m} }</annotation>
+ </semantics>
+</math>
