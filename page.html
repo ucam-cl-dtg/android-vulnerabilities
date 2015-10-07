@@ -28,7 +28,7 @@
 <body>
     <header>
      <div class="logo">
-         <a class="smoothscroll" href="#hero"><img alt="AndroidVulnerabilities.org" src="images/logo.png"></a>
+         <a class="smoothscroll" href="/#hero"><img alt="AndroidVulnerabilities.org" src="images/logo.png"></a>
      </div>
 
     <nav id="nav-wrap">
@@ -51,20 +51,26 @@
     </ul>
     </nav>
     </header>
-    <section id="title">
+    <section id="hero" >
+    <div class="hero-text">
     <hgroup>
-         <h1>Android Vulnerabilities</h1>
-         <h2>{{hx(page["title"])}}</h2>
+         <a href="/"><h1 class="responsive-headline">AndroidVulnerabilities.org</h1></a>
     </hgroup>
+    </div>
     </section>
 
-    <section style="padding: 90px 0 72px; background: #fff;">
+    <section style="padding: 10px 0 72px; background: #fff;">
     <div class="row">{{ __content__ }}</div>
     </section>
 
     <footer>
       <div class="row">
-         <p class="copyright"><a href="terms">Terms and conditions</a>
+         <p class="copyright">
+          <div class="footer-logo">
+           <a class="smoothscroll" href="/#hero"><img alt="AndroidVulnerabilities.org" src="images/logo.png"></a>
+          </div>
+        &middot;
+        <a href="terms">Terms and conditions</a>
         &middot;
         <a href="/#contact">Contact</a>
         &middot;
