@@ -18,7 +18,7 @@ from math import sqrt
 
 sys.path.append('')# So that we find latex_value
 import latex_value
-from latex_value import set_latex_value, num2word, try_shorten
+from latex_value import set_latex_value, num2word, try_shorten, display_num
 latex_value.latex_value_filename('output/latex.tex')
 latex_value.latex_value_prefix('avo')
 from avohelpers import *
@@ -486,6 +486,24 @@ def hook_preconvert_submitterpages():
             submitter), title="{name} ({ID})".format(name=submitter.name, ID=ID))
         pages.append(p)
 
+manufacturer_scores = dict()
+
+def link_manufacturer(manufacturer):
+    if manufacturer in by_manufacturer:
+        return '<a href="by/manufacturer/{manufacturer}">{manufacturer}</a>'.format(manufacturer=manufacturer)
+    else:
+        return manufacturer
+
+def hook_preconvert_04_load_scores():
+    if os.path.isfile('input/sec_scores_manufacturer.csv'):
+        with open('input/sec_scores_manufacturer.csv') as csvfile:
+            csvreader = csv.reader(csvfile)
+            for row in csvreader:
+                try:
+                    manufacturer_scores[row[0]] = float(row[7])
+                except ValueError:
+                    pass
+
 
 def hook_preconvert_bypages():
     by_pages(by_year, 'year')
@@ -501,7 +519,13 @@ def by_pages(vulndict, by):
     bypagestring = '\n'  # Can't be the empty string or empty pages will cause errors
     for key, vulns in list(vulndict.items()):
         bypagestring += "##[{key}](by/{by}/{key})\n\n".format(key=key, by=by)
-        vstring = "#{key}\n\n".format(key=key)
+        vstring = "[Back to all {by}s](by/{by})\n\n#{key}\n\n".format(key=key, by=by)
+        if 'manufacturer' == by and key != 'all':
+            preamblestring = '\n{key} is affected by [vulnerabilities that affect all Android manufacturers](by/manufacturer/all) in addition to those listed below.\n'.format(key=key)
+            if key in manufacturer_scores:
+                preamblestring += '\n{key} has a [FUM score](/) of {score}.\n'.format(key=key,score=display_num(manufacturer_scores[key]))
+            bypagestring += preamblestring
+            vstring +=  preamblestring
         num_vulns = len(vulns)
         for vuln in vulns:
             vulnstring = str(vuln) + '\n'
