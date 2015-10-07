@@ -5,7 +5,7 @@ menu-position: 0
 
 <div id="graph">
  <h2>Proportion of devices running vulnerable versions of Android</h2>
- <div style="width:720px; margin:auto;">
+ <div style="width:100%; margin:auto;">
  {% insert_svg('images/norm_versionsecurity', 'Proportion of devices affected by critical vulnerabilities', '720px', '360px')  %}
  </div>
  <p>This figure shows our estimate of the proportion of Android devices running <em>insecure</em>, <em>maybe secure</em> and <em>secure</em> versions of Android over time.
