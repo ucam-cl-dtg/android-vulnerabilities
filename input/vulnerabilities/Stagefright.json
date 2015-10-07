@@ -18,7 +18,7 @@
   "Fix_released_on" : [["2015-08-03","androidpolice-sprint-update"]],
   "Affected_versions" : [["2.2-5.1.0","cert-kb-stagefright"]],
   "Affected_devices" : [["all","cert-kb-stagefright"]],
-  "Affected_versions_regexp" : ["([1-4]\\.[0-9]\\.[0-9])|(5\\.0]\\.[0-9])|(5\\.1\\.0)"],
+  "Affected_versions_regexp" : ["([1-4]\\.[0-9]\\.[0-9])|(5\\.0\\.[0-9])|(5\\.1\\.0)"],
   "Affected_manufacturers" : [["all","cert-kb-stagefright"]],
   "Fixed_versions" : [["5.1.1_r9","cert-kb-stagefright"]],
   "references" : {
