@@ -13,7 +13,7 @@
   "Affected_versions" : [],
   "Affected_devices" : [["ASUS Transformer Prime","gh-cunninglogic-nachoroot" ]],
   "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [["ASUS","gh-cunninglogic-nachoroot" ]],
+  "Affected_manufacturers" : [["Asus","gh-cunninglogic-nachoroot" ]],
   "Fixed_versions" : [],
   "references" : {
     "gh-cunninglogic-nachoroot-sh" : {
