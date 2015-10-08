@@ -711,6 +711,18 @@ def hook_preconvert_stats():
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
+
+# Postconvert hooks
+
+
 def hook_postconvert_python_export():
     with open('output/avo.py', 'w') as f:
         f.write(python_export_file_contents.replace("u'","'"))
+
+
+def hook_postconvert_fix_html():
+    '''Fix up broken pieces of html produced by markdown'''
+    for page in pages:
+        page.html = page.html.replace('<p></div>','</div>')
+        page.html = page.html.replace('</div></p>','</div>')
+        page.html = page.html.replace(' markdown="1"','')
