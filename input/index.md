@@ -113,20 +113,22 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
  </div>
  <div class="eight columns right-cols">
   <div class="row">
+   <div class="twelve columns">
    <h2>Researchers</h2>
-   <div class="four columns">
+   </div>
+   <div class="three columns" style="margin:auto; text-align:center;">
     <a href="https://www.cl.cam.ac.uk/~drt24/"><img src="images/people/drt24.jpg" alt="Picture of Daniel Thomas"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~drt24/">Daniel Thomas</a></p>
    </div>
-   <div class="four columns">
+   <div class="three columns" style="margin:auto; text-align:center;">
     <a href="https://www.cl.cam.ac.uk/~arb33/"><img src="images/people/arb33.jpg" alt="Picture of Alastair Beresford"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~arb33/">Alastair Beresford</a></p>
    </div>
-   <div class="four columns">
+   <div class="three columns" style="margin:auto; text-align:center;">
     <a href="https://www.cl.cam.ac.uk/~acr31/"><img src="images/people/acr31.jpg" alt="Picture of Andrew Rice"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~acr31/">Andrew Rice</a></p>
    </div>
-   <div class="eight columns">
+   <div class="three columns" style="margin:auto; text-align:center;">
     <a href="https://github.com/danieltwagner"><img src="images/people/dtw30.jpg" alt="Picture of Daniel Wagner"/></a>
     <p><a href="https://github.com/danieltwagner">Daniel Wagner</a></p>
    </div>
