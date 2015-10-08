@@ -44,7 +44,7 @@ The score gives each Android manufacturer a score out of 10 based on the securit
  <div style="width:100%; margin:auto;">
  {% insert_svg('images/norm_versionsecurity', 'Proportion of devices affected by critical vulnerabilities', '720px', '360px')  %}
  </div>
- <p style="color:#000; text-align: left;">This figure shows our estimate of the proportion of Android devices running <em>insecure</em>, <em>maybe secure</em> and <em>secure</em> versions of Android over time.
+ <p style="text-align: left;">This figure shows our estimate of the proportion of Android devices running <em>insecure</em>, <em>maybe secure</em> and <em>secure</em> versions of Android over time.
 Further details on how this figure constructed can be found <a href="graph" style="font-weight:bold;">on a separate page</a>.
  </p>
 </div>
