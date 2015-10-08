@@ -35,9 +35,9 @@ The score gives each Android manufacturer a score out of 10 based on the securit
 </div>
 </div>
 </section>
-<section style="background:#fff;">
+<section id="stats" style="background:#fff;">
 <div class="row">
-<div id="stats" class="twelve columns" style="padding-top:15px">
+<div class="twelve columns" style="padding-top:15px">
  <h2>Proportion of devices running vulnerable versions of Android</h2>
  <div style="width:100%; margin:auto;">
  <a href="graph">
