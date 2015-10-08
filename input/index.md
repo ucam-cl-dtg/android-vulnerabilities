@@ -87,7 +87,6 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 * [By category](by/category)
 
 </div>
-
 <div class="eight columns" markdown="1">
 
 ### Published papers
@@ -104,7 +103,7 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 </div>
 </section>
 <section markdown="1" id="screenshots">
-<div id="contact" class="row" markdown="1">
+<div id="contact" class="row">
 <div class="row">
  <div class="four columns info">
 <h2>Contact</h2>
@@ -112,7 +111,6 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
   <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#97;&#110;&#100;&#114;&#111;&#105;&#100;&#118;&#117;&#108;&#110;&#101;&#114;&#97;&#98;&#105;&#108;&#105;&#116;&#105;&#101;&#115;&#46;&#111;&#114;&#103;">&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#97;&#110;&#100;&#114;&#111;&#105;&#100;&#118;&#117;&#108;&#110;&#101;&#114;&#97;&#98;&#105;&#108;&#105;&#116;&#105;&#101;&#115;&#46;&#111;&#114;&#103;</a>
 </p>
  </div>
-
  <div class="eight columns right-cols">
   <div class="row">
    <h2>Researchers</h2>
@@ -120,12 +118,10 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
     <a href="https://www.cl.cam.ac.uk/~drt24/"><img src="images/people/drt24.jpg" alt="Picture of Daniel Thomas"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~drt24/">Daniel Thomas</a></p>
    </div>
-
    <div class="four columns">
     <a href="https://www.cl.cam.ac.uk/~arb33/"><img src="images/people/arb33.jpg" alt="Picture of Alastair Beresford"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~arb33/">Alastair Beresford</a></p>
    </div>
-
    <div class="four columns">
     <a href="https://www.cl.cam.ac.uk/~acr31/"><img src="images/people/acr31.jpg" alt="Picture of Andrew Rice"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~acr31/">Andrew Rice</a></p>
