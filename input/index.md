@@ -2,7 +2,6 @@
 title: Home
 menu-position: 0
 ---
-<div id="row">
 <div class="four columns info" id="scores">
 <h2>Scores out of ten</h2>
 <table class="five" >
@@ -35,27 +34,26 @@ The score gives each Android manufacturer a score out of 10 based on the securit
 </div>-->
 </div>
 </div>
-
 </section>
 <section style="background:#fff;">
-<div class="row"
+<div class="row">
 <div id="stats" class="twelve columns" style="padding-top:15px">
  <h2>Proportion of devices running vulnerable versions of Android</h2>
  <div style="width:100%; margin:auto;">
- {% insert_svg('images/norm_versionsecurity', 'Proportion of devices affected by critical vulnerabilities', '720px', '360px')  %}
- </div>
+ <a href="graph">
+ {% insert_svg('images/norm_versionsecurity', 'Proportion of devices affected by critical vulnerabilities', '720px', '360px', link=True)  %}
+ </a></div>
  <p style="text-align: left;">This figure shows our estimate of the proportion of Android devices running <em>insecure</em>, <em>maybe secure</em> and <em>secure</em> versions of Android over time.
-Further details on how this figure constructed can be found <a href="graph" style="font-weight:bold;">on a separate page</a>.
+Further details on how this figure constructed can be found <a href="graph">on a separate page</a>.
  </p>
 </div>
 </div>
 </section>
 <section id="screenshots" markdown="1">
 <div class="row" markdown="1" id="da">
-
 <div class="row">
  <div class="three columns">
-  <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">{% insert_svg('images/da-logo', 'Device Analyzer logo','100%','auto', link=True)%}</a>
+  <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer" style="max-width:300px; margin:auto;">{% insert_svg('images/da-logo', 'Device Analyzer logo','100%','auto', link=True)%}</a>
  </div>
  <div class="nine columns">
  <h2>Help us, install <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">Device Analyzer</a></h2>
@@ -66,7 +64,6 @@ Device Analyzer follows <a href="http://deviceanalyzer.cl.cam.ac.uk/collected.ht
  <p>If you have MDM data and want to know which devices used by your organisation are vulnerable then we can help: <a href="#contact">contact us</a>.</p>
  </div>
 </div>
-
 </div>
 </section>
 <section markdown="1" style="background:#fff;" id="vulnerabilities">
@@ -104,12 +101,10 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 
 </div>
 </div>
-
 </div>
 </section>
 <section markdown="1" id="screenshots">
 <div id="contact" class="row" markdown="1">
-
 <div class="row">
  <div class="four columns info">
 <h2>Contact</h2>
