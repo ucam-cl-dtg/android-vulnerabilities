@@ -74,7 +74,7 @@ Device Analyzer follows <a href="http://deviceanalyzer.cl.cam.ac.uk/collected.ht
 
 ## Vulnerabilities and papers
 
-We are collating all critical vulnerabilities in Android and storing this information in a [machine reable format (json)](spec).
+We are collating all critical vulnerabilities in Android and storing this information in a [machine readable format (json)](spec).
 We are only tracking critical vulnerabilities which an app could exploit.
 These are vulnerabilities that allow an app (malicious or compromised) to either gain root or gain privileges which can then be used to obtain root.
 
