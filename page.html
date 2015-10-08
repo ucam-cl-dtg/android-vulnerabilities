@@ -49,7 +49,7 @@
         entry = '<li class="%s"><a href="%s">%s</a></li>'
         for p in mpages:
             style = "currentpage" if p["title"] == page["title"] else ""
-            if p["title"] != "Home":
+            if not (p["title"] == "Home" and page["title"] == "Home"):
                 print(entry % (style, p["url"], hx(p["title"])))
     %-->
     </ul>
