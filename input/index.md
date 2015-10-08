@@ -98,6 +98,10 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
  * [Security metrics for the Android ecosystem](https://www.cl.cam.ac.uk/~drt24/papers/spsm-scoring.pdf) by Daniel R. Thomas, Alastair R. Beresford and Andrew Rice in ACM CCS Workshop on Security and Privacy in Smartphones and Mobile Devices (SPSM) 2015
  * [The lifetime of Android API vulnerabilities: case study on the JavaScript-to-Java interface](https://www.cl.cam.ac.uk/~drt24/papers/spw15-07-Thomas.pdf) by Daniel R. Thomas, Alastair R. Beresford, Thomas Coudray, Tom Sutcliffe and Adrian Taylor in the Proceedings of the Security Protocols Workshop 2015
 
+### Press
+
+ * [Thursday 8th October 2015](press/2015-10-08): 87% of Android devices insecure - Manufacturers fail to provide security updates
+
 </div>
 </div>
 
