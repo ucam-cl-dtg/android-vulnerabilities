@@ -40,13 +40,17 @@
             print('''<li><a class="smoothscroll" href="#scores">Scores</a></li>
                      <li><a class="smoothscroll" href="#stats">Stats</a></li>
                      <li><a class="smoothscroll" href="#da">Help us</a></li>
-                     <li><a class="smoothscroll" href="#contact">Contact</a></li>''')
+                     <li><a class="smoothscroll" href="#vulnerabilities">Vulnerabilities</a></li>
+                     <li><a class="smoothscroll" href="#vulnerabilities">Papers</a></li>
+                     <li><a class="smoothscroll" href="#contact">Contact</a></li>
+''')
         mpages = [p for p in pages if "menu-position" in p]
         mpages.sort(key=lambda p: int(p["menu-position"]))
         entry = '<li class="%s"><a href="%s">%s</a></li>'
         for p in mpages:
             style = "currentpage" if p["title"] == page["title"] else ""
-            print(entry % (style, p["url"], hx(p["title"])))
+            if p["title"] != "Home":
+                print(entry % (style, p["url"], hx(p["title"])))
     %-->
     </ul>
     </nav>

@@ -1,6 +1,5 @@
 
 title: Specification
-menu-position: 3
 ---
 
 Specification of json file format for vulnerabilities
