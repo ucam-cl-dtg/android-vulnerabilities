@@ -135,12 +135,10 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
     <a href="https://www.cl.cam.ac.uk/~acr31/"><img src="images/people/acr31.jpg" alt="Picture of Andrew Rice"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~acr31/">Andrew Rice</a></p>
    </div>
-<!--
    <div class="eight columns">
     <a href="https://github.com/danieltwagner"><img src="images/people/dtw30.jpg" alt="Picture of Daniel Wagner"/></a>
     <p><a href="https://github.com/danieltwagner">Daniel Wagner</a></p>
    </div>
--->
   </div> <!-- Nested Row End -->
  </div>
 </div>
