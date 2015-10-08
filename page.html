@@ -45,7 +45,7 @@
         mpages.sort(key=lambda p: int(p["menu-position"]))
         entry = '<li class="%s"><a href="%s">%s</a></li>'
         for p in mpages:
-            style = "current" if p["title"] == page["title"] else ""
+            style = "currentpage" if p["title"] == page["title"] else ""
             print(entry % (style, p["url"], hx(p["title"])))
     %-->
     </ul>

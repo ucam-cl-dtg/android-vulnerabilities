@@ -158,6 +158,10 @@ ul#nav li a:hover { color: #fff; }
 ul#nav li a:active { background-color: transparent !important; }
 ul#nav li.current a { color: #fff; }
 
+#nav-wrap li .currentpage {
+	font-weight: bold;
+	text-decoration: underline;
+}
 
 /* ------------------------------------------------------------------ */
 /* c. Hero Section
