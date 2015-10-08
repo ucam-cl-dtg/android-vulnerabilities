@@ -102,7 +102,7 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 </div>
 </div>
 </section>
-<section markdown="1" id="screenshots">
+<section id="screenshots">
 <div id="contact" class="row">
 <div class="row">
  <div class="four columns info">
