@@ -51,14 +51,14 @@ Further details on how this figure constructed can be found <a href="graph" styl
 </div>
 </section>
 <section id="screenshots" markdown="1">
-<div class="row" markdown="1">
+<div class="row" markdown="1" id="da">
 
 <div class="row">
  <div class="three columns">
   <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">{% insert_svg('images/da-logo', 'Device Analyzer logo','100%','auto', link=True)%}</a>
  </div>
  <div class="nine columns">
- <h2 id="da">Help us, install <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">Device Analyzer</a></h2>
+ <h2>Help us, install <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">Device Analyzer</a></h2>
  <p>We are only able to produce these scores due to the contributions made to <a href="https://deviceanalyzer.cl.cam.ac.uk/">Device Analyzer</a> by members of the public.
 If you have an Android device you can install the <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">Device Analyzer app</a> and provide researchers with additional data on which devices are secure.
 Device Analyzer follows <a href="http://deviceanalyzer.cl.cam.ac.uk/collected.htm">best practices in privacy preservation</a>.</p>
@@ -104,11 +104,11 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 </div>
 </section>
 <section markdown="1" id="screenshots">
-<div class="row" markdown="1">
+<div id="contact" class="row" markdown="1">
 
 <div class="row">
  <div class="four columns info">
-<h2 id="contact">Contact</h2>
+<h2>Contact</h2>
   <p>Computer Laboratory<br/>University of Cambridge<br/>15 JJ Thompson Avenue<br/>Cambridge CB3 0FD<br/>
   <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#97;&#110;&#100;&#114;&#111;&#105;&#100;&#118;&#117;&#108;&#110;&#101;&#114;&#97;&#98;&#105;&#108;&#105;&#116;&#105;&#101;&#115;&#46;&#111;&#114;&#103;">&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#97;&#110;&#100;&#114;&#111;&#105;&#100;&#118;&#117;&#108;&#110;&#101;&#114;&#97;&#98;&#105;&#108;&#105;&#116;&#105;&#101;&#115;&#46;&#111;&#114;&#103;</a>
 </p>
