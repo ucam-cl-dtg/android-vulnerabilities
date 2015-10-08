@@ -1,8 +1,9 @@
 
 title: Home
 menu-position: 0
+first-section-id: scores
 ---
-<div class="four columns info" id="scores">
+<div class="four columns info">
 <h2>Scores out of ten</h2>
 <table class="five" >
 <tbody>

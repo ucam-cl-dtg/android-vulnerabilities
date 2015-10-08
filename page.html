@@ -63,7 +63,7 @@
     </div>
     </section>
 
-    <section class="textured">
+    <section class="textured" id="{{ hx(page["first-section-id"]) if 'first-section-id' in page else '' }}">
     <div class="row">{{ __content__ }}</div>
     </section>
 
