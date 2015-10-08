@@ -346,10 +346,13 @@ ul.features li:nth-child(even) { }
    letter-spacing: 2px;
 }
 
+section {/*Make space for the nav bar*/
+   padding-top: 60px;
+}
+
 section.textured {
    background: #fff url(img/grey.png);
-   padding-top: 96px;
-   padding-bottom: 120px;
+   padding-bottom: 60px;
 }
 @media
 (-webkit-min-device-pixel-ratio: 2),
