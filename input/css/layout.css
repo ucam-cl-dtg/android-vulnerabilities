@@ -346,6 +346,21 @@ ul.features li:nth-child(even) { }
    letter-spacing: 2px;
 }
 
+section.textured {
+   background: #fff url(img/grey.png);
+   padding-top: 96px;
+   padding-bottom: 120px;
+}
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
+   section.textured {
+      background: #fff url(img/grey_@2X.png);
+      background-size: 397px 322px;
+   }
+
+}
 
 /* ------------------------------------------------------------------ */
 /* c. Screenshots

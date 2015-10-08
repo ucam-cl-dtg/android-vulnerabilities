@@ -49,8 +49,8 @@ Further details on how this figure constructed can be found <a href="graph">on a
 </div>
 </div>
 </section>
-<section id="screenshots" markdown="1">
-<div class="row" markdown="1" id="da">
+<section id="da" class="textured" markdown="1">
+<div class="row" markdown="1">
 <div class="row">
  <div class="three columns">
   <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer" style="max-width:300px; margin:auto;">{% insert_svg('images/da-logo', 'Device Analyzer logo','100%','auto', link=True)%}</a>
@@ -102,8 +102,8 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 </div>
 </div>
 </section>
-<section id="screenshots">
-<div id="contact" class="row">
+<section class="textured" id="contact">
+<div class="row">
 <div class="row">
  <div class="four columns info">
 <h2>Contact</h2>
