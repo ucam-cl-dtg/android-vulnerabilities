@@ -516,7 +516,7 @@ def hook_preconvert_bypages():
 max_vulns_per_key = 10
 
 def by_pages(vulndict, by):
-    bypagestring = '\n'  # Can't be the empty string or empty pages will cause errors
+    bypagestring = '\n[Back to all vulnerabilities](all)\n\n'  # Can't be the empty string or empty pages will cause errors
     for key, vulns in list(vulndict.items()):
         bypagestring += "##[{key}](by/{by}/{key})\n\n".format(key=key, by=by)
         vstring = "[Back to all {by}s](by/{by})\n\n#{key}\n\n".format(key=key, by=by)
