@@ -98,6 +98,15 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 ### Press
 
  * [Thursday 8th October 2015](press/2015-10-08): 87% of Android devices insecure - Manufacturers fail to provide security updates
+ * [ZDNet](http://www.zdnet.com/article/android-security-a-market-for-lemons-that-leaves-87-percent-insecure/): Android security a 'market for lemons' that leaves 87 percent vulnerable
+ * [Arstechnica](http://arstechnica.com/security/2015/10/university-of-cambridge-study-finds-87-of-android-devices-are-insecure/): University of Cambridge study finds 87% of Android devices are insecure
+ * [The Register](http://www.theregister.co.uk/2015/10/12/android_patching_survey/): Android users left at risk... and it's not even THEIR FAULT this time!
+ * [Silicon Angle](http://siliconangle.com/blog/2015/10/14/the-elephant-in-the-room-study-confirms-android-devices-vulnerable-due-to-lack-of-patches/): The elephant in the room: Study confirms Android devices vulnerable due to lack of patches
+ * [Phone arena](http://www.phonearena.com/news/Cambridge-paper-shows-that-LG-is-better-than-other-OEMs-when-it-comes-to-security_id74681): Cambridge paper shows that LG is better than other OEMs when it comes to security
+ * [Digital Journal](http://www.digitaljournal.com/technology/90-of-android-devices-left-exposed-to-critical-vulnerabilities/article/446449): 90% of Android devices left exposed to critical vulnerabilities
+ * [The Sydney Morning Herald](http://www.smh.com.au/digital-life/consumer-security/9outof10-android-phones-are-insecure-and-manufacturers-are-to-blame-20151014-gk8kp5.html): 9-out-of-10 Android phones are insecure, and manufacturers are to blame
+ * [Digital Trends](http://www.digitaltrends.com/mobile/android-security-report/): "Google-commissioned security report paints a bleak picture of Android" (Note: Google did not commission this report, they funded work on Device Analyzer which we used in this analysis)
+ * [Silicon Republic](https://www.siliconrepublic.com/enterprise/2015/10/14/87pc-of-android-devices-wildly-insecure-report): 87pc of Android devices wildly insecure — report
 
 </div>
 </div>
