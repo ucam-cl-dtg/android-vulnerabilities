@@ -107,6 +107,10 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
  * [The Sydney Morning Herald](http://www.smh.com.au/digital-life/consumer-security/9outof10-android-phones-are-insecure-and-manufacturers-are-to-blame-20151014-gk8kp5.html): 9-out-of-10 Android phones are insecure, and manufacturers are to blame
  * [Digital Trends](http://www.digitaltrends.com/mobile/android-security-report/): "Google-commissioned security report paints a bleak picture of Android" (Note: Google did not commission this report, they funded work on Device Analyzer which we used in this analysis)
  * [Silicon Republic](https://www.siliconrepublic.com/enterprise/2015/10/14/87pc-of-android-devices-wildly-insecure-report): 87pc of Android devices wildly insecure — report
+ * [Forbes](http://www.forbes.com/sites/ewanspence/2015/10/14/android-vulnerability-university-study/): The Dangerous Vulnerabilities Hiding In The Heart Of Android
+ * [Gadgets 360](http://gadgets.ndtv.com/mobiles/news/lg-top-oem-for-issuing-security-patches-to-its-android-devices-report-752483): LG Top OEM for Issuing Security Patches to Its Android Devices: Report
+ * [Android Headlines](http://www.androidheadlines.com/2015/10/ah-primetime-cambridge-university-analyze-android-security-risk.html): AH Primetime: Cambridge University Analyze Android Security Risk
+ * [Engaget](http://www.engadget.com/2015/10/14/android-vulnerabilities/): Most Android phones are vulnerable due to lack of security patches
 
 </div>
 </div>
