@@ -747,4 +747,6 @@ def hook_postconvert_fix_html():
     for page in pages:
         page.html = page.html.replace('<p></div>','</div>')
         page.html = page.html.replace('</div></p>','</div>')
+        page.html = page.html.replace('<p><table','<table')
+        page.html = page.html.replace('</table></p>','</table>')
         page.html = page.html.replace(' markdown="1"','')
