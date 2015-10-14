@@ -494,6 +494,26 @@ def link_manufacturer(manufacturer):
     else:
         return manufacturer
 
+
+def score_table(files, remove):
+    scores = OrderedDict()
+    for file in files:
+        with open(file) as csvfile:
+            csvreader - csv.reader(csvfile)
+            for row in csvreader:
+                try:
+                    key = row[0]
+                    if not key in remove:
+                        scores[key] = float(row[7])
+                except ValueError:
+                    pass # Ignore headers
+     table = '<table class="five" ><tbody>'
+     for key, value in scores.items():
+         table += '<tr><td>{key}</td>  <td>{value}&nbsp;<i>{annotation}</i></td></tr>'.format(key=link_manufacturer(key), value=value, annotation='')
+     table += '</tbody></table>'
+     return table
+
+
 def hook_preconvert_04_load_scores():
     if os.path.isfile('input/sec_scores_manufacturer.csv'):
         with open('input/sec_scores_manufacturer.csv') as csvfile:
