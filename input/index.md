@@ -110,7 +110,7 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
  * [Forbes](http://www.forbes.com/sites/ewanspence/2015/10/14/android-vulnerability-university-study/): The Dangerous Vulnerabilities Hiding In The Heart Of Android
  * [Gadgets 360](http://gadgets.ndtv.com/mobiles/news/lg-top-oem-for-issuing-security-patches-to-its-android-devices-report-752483): LG Top OEM for Issuing Security Patches to Its Android Devices: Report
  * [Android Headlines](http://www.androidheadlines.com/2015/10/ah-primetime-cambridge-university-analyze-android-security-risk.html): AH Primetime: Cambridge University Analyze Android Security Risk
- * [Engaget](http://www.engadget.com/2015/10/14/android-vulnerabilities/): Most Android phones are vulnerable due to lack of security patches
+ * [Engadget](http://www.engadget.com/2015/10/14/android-vulnerabilities/): Most Android phones are vulnerable due to lack of security patches
 
 </div>
 </div>
