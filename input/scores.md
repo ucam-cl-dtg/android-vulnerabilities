@@ -17,7 +17,7 @@ The score gives each Android manufacturer a score out of 10 based on the securit
 </dl>
 
 <div class="six columns">
-{% insert_svg('images/fum', 'FUM score = 4 cdot f + 3 cdot u + 3 cdot {{2} over {1+e^m} }','100%','100%') %}
+{% insert_svg('images/fum', 'FUM score = 4 cdot f + 3 cdot u + 3 cdot { {2} over {1+e^m} }', '100%', '100%') %}
 </div>
 
 ## Scores out of 10 for manufacturers and for Nexus devices
