@@ -93,10 +93,15 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
  * [Security metrics for the Android ecosystem](https://www.cl.cam.ac.uk/~drt24/papers/spsm-scoring.pdf) by Daniel R. Thomas, Alastair R. Beresford and Andrew Rice in ACM CCS Workshop on Security and Privacy in Smartphones and Mobile Devices (SPSM) 2015
  * [The lifetime of Android API vulnerabilities: case study on the JavaScript-to-Java interface](https://www.cl.cam.ac.uk/~drt24/papers/spw15-07-Thomas.pdf) by Daniel R. Thomas, Alastair R. Beresford, Thomas Coudray, Tom Sutcliffe and Adrian Taylor in the Proceedings of the Security Protocols Workshop 2015
 
-### Press
+### Press releases
 
  * [Thursday 8th October 2015](press/2015-10-08): 87% of Android devices insecure - Manufacturers fail to provide security updates
  * [Light Blue Touchpaper](https://www.lightbluetouchpaper.org/2015/10/08/87-of-android-devices-insecure-because-manufacturers-fail-to-provide-security-updates/): 87% of Android devices insecure because manufacturers fail to provide security updates
+
+</div></div><div class="row" markdown="1"><div class="twelve columns" markdown="1">
+
+### Press coverage
+
  * [ZDNet](http://www.zdnet.com/article/android-security-a-market-for-lemons-that-leaves-87-percent-insecure/): Android security a 'market for lemons' that leaves 87 percent vulnerable
  * [Arstechnica](http://arstechnica.com/security/2015/10/university-of-cambridge-study-finds-87-of-android-devices-are-insecure/): University of Cambridge study finds 87% of Android devices are insecure
  * [The Register](http://www.theregister.co.uk/2015/10/12/android_patching_survey/): Android users left at risk... and it's not even THEIR FAULT this time!
