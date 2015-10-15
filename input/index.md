@@ -30,9 +30,7 @@ The score gives each Android manufacturer a score out of 10 based on the securit
 <dt><b><i>u</i></b></dt> <dd>the proportion of devices updated to the most recent version.</dd>
 <dt><b><i>m</i></b></dt> <dd>the number of vulnerabilities the manufacturer has not yet fixed on any device.</dd>
 </dl>
-<!--<div class="six columns">
-{% insert_svg('images/fum', 'FUM score = 4 cdot f + 3 cdot u + 3 cdot {{2} over {1+e^m} }','100%','100%') %}
-</div>-->
+<p><a href="scores">Further details</a>.</p>
 </div>
 </div>
 </section>
