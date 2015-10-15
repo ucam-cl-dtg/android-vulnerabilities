@@ -510,8 +510,15 @@ def score_table(files, remove):
                 except ValueError:
                     pass # Ignore headers
     table = '<table class="five" ><tbody>\n'
-    for key, value in scores.items():
-        table += '<tr><td>{key}</td>  <td>{value}&nbsp;<i>{annotation}</i></td></tr>\n'.format(key=link_manufacturer(key), value=display_num(value), annotation='')
+    annotation = ''
+    for index, (key, value) in enumerate(scores.items()):
+        if index == 0:
+            annotation = '(best)'
+        elif index == len(scores) - 1:
+            annotation = '(worst)'
+        else:
+            annotation = ''
+        table += '<tr><td>{key}</td>  <td>{value}&nbsp;<i>{annotation}</i></td></tr>\n'.format(key=link_manufacturer(key), value=display_num(value), annotation=annotation)
     table += '</tbody></table>\n'
     return table
 
