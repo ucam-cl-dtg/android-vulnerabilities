@@ -518,7 +518,7 @@ def score_table(files, remove):
             annotation = '(worst)'
         else:
             annotation = ''
-        table += '<tr><td>{key}</td>  <td>{value}&nbsp;<i>{annotation}</i></td></tr>\n'.format(key=link_manufacturer(key), value=display_num(value), annotation=annotation)
+        table += '<tr><td style="padding-right:4px;">{key}</td>  <td>{value}&nbsp;<i>{annotation}</i></td></tr>\n'.format(key=link_manufacturer(key).replace(' ', '&nbsp;'), value=display_num(value), annotation=annotation)
     table += '</tbody></table>\n'
     return table
 

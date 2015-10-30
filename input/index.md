@@ -5,20 +5,7 @@ first-section-id: scores
 ---
 <div class="four columns info">
 <h2>Scores out of ten</h2>
-<table class="five" >
-<tbody>
-<tr><td>Nexus&nbsp;devices&nbsp;</td>  <td>5.2&nbsp;<i>(best)</i></td></tr>
-<tr><td>{{link_manufacturer('LG')}}</td> <td>4.0</td></tr>
-<tr><td>{{link_manufacturer('Motorola')}}</td>   <td>3.1</td></tr>
-<tr><td>{{link_manufacturer('Samsung')}}</td>    <td>2.7</td></tr>
-<tr><td>{{link_manufacturer('Sony')}}</td>   <td>2.5</td></tr>
-<tr><td>{{link_manufacturer('HTC')}}</td>    <td>2.5</td></tr>
-<tr><td>{{link_manufacturer('Asus')}}</td>   <td>2.4</td></tr>
-<tr><td>{{link_manufacturer('Alps')}}</td>   <td>0.7</td></tr>
-<tr><td>{{link_manufacturer('Symphony')}}</td>   <td>0.3</td></tr>
-<tr><td>{{link_manufacturer('Walton')}}</td> <td>0.3&nbsp;<i>(worst)</i></td></tr>
-</tbody>
-</table>
+{{score_table(['input/scores/sec_scores_summary.csv', 'input/scores/sec_scores_manufacturer.csv'], ['other','non-Nexus devices'])}}
 </div>
 <div class="eight columns right-cols">
 <h2>Calculating the score</h2>
