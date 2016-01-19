@@ -1,0 +1,29 @@
+{
+  "name" : "LG Lit",
+  "CVE" : [],
+  "Responsibly_disclosed" : true,
+  "Categories" : ["kernel"],
+  "Details" : [["Bug in LG backlight driver allows gaining root from local user", "androidforums-lit"]],
+  "Discovered_by" : [["giantpune", "giantpune-email0"]],
+  "Discovered_on" : [["2012-10-31","giantpune-email0"]],
+  "Submission" : [{"by":"giantpune", "on": "2014-10-17"}],
+  "Reported_on" : [["2012-10-25","androidforums-lit"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["LG LM3530 backlight driver devices","androidforums-lit"], ["L38C", "androidforums-lit-package"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["LG","androidforums-lit"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "giantpune-email0" : {
+      "url" : "/submissions/giantpune-email0"
+    }
+  , "androidforums-lit" : {
+      "url" : "http://androidforums.com/threads/privilidge-escailation-exploit-in-lgs-backlight-driver.638367/"
+    }
+  , "androidforums-lit-package" : {
+      "url" : "http://androidforums.com/threads/root-apk-for-l38c.682486/"
+    }
+  }
+}
