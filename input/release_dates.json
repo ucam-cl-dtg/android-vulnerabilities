@@ -48,5 +48,8 @@
 	"5.0.0" : ["2014-11-03", "http://www.expertreviews.co.uk/mobile-phones/1401595/android-50-lollipop-release-date-features-and-news-source-code-released-to"],
 	"5.0.1" : ["2014-12-02", "http://www.zdnet.com/article/google-quietly-pushes-out-android-lollipop-5-0-1-images/"],
 	"5.0.2" : ["2014-12-19", "http://www.droid-life.com/2014/12/19/android-5-0-2-lrx22g-factory-image-for-nexus-7-wifi-randomly-shows-up/"],
-	"5.1.0" : ["2015-03-09", "http://officialandroid.blogspot.com/2015/03/android-51-unwrapping-new-lollipop.html"]
+	"5.1.0" : ["2015-03-09", "http://officialandroid.blogspot.com/2015/03/android-51-unwrapping-new-lollipop.html"],
+	"5.1.1" : ["2015-04-21", "http://blog.emojipedia.org/android-6-0-1-emoji-changelog/"],
+	"6.0.0" : ["2015-10-05", "http://officialandroid.blogspot.co.uk/2015/10/get-ready-for-sweet-taste-of-android-60.html"],
+	"6.0.1" : ["2015-12-07", "http://blog.emojipedia.org/android-6-0-1-emoji-changelog/"]
 }
