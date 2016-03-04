@@ -748,9 +748,11 @@ def hook_preconvert_stats():
     set_latex_value('VulnsPerYearAllAndroid', (ufloat(num_vuln_all_android,sqrt(num_vuln_all_android))/((last_date - first_date)/datetime.timedelta(1)))*365)
     set_latex_value('VulnsPerYearTwosf', (ufloat(len(vulnerabilities),sqrt(len(vulnerabilities)))/((last_date - first_date)/datetime.timedelta(1)))*365, sig_figs=2)
     set_latex_value('VulnsPerYearAllAndroidTwosf', (ufloat(num_vuln_all_android,sqrt(num_vuln_all_android))/((last_date - first_date)/datetime.timedelta(1)))*365, sig_figs=2)
-    vuln_table = r'\begin{table} \centering \small \begin{tabular}{l|l|c|c} Vulnerability & How known & Date & Categories\\ \hline'
+    vuln_table = r'\begin{table} \centering \begin{tabular}{l|l|c|c|p{19.5em}} Vulnerability & How known & Date & Categories & CVEs\\ \hline'
     for versions, date, name, how_known in raw_vulnerabilities:
-            vuln_table += r' {} & {} & {} & {}\\'.format(try_shorten(name), how_known, date, ", ".join(vuln_by_name[name].categories()))
+        cves = vuln_by_name[name].cves()
+        cvestring = ", ".join([r'{0}~\cite{{{0}}}'.format(x) if x.startswith('CVE') else x for x in cves])
+        vuln_table += r' \href{{http://androidvulnerabilities.org/vulnerabilities/{}}}{{{}}} & {} & {} & {} & {}\\'.format(name.replace(' ', '_'), try_shorten(name), how_known, date, ", ".join(vuln_by_name[name].categories()), cvestring)
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
