@@ -275,6 +275,20 @@ class Vulnerability:
     def categories(self):
         return self.jsn['Categories']
 
+    def cves(self):
+        reflist = self.jsn['CVE']
+        if len(reflist) == 0:
+            return []
+        results = []
+        for entry in reflist:
+            if isinstance(entry, list):
+                results.append(entry[0])
+            elif isinstance(entry, str):
+                results.append(entry)
+            else:
+                raise ValueError("unexpected type of ref entry:" + type(entry))
+        return results
+
     def _get_reference_url(self, reference):
         return self.jsn['references'][reference]['url']
 
