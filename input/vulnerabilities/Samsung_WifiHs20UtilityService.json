@@ -1,0 +1,26 @@
+{
+  "name" : "Samsung WifiHs20UtilityService",
+  "CVE" : [["CVE-2015-7888","projectzero-489"]],
+  "Responsibly_disclosed" : true,
+  "Categories" : ["system"],
+  "Details" : [["A path traversal vulnerability was found in the WifiHs20UtilityService. This service is running on a Samsung S6 Edge device, and may be present on other Samsung device models.  WifiHs20UtilityService reads any files placed in /sdcard/Download/cred.zip, and unzips this file into /data/bundle. Directory traversal  in the path of the zipped contents allows an attacker to write a controlled file to an arbitrary path as the system user."]],
+  "Discovered_by" : [["Mark Brand","projectzeroblog-huntinggalaxy"]],
+  "Discovered_on" : [["2015-07-29"]],
+  "Submission" : [{"by":"drt24","on":"2016-03-18"},{"by":"sak70", "on":"2015-10-14"}],
+  "Reported_on" : [["2015-07-29"]],
+  "Fixed_on" : [["2015-10-22","projectzero-489"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["Samsung S6 Edge and may be present in other Samsung device models", "projectzero-489"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Samsung","projectzero-489"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "projectzero-489" : {
+      "url" : "https://bugs.chromium.org/p/project-zero/issues/detail?id=489&redir=1"
+    }
+  , "projectzeroblog-huntinggalaxy" : {
+      "url" : "https://googleprojectzero.blogspot.co.uk/2015/11/hack-galaxy-hunting-bugs-in-samsung.html"
+    }
+  }
+}
