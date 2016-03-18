@@ -1,0 +1,23 @@
+{
+  "name" : "StumpRoot",
+  "CVE" : [],
+  "Responsibly_disclosed" : false,
+  "Categories" : [],
+  "Details" : [["Vulnerability affecting LG devices released between 2012 and 2014","xda-developers-stumproot"]],
+  "Discovered_by" : [["thecubed","xda-developers-stumproot"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"drt24","on":"2016-03-18"},{"by":"sak70", "on":"2015-10-14"}],
+  "Reported_on" : [["2014-08-17","xda-developers-stumproot"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["Verizon LG G3, T-Mobile LG G3, AT&T LG G3, Sprint LG G3, D852G Videotron 10C, D852 Rogers 10B, D852 Bell 10B, Flex D959 TMobile, LG-D855, LG-D858, LG-D855, LG-D851, LG-F400L","xda-developers-stumproot"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["LG","xda-developers-stumproot"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "xda-developers-stumproot" : {
+      "url" : "http://forum.xda-developers.com/lg-g3/orig-development/root-stump-root-lg-g3-sprint-verizon-t2850906"
+    }
+  }
+}

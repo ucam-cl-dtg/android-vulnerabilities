@@ -1,0 +1,32 @@
+{
+  "name" : "PingPongRoot",
+  "CVE" : [["CVE-2015-3636","avs-test-pingpong"]],
+  "Responsibly_disclosed" : false,
+  "Categories" : [],
+  "Details" : [["Wen Xu and wushi of KeenTeam discovered that users allowed to create ping sockets can use them to crash the system and, on 32-bit architectures, for privilege escalation. However, by default, no users on a Debian system have access to ping sockets.","dsa-3290"]],
+  "Discovered_by" : [["Wen Xu and wushi of KeenTeam","dsa-3290"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"drt24","on":"2016-03-18"},{"by":"sak70", "on":"2015-10-14"}],
+  "Reported_on" : [["2015-05-08","xda-developers-pingpongroot"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["Samsung Galaxy S6 Edge","xda-developers-pingpongroot"],["HTC One (M9)","xda-developers-pingpongroot"],["Samsung Galaxy S6","xda-developers-pingpongroot"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Samsung","xda-developers-pingpongroot"],["HTC","xda-developers-pingpongroot"]],
+  "Fixed_versions" : [["5.0.2,5.1.1","xda-developers-pingpongroot"]],
+  "references" : {
+    "xda-developers-pingpongroot" : {
+      "url" : "http://forum.xda-developers.com/galaxy-s6/general/root-pingpongroot-s6-root-tool-t3103016"
+    }
+  , "avs-test-pingpong" : {
+      "url" : "https://github.com/nowsecure/android-vts/blob/master/app/src/main/jni/ping_pong.c"
+    }
+  , "CVE-2015-3636" : {
+      "url" : "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3636"
+    }
+  , "dsa-3290" : {
+      "url" : "https://www.debian.org/security/2015/dsa-3290"
+    }
+  }
+}
