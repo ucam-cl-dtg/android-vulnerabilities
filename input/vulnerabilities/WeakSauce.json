@@ -1,0 +1,29 @@
+{
+  "name" : "WeakSauce",
+  "CVE" : [["CVE-2014-3847","twitter-jcase-weaksaucecve"]],
+  "Responsibly_disclosed" : false,
+  "Categories" : [],
+  "Details" : [["WeakSauce is an exploit for some HTC devices. It was compatible with the HTC One m7 & m7 on Verizon","xda-developers-weaksauce"]],
+  "Discovered_by" : [["jcase","xda-developers-weaksauce"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"drt24","on":"2016-03-18"},{"by":"sak70", "on":"2015-10-14"}],
+  "Reported_on" : [["2014-03-29","xda-developers-weaksauce"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["HTC One m7 & m7 on Verizon","xda-developers-weaksauce"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["HTC","xda-developers-weaksauce"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "twitter-jcase-weaksaucecve" : {
+      "url" : "https://twitter.com/jcase/status/469516424860286977"
+    }
+  , "android-vts" : {
+      "url" : "https://github.com/nowsecure/android-vts"
+    }
+  , "xda-developers-weaksauce" : {
+      "url" : "http://forum.xda-developers.com/showthread.php?t=2699089"
+    }
+  }
+}
