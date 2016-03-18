@@ -1,0 +1,57 @@
+{
+  "name" : "One class to rule them all",
+  "CVE" : [["CVE-2015-3837","CVE-2015-3837"],["CVE-2015-3825","woot15-paper-peles"], ["ANDROID-21437603","woot15-paper-peles"], ["ANDROID-21583849","woot15-paper-peles"]],
+  "Responsibly_disclosed" : true,
+  "Categories" : ["system"],
+  "Details" : [["This vulnerability allows for arbitrary code execution in the context of many apps and services and results in elevation of privileges. There is a Proof-of-Concept exploit against the Google Nexus 5 device, that achieves code execution inside the highly privileged system_server process, and then either replaces an existing arbitrary application on the device with our own malware app or changes the device’s SELinux policy. For some other devices, it is also possible to gain kernel code execution by loading an arbitrary kernel modules. This vulnerability was responsibly disclosed to the Android Security Team which tagged it as CVE-2015-3825 internally as ANDROID-21437603/ANDROID-21583849 and patched Android 4.4 / 5.x / M and Google Play Services.", "woot15-paper-peles"]
+  , ["CVE-2015-3825 is the wrong CVE number (duplicate), CVE-2015-3837 should be used instead", "CVE-2015-3825"]
+  , ["The OpenSSLX509Certificate class in org/conscrypt/OpenSSLX509Certificate.java in Android before 5.1.1 LMY48I improperly includes certain context data during serialization and deserialization, which allows attackers to execute arbitrary code via an application that sends a crafted Intent, aka internal bug 21437603.","CVE-2015-3837"]],
+  "Discovered_by" : [["Or Peles and Roee Hay {orpeles,roeeh}@il.ibm.com","woot15-paper-peles"]],
+  "Discovered_on" : [["2015-05-22","woot15-paper-peles"]],
+  "Submission" : [{"by":"lmrs2", "on":"2015-08-10"},{"by":"roeeh", "on":"2015-10-14"}],
+  "Reported_on" : [["2015-06-01","NexusSecurityBulletinAugust2015"]],
+  "Fixed_on" : [["2015-05-28","OneClassPatch"]],
+  "Fix_released_on" : [["2015-08-05","droid-life-5-1-1-lmy48i"]],
+  "Affected_versions" : [["4.3-5.1, M (Preview 1)","woot15-paper-peles"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : ["(4\\.[0-3]\\.[0-9])|(5\\.0\\.[0-9])|(5\\.1\\.0)"],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [["4.4, 5.x, M","woot15-paper-peles"]],
+  "references" : {
+    "woot15-paper-peles" : {
+      "url" : "https://www.usenix.org/system/files/conference/woot15/woot15-paper-peles.pdf"
+    }
+  , "CVE-2015-3837" : {
+      "url" : "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3837"
+    }
+  , "CVE-2015-3825" : {
+      "url" : "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3825"
+    }
+  , "NexusSecurityBulletinAugust2015" : {
+      "url" : "https://groups.google.com/forum/message/raw?msg=android-security-updates/Ugvu3fi6RQM/yzJvoTVrIQAJ"
+    }
+  , "OneClassPatch" : {
+      "url" : "https://android.googlesource.com/platform/external/conscrypt/+/edf7055461e2d7fa18de5196dca80896a56e3540"
+    , "component" : "platform/external/conscrypt"
+    , "commit" : "edf7055461e2d7fa18de5196dca80896a56e3540"
+    }
+  , "droid-life-5-1-1-lmy48i" : {
+      "url" : "http://www.droid-life.com/2015/08/05/android-5-1-1-lmy48i-factory-images-arrive-for-nexus-4-5-6-7-2013-9-and-10/"
+    }
+  , "OneClassPatch4.4" : {
+      "url" : ""
+    , "commit" : "0b9d6334acde7460502face82417de40e438a3f4"
+    , "component" : ""
+    }
+  , "OneClassPatch5" : {
+      "url" : "https://android.googlesource.com/platform/external/conscrypt/+/de55e62f6c7ecd57d0a91f2b497885c3bdc661d3"
+    , "commit" : "de55e62f6c7ecd57d0a91f2b497885c3bdc661d3"
+    , "component" : "platform/external/conscrypt"
+    }
+  , "OneClassPatchPicked" : {
+      "url" : "https://android.googlesource.com/platform/external/conscrypt/+/8d57b9dbbd883422a0ff02083bfcf637b097e504"
+    , "commit" : "8d57b9dbbd883422a0ff02083bfcf637b097e504"
+    , "component" : "platform/external/conscrypt"
+    }
+  }
+}
