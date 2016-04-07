@@ -461,6 +461,9 @@ def hook_preconvert_01_vulnerabilities():
     raw_vulnerabilities = sorted(raw_vulnerabilities, key=lambda x: x[1])
 
     python_export_file_contents += '\nraw_vulnerabilities = ' + str(raw_vulnerabilities) + '\n'
+    last_vuln_date = raw_vulnerabilities[-1][1]
+    python_export_file_contents += '\nkey_vuln_labels.append((\'End of AVO\', \'' + last_vuln_date + '\', 1.05, 0))\n'
+    python_export_file_contents += '\nkey_vuln_arrows.append((\'' + last_vuln_date + '\', 1.05))\n'
 
 
 submitters = dict()
