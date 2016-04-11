@@ -14,7 +14,7 @@
   "Fix_released_on" : [["2015-08-05","droid-life-5-1-1-lmy48i"]],
   "Affected_versions" : [["4.3-5.1, M (Preview 1)","woot15-paper-peles"]],
   "Affected_devices" : [["all"]],
-  "Affected_versions_regexp" : ["(4\\.[0-3]\\.[0-9])|(5\\.0\\.[0-9])|(5\\.1\\.[0-1])"],
+  "Affected_versions_regexp" : ["(4\\.[0-3]\\.[0-9])|(4\\.4\\.[0-4])|(5\\.0\\.[0-9])|(5\\.1\\.[0-1])"],
   "Affected_manufacturers" : [["all"]],
   "Fixed_versions" : [["4.4, 5.x, M","woot15-paper-peles"]],
   "references" : {
