@@ -12,7 +12,7 @@
   "Fix_released_on" : [["2015-10-05","register-stagefright2"]],
   "Affected_versions" : [["5.1 and below","android-security-october"]],
   "Affected_devices" : [["all","zimperium-stagefright2"]],
-  "Affected_versions_regexp" : ["([1-4]\\.[0-9]\\.[0-9])|(5\\.0\\.[0-9])|(5\\.1\\.0)"],
+  "Affected_versions_regexp" : ["([1-4]\\.[0-9]\\.[0-9])|(5\\.0\\.[0-9])|(5\\.1\\.[0-1])"],
   "Affected_manufacturers" : [["all", "zimperium-stagefright2"]],
   "Fixed_versions" : [["5.1.1, LMY48T or later, LMY48W", "android-security-october"]],
   "references" : {
@@ -23,7 +23,8 @@
       "url" : "http://m.theregister.co.uk/2015/10/01/stagefright_two_point_oh_android/"
     }
   , "android-security-october" : {
-      "url" : "https://groups.google.com/forum/#!topic/android-security-updates/_Rm-lKnS2M8"
+      "url" : "https://groups.google.com/forum/#!topic/android-security-updates/iv1BF0f0XY4"
+    , "archiveurl" : "https://archive.is/PF5fm"
     }
   }
 }
