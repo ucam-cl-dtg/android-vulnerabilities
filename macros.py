@@ -42,7 +42,7 @@ def warning(*objs):
     print(*objs, file=sys.stderr)
 
 key_vuln_labels = [('zergRush', '2011-10-06', 1.05, 0), ('APK duplicate file', '2013-02-18', 1.05, 0), ('Fake ID', '2014-04-17', 1.05, 0)]
-key_vuln_arrows =[('2011-10-06', 1.05), ('2013-02-18', 1.05), ('2014-01-27', 1.05)]
+key_vuln_arrows =[('2011-10-06', 1.05), ('2013-02-18', 1.05), ('2014-04-17', 1.05)]
 
 def expand_raw_vulnerabilities(rawvulns, vulns, vuln_nms):
     for versions, date, name, how_known in rawvulns:
