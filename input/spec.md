@@ -29,7 +29,7 @@ Keys are as follows:
 * name : string
 * CVE : list of string-refs
 * Responsibly_disclosed : list of bool-refs
-* Categories : list of strings from : 'kernel' (a kernel vulnerability), 'signature' (errors processing signatures on APKs), 'system' (a vulnerability in the system libraries or processes), 'network' (a vulnerability exploitable by a network attacker), 'permissions' (incorrect permissions on a file)
+* Categories : list of strings from : 'kernel' (a kernel vulnerability), 'signature' (errors processing signatures on APKs), 'system' (a vulnerability in the system libraries or processes), 'network' (a vulnerability exploitable by a network attacker), 'permissions' (incorrect permissions on a file), 'app' (exploitable app with elevated permissions)
 * Severity : string
 * Details : list of string-refs
 * Discovered_by : list of date-refs

@@ -1,0 +1,27 @@
+{
+  "name" : "certifi-gate",
+  "CVE" : [],
+  "Responsibly_disclosed" : false,
+  "Categories" : ["app"],
+  "Details" : [["Certifi-gate is a set of vulnerabilities in the authorization methods between mobile Remote Support Tool (mRST) apps and system-level plugs on a device. mRSTs allow remote personnel to offer customers personalized technical support for their devices by replicating a device’s screen and by simulating screen clicks at a remote console. If exploited, Certifi-gate allows malicious applications to gain unrestricted access to a device silently, elevating their privileges to allow access to the user data and perform a variety of actions usually only available to the device owner.","checkpoint-certifigate-blog"]],
+  "Discovered_by" : [["Check Point Software Technologies Ltd.", "checkpoint-certificate-report"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"lmrs2", "on":"2015-08-07"},{"by":"drt24", "on":"2016-06-01"}],
+  "Reported_on" : [["2015-08-06", "checkpoint-certifigate-blog"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [],
+  "Fixed_versions" : [],
+  "references" : {
+    "checkpoint-certifigate-blog" : {
+      "url" : "http://blog.checkpoint.com/2015/08/06/certifigate/"
+    , "archiveurl" : "https://archive.is/oBVjy"
+    }
+  , "checkpoint-certificate-report" : {
+      "url" : "https://www.checkpoint.com/resources/downloads/certifigate-report.pdf"
+    }
+  }
+}
