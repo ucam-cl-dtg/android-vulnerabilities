@@ -16,6 +16,7 @@ The reference object contains key -> string or key -> list string pairs.
 It contains a url key which lists the url for the reference and may also contain:
 
 * A commit key giving the git commit refered to and a component key giving the component in android which the commit is for. e.g. `"commit":"79b579c92afc08ab12c0a5788d61f2dd2934836f", "component":"platform/system/netd/"`.
+* An archiveurl key containing a url that archives the url in the url field.
 
 In the vulnerability json object dates are either lists of 1 or 2 elements (first being the ISO format date YYYY-MM-DD and second the reference) or they are a date object with a date key pointing to the ISO date string and optionally a bound and a ref key.
 
