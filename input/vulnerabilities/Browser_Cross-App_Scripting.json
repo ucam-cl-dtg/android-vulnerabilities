@@ -1,0 +1,34 @@
+{
+  "name" : "Browser Cross-App Scripting",
+  "CVE" : [["CVE-2011-2357","watchfire-crossapp"]],
+  "Responsibly_disclosed" : true,
+  "Categories" : ["app"],
+  "Details" : [["Android browser could be tricked into running javascript in the domain of a different app","watchfire-crossapp"]],
+  "Severity" : "uncertain",
+  "Discovered_by" : [["Roee Hay and Yair Amit of the IBM Rational Application Security Research Group"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"roeeh", "on":"2015-10-15"}],
+  "Reported_on" : [["2011-07-31","watchfire-crossapp"]],
+  "Fixed_on" : [["2011-06-20","browser-fix"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["2.3.4, 3.1","watchfire-crossapp"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [["2.3.5, 3.2"]],
+  "references" : {
+    "watchfire-crossapp" : {
+      "url" : "http://blog.watchfire.com/files/advisory-android-browser.pdf"
+    }
+  , "browser-fix" : {
+      "url" : "https://android.googlesource.com/platform/packages/apps/Browser/+/afa4ab1e4c1d645e34bd408ce04cadfd2e5dae1e"
+    , "component" : "platform/packages/apps/Browser"
+    , "commit" : "afa4ab1e4c1d645e34bd408ce04cadfd2e5dae1e"
+    }
+  , "browser-fix2" : {
+      "url" : "https://android.googlesource.com/platform/packages/apps/Browser/+/096bae248453abe83cbb2e5a2c744bd62cdb620b"
+    , "component" : "platform/packages/apps/Browser"
+    , "commit" : "096bae248453abe83cbb2e5a2c744bd62cdb620b"
+    }
+  }
+}
