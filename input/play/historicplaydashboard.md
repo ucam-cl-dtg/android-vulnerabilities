@@ -22,6 +22,8 @@ Google also [publishes some additional information about build numbers and code 
  </div>
 </div>
 
+The graph is outdated but the [spreadsheet](play/androiddevolperdashboardhistory.ods) and [CSV file](play/androiddevolperdashboardhistory.csv) are updated monthly.
+
 {%
 with open('input/play/androiddevolperdashboardhistory.csv') as csvfile:
 	reader = csv.reader(csvfile)
