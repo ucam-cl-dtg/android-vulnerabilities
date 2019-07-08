@@ -22,5 +22,11 @@
     "twitter-fi01_IS01" : {
       "url" : "https://twitter.com/fi01_IS01/statuses/332055753181519872"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

@@ -30,5 +30,11 @@
       "component" : "platform/libcore/",
       "tag" : "android-2.3.6_r1"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["insufficient-memory-protection"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed", "unknown-source-install-allowed"],
+  "Privilege": ["root"]
 }

@@ -31,5 +31,12 @@
     "giantpune-email0" : {
       "url" : "/submissions/giantpune-email0"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
+
 }

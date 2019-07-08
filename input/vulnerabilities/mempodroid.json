@@ -1,0 +1,29 @@
+{
+  "name" : "mempodroid/mempodripper/mem exploit",
+  "CVE" : [["CVE-2012-0056", "cve-mitre"]],
+  "Responsibly_disclosed" : false,
+  "Categories" : ["kernel"],
+  "Details" : [["The mem_write function in the Linux kernel does not properly check permissions, allowing a user to gain privileges", "cve-mitre"]],
+  "Discovered_by" : [["Jay Freeman (saurik)", "xda"]],
+  "Discovered_on" : [["2012-01-24", "xda"]],
+  "Submission" : [{"by":"dcc52","on":"2019-07-03"}],
+  "Reported_on" : [[]],
+  "Fixed_on" : [["2012-01-17"]],
+  "Fix_released_on" : [[]],
+  "Affected_versions" : [["4.0.1-4.0.3"]],
+  "Affected_devices" : [["Acer A200 Tablet, Galaxy Nexus, Motorola RAZR, Nexus S, Asus Transformer Prime", "android-paper"]],
+  "Affected_versions_regexp" : ["4\\.0\\.[1-3"],
+  "Affected_manufacturers" : [["Acer, Samsung, Motorola, Asus"]],
+  "Fixed_versions" : [[]],
+  "references" : {
+    "android-paper" : {
+      "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
+    }
+  },
+  "Surface": [],
+  "Vector": [],
+  "Target": [],
+  "Channel": [],
+  "Condition": [],
+  "Privilege": []
+}

@@ -33,5 +33,11 @@
     "androidpolice-rockmymoto" : {
       "url" : "http://www.androidpolice.com/2013/11/04/rockmymoto-roots-moto-x-after-latest-camera-update-should-work-on-all-recent-motorola-phones/"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["insufficient-standards-verification"],
+  "Target": ["apps"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed", "unknown-source-install-allowed"],
+  "Privilege": ["user", "modify-apps"]
 }

@@ -1,0 +1,36 @@
+{
+  "name" : "Diaggetroot",
+  "CVE" : [["CVE-2012-4220", "kc-blog-diaggetroot"]],
+  "Responsibly_disclosed" : false,
+  "Categories" : ["system"],
+  "Details" : [["A vulnerability in the Qualcomm Innovation Center (QuIC) Diagnostics (aka DIAG) kernel-mode driver allows arbitrary code execution or denial of service via a call to diagchar_ioctl", "kc-blog-diggetroot"]],
+  "Discovered_by" : [["goroh kun", "android-paper", "giantprune", "kc-blog-diggetroot"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
+  "Reported_on" : [[]],
+  "Fixed_on" : [[]],
+  "Fix_released_on" : [[]],
+  "Affected_versions" : [["2.3 to 4.2", "kc-blog-diggetroot"]],
+  "Affected_devices" : [["HTC J Butterfly", "android-paper"]],
+  "Affected_versions_regexp" : ["(2\\.[3-9]\\.[0-9])|(3\\.[0-9]\\.[0-9])|(4\\.[0-2]\\.[0-9])"],
+  "Affected_manufacturers" : [["HTC", "android-paper"]],
+  "Fixed_versions" : [[]],
+  "references" : {
+    "kc-blog-diaggetroot": {
+      "url" : "http://zomo.herokuapp.com/blog/2015/05/25/rooting-methods/",
+      "archive-url" : "https://perma.cc/9GX7-BX5R"
+    },
+    "android-paper" : {
+      "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
+    },
+    "xda-developers-diaggetroot" : {
+      "url" : "https://forum.xda-developers.com/showthread.php?t=2069754"
+    }
+  },
+  "Surface": ["app", "usb"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["app-execution", "shell"],
+  "Condition": ["unknown-source-install-allowed", "usb-debug"],
+  "Privilege": ["root"]
+}

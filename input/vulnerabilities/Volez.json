@@ -1,0 +1,29 @@
+{
+  "name" : "Volez",
+  "CVE" : [[]],
+  "Responsibly_disclosed" : false,
+  "Categories" : ["signature"],
+  "Details" : [["Ability to modify a signed OTA recovery package due to an error in the signature verifier", "hackers-handbook"]],
+  "Discovered_by" : [["Christopher Lais (Zinx)", "hackers-handbook"]],
+  "Discovered_on" : [[]],
+  "Submission" : [{"by":"dcc52","on":"2019-06-28"}],
+  "Reported_on" : [[]],
+  "Fixed_on" : [[]],
+  "Fix_released_on" : [[]],
+  "Affected_versions" : [["2.0-2.0.1"]],
+  "Affected_devices" : [["Motorola Droid"]],
+  "Affected_versions_regexp" : ["2\\.0\\.[0-1]"],
+  "Affected_manufacturers" : [["Motorola"]],
+  "Fixed_versions" : [[]],
+  "references" : {    
+    "hackers-handbook" : {
+      "url" : "https://doc.lagout.org/programmation/Android/Android%20Hacker%27s%20Handbook%20%5BDrake%2C%20Oliva%2C%20Lanier%2C%20Mulliner%2C%20Ridley%20%26%20Wicherski%202014-03-31%5D.pdf"
+    }
+  },
+  "Surface": ["local", "filesystem"],
+  "Vector": ["improper-verification"],
+  "Target": ["system-component"],
+  "Channel": ["file-placement", "app-execution"],
+  "Condition": ["file-placed-onto-device"],
+  "Privilege": ["root"]
+}

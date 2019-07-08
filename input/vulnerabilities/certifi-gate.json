@@ -23,5 +23,11 @@
   , "checkpoint-certificate-report" : {
       "url" : "https://www.checkpoint.com/resources/downloads/certifigate-report.pdf"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["improper-verification"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

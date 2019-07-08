@@ -30,5 +30,11 @@
     , "component" : "platform/packages/apps/Browser"
     , "commit" : "096bae248453abe83cbb2e5a2c744bd62cdb620b"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["insufficient-memory-protection"],
+  "Target": ["browser"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["user", "access-to-data"]
 }

@@ -28,5 +28,11 @@
   , "dsa-3290" : {
       "url" : "https://www.debian.org/security/2015/dsa-3290"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["kernel-vulnerability"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed", "unknown-source-install-allowed"],
+  "Privilege": ["root"]
 }

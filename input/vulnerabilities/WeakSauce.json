@@ -25,5 +25,14 @@
   , "xda-developers-weaksauce" : {
       "url" : "http://forum.xda-developers.com/showthread.php?t=2699089"
     }
-  }
+  , "newandroidbook" : {
+      "url" : "http://newandroidbook.com/Articles/HTC.html"
+    }
+  },
+  "Surface": ["app", "local"],
+  "Vector": ["daemon-abusing"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["unknown-source-install-allowed"],
+  "Privilege": ["root"]
 }

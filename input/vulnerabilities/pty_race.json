@@ -35,5 +35,11 @@
   , "novel-pty-race-bug" : {
       "url" : "https://bugzilla.novell.com/show_bug.cgi?id=875690"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

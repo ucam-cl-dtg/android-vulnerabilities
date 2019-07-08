@@ -30,5 +30,11 @@
   , "CVE-2014-7911_poc" : {
       "url" : "https://github.com/retme7/CVE-2014-7911_poc"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["kernel-vulnerability"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

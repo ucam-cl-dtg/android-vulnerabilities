@@ -19,5 +19,11 @@
     "talks.cam-46303" : {
       "url" : "http://talks.cam.ac.uk/talk/index/46303"
     }
-  }
+  },
+  "Surface": [],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": [],
+  "Condition": [],
+  "Privilege": []
 }

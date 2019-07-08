@@ -32,5 +32,11 @@
     "android-release-2.3" : {
       "url" : "http://android-developers.blogspot.com/2010/12/android-23-platform-and-updated-sdk.html"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["property-space"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

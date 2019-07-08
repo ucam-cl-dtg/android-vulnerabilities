@@ -25,5 +25,11 @@
     "plus-jcase-defy-republic" : {
       "url" : "https://plus.google.com/110348415484169880343/posts/5ofgPNrSu3J"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

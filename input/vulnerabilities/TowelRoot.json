@@ -33,5 +33,12 @@
     , "component" : "kernel"
     , "commit" : "e9c243a5a6de0be8e584c604d353412584b592f8"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["kernel-vulnerability"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["unknown-source-install-allowed"],
+  "Privilege": ["root"]
+  
 }

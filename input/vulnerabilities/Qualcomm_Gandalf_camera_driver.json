@@ -25,5 +25,11 @@
     "xda-developers-gandalf" : {
       "url" : "http://forum.xda-developers.com/showthread.php?p=40936861&highlight=gandalf#post40936861"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["shared-memory-remapping"],
+  "Target": ["driver"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

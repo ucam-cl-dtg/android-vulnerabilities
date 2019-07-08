@@ -42,5 +42,11 @@
       "commit" : "fd256a79a77b53e785fb4a0251efc910e8062c09",
       "component" : "quic/la/platform/system/core"
     }
-  }
+  },
+  "Surface": ["local", "filesystem"],
+  "Vector": ["file-permissions"],
+  "Target": ["system-component"],
+  "Channel": ["file-placement"],
+  "Condition": ["file-placed-onto-device"],
+  "Privilege": ["root"]
 }

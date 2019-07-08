@@ -19,5 +19,11 @@
     "fulldisclosure-2013-06-196" : {
       "url":"http://seclists.org/fulldisclosure/2013/Jun/196"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["daemon-abusing"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["file-placed-onto-device"],
+  "Privilege": ["root"]
 }

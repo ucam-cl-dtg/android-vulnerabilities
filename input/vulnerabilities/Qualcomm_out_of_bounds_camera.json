@@ -29,5 +29,11 @@
       "commit" : "60e4af06161d91d5aeaa04c7d6e9f4345a6acdd4",
       "component" : "quic/la/kernel/msm"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

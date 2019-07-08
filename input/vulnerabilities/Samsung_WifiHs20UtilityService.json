@@ -22,5 +22,11 @@
   , "projectzeroblog-huntinggalaxy" : {
       "url" : "https://googleprojectzero.blogspot.co.uk/2015/11/hack-galaxy-hunting-bugs-in-samsung.html"
     }
-  }
+  },
+  "Surface": ["remote", "local", "webpage", "filesystem"],
+  "Vector": ["daemon-abusing"],
+  "Target": ["system-component"],
+  "Channel": ["file-placement"],
+  "Condition": ["save-to-filesystem"],
+  "Privilege": ["system"]
 }

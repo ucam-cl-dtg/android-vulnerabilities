@@ -53,5 +53,11 @@
     , "commit" : "8d57b9dbbd883422a0ff02083bfcf637b097e504"
     , "component" : "platform/external/conscrypt"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["kernel-vulnerability"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

@@ -33,5 +33,11 @@
     , "component" : "platform/libcore"
     , "commit" : "2bc5e811a817a8c667bca4318ae98582b0ee6dc6"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["improper-verification"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root", "system"]
 }

@@ -47,5 +47,11 @@
       "component" : "platform/system/core",
       "commit" : "dd7bc3319deb2b77c5d07a51b7d6cd7e11b5beb0"
     }
-  }
+  },
+  "Surface": ["local", "system-call", "app"],
+  "Vector": ["return-not-checked"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed","unknown-source-install-allowed"],
+  "Privilege": ["root"]
 }

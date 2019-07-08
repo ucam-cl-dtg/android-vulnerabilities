@@ -27,5 +27,11 @@
       "component" : "quic/la/kernel/msm",
       "commit" : "76565e3d786bed66f247c682bd9f591098522483"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["kernel-vulnerability"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed", "app-uses-vulnerable-api-functions"],
+  "Privilege": ["root"]
 }

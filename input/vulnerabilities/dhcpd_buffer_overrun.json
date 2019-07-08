@@ -25,5 +25,12 @@
   , "ZDI-15-093" : {
       "url" : "http://www.zerodayinitiative.com/advisories/ZDI-15-093/"
     }
-  }
+  },
+  "Surface": ["remote", "webpage"],
+  "Vector": ["daemon-abusing"],
+  "Target": ["system-component"],
+  "Channel": ["remote"],
+  "Condition": ["attacker-on-same-network"],
+  "Privilege": ["user"]
+
 }

@@ -61,5 +61,11 @@
     , "component" : "platform/frameworks/av"
     , "commit" : "0e4e5a8c09c63548f2a00c77ab5038b7703384bc"
     }
-  }
+  },
+  "Surface": ["remote", "sms", "mms"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["remote"],
+  "Condition": ["none"],
+  "Privilege": ["user"]
 }

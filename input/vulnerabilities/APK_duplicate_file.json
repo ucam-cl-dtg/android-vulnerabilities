@@ -27,5 +27,11 @@
     "verge-android-4.3" : {
       "url" : "http://www.theverge.com/2013/7/24/4550234/android-4-3-announcement"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["insufficient-standards-verification"],
+  "Target": ["apps"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed", "unknown-source-install-allowed"],
+  "Privilege": ["user", "modify-apps"]
 }

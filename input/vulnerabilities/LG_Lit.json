@@ -25,5 +25,11 @@
   , "androidforums-lit-package" : {
       "url" : "http://androidforums.com/threads/root-apk-for-l38c.682486/"
     }
-  }
+  },
+  "Surface": ["local", "usb"],
+  "Vector": ["vulnerable-driver"],
+  "Target": ["system-component"],
+  "Channel": ["physical-access", "shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
 }

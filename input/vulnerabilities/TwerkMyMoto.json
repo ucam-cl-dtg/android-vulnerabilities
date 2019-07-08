@@ -23,5 +23,14 @@
       "url" : "https://github.com/CunningLogic/TwerkMyMoto/commit/0fc76a59720ca166f9e0febe73974ed5a77e75c5",
       "commit" : "0fc76a59720ca166f9e0febe73974ed5a77e75c5"
     }
-  }
+  , "droidviews-root-instructions" : {
+      "url" : "https://www.droidviews.com/how-to-root-motorola-razr-i-without-unlocking-the-bootloader"
+    }
+  },
+  "Surface": ["usb", "local"],
+  "Vector": ["file-permissions", "symbolic-link"],
+  "Target": ["system-component"],
+  "Channel": ["physical-access", "shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
 }

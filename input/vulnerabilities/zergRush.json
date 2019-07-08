@@ -27,5 +27,12 @@
       "tag" : "android-2.2.3_r1",
       "component" : "platform/build"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption", "buffer overflow", "use-after-free"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
+  
 }
