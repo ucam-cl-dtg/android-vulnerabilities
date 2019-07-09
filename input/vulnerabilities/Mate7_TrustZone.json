@@ -27,7 +27,7 @@
   },
   "Surface": ["local", "app"],
   "Vector": ["memory-corruption"],
-  "Target": ["other"],
+  "Target": ["tee"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
   "Privilege": ["root"]

@@ -1,0 +1,41 @@
+{
+  "name" : "DirtyCow (dirtyc0w)",
+  "CVE" : [["CVE-2016-5195", "dirtyc0w-redhat"]],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["kernel"],
+  "Details" : [["A race condition in the Linux kernel's handling of copy-on-write (COW) operations means that users can gain write access to otherwise read-only areas of memory and gain permissions", "dirtyc0w-redhat"]],
+  "Discovered_by" : [["Phil Oester", "dirtyc0w-redhat"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2016-10-13", "dirtyc0w-bugzilla"]],
+  "Fixed_on" : [["2016-10-18", "dirtyc0w-github"]],
+  "Fix_released_on" : [["2016-11-06", "dirtyc0w-bulletin"]],
+  "Affected_versions" : [["1.0 to 7.0", "dirtyc0w-arstechnica"]],
+  "Affected_devices" : [["all", "dirtyc0w-arstechnica"]],
+  "Affected_versions_regexp" : ["([1-6]\\.[0-9]\\.[0-9])|(7\\.0\\.[0-9])"],
+  "Affected_manufacturers" : [["all", "dirtyc0w-arstechnica"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "dirtyc0w-redhat" : {
+      "url" : "https://access.redhat.com/security/cve/cve-2016-5195"
+    },
+    "dirtyc0w-bugzilla" : {
+      "url" : "https://bugzilla.redhat.com/show_bug.cgi?id=1384344"
+    },
+    "dirtyc0w-github" : {
+      "url" : "https://github.com/dirtycow/dirtycow.github.io/wiki/VulnerabilityDetails"
+    },
+    "dirtyc0w-bulletin" : {
+      "url" : "https://source.android.com/security/bulletin/2016-11-01"
+    },
+    "dirtyc0w-arstechnica" : {
+      "url" : "https://arstechnica.com/information-technology/2016/10/android-phones-rooted-by-most-serious-linux-escalation-bug-ever/"
+    }
+  },
+  "Surface": ["local", "usb"],
+  "Vector": ["memory-corruption"],
+  "Target": ["kernel"],
+  "Channel": ["shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
+}

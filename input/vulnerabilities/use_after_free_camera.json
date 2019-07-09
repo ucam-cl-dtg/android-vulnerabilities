@@ -1,0 +1,33 @@
+{
+  "name" : "Use-After-Free camera driver exploit",
+  "CVE" : [["CVE-2015-0568", "camera-driver-coreteam"]],
+  "Coordinated_disclosure" : "true",
+  "Categories" : ["system"],
+  "Details" : [["A use-after-free vulnerability in the camera driver of Qualcomm MSM 7x30 SoCs", "camera-driver-coreteam"]],
+  "Discovered_by" : [["Chiachih Wu and Yanfeng Wang", "camera-driver-coreteam"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2015-06-05", "camera-driver-coreteam"]],
+  "Fixed_on" : [["2015-08-13", "camera-driver-coreteam"]],
+  "Fix_released_on" : [["2015-08-21", "camera-driver-coreteam"]],
+  "Affected_versions" : [["Linux kernel 3.x", "nvd-camera-driver"]],
+  "Affected_devices" : [["All devices using Qualcomm MSM 7x30 SoCs", "camera-driver-coreteam"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [],
+  "Fixed_versions" : [],
+  "references" : {
+    "camera-driver-coreteam" : {
+      "url" : "http://c0reteam.org/2015/11/18/cve-20150568",
+      "archive-url" : "https://perma.cc/GLE9-TEAR"
+    },
+    "nvd-camera-driver" : {
+      "url" : "https://nvd.nist.gov/vuln/detail/CVE-2015-0568"
+    }
+  },
+  "Surface": ["local"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["shell", "app-execution"],
+  "Condition": ["affected-app-installed", "usb-debug"],
+  "Privilege": ["system"]
+}

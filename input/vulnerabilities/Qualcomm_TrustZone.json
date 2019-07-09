@@ -1,0 +1,33 @@
+{
+  "name" : "Qualcomm TrustZone Privilege Escalation",
+  "CVE" : [["CVE-2016-2431", "trustzone-blog"]],
+  "Coordinated_disclosure" : "true",
+  "Categories" : ["kernel"],
+  "Details" : [["An exploit which allows code execution within the TrustZone kernel. This may allow capturing of secret keys, disabling of hardware protection and unlocking locked bootloaders", "trustzone-blog"]],
+  "Discovered_by" : [["Gal Beniamini (laginimaineb)", "trustzone-blog"]],
+  "Discovered_on" : [["2015-10-13", "trustzone-blog"]],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2015-10-13", "trustzone-blog"]],
+  "Fixed_on" : [["2016-05-02", "trustzone-blog"]],
+  "Fix_released_on" : [["2016-05-02", "trustzone-blog"]],
+  "Affected_versions" : [],
+  "Affected_devices" : [["Many devices using Qualcomm SoCs, including Nexus 5, Nexus 6 and Nexus 7 (2013)", "trustzone-bulletin"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [],
+  "Fixed_versions" : [],
+  "references" : {
+    "trustzone-blog" : {
+      "url" : "http://bits-please.blogspot.com/2016/06/trustzone-kernel-privilege-escalation.html",
+      "archive-url" : "https://perma.cc/G4SL-R68U"
+    },
+    "trustzone-bulletin" : {
+      "url" : "https://source.android.com/security/bulletin/2016-05-01"
+    }
+  },
+  "Surface": ["local", "usb"],
+  "Vector": ["memory-corruption"],
+  "Target": ["tee"],
+  "Channel": ["shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["system"]
+}

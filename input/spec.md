@@ -83,6 +83,7 @@ These are obtained from various sources, and give details of the type of vulnera
   * `system-component` - a component of the core OS
   * `kernel` - the Linux kernel
   * `driver` - a device driver
+  * `tee` - Trusted Execution Environment
   * `other` - miscellaneous or not known
 * Channel:
   * `app-execution` - running an application which exploits the vulnerability
@@ -107,3 +108,4 @@ These are obtained from various sources, and give details of the type of vulnera
   * `system` - gain access as the system user
   * `unlock-bootloader` - allows the device's bootloader to be unlocked
   * `control-hardware` - take control of hardware devices
+  * `service` - takes the privilege level of system services
