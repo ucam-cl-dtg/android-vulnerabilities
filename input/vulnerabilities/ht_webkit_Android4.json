@@ -1,20 +1,20 @@
 {
   "name" : "Android Browser Exploit (WebKit)",
-  "CVE" : [["CVE-2011-1202", "webkit-and4-nvd1"], ["CVE-2012-2825", "webkit-and4-nvd2"], ["CVE-2012-2871","webkit-and4-nvd3"]]
-  "Responsibly_disclosed" : false,
+  "CVE" : [["CVE-2011-1202", "webkit-and4-nvd1"], ["CVE-2012-2825", "webkit-and4-nvd2"], ["CVE-2012-2871","webkit-and4-nvd3"]],
+  "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
   "Details" : [["A series of vulnerabilities in XSL in WebKit that allow denial of service and other effects", "webkit-and4-nvd3"]],
   "Discovered_by" : [["Hacking Team", "android-paper"]],
-  "Discovered_on" : [[]],
+  "Discovered_on" : [],
   "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
-  "Reported_on" : [[]],
-  "Fixed_on" : [[]],
-  "Fix_released_on" : [[]],
+  "Reported_on" : [["2011-02-22", "webkit-and4-redhat"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
   "Affected_versions" : [["4.0 to 4.3", "android-paper"]],
-  "Affected_devices" : [[]],
+  "Affected_devices" : [],
   "Affected_versions_regexp" : ["4\\.[0-3]\\.[0-9]"],
-  "Affected_manufacturers" : [[]],
-  "Fixed_versions" : [[]],
+  "Affected_manufacturers" : [],
+  "Fixed_versions" : [],
   "references" : {
     "webkit-and4-nvd1" : {
       "url" : "https://nvd.nist.gov/vuln/detail/CVE-2011-1202"
@@ -24,6 +24,9 @@
     },
     "webkit-and4-nvd3" : {
       "url" : "https://nvd.nist.gov/vuln/detail/CVE-2012-2871"
+    },
+    "webkit-and4-redhat" : {
+      "url" : "https://access.redhat.com/security/cve/cve-2011-1202"
     },
     "android-paper" : {
       "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"

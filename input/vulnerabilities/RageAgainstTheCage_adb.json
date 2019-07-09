@@ -1,7 +1,7 @@
 {
   "name" : "RageAgainstTheCage adb",
   "CVE" : [["CVE-2010-EASY","intrepidus-looking-at-c-skills"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
   "Severity" : "uncertain",
   "Details" : [["adb fails to check setuid return code and this can be caused to fail by the shell user already having RLIMIT_NPROC processes."]],

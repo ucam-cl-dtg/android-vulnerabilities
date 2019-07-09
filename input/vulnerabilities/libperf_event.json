@@ -1,26 +1,29 @@
 {
   "name" : "libperf_event",
   "CVE" : [["CVE-2013-2094", "cve-mitre-libperf-event"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["kernel"],
   "Details" : [["The perf_swevent_init function in kernel/events/core.c in the Linux kernel before 3.8.9 uses an incorrect integer data type, which allows local users to gain privileges via a crafted perf_event_open system call.", "cve-mitre-libperf-event"]],
   "Discovered_by" : [["Hiroyuki Ikezoe", "android-paper"]],
-  "Discovered_on" : [[]],
+  "Discovered_on" : [],
   "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
-  "Reported_on" : [[]],
-  "Fixed_on" : [[]],
-  "Fix_released_on" : [[]],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : ["2013-04-25", "linux-3-8-9-launchpad"],
   "Affected_versions" : [["4.0 to 4.3.1", "android-paper"]],
   "Affected_devices" : [["Nexus 4, and some Japanese models from HTC, Fujitsu, Sharp, Sony and LG models", "android-paper"]],
   "Affected_versions_regexp" : ["(4\\.[0-2]\\.[0-9])|(4\\.3\\.[0-1])"],
   "Affected_manufacturers" : [["HTC", "android-paper"], ["Fujitsu", "android-paper"], ["Sharp", "android-paper"], ["Sony", "android-paper"], ["LG", "android-paper"]],
-  "Fixed_versions" : [[]],
+  "Fixed_versions" : [],
   "references" : {
     "cve-mitre-libperf-event": {
       "url" : "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2094"
     },
     "android-paper" : {
       "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
+    },
+    "linux-3-8-9-launchpad" : {
+      "url" : "https://launchpad.net/linux/+milestone/3.8.9"
     }
   },
   "Surface": ["local", "usb"],

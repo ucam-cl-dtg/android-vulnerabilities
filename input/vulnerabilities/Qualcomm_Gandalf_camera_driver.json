@@ -1,7 +1,7 @@
 {
   "name" : "Qualcomm Gandalf camera driver",
   "CVE" : [["CVE-2013-2595","QCIR-2013-00001-1"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],
   "Details" : [["The camera driver provides several interfaces to user space clients. The user space clients communicate to the kernel via syscalls such as ioctl or mmap. The camera driver provides an uncontrolled mmap interface that allows an application with access to the device file to map physical memory exceeding the camera driver's memory into user space. A locally installed, unprivileged application can use this flaw to escalate privileges.","QCIR-2013-00001-1"]],
   "Discovered_by" : [["alephzain <alephzain1@gmail.com>","QCIR-2013-00001-1"]],

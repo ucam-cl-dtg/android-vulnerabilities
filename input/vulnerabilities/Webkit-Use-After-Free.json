@@ -1,7 +1,7 @@
 {
   "name" : "WebKit Use-After-Free",
   "CVE" : [["CVE-2010-1119"]],
-  "Responsibly_disclosed" : **UNKNOWN**,
+  "Coordinated_disclosure" : "unknown",
   "Categories" : ["system", "app"],
   "Details" : [["A vulnerability in the WebKit browser engine allows a malicious webpage to perform remote code execution"]],
   "Discovered_by" : [["MJ Keith", "exploit-db"]],

@@ -1,7 +1,7 @@
 {
   "name" : "Browser Cross-App Scripting",
   "CVE" : [["CVE-2011-2357","watchfire-crossapp"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["app"],
   "Details" : [["Android browser could be tricked into running javascript in the domain of a different app","watchfire-crossapp"]],
   "Severity" : "uncertain",

@@ -1,7 +1,7 @@
 {
   "name" : "StumpRoot",
   "CVE" : [],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : [],
   "Details" : [["Vulnerability affecting LG devices released between 2012 and 2014","xda-developers-stumproot"]],
   "Discovered_by" : [["thecubed","xda-developers-stumproot"]],

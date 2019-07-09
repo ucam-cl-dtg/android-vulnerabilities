@@ -1,7 +1,7 @@
 {
   "name" : "APK duplicate file",
   "CVE" : [["ANDROID-8219321"],["CVE-2013-4787"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["signature"],
   "Details" : [["Android does not properly check cryptographic signatures for applications, which allows attackers to execute arbitrary code via an application package file (APK) that is modified in a way that does not violate the cryptographic signature. Android security bug 8219321."]],
   "Discovered_by" : [["Jeff Forristal of Bluebox security","bluebox-master-key"]],

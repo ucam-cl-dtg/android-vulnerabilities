@@ -1,7 +1,7 @@
 {
   "name" : "Qualcomm Integer oveflow diagnostics",
   "CVE" : [["CVE-2012-4220","CVE-2012-4220"], ["CVE-2012-4221","CVE-2012-4221"], ["CVE-2012-4222","CVE-2012-4222"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],
   "Details" : [["QCIR-2012-00001-1: Multiple security vulnerabilities have been discovered in the handling of the diagchar_ioctl() and kgsl_ioctl() system call parameters for the diagnostics (DIAG) and KGSL graphics kernel drivers for Android.","QCIR-2012-00001-1"]],
   "Discovered_by" : [["<giantpune@gmail.com>","QCIR-2012-00001-1"]],

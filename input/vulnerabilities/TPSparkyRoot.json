@@ -1,7 +1,7 @@
 {
   "name" : "TPSparkyRoot",
   "CVE" : [],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
   "Details" : [["A bug in chmod, mkdir and chown mean that they fail when the last element of their target path is a symlink", "android-commit-tpsparkyroot"]],
   "Discovered_by" : [["sparkym3", "xda-forum-tpsparkyroot"]],
@@ -14,7 +14,7 @@
   "Affected_devices" : [],
   "Affected_versions_regexp" : ["4\\.0\\.[0-4]"],
   "Affected_manufacturers" : [],
-  "Fixed_versions" : ["4.0.4_r2", "android-commit-tpsparkyroot"],
+  "Fixed_versions" : [["4.0.4_r2", "android-commit-tpsparkyroot"]],
   "references" : {
     "android-commit-tpsparkyroot" : {
       "url" : "https://android.googlesource.com/platform/system/core/+/42a9349dc4e98019d27d7f8d19bc6c431695d7e1",

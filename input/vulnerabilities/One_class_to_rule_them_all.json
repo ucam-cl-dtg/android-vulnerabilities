@@ -1,7 +1,7 @@
 {
   "name" : "One class to rule them all",
   "CVE" : [["CVE-2015-3837","CVE-2015-3837"],["CVE-2015-3825","woot15-paper-peles"], ["ANDROID-21437603","woot15-paper-peles"], ["ANDROID-21583849","woot15-paper-peles"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["system"],
   "Details" : [["This vulnerability allows for arbitrary code execution in the context of many apps and services and results in elevation of privileges. There is a Proof-of-Concept exploit against the Google Nexus 5 device, that achieves code execution inside the highly privileged system_server process, and then either replaces an existing arbitrary application on the device with our own malware app or changes the device’s SELinux policy. For some other devices, it is also possible to gain kernel code execution by loading an arbitrary kernel modules. This vulnerability was responsibly disclosed to the Android Security Team which tagged it as CVE-2015-3825 internally as ANDROID-21437603/ANDROID-21583849 and patched Android 4.4 / 5.x / M and Google Play Services.", "woot15-paper-peles"]
   , ["CVE-2015-3825 is the wrong CVE number (duplicate), CVE-2015-3837 should be used instead", "CVE-2015-3825"]

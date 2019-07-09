@@ -1,7 +1,7 @@
 {
   "name" : "Qualcomm Integer overflow camera",
   "CVE" : [["CVE-2013-4736","QCIR-2013-00005-1"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["kernel"],
   "Details" : [["Integer overflow and signedness issue in camera JPEG engines (CVE-2013-4736) QCIR-2013-00005-1: The JPEG engines that are part of the camera driver provide an ioctl system call interface to user space clients for communication. When processing hardware commands ioctl calls, the drivers are incorrectly handling the number of commands included in the user space payload. This can lead to an integer overflow which subsequently results in the driver attempting to process hardware commands from out-of-bounds memory which can cause the kernel to crash. The same code also suffered from incorrectly treating the number of hardware commands as signed.","QCIR-2013-00005-1"],["Gemini JPEG encoder, Mercury JPEG decoder, and Jpeg1.0 common encoder/decoder contain an unspecified integer overflow condition during the handling of hardware command IOCTL calls that may allow a local attacker to cause a denial of service or potentially execute of arbitrary code.","osvdb-96924"]],
   "Discovered_by" : [["alephzain <alephzain1@gmail.com>","QCIR-2013-00005-1"]],
