@@ -23,7 +23,7 @@
       "url" : "https://forum.xda-developers.com/showthread.php?t=2781109"
     }
   },
-  "Surface": ["local", "usb"],
+  "Surface": ["local", "usb-debug"],
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["shell"],

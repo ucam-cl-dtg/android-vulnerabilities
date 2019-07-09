@@ -21,7 +21,7 @@
       "archived-url" : "https://perma.cc/LLN2-NC8F"
     }
   },
-  "Surface": ["local", "usb"],
+  "Surface": ["local", "usb-debug"],
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["shell"],

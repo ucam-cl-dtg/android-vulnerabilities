@@ -36,5 +36,5 @@
   "Target": ["apps"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed", "unknown-source-install-allowed"],
-  "Privilege": ["user", "modify-apps"]
+  "Privilege": ["system", "modify-apps"]
 }

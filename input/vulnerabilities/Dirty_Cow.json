@@ -32,7 +32,7 @@
       "url" : "https://arstechnica.com/information-technology/2016/10/android-phones-rooted-by-most-serious-linux-escalation-bug-ever/"
     }
   },
-  "Surface": ["local", "usb"],
+  "Surface": ["local", "usb-debug"],
   "Vector": ["memory-corruption"],
   "Target": ["kernel"],
   "Channel": ["shell"],

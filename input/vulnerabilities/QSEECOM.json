@@ -26,7 +26,7 @@
     }
   },
   "Surface": ["local"],
-  "Vector": ["memory-corruption", "buffer-overflow"],
+  "Vector": ["memory-corruption"],
   "Target": ["tee"],
   "Channel": ["shell"],
   "Condition": ["usb-debug"],

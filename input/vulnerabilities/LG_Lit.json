@@ -26,8 +26,8 @@
       "url" : "http://androidforums.com/threads/root-apk-for-l38c.682486/"
     }
   },
-  "Surface": ["local", "usb"],
-  "Vector": ["vulnerable-driver"],
+  "Surface": ["local", "usb-debug"],
+  "Vector": ["memory-corruption"],
   "Target": ["system-component"],
   "Channel": ["physical-access", "shell"],
   "Condition": ["usb-debug"],

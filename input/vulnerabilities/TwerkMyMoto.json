@@ -27,7 +27,7 @@
       "url" : "https://www.droidviews.com/how-to-root-motorola-razr-i-without-unlocking-the-bootloader"
     }
   },
-  "Surface": ["usb", "local"],
+  "Surface": ["usb-debug", "local"],
   "Vector": ["file-permissions", "symbolic-link"],
   "Target": ["system-component"],
   "Channel": ["physical-access", "shell"],

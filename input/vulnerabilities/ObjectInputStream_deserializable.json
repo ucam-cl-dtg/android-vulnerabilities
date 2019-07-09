@@ -32,7 +32,7 @@
     }
   },
   "Surface": ["local", "app"],
-  "Vector": ["kernel-vulnerability"],
+  "Vector": ["daemon-abusing"],
   "Target": ["kernel"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],

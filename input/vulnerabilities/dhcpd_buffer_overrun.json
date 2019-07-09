@@ -26,7 +26,7 @@
       "url" : "http://www.zerodayinitiative.com/advisories/ZDI-15-093/"
     }
   },
-  "Surface": ["remote", "webpage"],
+  "Surface": ["remote", "webview"],
   "Vector": ["daemon-abusing"],
   "Target": ["system-component"],
   "Channel": ["remote"],

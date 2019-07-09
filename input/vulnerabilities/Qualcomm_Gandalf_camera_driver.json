@@ -27,7 +27,7 @@
     }
   },
   "Surface": ["local", "app"],
-  "Vector": ["shared-memory-remapping"],
+  "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],

@@ -27,7 +27,7 @@
       "url" : "https://forum.xda-developers.com/showthread.php?t=2069754"
     }
   },
-  "Surface": ["app", "usb"],
+  "Surface": ["app", "usb-debug"],
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["app-execution", "shell"],

@@ -32,7 +32,7 @@
     }
   },
   "Surface": ["local", "app"],
-  "Vector": ["insufficient-memory-protection"],
+  "Vector": ["other"],
   "Target": ["browser"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],

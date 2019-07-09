@@ -29,7 +29,7 @@
     }
   },
   "Surface": ["local", "app"],
-  "Vector": ["memory-corruption", "buffer overflow", "use-after-free"],
+  "Vector": ["memory-corruption"],
   "Target": ["system-component"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],

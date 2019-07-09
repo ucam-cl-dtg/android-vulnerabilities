@@ -24,7 +24,7 @@
       "url" : "https://source.android.com/security/bulletin/2016-05-01"
     }
   },
-  "Surface": ["local", "usb"],
+  "Surface": ["local", "usb-debug"],
   "Vector": ["memory-corruption"],
   "Target": ["tee"],
   "Channel": ["shell"],

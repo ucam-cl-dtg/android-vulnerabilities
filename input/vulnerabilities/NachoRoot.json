@@ -26,7 +26,7 @@
       "url" : "http://forum.xda-developers.com/showthread.php?t=1426280"
     }
   },
-  "Surface": ["local", "app", "usb"],
+  "Surface": ["local", "app", "usb-debug"],
   "Vector": ["file-permissions"],
   "Target": ["system-component"],
   "Channel": ["app-execution"],

@@ -34,7 +34,7 @@
     }
   },
   "Surface": ["local", "app"],
-  "Vector": ["property-space"],
+  "Vector": ["shared-memory"],
   "Target": ["system-component"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],

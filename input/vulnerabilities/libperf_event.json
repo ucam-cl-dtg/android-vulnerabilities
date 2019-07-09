@@ -26,8 +26,8 @@
       "url" : "https://launchpad.net/linux/+milestone/3.8.9"
     }
   },
-  "Surface": ["local", "usb"],
-  "Vector": ["memory-corruption", "kernel-vulnerability"],
+  "Surface": ["local", "usb-debug"],
+  "Vector": ["memory-corruption"],
   "Target": ["kernel"],
   "Channel": ["shell"],
   "Condition": ["usb-debug"],

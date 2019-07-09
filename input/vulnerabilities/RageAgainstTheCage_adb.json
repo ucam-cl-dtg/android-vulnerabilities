@@ -49,7 +49,7 @@
     }
   },
   "Surface": ["local", "system-call", "app"],
-  "Vector": ["return-not-checked"],
+  "Vector": ["daemon-abusing"],
   "Target": ["system-component"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed","unknown-source-install-allowed"],

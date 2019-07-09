@@ -32,7 +32,7 @@
     }
   },
   "Surface": ["local", "app"],
-  "Vector": ["insufficient-memory-protection"],
+  "Vector": ["memory-corruption"],
   "Target": ["kernel"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed", "unknown-source-install-allowed"],

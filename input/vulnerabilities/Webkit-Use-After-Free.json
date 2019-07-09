@@ -23,7 +23,7 @@
       "url" : "https://www.slideshare.net/mjza/bsides"
     }
   },
-  "Surface": ["remote", "webpage"],
+  "Surface": ["remote", "webview"],
   "Vector": ["memory-corruption"],
   "Target": ["browser"],
   "Channel": ["remote"],

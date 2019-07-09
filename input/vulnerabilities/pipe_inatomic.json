@@ -46,7 +46,7 @@
     }
   },
   "Surface": ["local", "app"],
-  "Vector": ["kernel-vulnerability"],
+  "Vector": ["memory-corruption"],
   "Target": ["kernel"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],

@@ -52,7 +52,7 @@
       "url" : "http://android-developers.blogspot.co.uk/2011/05/android-31-platform-new-sdk-tools.html"
     }
   },
-  "Surface": ["local", "usb", "app"],
+  "Surface": ["local", "usb-debug", "app"],
   "Vector": ["daemon-abusing"],
   "Target": ["system-component"],
   "Channel": ["physical-access", "app-execution", "shell"],

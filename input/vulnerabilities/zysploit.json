@@ -20,7 +20,7 @@
       "url" : "http://unrevoked.com/rootwiki/doku.php/public/unrevoked3"
     }
   },
-  "Surface": ["local", "usb"],
+  "Surface": ["local", "usb-debug"],
   "Vector": ["daemon-abusing"],
   "Target": ["system-component"],
   "Channel": ["shell"],

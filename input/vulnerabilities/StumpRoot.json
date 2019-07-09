@@ -21,8 +21,8 @@
     }
   },
   "Surface": ["app", "local"],
-  "Vector": ["bruteforce"],
-  "Target": ["other"],
+  "Vector": ["other"],
+  "Target": ["driver"],
   "Channel": ["physical-access", "app-execution"],
   "Condition": ["unknown-source-install-allowed"],
   "Privilege": ["root"]

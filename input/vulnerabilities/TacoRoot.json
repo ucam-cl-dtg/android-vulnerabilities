@@ -30,7 +30,7 @@
       "url" : "http://rootzwiki.com/topic/13713-tacoroot-htc-universal-root-exploit-12-30-2011/"
     }
   },
-  "Surface": ["usb", "local"],
+  "Surface": ["usb-debug", "local"],
   "Vector": ["file-permissions", "symbolic-link"],
   "Target": ["system-component"],
   "Channel": ["physical-access", "shell"],

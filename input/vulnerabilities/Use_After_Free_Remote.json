@@ -23,7 +23,7 @@
       "url" : "https://www.exploit-db.com/exploits/15548"
     }
   },
-  "Surface": ["remote","webpage"],
+  "Surface": ["remote","webview"],
   "Vector": ["memory-corruption"],
   "Target": ["browser"],
   "Channel": ["remote"],
