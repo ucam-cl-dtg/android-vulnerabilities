@@ -1,7 +1,7 @@
 {
   "name" : "StumpRoot",
   "CVE" : [],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : [],
   "Details" : [["Vulnerability affecting LG devices released between 2012 and 2014","xda-developers-stumproot"]],
   "Discovered_by" : [["thecubed","xda-developers-stumproot"]],
@@ -19,5 +19,11 @@
     "xda-developers-stumproot" : {
       "url" : "http://forum.xda-developers.com/lg-g3/orig-development/root-stump-root-lg-g3-sprint-verizon-t2850906"
     }
-  }
+  },
+  "Surface": ["app", "local"],
+  "Vector": ["other"],
+  "Target": ["driver"],
+  "Channel": ["physical-access", "app-execution"],
+  "Condition": ["unknown-source-install-allowed"],
+  "Privilege": ["root"]
 }

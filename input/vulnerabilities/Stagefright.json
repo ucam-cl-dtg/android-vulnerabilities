@@ -7,7 +7,7 @@
            ["CVE-2015-3827", "nakedsecurity-stagefright"],
            ["CVE-2015-3828", "nakedsecurity-stagefright"],
            ["CVE-2015-3829", "nakedsecurity-stagefright"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["system", "network"],
   "Details" : [["Drake said that the vulnerabilities can be exploited by sending a single multimedia text message to an unpatched Android smartphone. While the exploit is deadly, in some cases, where phones parse the attack code prior to the message being opened, the exploits are silent and the user would have little chance of defending their data.","techworm-stagefright"], ["Stagefright is the media playback service for Android, introduced in Android 2.2 (Froyo). Stagefright in versions of Android prior to 5.1.1_r9 may contain multiple vulnerabilities, including several integer overflows, which may allow a remote attacker to execute code on the device.","cert-kb-stagefright"]],
   "Discovered_by" : [["Joshua J. Drake","zimperium-stagefright"]],
@@ -61,5 +61,11 @@
     , "component" : "platform/frameworks/av"
     , "commit" : "0e4e5a8c09c63548f2a00c77ab5038b7703384bc"
     }
-  }
+  },
+  "Surface": ["remote", "sms", "mms", "webview"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["remote"],
+  "Condition": ["none"],
+  "Privilege": ["service"]
 }

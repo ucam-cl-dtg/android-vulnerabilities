@@ -1,7 +1,7 @@
 {
   "name" : "PingPongRoot",
   "CVE" : [["CVE-2015-3636","avs-test-pingpong"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : [],
   "Details" : [["Wen Xu and wushi of KeenTeam discovered that users allowed to create ping sockets can use them to crash the system and, on 32-bit architectures, for privilege escalation. However, by default, no users on a Debian system have access to ping sockets.","dsa-3290"]],
   "Discovered_by" : [["Wen Xu and wushi of KeenTeam","dsa-3290"]],
@@ -28,5 +28,11 @@
   , "dsa-3290" : {
       "url" : "https://www.debian.org/security/2015/dsa-3290"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

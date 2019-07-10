@@ -367,7 +367,7 @@ class Vulnerability:
 ([json](vulnerabilities/{urlname}.json))
 
 * CVE numbers: {cve}
-* Responsibly disclosed?: {responsibly}
+* Coordinated disclosure?: {coordinated}
 * Categories: {categories}
 * Details: {details}
 * Discovered by: {discovered_by} on: {discovered_on}
@@ -381,7 +381,7 @@ class Vulnerability:
 * Submission: {submission_list}
 """.format(name=self.name, urlname=self.urlname,
            cve=self._print_ref_list(self.jsn['CVE']),
-           responsibly=self.jsn['Responsibly_disclosed'],
+           coordinated=self.jsn['Coordinated_disclosure'],
            categories=', '.join(self.categories()),
            details=self._print_ref_list(self.jsn['Details'], separator="\n"),
            discovered_by=self._print_ref_list(self.jsn['Discovered_by']),

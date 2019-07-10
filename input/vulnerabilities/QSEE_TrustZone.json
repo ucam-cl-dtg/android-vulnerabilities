@@ -1,0 +1,33 @@
+{
+  "name" : "QSEE privilege escalation",
+  "CVE" : [["CVE-2015-6639", "qsee-blog"]],
+  "Coordinated_disclosure" : "true",
+  "Categories" : ["system"],
+  "Details" : [["A vulnerability in the driver for Qualcomm's Trusted Excecution Environment allows code execution in this environment", "qsee-blog"]],
+  "Discovered_by" : [["Gal Beniamini (laginimaineb)", "qsee-blog"]],
+  "Discovered_on" : [["2015-09-27", "qsee-blog"]],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2015-09-27", "qsee-blog"]],
+  "Fixed_on" : [["2015-12-14", "qsee-blog"]],
+  "Fix_released_on" : [["2015-12-14", "qsee-blog"]],
+  "Affected_versions" : [["5.0-5.1.1 and 6.0", "cvedetails-qsee"]],
+  "Affected_devices" : [["Several, including Droid Turbo, Nexus 6 and Moto X 2nd Gen", "qsee-blog"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [],
+  "Fixed_versions" : [["5.1.1 LMY94F, 6.0", "cvedetails-qsee"]],
+  "references" : {
+    "qsee-blog" : {
+      "url" : "http://bits-please.blogspot.com/2016/05/qsee-privilege-escalation-vulnerability.html",
+      "archive-url" : "https://perma.cc/E8BA-M5T5"
+    },
+    "cvedetails-qsee" : {
+      "url" : "https://www.cvedetails.com/cve/CVE-2015-6639/"
+    }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["tee"],
+  "Channel": ["shell", "app-execution"],
+  "Condition": ["usb-debug", "affected-app-installed"],
+  "Privilege": ["tee"]
+}

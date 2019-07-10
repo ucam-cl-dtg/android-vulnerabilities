@@ -1,0 +1,37 @@
+{
+  "name" : "Metaphor",
+  "CVE" : [["CVE-2015-3864", "metaphor-avast"]],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["system"],
+  "Details" : [["A remote-access exploit that uses a vulnerability in libstagefright", "metaphor-report"]],
+  "Discovered_by" : [["Hanan Be’er", "metaphor-report"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [["2015-09-09", "metaphor-bulletin"]],
+  "Affected_versions" : [["2.2 to 4.0 and 5.0 to 5.1", "metaphor-report"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : ["(2\\.[2-9]\\.[0-9])|(3\\.[0-9]\\.[0-9])|(4\\.0\\.[0-9])|(5\\.[0-1]\\.[0-9])"],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "metaphor-avast" : {
+      "url" : "https://blog.avast.com/metaphor-exploit-a-follow-up-to-stagefright-that-puts-millions-of-android-devices-at-risk"
+    },
+    "metaphor-report" : {
+      "url" : "https://www.exploit-db.com/docs/39527.pdf",
+      "archive-url" : "https://web.archive.org/web/20160315124119/https://www.exploit-db.com/docs/39527.pdf"
+    },
+    "metaphor-bulletin" : {
+      "url" : "https://groups.google.com/forum/message/raw?msg=android-security-updates/1M7qbSvACjo/Y7jewiW1AwAJ",
+      "archive-url" : "https://web.archive.org/web/20161010200046/https://groups.google.com/forum/message/raw?msg=android-security-updates/1M7qbSvACjo/Y7jewiW1AwAJ"
+    }
+  },
+  "Surface": ["remote", "webview", "mms"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["remote"],
+  "Condition": ["user-visits-webpage"],
+  "Privilege": ["service"]
+}

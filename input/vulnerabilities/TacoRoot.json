@@ -1,7 +1,7 @@
 {
   "name" : "TacoRoot",
   "CVE" : [],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["permissions"],
   "Details" : [["HTC recovery log on some devices is world writable and so can be deleted and symlinked to /data/local.prop to allow root on reboot, this is a appears to be a unstable exploit and requires the user to reboot into recovery mode","gh-cunninglogic-tacoroot"]],
   "Discovered_by" : [["Justin Case (jcase) and Dan Rosenberg","gh-cunninglogic-tacoroot-sh"]],
@@ -29,5 +29,11 @@
   , "rootzwiki-tacoroot" : {
       "url" : "http://rootzwiki.com/topic/13713-tacoroot-htc-universal-root-exploit-12-30-2011/"
     }
-  }
+  },
+  "Surface": ["usb-debug", "local"],
+  "Vector": ["file-permissions", "symbolic-link"],
+  "Target": ["system-component"],
+  "Channel": ["physical-access", "shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
 }

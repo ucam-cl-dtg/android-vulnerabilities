@@ -1,7 +1,7 @@
 {
   "name" : "Qualcomm chown init scripts",
   "CVE" : [["CVE-2013-6124","QCIR-2014-00002-1"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["permissions"],
   "Details" : [["Insecure owner/permission changes in init shell scripts (CVE-2013-6124): During the device start-up phase, several init shell scripts are executed with root privileges to configure various aspects of the system. During this process, standard toolchain commands such as chown or chmod are used to, e.g., change the owner of the sensor settings file to the system user. As these commands follow symbolic links (symlinks), an attacker with write access to these resources is able to conduct symlink attacks and thus change for example the owner of an arbitrary file to system. This flaw can be used to, e.g., elevate privileges.","QCIR-2014-00002-1"]],
   "Discovered_by" : [["Jon Sawyer","QCIR-2014-00002-1"]],
@@ -42,5 +42,11 @@
       "commit" : "fd256a79a77b53e785fb4a0251efc910e8062c09",
       "component" : "quic/la/platform/system/core"
     }
-  }
+  },
+  "Surface": ["local", "filesystem"],
+  "Vector": ["file-permissions"],
+  "Target": ["system-component"],
+  "Channel": ["file-placement"],
+  "Condition": ["file-placed-onto-device"],
+  "Privilege": ["root"]
 }

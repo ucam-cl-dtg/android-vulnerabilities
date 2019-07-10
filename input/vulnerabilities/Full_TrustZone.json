@@ -1,0 +1,38 @@
+{
+  "name" : "Full TrustZone exploit for MSM8974",
+  "CVE" : [],
+  "Coordinated_disclosure" : "true",
+  "Categories" : ["kernel", "system"],
+  "Details" : [["A vulnerability in a modified kernel means that a series of exploits can be used to obtain access to the Trusted Execution Environment", "msm8974-pt1"]],
+  "Discovered_by" : [["Gal Beniamini (laginimaineb)", "msm8974-pt3"]],
+  "Discovered_on" : [["2014-09-19", "msm8974-pt3"]],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2014-09-19", "msm8974-pt3"]],
+  "Fixed_on" : [["2014-10-01", "msm8974-pt3"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["Crafted ROM based on 4.4.4", "msm8974-pt3"]],
+  "Affected_devices" : [["All devices using the MSM8974 SoCMSM8974 SoC", "msm8974-pt3"]],
+  "Affected_versions_regexp" : ["4\\.4\\.4"],
+  "Affected_manufacturers" : [["Samsung", "msm8974-pt3"],["HTC", "msm8974-pt3"],["LG", "msm8974-pt3"],["Sony", "msm8974-pt3"],["OnePlus", "msm8974-pt3"],["Acer", "msm8974-pt3"],["Asus", "msm8974-pt3"],["Gionee", "msm8974-pt3"],["ZTE", "msm8974-pt3"],["Sharp", "msm8974-pt3"],["Pantech", "msm8974-pt3"],["Lenovo", "msm8974-pt3"],["Oppo", "msm8974-pt3"],["Vivo", "msm8974-pt3"],["IUNI", "msm8974-pt3"],["Hisense", "msm8974-pt3"],["Coolpad", "msm8974-pt3"],["Xiaomi", "msm8974-pt3"],["InFocus", "msm8974-pt3"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "msm8974-pt1" : {
+      "url" : "http://bits-please.blogspot.com/2015/03/getting-arbitrary-code-execution-in.html",
+      "archive-url" : "https://perma.cc/QU9V-LTC6"
+    },
+    "msm8974-pt2" : {
+      "url" : "http://bits-please.blogspot.com/2015/08/exploring-qualcomms-trustzone.html",
+      "archive-url" : "https://perma.cc/9H9S-2NKN"
+    },
+    "msm8974-pt3" : {
+      "url" : "http://bits-please.blogspot.com/2015/08/full-trustzone-exploit-for-msm8974.html",
+      "archive-url" : "https://perma.cc/7QN5-GTEQ"
+    }
+  },
+  "Surface": ["local"],
+  "Vector": ["memory-corruption"],
+  "Target": ["tee"],
+  "Channel": ["shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["tee"]
+}

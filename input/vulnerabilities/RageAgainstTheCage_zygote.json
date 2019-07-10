@@ -1,7 +1,7 @@
 {
   "name" : "RageAgainstTheCage zygote",
   "CVE" : [["ANDROID-3176774"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
   "Details" : [["Also known as Zimperlich","c-skills-zimperlich"]],
   "Discovered_by" : [],
@@ -21,5 +21,11 @@
   , "c-skills-zimperlich" : {
       "url" : "http://c-skills.blogspot.co.uk/2011/02/zimperlich-sources.html"
     }
-  }
+  },
+  "Surface": ["local", "system-call", "app"],
+  "Vector": ["daemon-abusing"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

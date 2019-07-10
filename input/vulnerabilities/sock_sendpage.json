@@ -1,0 +1,41 @@
+{
+  "name" : "sock_sendpage",
+  "CVE" : [["CVE-2009-2692", "vulmon"]],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["kernel"],
+  "Details" : [["A vulnerability in the kernel allows local users to gain privileges due to function pointers not being initialised", "vulmon"]],
+  "Discovered_by" : [["Tavis Ormandy and Julien Tinnes", "cr0"]],
+  "Discovered_on" : [["2009-08-13", "cr0"]],
+  "Submission" : [{"by":"dcc52","on":"2019-07-03"}],
+  "Reported_on" : [],
+  "Fixed_on" : [["2009-08-13", "linux-commit"]],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["Up to 3.2.6", "android-paper"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : ["([1-2]\\.[0-9]\\.[0-9])|(3\\.[0-1]\\.[0-9])|(3\\.2\\.[0-5])"],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "vulmon" : {
+      "url" : "https://vulmon.com/exploitdetails?qidtp=exploitdb&qid=9477"
+    },
+    "cr0" : {
+      "url" : "https://blog.cr0.org/2009/08/linux-null-pointer-dereference-due-to.html",
+      "archiveurl" : "https://perma.cc/TNH4-RFM7"
+    },
+    "linux-commit" : {
+      "url" : "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=e694958388c50148389b0e9b9e9e8945cf0f1b98",
+      "commit" : "e694958388c50148389b0e9b9e9e8945cf0f1b98",
+      "component" : "kernel/git/torvalds/linux.git"
+    },
+    "android-paper" : {
+      "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
+    }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corrpution"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
+}

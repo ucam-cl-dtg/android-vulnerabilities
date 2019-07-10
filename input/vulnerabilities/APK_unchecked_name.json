@@ -1,7 +1,7 @@
 {
   "name" : "APK unchecked name",
   "CVE" : [["ANDROID-9950697"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["signature"],
   "Details" : [["APK signature verification does not check name lengths correctly, creating a difference between how the zip files are verified compared with how they are extracted which allows files in an existing APK to be replaced with new files.","saurik-19"], ["Exploited by RockMyMoto","androidpolice-rockmymoto"]],
   "Discovered_by" : [["Jay Freeman (saurik)","saurik-19"],["Elliott Hughes <enh@google.com>","android-issue-57851"]],
@@ -33,5 +33,11 @@
     "androidpolice-rockmymoto" : {
       "url" : "http://www.androidpolice.com/2013/11/04/rockmymoto-roots-moto-x-after-latest-camera-update-should-work-on-all-recent-motorola-phones/"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["insufficient-standards-verification"],
+  "Target": ["apps"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed", "unknown-source-install-allowed"],
+  "Privilege": ["system", "modify-apps"]
 }

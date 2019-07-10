@@ -1,7 +1,7 @@
 {
   "name" : "exploid udev",
   "CVE" : [["CVE-2009-1185"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["kernel"],
   "Details" : [["udev before 1.4.1 does not verify whether a NETLINK message originates from kernel space, which allows local users to gain privileges by sending a NETLINK message from user space.","CVE-2009-1185"]],
   "Discovered_by" : [["Sebastian ???", "c-skills-android-trickery"]],
@@ -20,6 +20,11 @@
     "c-skills-android-trickery" : {"url":"http://c-skills.blogspot.co.uk/2010/07/android-trickery.html"},
     "netd-udev-fix" : {"url":"https://android.googlesource.com/platform/system/netd/+/79b579c92afc08ab12c0a5788d61f2dd2934836f", "commit":"79b579c92afc08ab12c0a5788d61f2dd2934836f","component":"platform/system/netd/"},
     "sprint-2.3.5-release":{"url":["http://community.sprint.com/baw/community/sprintblogs/announcements/blog/2011/07/22/software-update-roll-out-begins-on-july-25-to-boost-nexus-s-4g-data-speeds","http://community.sprint.com/baw/thread/72067?start=21"]}
-  }
-
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["improper-verification"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

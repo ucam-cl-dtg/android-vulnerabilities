@@ -1,7 +1,7 @@
 {
   "name" : "",
   "CVE" : [[]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "unknown",
   "Categories" : [],
   "Details" : [[]],
   "Discovered_by" : [[]],
@@ -16,6 +16,11 @@
   "Affected_manufacturers" : [[]],
   "Fixed_versions" : [[]],
   "references" : {
-    
-  }
+  },
+  "Surface": [],
+  "Vector": [],
+  "Target": [],
+  "Channel": [],
+  "Condition": [],
+  "Privilege": []
 }

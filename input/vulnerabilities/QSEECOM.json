@@ -1,0 +1,34 @@
+{
+  "name" : "QSEECOM driver memory corruption",
+  "CVE" : [["CVE-2014-4322", "qseecom-codeaurora"]],
+  "Coordinated_disclosure" : "true",
+  "Categories" : ["kernel"],
+  "Details" : [["A Linux kernel privilege escalation vulnerability allows arbitrary code to be executed within the kernel", "qseecom-blog"]],
+  "Discovered_by" : [["Gal Beniamini (laginimaineb)", "qseecom-blog"]],
+  "Discovered_on" : [["2014-09-24", "qseecom-blog"]],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2014-09-24", "qseecom-blog"]],
+  "Fixed_on" : [["2014-12-22", "qseecom-codeaurora"]],
+  "Fix_released_on" : [["2014-12-27", "qseecom-blog"]],
+  "Affected_versions" : [["All versions using an unpatched kernel", "qseecom-codeaurora"]],
+  "Affected_devices" : [["All devices using Qualcomm chipsets", "qseecom-blog"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["All manufacturers using Qualcomm chipsets", "qseecom-blog"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "qseecom-codeaurora" : {
+      "url" : "https://www.codeaurora.org/security-advisory/memory-corruption-in-qseecom-driver-cve-2014-4322",
+      "archive-url" : "https://perma.cc/CC9N-JXWV"
+    },
+    "qseecom-blog" : {
+      "url" : "http://bits-please.blogspot.com/2015/08/android-linux-kernel-privilege.html",
+      "archive-url" : "https://perma.cc/D9VK-7ZL9"
+    }
+  },
+  "Surface": ["local"],
+  "Vector": ["memory-corruption"],
+  "Target": ["tee"],
+  "Channel": ["shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["kernel"]
+}

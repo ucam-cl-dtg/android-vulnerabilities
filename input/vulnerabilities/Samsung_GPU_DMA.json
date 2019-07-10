@@ -1,7 +1,7 @@
 {
   "name" : "Samsung GPU DMA",
   "CVE" : [],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],
   "Details" : [["","talks.cam-46303"]],
   "Discovered_by" : [["Janis Danisevskis <janis@sec.t-labs.tu-berlin.de> from Technische Universität Berlin"]],
@@ -19,5 +19,11 @@
     "talks.cam-46303" : {
       "url" : "http://talks.cam.ac.uk/talk/index/46303"
     }
-  }
+  },
+  "Surface": ["app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["kernel"]
 }

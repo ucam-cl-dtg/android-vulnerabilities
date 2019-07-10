@@ -1,7 +1,7 @@
 {
   "name" : "KillingInTheNameOf psneuter ashmem",
   "CVE" : [["CVE-2011-1149"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["system", "kernel"],
   "Details" : [["Android before 2.3 does not properly restrict access to the system property space, which allows local applications to bypass the application sandbox and gain privileges"]],
   "Discovered_by" : [],
@@ -32,5 +32,11 @@
     "android-release-2.3" : {
       "url" : "http://android-developers.blogspot.com/2010/12/android-23-platform-and-updated-sdk.html"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["shared-memory"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

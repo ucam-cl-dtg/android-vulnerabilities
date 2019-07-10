@@ -1,0 +1,35 @@
+{
+  "name" : "prctl_set_vma_anon_name",
+  "CVE" : [["CVE-2015-6640", "prctl-vma-bulletin"]],
+  "Coordinated_disclosure" : "true",
+  "Categories" : ["kernel"],
+  "Details" : [["An elevation of privilege vulnerability in the kernel could enable a local malicious application to execute arbitrary code in the kernel", "prctl-vma-bulletin"]],
+  "Discovered_by" : [["Edward Huang", "android-paper"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [],
+  "Fixed_on" : [["2014-08-05", "prctl-vma-commit"]],
+  "Fix_released_on" : ["2014-08-12", "prctl-vma-commit"],
+  "Affected_versions" : [["4.4.4 to 6.0", "prctl-vma-bulletin"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : ["(4\\.[4-9]\\.[4-9])|(5\\.[0-9]\\.[0-9])|(6\\.0\\.[0-9])"],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "prctl-vma-bulletin" : {
+      "url" : "https://source.android.com/security/bulletin/2016-01-01"
+    },
+    "android-paper" : {
+      "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
+    },
+    "prctl-vma-commit" : {
+      "url" : "https://android.googlesource.com/kernel%2Fcommon/+/69bfe2d957d903521d32324190c2754cb073be15"
+    }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["kernel"]
+}

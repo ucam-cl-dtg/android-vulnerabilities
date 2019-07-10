@@ -1,7 +1,7 @@
 {
   "name" : "zergRush",
   "CVE" : [["CVE-2011-3874"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
   "Details" : [["","android-issue-21681"]],
   "Discovered_by" : [["[The Revolutionary development team](http://revolutionary.io/)"]],
@@ -27,5 +27,12 @@
       "tag" : "android-2.2.3_r1",
       "component" : "platform/build"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
+  
 }

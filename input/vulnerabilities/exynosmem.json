@@ -1,0 +1,36 @@
+{
+  "name" : "Exynos Abuse Exploit (exynosroot)",
+  "CVE" : [["CVE-2012-6422", "nist-exynosroot"]],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["system"],
+  "Details" : [["A driver/kernel vulnerability allows the device /dev/exynos-mem access to all physical memory, meaning that any library with access to it can obtain root access", "xda-developers-exynosroot"]],
+  "Discovered_by" : [["alephzain", "xda-developers-exynosroot"]],
+  "Discovered_on" : [["2012-12-15", "xda-developers-exynosroot"]],
+  "Submission" : [{"by": "dcc52", "on": "2019-07-08"}],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["4.0 (and possibly some later version", "azimuth-exynos"]],
+  "Affected_devices" : [["Samsung Galaxy S2", "xda-developers-exynosroot"], ["Samsung Galaxy Note 2", "xda-developers-exynosroot"], ["MEIZU MX", "xda-developers-exynosroot"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Samsung", "xda-developers-exynosroot"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "nist-exynosroot" : {
+      "url" : "https://nvd.nist.gov/vuln/detail/CVE-2012-6422"
+    },
+    "azimuth-exynos" : {
+      "url" : "http://blog.azimuthsecurity.com/2013/02/re-visiting-exynos-memory-mapping-bug.html",
+      "archive-url" : "https://perma.cc/6YDF-R7NA"
+    },
+    "xda-developers-exynosroot" : {
+      "url" : "https://forum.xda-developers.com/showthread.php?t=2781109"
+    }
+  },
+  "Surface": ["local", "usb-debug", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["shell", "app-execution"],
+  "Condition": ["usb-debug", "unknown-source-install-allowed"],
+  "Privilege": ["root"]
+}

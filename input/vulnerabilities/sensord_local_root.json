@@ -1,0 +1,29 @@
+{
+  "name" : "Sensord local root",
+  "CVE" : [],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["system"],
+  "Details" : [["A vulnerability exploiting the sensord daemon, which runs as root on some devices", "sensord-exploit-db"]],
+  "Discovered_by" : [["s0m3b0dy", "sensord-exploit-db"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2016-01-27", "sensord-exploit-db"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["LG L7 and others", "sensord-exploit-db"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["LG", "sensord-exploit-db"], ["Other devices using the sensord daemon", "sensord-exploit-db"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "sensord-exploit-db" : {
+      "url" : "https://www.exploit-db.com/exploits/39340"
+    }
+  },
+  "Surface": ["local"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
+}

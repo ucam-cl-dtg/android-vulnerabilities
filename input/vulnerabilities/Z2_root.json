@@ -1,0 +1,32 @@
+{
+  "name" : "Z2 root exploit",
+  "CVE" : [],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["system"],
+  "Details" : [["A system vulnerability enables users to obtain root access to some Sony devices via the shell", "xda-developers-z2root"]],
+  "Discovered_by" : [["Sacha (xsacha), cubundcube and Andreas Makris (bin4ry)", "android-paper"]],
+  "Discovered_on" : [["2014-06-12", "xda-developers-z2root"]],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["Z2 phones and tablets", "xda-developers-z2root"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Sony", "xda-developers-z2root"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "xda-developers-z2root" : {
+      "url" : "https://forum.xda-developers.com/showthread.php?t=2781109"
+    },
+    "android-paper" : {
+      "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
+    }
+  },
+  "Surface": ["local", "usb-debug"],
+  "Vector": ["daemon-abusing"],
+  "Target": ["system-component"],
+  "Channel": ["shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
+}

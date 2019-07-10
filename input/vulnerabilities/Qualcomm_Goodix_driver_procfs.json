@@ -1,7 +1,7 @@
 {
   "name" : "Qualcomm Goodix driver procfs",
   "CVE" : [["CVE-2013-4740","QCIR-2013-00009-1"],["CVE-2013-6122","QCIR-2013-00009-1"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],
   "Details" : [["Multiple memory corruption issues and race condition in Goodix gt915 touchscreen driver procfs handler (CVE-2013-4740 CVE-2013-6122) QCIR-2013-00009-1: Multiple issues have been identified in the Goodix gt915 touchscreen driver for Android. The issues were found in the write handler of the procfs entry created by the driver, which by default is readable and writeable to users without any specific privileges.","QCIR-2013-00009-1"]],
   "Discovered_by" : [["Jonathan Salwan of the Sysdream Security Lab","QCIR-2013-00009-1"]],
@@ -24,5 +24,11 @@
       "component" : "quic/la/kernel/msm-3.10",
       "commit" : "f53bcf29a6e7a66b3d935b8d562fa00829261f05"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-application-installed"],
+  "Privilege": ["root"]
 }

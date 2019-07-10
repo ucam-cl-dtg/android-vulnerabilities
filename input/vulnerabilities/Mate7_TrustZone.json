@@ -1,0 +1,34 @@
+{
+  "name" : "Mate7 TrustZone Exploit",
+  "CVE" : [["CVE-2015-4421", "mate7-advisory"],["CVE-2015-4422", "mate7-advisory"]],
+  "Coordinated_disclosure" : "unknown",
+  "Categories" : ["system"],
+  "Details" : [["The tzdriver and TEEOS modules of the Huawei Mate 7 have vulnerabilities which may allow malicious apps to perform denial of service attacks, or gain privileges, by gaining access to the TEE", "mate7-advisory"]],
+  "Discovered_by" : [["Di Shen (returnsme)", "mate7-advisory"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
+  "Reported_on" : [["2015-05-20", "mate7-advisory"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [],
+  "Affected_devices" : [["Huawei Mate 7", "mate7-advisory"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Huawei", "mate7-advisory"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "mate7-advisory" : {
+      "url" : "https://www.huawei.com/en/psirt/security-advisories/hw-432799",
+      "archive-url" : "https://perma.cc/EQ7Y-XHPQ"
+    },
+    "mate7-firmware-security" : {
+      "url" : "https://firmwaresecurity.com/2015/08/03/trustzone-tee-vulnerability-for-huawei-mate-7/",
+      "archive-url" : "https://perma.cc/S3T8-2XTR"
+    }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["tee"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
+}

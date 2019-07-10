@@ -1,7 +1,7 @@
 {
   "name" : "pipe inatomic",
   "CVE" : [["CVE-2015-1805","CVE-2015-1805"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],
   "Details" : [["The (1) pipe_read and (2) pipe_write implementations in fs/pipe.c in the Linux kernel before 3.16 do not properly consider the side effects of failed __copy_to_user_inatomic and __copy_from_user_inatomic calls, which allows local users to cause a denial of service (system crash) or possibly gain privileges via a crafted application, aka an 'I/O vector array overrun.'","CVE-2015-1805"],
     ["This is a known issue in the upstream Linux kernel that was fixed in April 2014 but wasn’t called out as a security fix and assigned CVE-2015-1805 until February 2, 2015. On February 19, 2016, C0RE Team notified Google that the issue could be exploited on Android and a patch was developed to be included in an upcoming regularly scheduled monthly update.  On March 15, 2016 Google received a report from Zimperium that this vulnerability had been abused on a Nexus 5 device. Google has confirmed the existence of a publicly available rooting application that abuses this vulnerability on Nexus 5 and Nexus 6 to provide the device user with root privileges.","android-advisory-2016-03-18"]],
@@ -44,5 +44,11 @@
   , "openwall-2015-06-06-2" : {
       "url" : "http://www.openwall.com/lists/oss-security/2015/06/06/2"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["kernel"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["root"]
 }

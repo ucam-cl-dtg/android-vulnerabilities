@@ -1,0 +1,34 @@
+{
+  "name" : "TPSparkyRoot",
+  "CVE" : [],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["system"],
+  "Details" : [["A bug in chmod, mkdir and chown mean that they fail when the last element of their target path is a symlink", "android-commit-tpsparkyroot"]],
+  "Discovered_by" : [["sparkym3", "xda-forum-tpsparkyroot"]],
+  "Discovered_on" : [["2012-01-11", "xda-forum-tpsparkyroot"]],
+  "Submission" : [{"by":"dcc52","on":"2019-07-03"}],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [["2012-05-02", "android-commit-tpsparkyroot"]],
+  "Affected_versions" : [["4.0-4.0.4"]],
+  "Affected_devices" : [],
+  "Affected_versions_regexp" : ["4\\.0\\.[0-4]"],
+  "Affected_manufacturers" : [],
+  "Fixed_versions" : [["4.0.4_r2", "android-commit-tpsparkyroot"]],
+  "references" : {
+    "android-commit-tpsparkyroot" : {
+      "url" : "https://android.googlesource.com/platform/system/core/+/42a9349dc4e98019d27d7f8d19bc6c431695d7e1",
+      "commit" : "42a9349dc4e98019d27d7f8d19bc6c431695d7e1",
+      "component" : "platform/system/core"
+    },
+    "xda-forum-tpsparkyroot" : {
+      "url" : "https://forum.xda-developers.com/showthread.php?t=1439429"
+    }
+  },
+  "Surface": ["local", "usb-debug"],
+  "Vector": ["file-permissions"],
+  "Target": ["system-component"],
+  "Channel": ["shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
+}

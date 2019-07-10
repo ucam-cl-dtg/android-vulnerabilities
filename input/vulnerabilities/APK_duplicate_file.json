@@ -1,7 +1,7 @@
 {
   "name" : "APK duplicate file",
   "CVE" : [["ANDROID-8219321"],["CVE-2013-4787"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["signature"],
   "Details" : [["Android does not properly check cryptographic signatures for applications, which allows attackers to execute arbitrary code via an application package file (APK) that is modified in a way that does not violate the cryptographic signature. Android security bug 8219321."]],
   "Discovered_by" : [["Jeff Forristal of Bluebox security","bluebox-master-key"]],
@@ -27,5 +27,11 @@
     "verge-android-4.3" : {
       "url" : "http://www.theverge.com/2013/7/24/4550234/android-4-3-announcement"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["insufficient-standards-verification"],
+  "Target": ["apps"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed", "unknown-source-install-allowed"],
+  "Privilege": ["system", "modify-apps"]
 }

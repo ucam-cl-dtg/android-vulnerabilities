@@ -1,7 +1,7 @@
 {
   "name" : "NachoRoot",
   "CVE" : [],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["permissions"],
   "Details" : [["On ASUS Transformer Pime /data/sensors/AMI304_Config.ini is set world writable on boot and so a /data/local.prop symlink attack can be mounted","gh-cunninglogic-nachoroot-sh"]],
   "Discovered_by" : [["Justin Case (jcase)","gh-cunninglogic-nachoroot-sh"]],
@@ -25,5 +25,11 @@
   , "xda-nachoroot" : {
       "url" : "http://forum.xda-developers.com/showthread.php?t=1426280"
     }
-  }
+  },
+  "Surface": ["local", "app", "usb-debug"],
+  "Vector": ["file-permissions"],
+  "Target": ["system-component"],
+  "Channel": ["app-execution"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
 }

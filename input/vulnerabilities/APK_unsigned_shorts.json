@@ -1,7 +1,7 @@
 {
   "name" : "APK unsigned shorts",
   "CVE" : [["ANDROID-9695860"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["signature"],
   "Details" : [["File offsets in zips are supposed to be unsigned but were interpreted as signed allowing different content to be verified from the content executed."]],
   "Discovered_by" : [],
@@ -30,5 +30,11 @@
     "verge-android-4.3" : {
       "url" : "http://www.theverge.com/2013/7/24/4550234/android-4-3-announcement"
     }
-  }
+  },
+  "Surface": ["local", "app"],
+  "Vector": ["insufficient-standards-verification"],
+  "Target": ["apps"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["system", "modify-apps"]
 }

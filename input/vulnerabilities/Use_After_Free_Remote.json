@@ -1,0 +1,32 @@
+{
+  "name" : "Use-After-Free Remote Code Execution on WebKit",
+  "CVE" : [["CVE-2010-1807","webkit-use-after-free-mitre"]],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["system"],
+  "Details" : [["WebKit does not properly validate floating-point data in Android versions prior to 2.2, which allows a remote arbitrary code execution attack to occur through a crafted HTML page", "webkit-use-after-free-mitre"]],
+  "Discovered_by" : [["Itzhak Avraham", "exploit-db-webkit-use-after-free"]],
+  "Discovered_on" : [],
+  "Submission" : [{"by":"dcc52","on":"2019-06-28"}],
+  "Reported_on" : [["2010-11-14", "exploit-db-webkit-use-after-free"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["Up to 2.2", "exploit-db-webkit-use-after-free"]],
+  "Affected_devices" : [["all"]],
+  "Affected_versions_regexp" : ["(1\\.[0-9]\\.[0-9])|(2\\.[0-1]\\.[0-9])"],
+  "Affected_manufacturers" : [["all"]],
+  "Fixed_versions" : [["2.2"]],
+  "references" : {
+    "webkit-use-after-free-mitre": {
+      "url" : "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1807"
+    },
+    "exploit-db-webkit-use-after-free" : {
+      "url" : "https://www.exploit-db.com/exploits/15548"
+    }
+  },
+  "Surface": ["remote","webview"],
+  "Vector": ["memory-corruption"],
+  "Target": ["browser"],
+  "Channel": ["remote"],
+  "Condition": ["user-visits-webpage"],
+  "Privilege": ["user"]
+}

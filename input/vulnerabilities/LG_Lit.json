@@ -1,7 +1,7 @@
 {
   "name" : "LG Lit",
   "CVE" : [],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],
   "Details" : [["Bug in LG backlight driver allows gaining root from local user", "androidforums-lit"]],
   "Discovered_by" : [["giantpune", "giantpune-email0"]],
@@ -25,5 +25,11 @@
   , "androidforums-lit-package" : {
       "url" : "http://androidforums.com/threads/root-apk-for-l38c.682486/"
     }
-  }
+  },
+  "Surface": ["local", "usb-debug"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["physical-access", "shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["root"]
 }

@@ -1,0 +1,36 @@
+
+
+{
+  "name" : "Framaroot",
+  "CVE" : [],
+  "Coordinated_disclosure" : "false",
+  "Categories" : ["system"],
+  "Details" : [["An APK-based exploit which uses the earlier Exynos Abuse Exploit and incldues others", "azimuth-exynos"]],
+  "Discovered_by" : [["alephzain", "azimuth-exynos"]],
+  "Discovered_on" : [["2013-02-02", "azimuth-exynos"]],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [],
+  "Affected_versions" : [["4.0 (and possibly some later version", "azimuth-exynos"]],
+  "Affected_devices" : [["Samsung Galaxy S2", "azimuth-exynos"], ["Samsung Galaxy S3 (not in North America", "azimuth-exynos"], ["Samsung Galaxy Note", "azimuth-exynos"], ["Samsung Galaxy Note 2", "azimuth-exynos"], ["Samsung Galaxy Tab", "azimuth-exynos"], ["Many others", "xda-framaroot-devices"]],
+  "Affected_versions_regexp" : [],
+  "Affected_manufacturers" : [["Samsung", "azimuth-exynos"]],
+  "Fixed_versions" : [],
+  "references" : {
+    "azimuth-exynos" : {
+      "url" : "http://blog.azimuthsecurity.com/2013/02/re-visiting-exynos-memory-mapping-bug.html",
+      "archive-url" : "https://perma.cc/6YDF-R7NA"
+    },
+    "xda-framaroot-devices" : {
+      "url" : "https://forum.xda-developers.com/apps/framaroot/framaroot-supported-devices-t2722980",
+      "archive-url" : "https://perma.cc/557B-23JS"
+    }
+  },
+  "Surface": ["app"],
+  "Vector": ["memory-corruption"],
+  "Target": ["driver"],
+  "Channel": ["app-execution"],
+  "Condition": ["unknown-source-install-allowed"],
+  "Privilege": ["root"]
+}

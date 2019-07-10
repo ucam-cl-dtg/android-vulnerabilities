@@ -1,7 +1,7 @@
 {
   "name" : "dhcpd buffer overrun",
   "CVE" : [["CVE-2014-7912","dhcpd-fix"],["CVE-2014-7913","dhcpd-fix"]],
-  "Responsibly_disclosed" : true,
+  "Coordinated_disclosure" : "true",
   "Categories" : ["network"],
   "Severity" : "medium",
   "Details" : [["The specific flaw exists within the parsing of the DHCP options in a DHCP ACK packet. The vulnerability is triggered when the LENGTH of an option, when added to the current read position, exceeds the actual length of the DHCP options buffer. An attacker can leverage this vulnerability to execute code on the device.","ZDI-15-093"],["This remote code execution vulnerability executes code as the dhcp user which limit's its severity"]],
@@ -25,5 +25,12 @@
   , "ZDI-15-093" : {
       "url" : "http://www.zerodayinitiative.com/advisories/ZDI-15-093/"
     }
-  }
+  },
+  "Surface": ["remote", "webview"],
+  "Vector": ["daemon-abusing"],
+  "Target": ["system-component"],
+  "Channel": ["remote"],
+  "Condition": ["attacker-on-same-network"],
+  "Privilege": ["user"]
+
 }

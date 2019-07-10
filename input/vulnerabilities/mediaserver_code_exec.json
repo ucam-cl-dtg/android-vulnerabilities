@@ -1,0 +1,33 @@
+{
+  "name" : "Android privilege escalation to mediaserver",
+  "CVE" : [["CVE-2014-7920", "mediaserver-blog"], ["CVE-2014-7921", "mediaserver-blog"]],
+  "Coordinated_disclosure" : "true",
+  "Categories" : ["kernel", "system"],
+  "Details" : [["Two vulnerabilities which allow arbitrary code execution in the mediaserver process", "mediaserver-blog"]],
+  "Discovered_by" : [["Gal Beniamini (laginimaineb)", "mediaserver-blog"]],
+  "Discovered_on" : [["2014-10-14", "mediaserver-blog"]],
+  "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
+  "Reported_on" : [["2014-10-14", "mediaserver-blog"]],
+  "Fixed_on" : [["2014-10-28", "mediaserver-commit"]],
+  "Fix_released_on" : [["2014-12-04", "mediaserver-commit"]],
+  "Affected_versions" : [["2.2 to 5.0", "mediaserver-blog"]],
+  "Affected_devices" : [["all", "mediaserver-blog"]],
+  "Affected_versions_regexp" : ["(2\\.[2-9]\\.[0-9])|([3-4]\\.[0-9]\\.[0-9])|(5\\.0\\.[0-9])"],
+  "Affected_manufacturers" : [["all", "mediaserver-blog"]],
+  "Fixed_versions" : [["5.1", "mediaserver-blog"]],
+  "references" : {
+    "mediaserver-blog" : {
+      "url" : "http://bits-please.blogspot.com/2016/01/android-privilege-escalation-to.html",
+      "archive-url" : "https://perma.cc/257S-S8PD"
+    },
+    "mediaserver-commit" : {
+      "url" : "https://android.googlesource.com/platform/frameworks/av/+/36d1577%5E!/"
+    }
+  },
+  "Surface": ["local"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["shell", "app"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["service"]
+}

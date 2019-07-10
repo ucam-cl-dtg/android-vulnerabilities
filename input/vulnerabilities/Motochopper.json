@@ -1,7 +1,7 @@
 {
   "name" : "Motochopper",
   "CVE" : [["CVE-2013-2596"]],
-  "Responsibly_disclosed" : false,
+  "Coordinated_disclosure" : "false",
   "Categories" : ["kernel"],
   "Details" : [["Integer overflow in the fb_mmap function in drivers/video/fbmem.c in the Linux kernel before 3.8.9 QCIR-2013-00004-1","QCIR-2013-00004-1"]],
   "Discovered_by" : [["Dan Rosenberg"]],
@@ -30,5 +30,11 @@
     "xda-developers-motochopper" : {
       "url" : "http://forum.xda-developers.com/showthread.php?p=43960995"
     }
-  }
+  },
+  "Surface": ["local", "usb-debug"],
+  "Vector": ["memory-corruption"],
+  "Target": ["system-component"],
+  "Channel": ["physical-access", "shell"],
+  "Condition": ["usb-debug"],
+  "Privilege": ["unlock-bootloader"]
 }
