@@ -1,5 +1,5 @@
 {
-  "name" : "Qualcomm TrustZone Privilege Escalation",
+  "name" : "Qualcomm TrustZone",
   "CVE" : [["CVE-2016-2431", "trustzone-blog"]],
   "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],

@@ -1,5 +1,5 @@
 {
-  "name" : "QSEECOM driver memory corruption",
+  "name" : "QSEECOM driver",
   "CVE" : [["CVE-2014-4322", "qseecom-codeaurora"]],
   "Coordinated_disclosure" : "true",
   "Categories" : ["kernel"],

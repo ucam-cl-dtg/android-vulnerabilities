@@ -27,6 +27,6 @@
   "Vector": ["daemon-abusing"],
   "Target": ["system-component"],
   "Channel": ["file-placement"],
-  "Condition": ["save-to-filesystem"],
+  "Condition": ["file-placed-onto-device"],
   "Privilege": ["system"]
 }

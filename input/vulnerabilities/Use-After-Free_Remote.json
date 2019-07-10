@@ -1,5 +1,5 @@
 {
-  "name" : "Use-After-Free Remote Code Execution on WebKit",
+  "name" : "Use-After-Free Remote",
   "CVE" : [["CVE-2010-1807","webkit-use-after-free-mitre"]],
   "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
