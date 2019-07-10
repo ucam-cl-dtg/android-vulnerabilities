@@ -43,5 +43,5 @@
   "Target": ["driver"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["control-hardware"]
+  "Privilege": ["kernel", "control-hardware"]
 }

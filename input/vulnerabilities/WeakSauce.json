@@ -33,6 +33,6 @@
   "Vector": ["daemon-abusing"],
   "Target": ["system-component"],
   "Channel": ["app-execution"],
-  "Condition": ["unknown-source-install-allowed"],
+  "Condition": ["affected-app-installed"],
   "Privilege": ["root"]
 }

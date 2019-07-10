@@ -7,7 +7,7 @@
   "Discovered_by" : [["Di Shen (returnsme)", "mate7-advisory"]],
   "Discovered_on" : [],
   "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
-  "Reported_on" : [["2015-08-03", "mate7-firmware-security"]],
+  "Reported_on" : [["2015-05-20", "mate7-advisory"]],
   "Fixed_on" : [],
   "Fix_released_on" : [],
   "Affected_versions" : [],

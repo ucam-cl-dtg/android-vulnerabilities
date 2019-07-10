@@ -26,10 +26,10 @@
       "url" : "https://launchpad.net/linux/+milestone/3.8.9"
     }
   },
-  "Surface": ["local", "usb-debug"],
+  "Surface": ["local", "app"],
   "Vector": ["memory-corruption"],
   "Target": ["kernel"],
-  "Channel": ["shell"],
-  "Condition": ["usb-debug"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
   "Privilege": ["root"]
 }

@@ -3,7 +3,7 @@
   "CVE" : [],
   "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
-  "Details" : [["A system vulnerability enables users to obtain root access to some Sony devices via the shel", "xda-developers-z2root"]],
+  "Details" : [["A system vulnerability enables users to obtain root access to some Sony devices via the shell", "xda-developers-z2root"]],
   "Discovered_by" : [["Sacha (xsacha), cubundcube and Andreas Makris (bin4ry)", "android-paper"]],
   "Discovered_on" : [["2014-06-12", "xda-developers-z2root"]],
   "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],

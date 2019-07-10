@@ -32,7 +32,7 @@
       "url" : "/submissions/giantpune-email0"
     }
   },
-  "Surface": ["local", "app"],
+  "Surface": ["local", "app", "system-call"],
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["app-execution"],

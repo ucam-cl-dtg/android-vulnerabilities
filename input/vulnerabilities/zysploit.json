@@ -3,7 +3,7 @@
   "CVE" : [],
   "Coordinated_disclosure" : "false",
   "Categories" : ["system"],
-  "Details" : [["Takes advantage of a setuid vulnerability (few details available"]],
+  "Details" : [["Takes advantage of a setuid vulnerability (few details available)"]],
   "Discovered_by" : [["Joshua Wise", "zysploit-rootwiki"]],
   "Discovered_on" : [],
   "Submission" : [{"by": "dcc52", "on": "2019-07-03"}],

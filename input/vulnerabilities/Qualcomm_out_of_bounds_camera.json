@@ -30,7 +30,7 @@
       "component" : "quic/la/kernel/msm"
     }
   },
-  "Surface": ["local", "app"],
+  "Surface": ["local", "app", "system-call"],
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["app-execution"],

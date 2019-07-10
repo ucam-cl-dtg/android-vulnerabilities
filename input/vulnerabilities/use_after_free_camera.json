@@ -28,6 +28,6 @@
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["shell", "app-execution"],
-  "Condition": ["affected-app-installed", "usb-debug"],
+  "Condition": ["affected-app-installed"],
   "Privilege": ["system"]
 }

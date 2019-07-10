@@ -38,7 +38,7 @@
   "Vector": ["memory-corruption"],
   "Target": ["kernel"],
   "Channel": ["app-execution"],
-  "Condition": ["unknown-source-install-allowed"],
+  "Condition": ["affected-app-installed"],
   "Privilege": ["root"]
   
 }

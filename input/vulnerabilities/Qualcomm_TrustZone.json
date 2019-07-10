@@ -10,7 +10,7 @@
   "Reported_on" : [["2015-10-13", "trustzone-blog"]],
   "Fixed_on" : [["2016-05-02", "trustzone-blog"]],
   "Fix_released_on" : [["2016-05-02", "trustzone-blog"]],
-  "Affected_versions" : [],
+  "Affected_versions" : [["6.0.1", "cvedetails-qualcomm-trustzone"]],
   "Affected_devices" : [["Many devices using Qualcomm SoCs, including Nexus 5, Nexus 6 and Nexus 7 (2013)", "trustzone-bulletin"]],
   "Affected_versions_regexp" : [],
   "Affected_manufacturers" : [],
@@ -22,6 +22,9 @@
     },
     "trustzone-bulletin" : {
       "url" : "https://source.android.com/security/bulletin/2016-05-01"
+    },
+    "cvedetails-qualcomm-trustzone" : {
+      "url" : "https://www.cvedetails.com/cve/CVE-2016-2431"
     }
   },
   "Surface": ["local", "usb-debug"],
@@ -29,5 +32,5 @@
   "Target": ["tee"],
   "Channel": ["shell"],
   "Condition": ["usb-debug"],
-  "Privilege": ["system"]
+  "Privilege": ["kernel", "unlock-bootloader"]
 }

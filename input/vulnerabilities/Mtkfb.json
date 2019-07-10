@@ -1,13 +1,13 @@
 {
-  "name" : "Mtkbf exploit",
+  "name" : "Mtkfb exploit",
   "CVE" : [],
   "Coordinated_disclosure" : "true",
   "Categories" : ["system"],
-  "Details" : [["Memory write vulnerabilities allow a local user to gain privileges", "mtkbf-ele7enxxh-blog"]],
-  "Discovered_by" : [["KeenTeam", "mtkbf-ele7enxxh-blog"]],
-  "Discovered_on" : [["2015"]],
+  "Details" : [["Memory write vulnerabilities allow a local user to gain privileges", "mtkfb-ele7enxxh-blog"]],
+  "Discovered_by" : [["KeenTeam", "mtkfb-ele7enxxh-blog"]],
+  "Discovered_on" : [["2015-04-30"]],
   "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
-  "Reported_on" : [["2015"]],
+  "Reported_on" : [["2015-04-30"]],
   "Fixed_on" : [],
   "Fix_released_on" : [],
   "Affected_versions" : [],
@@ -16,7 +16,7 @@
   "Affected_manufacturers" : [],
   "Fixed_versions" : [],
   "references" : {
-    "mtkbf-ele7enxxh-blog" : {
+    "mtkfb-ele7enxxh-blog" : {
       "url" : "http://ele7enxxh.com/Mtkfb-Exploit.html",
       "archived-url" : "https://perma.cc/LLN2-NC8F"
     }

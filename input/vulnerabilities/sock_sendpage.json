@@ -32,10 +32,10 @@
       "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
     }
   },
-  "Surface": ["local", "usb-debug"],
+  "Surface": ["local", "app"],
   "Vector": ["memory-corrpution"],
   "Target": ["kernel"],
-  "Channel": ["shell"],
-  "Condition": ["usb-debug"],
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
   "Privilege": ["root"]
 }

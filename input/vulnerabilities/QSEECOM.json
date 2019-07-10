@@ -30,5 +30,5 @@
   "Target": ["tee"],
   "Channel": ["shell"],
   "Condition": ["usb-debug"],
-  "Privilege": ["root", "system"]
+  "Privilege": ["kernel"]
 }

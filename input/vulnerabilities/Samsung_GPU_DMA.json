@@ -20,10 +20,10 @@
       "url" : "http://talks.cam.ac.uk/talk/index/46303"
     }
   },
-  "Surface": [],
+  "Surface": ["app"],
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
-  "Channel": [],
-  "Condition": [],
-  "Privilege": []
+  "Channel": ["app-execution"],
+  "Condition": ["affected-app-installed"],
+  "Privilege": ["kernel"]
 }

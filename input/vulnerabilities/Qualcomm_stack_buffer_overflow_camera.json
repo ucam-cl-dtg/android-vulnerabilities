@@ -30,7 +30,7 @@
       "commit" : "28385b9c3054c91dca1aa194ffa750550c50f3ce"
     }
   },
-  "Surface": ["local", "app"],
+  "Surface": ["local", "app", "system-call"],
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["app-execution"],

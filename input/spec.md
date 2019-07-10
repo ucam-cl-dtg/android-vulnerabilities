@@ -93,6 +93,7 @@ These are obtained from various sources, and give details of the type of vulnera
   * `none` - attack can be performed with no other access to the device, or use of vulnerable apps
 * Privilege:
   * `root` - gain root privileges
+  * `kernel` - gain full kernel-level privileges (unconstrained by SELinux)
   * `user` - get access to user-mode
   * `modify-apps` - allows other apps on the device to be modified
   * `access-to-data` - allows an attacker access to a user's personal data
@@ -100,3 +101,4 @@ These are obtained from various sources, and give details of the type of vulnera
   * `unlock-bootloader` - allows the device's bootloader to be unlocked
   * `control-hardware` - take control of hardware devices
   * `service` - takes the privilege level of system services
+  * `tee` - execute within the Trusted Execution Environment

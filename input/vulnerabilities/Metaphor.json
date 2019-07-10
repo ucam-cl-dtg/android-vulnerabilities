@@ -28,7 +28,7 @@
       "archive-url" : "https://web.archive.org/web/20161010200046/https://groups.google.com/forum/message/raw?msg=android-security-updates/1M7qbSvACjo/Y7jewiW1AwAJ"
     }
   },
-  "Surface": ["remote", "webview"],
+  "Surface": ["remote", "webview", "mms"],
   "Vector": ["memory-corruption"],
   "Target": ["system-component"],
   "Channel": ["remote"],
