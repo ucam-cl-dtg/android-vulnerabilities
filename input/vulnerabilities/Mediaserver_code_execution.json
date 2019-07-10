@@ -1,5 +1,5 @@
 {
-  "name" : "Android privilege escalation to mediaserver",
+  "name" : "Mediaserver code execution",
   "CVE" : [["CVE-2014-7920", "mediaserver-blog"], ["CVE-2014-7921", "mediaserver-blog"]],
   "Coordinated_disclosure" : "true",
   "Categories" : ["kernel", "system"],
@@ -29,5 +29,5 @@
   "Target": ["system-component"],
   "Channel": ["shell", "app"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["service"]
+  "Privilege": ["system"]
 }

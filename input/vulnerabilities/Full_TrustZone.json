@@ -1,5 +1,5 @@
 {
-  "name" : "Full TrustZone exploit for MSM8974",
+  "name" : "Full TrustZone",
   "CVE" : [],
   "Coordinated_disclosure" : "true",
   "Categories" : ["kernel", "system"],

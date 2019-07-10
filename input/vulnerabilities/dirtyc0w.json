@@ -1,5 +1,5 @@
 {
-  "name" : "DirtyCow (dirtyc0w)",
+  "name" : "dirtyc0w",
   "CVE" : [["CVE-2016-5195", "dirtyc0w-redhat"]],
   "Coordinated_disclosure" : "false",
   "Categories" : ["kernel"],

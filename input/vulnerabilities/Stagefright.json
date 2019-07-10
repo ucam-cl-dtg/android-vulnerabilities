@@ -67,5 +67,5 @@
   "Target": ["system-component"],
   "Channel": ["remote"],
   "Condition": ["none"],
-  "Privilege": ["service"]
+  "Privilege": ["system"]
 }

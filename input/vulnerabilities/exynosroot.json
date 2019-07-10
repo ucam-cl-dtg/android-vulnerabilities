@@ -1,5 +1,5 @@
 {
-  "name" : "Exynos Abuse Exploit (exynosroot)",
+  "name" : "exynosroot",
   "CVE" : [["CVE-2012-6422", "nist-exynosroot"]],
   "Coordinated_disclosure" : "false",
   "Categories" : ["system"],

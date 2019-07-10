@@ -33,5 +33,5 @@
   "Target": ["system-component"],
   "Channel": ["remote"],
   "Condition": ["user-visits-webpage"],
-  "Privilege": ["service"]
+  "Privilege": ["system"]
 }

@@ -12,7 +12,7 @@
   "Fix_released_on" : [["2015-12-14", "qsee-blog"]],
   "Affected_versions" : [["5.0-5.1.1 and 6.0", "cvedetails-qsee"]],
   "Affected_devices" : [["Several, including Droid Turbo, Nexus 6 and Moto X 2nd Gen", "qsee-blog"]],
-  "Affected_versions_regexp" : [],
+  "Affected_versions_regexp" : ["(5\\.0\\.[0-9])|(5\\.1\\.[0-1])|(6\\.0\\.[0-9])"],
   "Affected_manufacturers" : [],
   "Fixed_versions" : [["5.1.1 LMY94F, 6.0", "cvedetails-qsee"]],
   "references" : {

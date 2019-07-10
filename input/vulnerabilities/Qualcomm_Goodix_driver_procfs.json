@@ -29,6 +29,6 @@
   "Vector": ["memory-corruption"],
   "Target": ["driver"],
   "Channel": ["app-execution"],
-  "Condition": ["affected-application-installed"],
+  "Condition": ["affected-app-installed"],
   "Privilege": ["root"]
 }
