@@ -31,5 +31,5 @@
   "Target": ["system-component"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["kernel"]
+  "Privilege": ["root"]
 }
