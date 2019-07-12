@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "threatpost-towelroot" : {
-      "url" : "http://threatpost.com/android-root-access-vulnerability-affecting-most-devices"
+      "url" : "http://threatpost.com/android-root-access-vulnerability-affecting-most-devices",
+      "archiveurl" : "https://perma.cc/L6VR-B87U"
     }
   , "CVE-2014-3153" : {
       "url" : "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3153"
@@ -39,6 +40,6 @@
   "Target": ["kernel"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
   
 }

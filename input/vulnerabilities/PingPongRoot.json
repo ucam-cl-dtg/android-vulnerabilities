@@ -20,7 +20,8 @@
       "url" : "http://forum.xda-developers.com/galaxy-s6/general/root-pingpongroot-s6-root-tool-t3103016"
     }
   , "avs-test-pingpong" : {
-      "url" : "https://github.com/nowsecure/android-vts/blob/master/app/src/main/jni/ping_pong.c"
+      "url" : "https://github.com/nowsecure/android-vts/blob/master/app/src/main/jni/ping_pong.c",
+      "archiveurl" : "https://perma.cc/6663-DEVW"
     }
   , "CVE-2015-3636" : {
       "url" : "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3636"

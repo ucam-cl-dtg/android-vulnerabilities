@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "zysploit-rootwiki" : {
-      "url" : "http://unrevoked.com/rootwiki/doku.php/public/unrevoked3"
+      "url" : "http://unrevoked.com/rootwiki/doku.php/public/unrevoked3",
+      "archiveurl" : "https://perma.cc/4DE2-GUFL"
     }
   },
   "Surface": ["local", "usb-debug"],

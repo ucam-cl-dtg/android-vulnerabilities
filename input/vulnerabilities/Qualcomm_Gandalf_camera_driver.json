@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "QCIR-2013-00001-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/uncontrolled-memory-mapping-camera-driver-cve-2013-2595"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/uncontrolled-memory-mapping-camera-driver-cve-2013-2595",
+      "archiveurl" : "https://web.archive.org/web/20170321230710/https://www.codeaurora.org/projects/security-advisories/uncontrolled-memory-mapping-camera-driver-cve-2013-2595"
     },
     "CVE-2013-2595" : {
       "url" : "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2595"
@@ -31,5 +32,5 @@
   "Target": ["driver"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

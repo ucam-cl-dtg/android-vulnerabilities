@@ -19,7 +19,8 @@
     "dalvik-zygote" : {"url" : "https://android.googlesource.com/platform/dalvik/+/f36b57235b765c9eec3c001773b34c59cdefd87a", "commit" : "f36b57235b765c9eec3c001773b34c59cdefd87a", "component" : "platform/dalvik/"},
     "dalvik-zygote-cherry" : {"url" : "https://android.googlesource.com/platform/dalvik/+/886130bc7ff992940e152636f57072e58c91aa2e", "commit" : "886130bc7ff992940e152636f57072e58c91aa2e", "component" : "platform/dalvik/"}
   , "c-skills-zimperlich" : {
-      "url" : "http://c-skills.blogspot.co.uk/2011/02/zimperlich-sources.html"
+      "url" : "http://c-skills.blogspot.co.uk/2011/02/zimperlich-sources.html",
+      "archiveurl" : "https://perma.cc/J2JS-8PM2"
     }
   },
   "Surface": ["local", "system-call", "app"],

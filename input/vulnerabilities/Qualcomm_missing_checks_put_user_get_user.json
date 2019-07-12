@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "QCIR-2013-00010-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/missing-access-checks-putusergetuser-kernel-api-cve-2013-6282"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/missing-access-checks-putusergetuser-kernel-api-cve-2013-6282",
+      "archiveurl" : "https://web.archive.org/web/20170321200949/https://www.codeaurora.org/projects/security-advisories/missing-access-checks-putusergetuser-kernel-api-cve-2013-6282"
     },
     "xda-developers-vroot" : {
       "url" : "http://forum.xda-developers.com/showthread.php?t=2434453"
@@ -33,5 +34,5 @@
   "Target": ["kernel"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed", "app-uses-vulnerable-api-functions"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

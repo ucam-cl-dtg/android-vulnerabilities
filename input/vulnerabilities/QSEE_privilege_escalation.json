@@ -18,7 +18,7 @@
   "references" : {
     "qsee-blog" : {
       "url" : "http://bits-please.blogspot.com/2016/05/qsee-privilege-escalation-vulnerability.html",
-      "archive-url" : "https://perma.cc/E8BA-M5T5"
+      "archiveurl" : "https://perma.cc/E8BA-M5T5"
     },
     "cvedetails-qsee" : {
       "url" : "https://www.cvedetails.com/cve/CVE-2015-6639/"

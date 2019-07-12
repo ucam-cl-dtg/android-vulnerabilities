@@ -26,5 +26,5 @@
   "Target": ["driver"],
   "Channel": ["shell"],
   "Condition": ["usb-debug"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

@@ -18,7 +18,8 @@
   "Fixed_versions" : [["2.2.2 and greater","android-security-2010-EASY-patches"],["2.2_r8, 2.3_r1","rageagainstthecage-adb-patch"]],
   "references" : {
     "android-security-2010-EASY-patches" : {
-      "url" : "https://groups.google.com/forum/#!topic/android-security-discuss/G6hyT7LU6bs"
+      "url" : "https://groups.google.com/forum/#!topic/android-security-discuss/G6hyT7LU6bs",
+      "archiveurl" : "http://archive.is/Rr9NW"
     },
     "rageagainstthecage-adb-patch" : {
       "url" : "https://android.googlesource.com/platform/system/core/+/44db990d3a4ce0edbdd16fa7ac20693ef601b723%5E%21/",
@@ -31,16 +32,20 @@
       "commit" : "2ad6067ce491446ab22f59a363d36575a942f5c7"
     },
     "intrepidus-looking-at-c-skills" : {
-      "url" : "https://intrepidusgroup.com/insight/2010/09/android-root-source-code-looking-at-the-c-skills/"
+      "url" : "https://intrepidusgroup.com/insight/2010/09/android-root-source-code-looking-at-the-c-skills/",
+      "archiveurl" : "https://web.archive.org/web/20160914082939/https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2010/september/android-root-source-code-looking-at-the-c-skills/"
     },
     "thesnkchrmr-ratc" : {
-      "url" : "http://thesnkchrmr.wordpress.com/2011/03/24/rageagainstthecage/"
+      "url" : "http://thesnkchrmr.wordpress.com/2011/03/24/rageagainstthecage/",
+      "archiveurl" : "https://perma.cc/V2FU-GEAA"
     },
     "openwall-ratc-source" : {
-      "url" : "http://stealth.openwall.net/xSports/RageAgainstTheCage.tgz"
+      "url" : "http://stealth.openwall.net/xSports/RageAgainstTheCage.tgz",
+      "archiveurl" : "http://web.archive.org/web/20170213114450/stealth.openwall.net/xSports/RageAgainstTheCage.tgz"
     },
     "c-skills-droid2" : {
-      "url" : "http://c-skills.blogspot.co.uk/2010/08/droid2.html"
+      "url" : "http://c-skills.blogspot.co.uk/2010/08/droid2.html",
+      "archiveurl" : "https://perma.cc/2UJ5-M76N"
     },
     "adb-setuid-bug-patch" : {
       "url" : "https://android.googlesource.com/platform/system/core/+/dd7bc3319deb2b77c5d07a51b7d6cd7e11b5beb0%5E%21/",

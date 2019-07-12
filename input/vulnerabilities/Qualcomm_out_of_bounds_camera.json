@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "QCIR-2014-00001-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/out-bounds-array-access-camera-driver-cve-2013-6123"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/out-bounds-array-access-camera-driver-cve-2013-6123",
+      "archiveurl" : "https://web.archive.org/web/20170322094648/https://www.codeaurora.org/projects/security-advisories/out-bounds-array-access-camera-driver-cve-2013-6123"
     },
     "msm-camera-bounds-patch" : {
       "url" : "https://www.codeaurora.org/cgit/quic/la//kernel/msm/commit/?id=7beb04ea945a7178e61d935918d3cb152996b558",
@@ -35,5 +36,5 @@
   "Target": ["driver"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

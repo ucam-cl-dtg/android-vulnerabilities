@@ -17,10 +17,12 @@
   "Fixed_versions" : [],
   "references" : {
     "QCIR-2013-00009-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/multiple-memory-corruption-issues-and-race-condition-goodix-gt915-touchscreen-driver-procfs-handler"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/multiple-memory-corruption-issues-and-race-condition-goodix-gt915-touchscreen-driver-procfs-handler",
+      "archiveurl" : "https://perma.cc/5VXU-PTN3"
     },
     "msm-goodix-patch" : {
       "url" : "https://www.codeaurora.org/cgit/quic/la/kernel/msm-3.10/commit/?id=f53bcf29a6e7a66b3d935b8d562fa00829261f05",
+      "archiveurl" : "https://perma.cc/4XL5-FF8G",
       "component" : "quic/la/kernel/msm-3.10",
       "commit" : "f53bcf29a6e7a66b3d935b8d562fa00829261f05"
     }

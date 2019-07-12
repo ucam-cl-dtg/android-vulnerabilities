@@ -17,17 +17,20 @@
   "Fixed_versions" : [],
   "references" : {
     "gh-cunninglogic-tacoroot" : {
-      "url" : "https://github.com/CunningLogic/TacoRoot"
+      "url" : "https://github.com/CunningLogic/TacoRoot",
+      "archiveurl" : "https://perma.cc/EH3G-SYBL"
     }
   , "gh-cunninglogic-tacoroot-sh" : {
-      "url" : "https://github.com/CunningLogic/TacoRoot/blob/master/tacoroot.sh"
+      "url" : "https://github.com/CunningLogic/TacoRoot/blob/master/tacoroot.sh",
+      "archiveurl" : "https://perma.cc/P84P-EFVB"
     }
   , "gh-cunninglogic-tacoroot-fc" : {
       "url" : "https://github.com/CunningLogic/TacoRoot/commit/057c99234214ca3e147c0a81a2f915a277258b76"
     , "commit" : "057c99234214ca3e147c0a81a2f915a277258b76"
     }
   , "rootzwiki-tacoroot" : {
-      "url" : "http://rootzwiki.com/topic/13713-tacoroot-htc-universal-root-exploit-12-30-2011/"
+      "url" : "http://rootzwiki.com/topic/13713-tacoroot-htc-universal-root-exploit-12-30-2011/",
+      "archiveurl" : "https://perma.cc/XEE6-HKTD"
     }
   },
   "Surface": ["usb-debug", "local"],

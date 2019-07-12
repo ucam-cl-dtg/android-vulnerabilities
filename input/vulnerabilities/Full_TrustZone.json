@@ -18,15 +18,15 @@
   "references" : {
     "msm8974-pt1" : {
       "url" : "http://bits-please.blogspot.com/2015/03/getting-arbitrary-code-execution-in.html",
-      "archive-url" : "https://perma.cc/QU9V-LTC6"
+      "archiveurl" : "https://perma.cc/QU9V-LTC6"
     },
     "msm8974-pt2" : {
       "url" : "http://bits-please.blogspot.com/2015/08/exploring-qualcomms-trustzone.html",
-      "archive-url" : "https://perma.cc/9H9S-2NKN"
+      "archiveurl" : "https://perma.cc/9H9S-2NKN"
     },
     "msm8974-pt3" : {
       "url" : "http://bits-please.blogspot.com/2015/08/full-trustzone-exploit-for-msm8974.html",
-      "archive-url" : "https://perma.cc/7QN5-GTEQ"
+      "archiveurl" : "https://perma.cc/7QN5-GTEQ"
     }
   },
   "Surface": ["local"],

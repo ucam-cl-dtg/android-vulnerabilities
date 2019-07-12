@@ -20,10 +20,12 @@
       "url" : "/submissions/giantpune-email0"
     }
   , "androidforums-lit" : {
-      "url" : "http://androidforums.com/threads/privilidge-escailation-exploit-in-lgs-backlight-driver.638367/"
+      "url" : "http://androidforums.com/threads/privilidge-escailation-exploit-in-lgs-backlight-driver.638367/",
+      "archiveurl" : "https://perma.cc/J9NR-7FBK"
     }
   , "androidforums-lit-package" : {
-      "url" : "http://androidforums.com/threads/root-apk-for-l38c.682486/"
+      "url" : "http://androidforums.com/threads/root-apk-for-l38c.682486/",
+      "archiveurl" : "https://perma.cc/HB6G-FWKW"
     }
   },
   "Surface": ["local", "usb-debug"],

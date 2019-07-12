@@ -17,7 +17,8 @@
   "Fixed_versions" : [["2.3"]],
   "references" : {
     "c-skills-adb-trickery" : {
-      "url" : "http://c-skills.blogspot.co.uk/2011/01/adb-trickery-again.html"
+      "url" : "http://c-skills.blogspot.co.uk/2011/01/adb-trickery-again.html",
+      "archiveurl" : "https://perma.cc/C52U-CJ6F"
     },
     "ashmem-fix-core" : {
       "url" : "https://android.googlesource.com/platform/system/core/+/25b15be9120bcdaa0aba622c67ad2c835d9e91ca",
@@ -30,7 +31,8 @@
       "commit" : "c98a285075f26e2b17a5baa2cb3eb6356a75597e"
     },
     "android-release-2.3" : {
-      "url" : "http://android-developers.blogspot.com/2010/12/android-23-platform-and-updated-sdk.html"
+      "url" : "http://android-developers.blogspot.com/2010/12/android-23-platform-and-updated-sdk.html",
+      "archiveurl" : "https://perma.cc/5GEF-ZYXY"
     }
   },
   "Surface": ["local", "app"],

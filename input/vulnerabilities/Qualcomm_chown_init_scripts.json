@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "QCIR-2014-00002-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/insecure-ownerpermission-changes-init-shell-scripts-cve-2013-6124"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/insecure-ownerpermission-changes-init-shell-scripts-cve-2013-6124",
+      "archiveurl" : "https://web.archive.org/web/20140701190759/https://www.codeaurora.org/projects/security-advisories/insecure-ownerpermission-changes-init-shell-scripts-cve-2013-6124"
     },
     "CVE-2013-6124" : {
       "url" : "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6124"

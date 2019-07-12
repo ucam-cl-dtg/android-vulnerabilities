@@ -18,11 +18,11 @@
   "references" : {
     "qseecom-codeaurora" : {
       "url" : "https://www.codeaurora.org/security-advisory/memory-corruption-in-qseecom-driver-cve-2014-4322",
-      "archive-url" : "https://perma.cc/CC9N-JXWV"
+      "archiveurl" : "https://perma.cc/CC9N-JXWV"
     },
     "qseecom-blog" : {
       "url" : "http://bits-please.blogspot.com/2015/08/android-linux-kernel-privilege.html",
-      "archive-url" : "https://perma.cc/D9VK-7ZL9"
+      "archiveurl" : "https://perma.cc/D9VK-7ZL9"
     }
   },
   "Surface": ["local"],

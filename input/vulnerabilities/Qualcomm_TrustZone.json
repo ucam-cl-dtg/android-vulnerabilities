@@ -18,7 +18,7 @@
   "references" : {
     "trustzone-blog" : {
       "url" : "http://bits-please.blogspot.com/2016/06/trustzone-kernel-privilege-escalation.html",
-      "archive-url" : "https://perma.cc/G4SL-R68U"
+      "archiveurl" : "https://perma.cc/G4SL-R68U"
     },
     "trustzone-bulletin" : {
       "url" : "https://source.android.com/security/bulletin/2016-05-01"

@@ -26,7 +26,8 @@
       "url" : "http://www.cvedetails.com/cve/CVE-2012-4222/"
     },
     "QCIR-2012-00001-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/multiple-issues-diagkgsl-system-call-handling-cve-2012-4220-cve-2012"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/multiple-issues-diagkgsl-system-call-handling-cve-2012-4220-cve-2012",
+      "archiveurl" : "https://web.archive.org/web/20170321213807/https://www.codeaurora.org/projects/security-advisories/multiple-issues-diagkgsl-system-call-handling-cve-2012-4220-cve-2012"
     },
     "giantpune-email0" : {
       "url" : "/submissions/giantpune-email0"
@@ -37,6 +38,6 @@
   "Target": ["driver"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 
 }

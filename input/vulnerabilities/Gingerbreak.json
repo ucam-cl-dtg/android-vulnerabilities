@@ -20,7 +20,8 @@
       "url" : "http://www.cvedetails.com/cve/CVE-2011-1823/"
     },
     "c-skills-gingerbreak" : {
-      "url" : "http://c-skills.blogspot.co.uk/2011/04/yummy-yummy-gingerbreak.html"
+      "url" : "http://c-skills.blogspot.co.uk/2011/04/yummy-yummy-gingerbreak.html",
+      "archiveurl" : "https://perma.cc/MN2B-4J7X"
     },
     "xda-forum-gingerbreak" : {
       "url" : "http://forum.xda-developers.com/showthread.php?t=1044765"
@@ -49,7 +50,8 @@
       "component" : "platform/system/core"
     },
     "ard-dev-3.1-release" : {
-      "url" : "http://android-developers.blogspot.co.uk/2011/05/android-31-platform-new-sdk-tools.html"
+      "url" : "http://android-developers.blogspot.co.uk/2011/05/android-31-platform-new-sdk-tools.html",
+      "archiveurl" : "https://perma.cc/G7XY-PKH9"
     }
   },
   "Surface": ["local", "usb-debug", "app"],

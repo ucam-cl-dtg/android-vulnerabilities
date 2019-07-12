@@ -17,14 +17,23 @@
   "Fixed_versions" : [["2.3.5_r1","netd-udev-fix"]],
   "references" : {
     "CVE-2009-1185" : {"url":"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1185"},
-    "c-skills-android-trickery" : {"url":"http://c-skills.blogspot.co.uk/2010/07/android-trickery.html"},
-    "netd-udev-fix" : {"url":"https://android.googlesource.com/platform/system/netd/+/79b579c92afc08ab12c0a5788d61f2dd2934836f", "commit":"79b579c92afc08ab12c0a5788d61f2dd2934836f","component":"platform/system/netd/"},
-    "sprint-2.3.5-release":{"url":["http://community.sprint.com/baw/community/sprintblogs/announcements/blog/2011/07/22/software-update-roll-out-begins-on-july-25-to-boost-nexus-s-4g-data-speeds","http://community.sprint.com/baw/thread/72067?start=21"]}
+    "c-skills-android-trickery" : {
+      "url" : "http://c-skills.blogspot.co.uk/2010/07/android-trickery.html",
+      "archiveurl" : "https://perma.cc/9TY7-LFW4"
+    },
+    "netd-udev-fix" : {
+      "url" : "https://android.googlesource.com/platform/system/netd/+/79b579c92afc08ab12c0a5788d61f2dd2934836f",
+      "commit" : "79b579c92afc08ab12c0a5788d61f2dd2934836f",
+      "component" : "platform/system/netd/"
+    },
+    "sprint-2.3.5-release" : {
+      "url" : ["http://community.sprint.com/baw/community/sprintblogs/announcements/blog/2011/07/22/software-update-roll-out-begins-on-july-25-to-boost-nexus-s-4g-data-speeds","http://community.sprint.com/baw/thread/72067?start=21"]
+    }
   },
   "Surface": ["local", "app"],
   "Vector": ["improper-verification"],
   "Target": ["system-component"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

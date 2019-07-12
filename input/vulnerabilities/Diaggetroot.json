@@ -18,7 +18,7 @@
   "references" : {
     "kc-blog-diaggetroot": {
       "url" : "http://zomo.herokuapp.com/blog/2015/05/25/rooting-methods/",
-      "archive-url" : "https://perma.cc/9GX7-BX5R"
+      "archiveurl" : "https://perma.cc/9GX7-BX5R"
     },
     "android-paper" : {
       "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
@@ -32,5 +32,5 @@
   "Target": ["driver"],
   "Channel": ["app-execution", "shell"],
   "Condition": ["affected-app-installed", "usb-debug"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }
