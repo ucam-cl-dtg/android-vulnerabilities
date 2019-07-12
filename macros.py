@@ -292,13 +292,20 @@ class Vulnerability:
     def _get_reference_url(self, reference):
         return self.jsn['references'][reference]['url']
 
+    def _get_reference_archive_url(self, reference):
+        if 'archiveurl' in self.jsn['references'][reference]:
+            return self.jsn['references'][reference]['archiveurl']
+        return None
+
     def _str_reference(self, reference):
+        """Return a string which gives the reference name and URL(s) in Markdown format"""
         if isinstance(reference, list):
             answer = ""
             for refentry in reference:
                 answer += self._str_reference(refentry)
             return answer
         url = self._get_reference_url(reference)
+        archive_url = self._get_reference_archive_url(reference)
         if isinstance(url, list):
             answer = ""
             index = 0
@@ -307,6 +314,9 @@ class Vulnerability:
                     reference=reference, index=index, url=urlelement)
                 index += 1
             return answer
+        if None != archive_url:
+            # Currently archived links are only displayed for references with only one URL
+            return "\\[[{reference}]({url})\\]\\[[archived]({archive_url})\\]".format(reference=reference, url=url, archive_url=archive_url)
         return "\\[[{reference}]({url})\\]".format(reference=reference, url=url)
 
     def _print_ref_list(self, reflist, separator=", "):
