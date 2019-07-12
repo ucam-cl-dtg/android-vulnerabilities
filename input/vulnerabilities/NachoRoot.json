@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "gh-cunninglogic-nachoroot-sh" : {
-      "url" : "https://github.com/CunningLogic/NachoRoot/blob/master/nachoroot.sh"
+      "url" : "https://github.com/CunningLogic/NachoRoot/blob/master/nachoroot.sh",
+      "archiveurl" : "https://perma.cc/X8CU-WMM5"
     }
   , "gh-cunninglogic-nachoroot" : {
       "url" : "https://github.com/CunningLogic/NachoRoot"

@@ -21,10 +21,12 @@
     }
   , "twerk-my-moto-commit" : {
       "url" : "https://github.com/CunningLogic/TwerkMyMoto/commit/0fc76a59720ca166f9e0febe73974ed5a77e75c5",
+      "archiveurl" : "https://perma.cc/X5FC-QFKJ",
       "commit" : "0fc76a59720ca166f9e0febe73974ed5a77e75c5"
     }
   , "droidviews-root-instructions" : {
-      "url" : "https://www.droidviews.com/how-to-root-motorola-razr-i-without-unlocking-the-bootloader"
+      "url" : "https://www.droidviews.com/how-to-root-motorola-razr-i-without-unlocking-the-bootloader",
+      "archiveurl" : "https://perma.cc/QS5M-EPXM"
     }
   },
   "Surface": ["usb-debug", "local"],

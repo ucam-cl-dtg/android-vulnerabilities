@@ -17,7 +17,8 @@
   "Fixed_versions" : [["2.3.6"]],
   "references" : {
     "security-focus-57900" : {
-      "url" : "http://www.securityfocus.com/bid/57900/info"
+      "url" : "http://www.securityfocus.com/bid/57900/info",
+      "archiveurl" : "https://perma.cc/G7J7-PZL2"
     },
     "CVE-2011-1350" : {
       "url" : "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1350"
@@ -36,5 +37,5 @@
   "Target": ["kernel"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

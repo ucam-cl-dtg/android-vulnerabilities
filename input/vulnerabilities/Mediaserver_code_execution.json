@@ -18,7 +18,7 @@
   "references" : {
     "mediaserver-blog" : {
       "url" : "http://bits-please.blogspot.com/2016/01/android-privilege-escalation-to.html",
-      "archive-url" : "https://perma.cc/257S-S8PD"
+      "archiveurl" : "https://perma.cc/257S-S8PD"
     },
     "mediaserver-commit" : {
       "url" : "https://android.googlesource.com/platform/frameworks/av/+/36d1577%5E!/"

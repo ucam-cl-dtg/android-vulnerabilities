@@ -17,7 +17,8 @@
   "Fixed_versions" : [],
   "references" : {
     "QCIR-2013-00008-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/stack-based-buffer-overflow-and-memory-disclosure-camera-driver-cve-2013-4738-cve-2013-4739"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/stack-based-buffer-overflow-and-memory-disclosure-camera-driver-cve-2013-4738-cve-2013-4739",
+      "archiveurl" : "https://web.archive.org/web/20170224102606/https://www.codeaurora.org/projects/security-advisories/stack-based-buffer-overflow-and-memory-disclosure-camera-driver-cve-2013-4738-cve-2013-4739"
     },
     "msm-camera-dequeue-patch" : {
       "url" : "https://www.codeaurora.org/cgit/quic/la/kernel/msm/commit/?id=c9c81836ee44db9974007d34cf2aaeb1a51a8d45",
@@ -35,5 +36,5 @@
   "Target": ["driver"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed", "app-uses-vulnerable-api-functions"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

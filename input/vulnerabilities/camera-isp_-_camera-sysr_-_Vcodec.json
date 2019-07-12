@@ -18,15 +18,15 @@
   "references" : {
     "azimuth-exynos" : {
       "url" : "http://blog.azimuthsecurity.com/2013/02/re-visiting-exynos-memory-mapping-bug.html",
-      "archive-url" : "https://perma.cc/6YDF-R7NA"
+      "archiveurl" : "https://perma.cc/6YDF-R7NA"
     },
     "xda-framaroot-devices" : {
       "url" : "https://forum.xda-developers.com/apps/framaroot/framaroot-supported-devices-t2722980",
-      "archive-url" : "https://perma.cc/557B-23JS"
+      "archiveurl" : "https://perma.cc/557B-23JS"
     },
     "boromir-techglobule" : {
       "url" : "https://techglobule.wordpress.com/2015/03/29/boromir-faramir/",
-      "archive-url" : "https://perma.cc/4UQQ-52R8"
+      "archiveurl" : "https://perma.cc/4UQQ-52R8"
     }
   },
   "Surface": ["local", "usb-debug", "app"],

@@ -23,13 +23,15 @@
       "url" : "https://bugzilla.redhat.com/show_bug.cgi?id=1384344"
     },
     "dirtyc0w-github" : {
-      "url" : "https://github.com/dirtycow/dirtycow.github.io/wiki/VulnerabilityDetails"
+      "url" : "https://github.com/dirtycow/dirtycow.github.io/wiki/VulnerabilityDetails",
+      "archiveurl" : "https://perma.cc/M4GA-BD7J"
     },
     "dirtyc0w-bulletin" : {
       "url" : "https://source.android.com/security/bulletin/2016-11-01"
     },
     "dirtyc0w-arstechnica" : {
-      "url" : "https://arstechnica.com/information-technology/2016/10/android-phones-rooted-by-most-serious-linux-escalation-bug-ever/"
+      "url" : "https://arstechnica.com/information-technology/2016/10/android-phones-rooted-by-most-serious-linux-escalation-bug-ever/",
+      "archiveurl" : "https://perma.cc/K4EE-SVJR"
     }
   },
   "Surface": ["local", "usb-debug"],
@@ -37,5 +39,5 @@
   "Target": ["kernel"],
   "Channel": ["shell"],
   "Condition": ["usb-debug"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

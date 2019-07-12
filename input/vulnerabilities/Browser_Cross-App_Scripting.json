@@ -36,5 +36,5 @@
   "Target": ["browser"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["user", "access-to-data"]
+  "Privilege": ["access-to-data"]
 }

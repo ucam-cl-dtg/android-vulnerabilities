@@ -20,7 +20,8 @@
       "url" : "https://doc.lagout.org/programmation/Android/Android%20Hacker%27s%20Handbook%20%5BDrake%2C%20Oliva%2C%20Lanier%2C%20Mulliner%2C%20Ridley%20%26%20Wicherski%202014-03-31%5D.pdf"
     },
     "volez-zen-thought" : {
-      "url" : "https://web.archive.org/web/20160806074055/http://zenthought.org/content/project/volez"
+      "url" : "http://zenthought.org/content/project/volez",
+      "archiveurl" : "https://web.archive.org/web/20160806074055/http://zenthought.org/content/project/volez"
     }
   },
   "Surface": ["local", "filesystem"],

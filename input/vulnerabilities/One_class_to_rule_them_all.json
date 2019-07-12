@@ -28,7 +28,8 @@
       "url" : "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3825"
     }
   , "NexusSecurityBulletinAugust2015" : {
-      "url" : "https://groups.google.com/forum/message/raw?msg=android-security-updates/Ugvu3fi6RQM/yzJvoTVrIQAJ"
+      "url" : "https://groups.google.com/forum/message/raw?msg=android-security-updates/Ugvu3fi6RQM/yzJvoTVrIQAJ",
+      "archiveurl" : "https://web.archive.org/web/20161130143800/https://groups.google.com/forum/message/raw?msg=android-security-updates/Ugvu3fi6RQM/yzJvoTVrIQAJ"
     }
   , "OneClassPatch" : {
       "url" : "https://android.googlesource.com/platform/external/conscrypt/+/edf7055461e2d7fa18de5196dca80896a56e3540"
@@ -36,7 +37,8 @@
     , "commit" : "edf7055461e2d7fa18de5196dca80896a56e3540"
     }
   , "droid-life-5-1-1-lmy48i" : {
-      "url" : "http://www.droid-life.com/2015/08/05/android-5-1-1-lmy48i-factory-images-arrive-for-nexus-4-5-6-7-2013-9-and-10/"
+      "url" : "http://www.droid-life.com/2015/08/05/android-5-1-1-lmy48i-factory-images-arrive-for-nexus-4-5-6-7-2013-9-and-10/",
+      "archiveurl" : "https://perma.cc/6RRN-9V44"
     }
   , "OneClassPatch4.4" : {
       "url" : ""
@@ -59,5 +61,5 @@
   "Target": ["kernel"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }

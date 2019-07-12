@@ -21,11 +21,11 @@
     },
     "metaphor-report" : {
       "url" : "https://www.exploit-db.com/docs/39527.pdf",
-      "archive-url" : "https://web.archive.org/web/20160315124119/https://www.exploit-db.com/docs/39527.pdf"
+      "archiveurl" : "https://web.archive.org/web/20160315124119/https://www.exploit-db.com/docs/39527.pdf"
     },
     "metaphor-bulletin" : {
       "url" : "https://groups.google.com/forum/message/raw?msg=android-security-updates/1M7qbSvACjo/Y7jewiW1AwAJ",
-      "archive-url" : "https://web.archive.org/web/20161010200046/https://groups.google.com/forum/message/raw?msg=android-security-updates/1M7qbSvACjo/Y7jewiW1AwAJ"
+      "archiveurl" : "https://web.archive.org/web/20161010200046/https://groups.google.com/forum/message/raw?msg=android-security-updates/1M7qbSvACjo/Y7jewiW1AwAJ"
     }
   },
   "Surface": ["remote", "webview", "mms"],

@@ -26,7 +26,8 @@
       "url" : "http://forum.xda-developers.com/showthread.php?t=2699089"
     }
   , "newandroidbook" : {
-      "url" : "http://newandroidbook.com/Articles/HTC.html"
+      "url" : "http://newandroidbook.com/Articles/HTC.html",
+      "archiveurl" : "https://perma.cc/A4CA-P4MX"
     }
   },
   "Surface": ["app", "local"],

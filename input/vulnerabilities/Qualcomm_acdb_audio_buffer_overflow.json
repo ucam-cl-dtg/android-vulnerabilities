@@ -17,10 +17,12 @@
   "Fixed_versions" : [],
   "references" : {
     "QCIR-2013-00002-1" : {
-      "url" : "https://www.codeaurora.org/projects/security-advisories/stack-based-buffer-overflow-acdb-audio-driver-cve-2013-2597"
+      "url" : "https://www.codeaurora.org/projects/security-advisories/stack-based-buffer-overflow-acdb-audio-driver-cve-2013-2597",
+      "archiveurl" : "https://web.archive.org/web/20161226013354/https://www.codeaurora.org/news/security-advisories/stack-based-buffer-overflow-acdb-audio-driver-cve-2013-2597"
     },
     "twitter-fi01_IS01" : {
-      "url" : "https://twitter.com/fi01_IS01/statuses/332055753181519872"
+      "url" : "https://twitter.com/fi01_IS01/statuses/332055753181519872",
+      "archiveurl" : "https://perma.cc/9PD7-TMV4"
     }
   },
   "Surface": ["local", "app"],
@@ -28,5 +30,5 @@
   "Target": ["driver"],
   "Channel": ["app-execution"],
   "Condition": ["affected-app-installed"],
-  "Privilege": ["root"]
+  "Privilege": ["kernel"]
 }
