@@ -13,7 +13,7 @@
   "Affected_versions" : [["All versions using an unpatched kernel", "qseecom-codeaurora"]],
   "Affected_devices" : [["All devices using Qualcomm chipsets", "qseecom-blog"]],
   "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [["All manufacturers using Qualcomm chipsets", "qseecom-blog"]],
+  "Affected_manufacturers" : [["Qualcomm", "qseecom-blog"]],
   "Fixed_versions" : [],
   "references" : {
     "qseecom-codeaurora" : {
