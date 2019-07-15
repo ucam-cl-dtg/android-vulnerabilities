@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Takes a folder of .DOT graph files and produces an animated GIF of the graph data
 # Default delay between frames of 80 units (= 800ms)

@@ -376,12 +376,12 @@ class Vulnerability:
             warning("Error in _dateref: " + str(e))
             return "Unknown"
 
-    def graphLines(self, lookup):
+    def graphLines(self, condition_privilege_lookup):
         """Return an array of strings (in DOT graph format) to show which privilege escalations this vulnerability can perform"""
         sources = []
         lines = []
         for condition in self.jsn['Condition']:
-            source = lookup[condition]
+            source = condition_privilege_lookup[condition]
             if source not in sources:
                 sources.append(source)
                 for privilege in self.jsn['Privilege']:
@@ -811,15 +811,15 @@ def hook_preconvert_stats():
     month_graphs(months_range(first_date, last_date))
 
 
-lookup = dict()
-lookup["affected-app-installed"] = "user"
-lookup["unknown-source-install-allowed"] = "user"
-lookup["attacker-on-same-network"] = "network"
-lookup["usb-debug"] = "system"
-lookup["file-placed-onto-device"] = "user"
-lookup["app-uses-vulnerable-api-functions"] = "user"
-lookup["user-visits-webpage"] = "remote"
-lookup["none"] = "remote"
+condition_privilege_lookup = dict()
+condition_privilege_lookup["affected-app-installed"] = "user"
+condition_privilege_lookup["unknown-source-install-allowed"] = "user"
+condition_privilege_lookup["attacker-on-same-network"] = "network"
+condition_privilege_lookup["usb-debug"] = "system"
+condition_privilege_lookup["file-placed-onto-device"] = "user"
+condition_privilege_lookup["app-uses-vulnerable-api-functions"] = "user"
+condition_privilege_lookup["user-visits-webpage"] = "remote"
+condition_privilege_lookup["none"] = "remote"
 
 def overall_graph():
     """Produce a nodes-and-edges graph showing all possible privilege escalations (that were possible at any time)"""
@@ -827,7 +827,7 @@ def overall_graph():
     graph_file = open("graphs/overall/overall.gv", 'w')
     graph_file.write("digraph vulnerabilities {\n")
     for vulnerability in vulnerabilities:
-        for line in vulnerability.graphLines(lookup):
+        for line in vulnerability.graphLines(condition_privilege_lookup):
             graph_file.write(line)
     graph_file.write("}\n")
     graph_file.close()
@@ -840,7 +840,7 @@ def month_graphs(dates):
         graph_file.write('digraph vulnerabilities {\n')
         for vulnerability in vulnerabilities:
             if vulnerability.exploitable_on(date):
-                for line in vulnerability.graphLines(lookup):
+                for line in vulnerability.graphLines(condition_privilege_lookup):
                     graph_file.write(line)
         graph_file.write('labelloc="top";\n')
         graph_file.write('labeljust="right";\n')
