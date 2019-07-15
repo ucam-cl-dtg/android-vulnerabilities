@@ -824,29 +824,27 @@ condition_privilege_lookup["none"] = "remote"
 def overall_graph():
     """Produce a nodes-and-edges graph showing all possible privilege escalations (that were possible at any time)"""
     print("Outputting graph data")
-    graph_file = open("graphs/overall/overall.gv", 'w')
-    graph_file.write("digraph vulnerabilities {\n")
-    for vulnerability in vulnerabilities:
-        for line in vulnerability.graphLines(condition_privilege_lookup):
-            graph_file.write(line)
-    graph_file.write("}\n")
-    graph_file.close()
+    with open("graphs/overall/overall.gv", 'w') as graph_file:
+        graph_file.write("digraph vulnerabilities {\n")
+        for vulnerability in vulnerabilities:
+            for line in vulnerability.graphLines(condition_privilege_lookup):
+                graph_file.write(line)
+        graph_file.write("}\n")
 
 def month_graphs(dates):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
     for date in dates:
         filename = 'graphs/graph-{:d}-{:02d}.gv'.format(date.year, date.month)
-        graph_file = open(filename, 'w')
-        graph_file.write('digraph vulnerabilities {\n')
-        for vulnerability in vulnerabilities:
-            if vulnerability.exploitable_on(date):
-                for line in vulnerability.graphLines(condition_privilege_lookup):
-                    graph_file.write(line)
-        graph_file.write('labelloc="top";\n')
-        graph_file.write('labeljust="right";\n')
-        graph_file.write('label="{:d}-{:02d}";\n'.format(date.year, date.month))
-        graph_file.write('}\n')
-        graph_file.close()
+        with open(filename, 'w') as graph_file:
+            graph_file.write('digraph vulnerabilities {\n')
+            for vulnerability in vulnerabilities:
+                if vulnerability.exploitable_on(date):
+                    for line in vulnerability.graphLines(condition_privilege_lookup):
+                        graph_file.write(line)
+            graph_file.write('labelloc="top";\n')
+            graph_file.write('labeljust="right";\n')
+            graph_file.write('label="{:d}-{:02d}";\n'.format(date.year, date.month))
+            graph_file.write('}\n')
 
 # Postconvert hooks
 
