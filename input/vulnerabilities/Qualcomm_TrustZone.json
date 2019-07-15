@@ -13,7 +13,7 @@
   "Affected_versions" : [["6.0.1", "cvedetails-qualcomm-trustzone"]],
   "Affected_devices" : [["Many devices using Qualcomm SoCs, including Nexus 5, Nexus 6 and Nexus 7 (2013)", "trustzone-bulletin"]],
   "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [],
+  "Affected_manufacturers" : [["Qualcomm", "trustzone-bulletin"]],
   "Fixed_versions" : [],
   "references" : {
     "trustzone-blog" : {
