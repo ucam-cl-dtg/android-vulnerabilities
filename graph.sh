@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
 # Takes a folder of .DOT graph files and produces an animated GIF of the graph data
+# By default, works on folder of all vulnerabilities
+VERSION=${1:-all}
 # Default delay between frames of 80 units (= 800ms)
-DELAY=${1:-80}
+DELAY=${2:-80}
 
 echo "Script to produce animated GIF of graph data"
+if [ ! -d "graphs/$VERSION" ]; then
+    echo "No files found for this Android version"
+    exit 1
+fi
+
 echo "Creating images of graph data..."
-cd graphs
+cd graphs/$VERSION
 mkdir -p graph_temp/sized
 find *.gv | xargs -I {} dot -Gsize=15,10\! -Gdpi=100 -Tgif {} -o ./graph_temp/{}.gif
 echo "Resizing images..."
