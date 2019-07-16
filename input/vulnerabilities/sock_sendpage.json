@@ -3,16 +3,16 @@
   "CVE" : [["CVE-2009-2692", "vulmon"]],
   "Coordinated_disclosure" : "false",
   "Categories" : ["kernel"],
-  "Details" : [["A vulnerability in the kernel allows local users to gain privileges due to function pointers not being initialised", "vulmon"]],
+  "Details" : [["A vulnerability in the kernel allows local users to gain privileges due to function pointers not being initialised.", "vulmon"], ["According to one source, Android versions up to 3.2.6 are vulnerable", "android-paper"]],
   "Discovered_by" : [["Tavis Ormandy and Julien Tinnes", "cr0"]],
   "Discovered_on" : [["2009-08-13", "cr0"]],
   "Submission" : [{"by":"dcc52","on":"2019-07-03"}],
   "Reported_on" : [],
   "Fixed_on" : [["2009-08-13", "linux-commit"]],
   "Fix_released_on" : [],
-  "Affected_versions" : [["Up to 3.2.6", "android-paper"]],
+  "Affected_versions" : [["Linux kernel 2.6.0 through 2.6.30.4, and 2.4.4 through 2.4.37.4", "cve-mitre-sock-sendpage"], ["Android up to 2.1", "cve-mitre-sock-sendpage"]],
   "Affected_devices" : [["all"]],
-  "Affected_versions_regexp" : ["([1-2]\\.[0-9]\\.[0-9])|(3\\.[0-1]\\.[0-9])|(3\\.2\\.[0-5])"],
+  "Affected_versions_regexp" : ["(1\\.[0-9]\\.[0-9])|(2\\.[0-1]\\.[0-9])"],
   "Affected_manufacturers" : [["all"]],
   "Fixed_versions" : [],
   "references" : {
@@ -30,6 +30,9 @@
     },
     "android-paper" : {
       "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
+    },
+    "cve-mitre-sock-sendpage" : {
+      "url" : "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-2692"
     }
   },
   "Surface": ["local", "app"],
