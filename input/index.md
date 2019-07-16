@@ -124,6 +124,10 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
    <h2>Researchers</h2>
    </div>
    <div class="three columns" style="margin:auto; text-align:center;">
+    <a href="https://dcc52.user.srcf.net"><img src="/images/people/dcc52.jpg" alt="Picture of Daniel Carter"/></a>
+    <p><a href="https://dcc52.user.srcf.net">Daniel Carter</a></p></p>
+   </div>
+   <div class="three columns" style="margin:auto; text-align:center;">
     <a href="https://www.cl.cam.ac.uk/~drt24/"><img src="images/people/drt24.jpg" alt="Picture of Daniel Thomas"/></a>
     <p><a href="https://www.cl.cam.ac.uk/~drt24/">Daniel Thomas</a></p>
    </div>
