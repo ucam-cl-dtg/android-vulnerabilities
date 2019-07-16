@@ -865,9 +865,12 @@ def month_graphs(dates, version=None):
                 graph_file.write('digraph vulnerabilities {\n')
                 for line in exploitables:
                     graph_file.write(line)
+                caption = "Android " + version_string
+                if version == None:
+                    caption = "All Android versions"
                 graph_file.write('labelloc="top";\n')
                 graph_file.write('labeljust="right";\n')
-                graph_file.write('label="{:d}-{:02d}";\n'.format(date.year, date.month))
+                graph_file.write('label="{:s}: {:d}-{:02d}";\n'.format(caption, date.year, date.month))
                 graph_file.write('}\n')
 
 # Postconvert hooks

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Takes a folder of .DOT files and produces PDF files with a graph of each one
-# Maybe use pdfunite?
 
 # By default, works on folder of all vulnerabilities
 VERSION=${1:-all}
