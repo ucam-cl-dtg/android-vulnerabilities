@@ -15,6 +15,7 @@ import numpy
 from collections import defaultdict, OrderedDict
 from uncertainties import ufloat
 from math import sqrt
+import pathlib
 
 sys.path.append('')# So that we find latex_value
 import latex_value
@@ -239,11 +240,16 @@ class Vulnerability:
         dates, fields = self._dates()
         return dates[-1]
 
-    def exploitable_on(self, date):
-        # A somewhat simplistic calculation at the moment
-        if self.first_date() <= date and self.last_date() > date:
-            return True
-        return False
+    def exploitable_on(self, date, version=None):
+        """Returns a boolean giving whether this vulnerability was exploitable on a given date, using a particular version of Android. If no version is given, it is only recorded as exploitable if no Android versions have yet received a patch for it"""
+        regex = self.regex()
+        if (version != None) and not regex.match(version):
+            return False
+        if date < self.first_date():
+            return False
+        if (version == None) and date >= self.last_date():
+            return False
+        return True
 
     def regex(self):
         affected_versions_regexp = self.jsn['Affected_versions_regexp']
@@ -808,8 +814,11 @@ def hook_preconvert_stats():
         vuln_table += r' \href{{http://androidvulnerabilities.org/vulnerabilities/{}}}{{{}}} & {} & {} & {} & {}\\'.format(name.replace(' ', '_'), try_shorten(name), how_known, date, ", ".join(vuln_by_name[name].categories()), cvestring)
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
-    month_graphs(months_range(first_date, last_date))
 
+    data_period = months_range(first_date, last_date)
+    month_graphs(data_period)
+    for version in os_to_api.keys():
+        month_graphs(data_period, version)
 
 condition_privilege_lookup = dict()
 condition_privilege_lookup["affected-app-installed"] = "user"
@@ -831,20 +840,35 @@ def overall_graph():
                 graph_file.write(line)
         graph_file.write("}\n")
 
-def month_graphs(dates):
+def month_graphs(dates, version=None):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
+    version_string = version
+    if version == None:
+        version_string = 'all'
+    print("Graphing version " + version_string)
+    # Create a folder for graphs of this version, if it doesn't exist already
+    folder_path = 'graphs/' + version_string.replace('.', '-')
+    pathlib.Path(folder_path).mkdir(exist_ok=True)
+    # Flag so that there aren't lots of blank graphs from before this version was ever exploited
+    yet_found = False
     for date in dates:
-        filename = 'graphs/graph-{:d}-{:02d}.gv'.format(date.year, date.month)
-        with open(filename, 'w') as graph_file:
-            graph_file.write('digraph vulnerabilities {\n')
-            for vulnerability in vulnerabilities:
-                if vulnerability.exploitable_on(date):
+        exploitables = []
+        for vulnerability in vulnerabilities:
+            if vulnerability.exploitable_on(date, version):
+                if version == None or vulnerability.regex().match(version):
+                    yet_found = True
                     for line in vulnerability.graphLines(condition_privilege_lookup):
-                        graph_file.write(line)
-            graph_file.write('labelloc="top";\n')
-            graph_file.write('labeljust="right";\n')
-            graph_file.write('label="{:d}-{:02d}";\n'.format(date.year, date.month))
-            graph_file.write('}\n')
+                        exploitables.append(line)
+        if yet_found:
+            filename = folder_path + '/graph-{:d}-{:02d}.gv'.format(date.year, date.month)
+            with open(filename, 'w') as graph_file:
+                graph_file.write('digraph vulnerabilities {\n')
+                for line in exploitables:
+                    graph_file.write(line)
+                graph_file.write('labelloc="top";\n')
+                graph_file.write('labeljust="right";\n')
+                graph_file.write('label="{:d}-{:02d}";\n'.format(date.year, date.month))
+                graph_file.write('}\n')
 
 # Postconvert hooks
 
