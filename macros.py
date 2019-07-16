@@ -241,7 +241,9 @@ class Vulnerability:
         return dates[-1]
 
     def exploitable_on(self, date, version=None):
-        """Returns a boolean giving whether this vulnerability was exploitable on a given date, using a particular version of Android. If no version is given, it is only recorded as exploitable if no Android versions have yet received a patch for it"""
+        """Returns a boolean giving whether this vulnerability was exploitable on a given date,
+        using a particular version of Android. If no version is given,
+        it is only recorded as exploitable if no Android versions have yet received a patch for it"""
         regex = self.regex()
         if (version != None) and not regex.match(version):
             return False
@@ -622,6 +624,7 @@ def by_pages(vulndict, by):
     pages.append(p)
 
 
+release_dates = dict()
 def hook_preconvert_releases():
     global python_export_file_contents
     with open('input/release_dates.json') as f:
@@ -632,6 +635,7 @@ def hook_preconvert_releases():
             if len(date) == 0 or '?' in date:
                 continue
             rlist.append([version, date])
+            release_dates[version] = datetime.datetime.strptime(date, '%Y-%m-%d').date()
         rlist = sorted(rlist, key=lambda x: x[0])
         python_export_file_contents += '\nrelease_dates = ' + str(rlist) + '\n'
 
@@ -752,14 +756,15 @@ def months_range(start_date, end_date, day_of_month=1):
     elif day < day_of_month:
         day = day_of_month
     dates = []
-    to_add = datetime.date(year, month, day)
-    while(to_add <= end_date):
-        dates.append(to_add)
-        month += 1
+    while True:
         if month == 13:
             month = 1
             year += 1
         to_add = datetime.date(year, month, day)
+        if to_add > end_date:
+            break
+        dates.append(to_add)
+        month += 1
     return dates
 
 
@@ -815,10 +820,9 @@ def hook_preconvert_stats():
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
-    data_period = months_range(first_date, last_date)
-    month_graphs(data_period)
-    for version in os_to_api.keys():
-        month_graphs(data_period, version)
+    month_graphs(months_range(first_date, last_date))
+    for version, date in release_dates.items():
+        month_graphs(months_range(date, last_date), version)
 
 condition_privilege_lookup = dict()
 condition_privilege_lookup["affected-app-installed"] = "user"
@@ -840,17 +844,17 @@ def overall_graph():
                 graph_file.write(line)
         graph_file.write("}\n")
 
-def month_graphs(dates, version=None):
+def month_graphs(dates, version=None, show_before_first_discovery=True):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
     version_string = version
     if version == None:
         version_string = 'all'
     print("Graphing version " + version_string)
     # Create a folder for graphs of this version, if it doesn't exist already
-    folder_path = 'graphs/' + version_string.replace('.', '-')
+    folder_path = 'graphs/' + version_string
     pathlib.Path(folder_path).mkdir(exist_ok=True)
     # Flag so that there aren't lots of blank graphs from before this version was ever exploited
-    yet_found = False
+    yet_found = show_before_first_discovery
     for date in dates:
         exploitables = []
         for vulnerability in vulnerabilities:
