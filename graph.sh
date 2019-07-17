@@ -11,8 +11,14 @@ if [ ! -d "output/graphs/$VERSION" ]; then
     exit 1
 fi
 
-echo "Creating images of graph data..."
 cd output/graphs/$VERSION
+
+if [ -z "$(ls -A | grep .gv)" ]; then
+    echo "No data to plot"
+    exit 1
+fi
+
+echo "Creating images of graph data..."
 mkdir -p graph_temp
 find *.gv | xargs -I {} dot -Gsize=15,10\! -Gdpi=100 -Tgif {} -o ./graph_temp/{}.gif
 echo "Combining into one animated GIF..."
