@@ -849,6 +849,7 @@ condition_privilege_lookup["usb-debug"] = "system"
 condition_privilege_lookup["file-placed-onto-device"] = "user"
 condition_privilege_lookup["app-uses-vulnerable-api-functions"] = "user"
 condition_privilege_lookup["user-visits-webpage"] = "remote"
+condition_privilege_lookup["root"] = "root"
 condition_privilege_lookup["none"] = "remote"
 
 def month_graphs(dates, version=None, show_before_first_discovery=True):
