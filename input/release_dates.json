@@ -11,7 +11,7 @@
 	"2.2.2" : ["2011-01-22", "https://en.wikipedia.org/wiki/Android_version_history#Android_2.2.E2.80.932.2.3_Froyo_.28API_level_8.29"],
 	"2.2.3" : ["2011-11-21", "https://android.googlesource.com/platform/build/+/refs/tags/android-2.2.3_r1"],
 	"2.3.0" : ["2010-12-06", "http://android-developers.blogspot.co.uk/2010/12/android-23-platform-and-updated-sdk.html"],
-	"2.3.1" : ["2010-12-??", "https://en.wikipedia.org/wiki/Android_version_history#Android_2.3.E2.80.932.3.2_Gingerbread_.28API_level_9.29"],
+	"2.3.1" : ["2010-12-24", "https://wccftech.com/google-nexus-android-231-update-air-smallest-update/"],
 	"2.3.2" : ["2011-01-??", "https://en.wikipedia.org/wiki/Android_version_history#Android_2.3.E2.80.932.3.2_Gingerbread_.28API_level_9.29"],
 	"2.3.3" : ["2011-02-11", "https://en.wikipedia.org/wiki/Android_version_history#Android_2.3.3.E2.80.932.3.7_Gingerbread_.28API_level_10.29"],
 	"2.3.4" : ["2011-04-28", "https://android.googlesource.com/platform/system/core/+/android-2.3.4_r1"],

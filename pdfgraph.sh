@@ -5,14 +5,13 @@
 # By default, works on folder of all vulnerabilities
 VERSION=${1:-all}
 
-echo "Script to produce PDF files of graph data"
-if [ ! -d "graphs/$VERSION" ]; then
+if [ ! -d "output/graphs/$VERSION" ]; then
     echo "No files found for this Android version"
     exit 1
 fi
 
 echo "Producing individual graphs..."
-cd graphs/$VERSION
+cd output/graphs/$VERSION
 find *.gv | xargs dot -Tpdf -O
 echo "Combining into one file..."
 pdfunite *.gv.pdf all.pdf
