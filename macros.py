@@ -859,7 +859,7 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
     print("Graphing version " + version_string)
     # Create a folder for graphs of this version, if it doesn't exist already
     folder_path = 'output/graphs/' + version_string
-    pathlib.Path(folder_path).mkdir(exist_ok=True)
+    pathlib.Path(folder_path).mkdir(parents=True, exist_ok=True)
     # Flag so that there aren't lots of blank graphs from before this version was ever exploited
     yet_found = show_before_first_discovery
     for date in dates:
