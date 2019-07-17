@@ -10,8 +10,14 @@ if [ ! -d "output/graphs/$VERSION" ]; then
     exit 1
 fi
 
-echo "Producing individual graphs..."
 cd output/graphs/$VERSION
+
+if [ -z "$(ls -A | grep .gv)" ]; then
+    echo "No data to plot"
+    exit 0
+fi
+
+echo "Producing individual graphs..."
 find *.gv | xargs dot -Tpdf -O
 echo "Combining into one file..."
 pdfunite *.gv.pdf all.pdf
