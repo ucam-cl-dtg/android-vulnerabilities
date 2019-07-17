@@ -14,7 +14,7 @@ cd output/graphs/$VERSION
 
 if [ -z "$(ls -A | grep .gv)" ]; then
     echo "No data to plot"
-    exit 1
+    exit 0
 fi
 
 echo "Producing individual graphs..."
