@@ -10,10 +10,10 @@
   "Reported_on" : ["2009-12-11", "volez-zen-thought"],
   "Fixed_on" : [],
   "Fix_released_on" : [],
-  "Affected_versions" : [["2.0-2.0.1"]],
-  "Affected_devices" : [["Motorola Droid"]],
+  "Affected_versions" : [["2.0-2.0.1", "android-paper"]],
+  "Affected_devices" : [["Motorola Droid", "android-paper"]],
   "Affected_versions_regexp" : ["2\\.0\\.[0-1]"],
-  "Affected_manufacturers" : [["Motorola"]],
+  "Affected_manufacturers" : [["Motorola", "android-paper"]],
   "Fixed_versions" : [],
   "references" : {    
     "hackers-handbook" : {
@@ -22,6 +22,9 @@
     "volez-zen-thought" : {
       "url" : "http://zenthought.org/content/project/volez",
       "archiveurl" : "https://web.archive.org/web/20160806074055/http://zenthought.org/content/project/volez"
+    },
+    "android-paper" : {
+      "url" : "https://www.researchgate.net/publication/323635885_A_survey_of_Android_exploits_in_the_wild"
     }
   },
   "Surface": ["local", "filesystem"],

@@ -605,7 +605,7 @@ def by_pages(vulndict, by):
         vstring = "[Back to all {by}s](by/{by})\n\n#{key}\n\n".format(key=key, by=by)
         if 'version' == by:
             vstring += '##Graph of vulnerabilities affecting this version\n\n![Vulnerability graph](graphs/{key}/graphs.gif)\n\n'.format(key=key)
-            bypagestring += '![Vulnerability graph](graphs/{key}/graphs-small.gif)\n\n'.format(key=key)
+            bypagestring += '[![Vulnerability graph](graphs/{key}/graphs-small.gif)](by/{by}/{key})\n\n'.format(key=key, by=by)
         if 'manufacturer' == by and key != 'all':
             preamblestring = '\n{key} is affected by [vulnerabilities that affect all Android manufacturers](by/manufacturer/all) in addition to those listed below.\n'.format(key=key)
             if key in manufacturer_scores:
