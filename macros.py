@@ -16,6 +16,7 @@ from collections import defaultdict, OrderedDict
 from uncertainties import ufloat
 from math import sqrt
 import pathlib
+import subprocess
 
 sys.path.append('')# So that we find latex_value
 import latex_value
@@ -595,21 +596,25 @@ def hook_preconvert_bypages():
     by_pages(by_category, 'category')
 
 
-max_vulns_per_key = 10
+max_vulns_per_key = 5
 
 def by_pages(vulndict, by):
     bypagestring = '\n[Back to all vulnerabilities](all)\n\n'  # Can't be the empty string or empty pages will cause errors
     for key, vulns in list(vulndict.items()):
         bypagestring += "##[{key}](by/{by}/{key})\n\n".format(key=key, by=by)
         vstring = "[Back to all {by}s](by/{by})\n\n#{key}\n\n".format(key=key, by=by)
+        if 'version' == by:
+            vstring += '##Graph of vulnerabilities affecting this version\n\n![Vulnerability graph](graphs/{key}/graphs.gif)\n\n'.format(key=key)
+            bypagestring += '![Vulnerability graph](graphs/{key}/graphs-small.gif)\n\n'.format(key=key)
         if 'manufacturer' == by and key != 'all':
             preamblestring = '\n{key} is affected by [vulnerabilities that affect all Android manufacturers](by/manufacturer/all) in addition to those listed below.\n'.format(key=key)
             if key in manufacturer_scores:
                 preamblestring += '\n{key} has a [FUM score](/) of {score}.\n'.format(key=key,score=display_num(manufacturer_scores[key]))
+            preamblestring += '\n'
             bypagestring += preamblestring
             vstring +=  preamblestring
         num_vulns = len(vulns)
-        for vuln in vulns:
+        for vuln in sorted(vulns, key=lambda x : x.first_date()):
             vulnstring = str(vuln) + '\n'
             vstring += vulnstring
             if num_vulns < max_vulns_per_key:
@@ -630,12 +635,24 @@ def hook_preconvert_releases():
     with open('input/release_dates.json') as f:
         rjson = json.load(f)
         rlist = []
+        prev_date = datetime.date(1970,1,1)
         for version, info in list(rjson.items()):
             date = info[0]
-            if len(date) == 0 or '?' in date:
+            if '?' in date:
+                # For graph generation purposes, assume first day of the month if we don't know otherwise
+                short_date = date[:8] + '01'
+                if not '?' in short_date:
+                    prev_date = datetime.datetime.strptime(short_date, '%Y-%m-%d').date()
+                # If there's not even a month, give up and use the last stored date
+                release_dates[version] = prev_date
+                continue
+            if len(date) == 0:
+                # If we really don't know when a release happened, use release date of previous version
+                release_dates[version] = prev_date
                 continue
             rlist.append([version, date])
-            release_dates[version] = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+            prev_date = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+            release_dates[version] = prev_date
         rlist = sorted(rlist, key=lambda x: x[0])
         python_export_file_contents += '\nrelease_dates = ' + str(rlist) + '\n'
 
@@ -834,16 +851,6 @@ condition_privilege_lookup["app-uses-vulnerable-api-functions"] = "user"
 condition_privilege_lookup["user-visits-webpage"] = "remote"
 condition_privilege_lookup["none"] = "remote"
 
-def overall_graph():
-    """Produce a nodes-and-edges graph showing all possible privilege escalations (that were possible at any time)"""
-    print("Outputting graph data")
-    with open("graphs/overall/overall.gv", 'w') as graph_file:
-        graph_file.write("digraph vulnerabilities {\n")
-        for vulnerability in vulnerabilities:
-            for line in vulnerability.graphLines(condition_privilege_lookup):
-                graph_file.write(line)
-        graph_file.write("}\n")
-
 def month_graphs(dates, version=None, show_before_first_discovery=True):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
     version_string = version
@@ -851,7 +858,7 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
         version_string = 'all'
     print("Graphing version " + version_string)
     # Create a folder for graphs of this version, if it doesn't exist already
-    folder_path = 'graphs/' + version_string
+    folder_path = 'output/graphs/' + version_string
     pathlib.Path(folder_path).mkdir(exist_ok=True)
     # Flag so that there aren't lots of blank graphs from before this version was ever exploited
     yet_found = show_before_first_discovery
@@ -876,6 +883,7 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
                 graph_file.write('labeljust="right";\n')
                 graph_file.write('label="{:s}: {:d}-{:02d}";\n'.format(caption, date.year, date.month))
                 graph_file.write('}\n')
+    subprocess.call(['./graph.sh', version_string])
 
 # Postconvert hooks
 
