@@ -1,0 +1,38 @@
+{
+  "name" : "No SELinux in Android 4.3 and below",
+  "CVE" : [],
+  "Coordinated_disclosure" : "N/A",
+  "Categories" : ["system"],
+  "Details" : [["Android 4.3 and below do not use Security-Enhanced Linux (SELinux) for mandatory access control, which means that a process with root access can gain access to the kernel.", "aosp-selinux"]],
+  "Discovered_by" : [["A design feature of the original Android system", "aosp-selinux"]],
+  "Discovered_on" : [["2008-09-23", "android-blog-sdk-1"]],
+  "Submission" : [{"by": "dcc52", "on": "2019-07-17"}],
+  "Reported_on" : [],
+  "Fixed_on" : [],
+  "Fix_released_on" : [["2013-10-31", "android-blog-4.4-release"]],
+  "Affected_versions" : [["Up to 4.3", "aosp-selinux"]],
+  "Affected_devices" : [["all", "aosp-selinux"]],
+  "Affected_versions_regexp" : ["([1-3]\\.[0-9]\\.[0-9])|(4\\.[0-3]\\.[0-9])"],
+  "Affected_manufacturers" : [["all", "aosp-selinux"]],
+  "Fixed_versions" : [["4.4 and above", "aosp-selinux"]],
+  "references" : {
+    "aosp-selinux" : {
+      "url" : "https://source.android.com/security/selinux",
+      "archiveurl" : "https://perma.cc/C6UT-867E"
+    },
+    "android-blog-sdk-1" : {
+      "url" : "https://android-developers.googleblog.com/2008/09/announcing-android-10-sdk-release-1.html",
+      "archiveurl" : "https://perma.cc/HWG6-CH9M"
+    },
+    "android-blog-4.4-release" : {
+      "url" : "https://googleblog.blogspot.com/2013/10/android-for-all-and-new-nexus-5.html",
+      "archiveurl" : "https://perma.cc/7X5A-7TVH"
+    }
+  },
+  "Surface": ["local"],
+  "Vector": ["other"],
+  "Target": ["kernel"],
+  "Channel": ["shell"],
+  "Condition": ["root"],
+  "Privilege": ["kernel"]
+}

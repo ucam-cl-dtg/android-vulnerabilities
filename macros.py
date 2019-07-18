@@ -385,17 +385,24 @@ class Vulnerability:
             warning("Error in _dateref: " + str(e))
             return "Unknown"
 
+    def startPrivileges(self, condition_privilege_lookup):
+        privs = []
+        for condition in self.jsn['Condition']:
+            privs.append(condition_privilege_lookup[condition])
+            return privs
+
     def graphLines(self, condition_privilege_lookup):
         """Return an array of strings (in DOT graph format) to show which privilege escalations this vulnerability can perform"""
         sources = []
         lines = []
-        for condition in self.jsn['Condition']:
-            source = condition_privilege_lookup[condition]
+        reached = set()
+        for source in self.startPrivileges(condition_privilege_lookup):
             if source not in sources:
                 sources.append(source)
-                for privilege in self.jsn['Privilege']:
+                reached = set(self.jsn['Privilege'])
+                for privilege in reached:
                     lines.append('"{origin}" -> "{dest}" [label="{label}"];\n'.format(origin=source, dest=privilege, label=self.name))
-        return lines
+        return lines, reached
 
     def __str__(self):
         if self._str != None:
@@ -456,8 +463,22 @@ def hook_preconvert_00_os_to_api():
         os_to_api = OrderedDict(rlist)
         python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
 
+# For vulnerability analysis, mapping of entry conditions to privilege levels
+condition_privilege_lookup = dict()
+condition_privilege_lookup["affected-app-installed"] = "user"
+condition_privilege_lookup["unknown-source-install-allowed"] = "user"
+condition_privilege_lookup["attacker-on-same-network"] = "network"
+condition_privilege_lookup["usb-debug"] = "system"
+condition_privilege_lookup["file-placed-onto-device"] = "user"
+condition_privilege_lookup["app-uses-vulnerable-api-functions"] = "user"
+condition_privilege_lookup["user-visits-webpage"] = "remote"
+condition_privilege_lookup["root"] = "root"
+condition_privilege_lookup["none"] = "remote"
+
 
 vulnerabilities = []
+# Don't show in lists, and only show on graphs if the required privilege has been already obtained
+hidden_vulnerabilities = defaultdict(list)
 vuln_by_name = dict()
 # Key to list of vulnerability dicts
 by_year = defaultdict(list)
@@ -473,7 +494,14 @@ def hook_preconvert_01_vulnerabilities():
         if filename == 'template.json':  # skip over template
             continue
         if not filename.endswith('.json'):
-          continue
+            continue
+        if filename.endswith('.hidden.json'):
+            with open('input/vulnerabilities/' + filename, 'r') as f:
+                print("processing: " + filename)
+                vulnerability = Vulnerability(json.load(f))
+                for privilege in vulnerability.startPrivileges(condition_privilege_lookup):
+                    hidden_vulnerabilities[privilege].append(vulnerability)
+            continue
         with open('input/vulnerabilities/' + filename, 'r') as f:
             print("processing: " + filename)
             vulnerability = Vulnerability(json.load(f))
@@ -841,16 +869,6 @@ def hook_preconvert_stats():
     for version, date in release_dates.items():
         month_graphs(months_range(date, last_date), version)
 
-condition_privilege_lookup = dict()
-condition_privilege_lookup["affected-app-installed"] = "user"
-condition_privilege_lookup["unknown-source-install-allowed"] = "user"
-condition_privilege_lookup["attacker-on-same-network"] = "network"
-condition_privilege_lookup["usb-debug"] = "system"
-condition_privilege_lookup["file-placed-onto-device"] = "user"
-condition_privilege_lookup["app-uses-vulnerable-api-functions"] = "user"
-condition_privilege_lookup["user-visits-webpage"] = "remote"
-condition_privilege_lookup["none"] = "remote"
-
 def month_graphs(dates, version=None, show_before_first_discovery=True):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
     version_string = version
@@ -864,12 +882,22 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
     yet_found = show_before_first_discovery
     for date in dates:
         exploitables = []
+        points_reached = set()
         for vulnerability in vulnerabilities:
             if vulnerability.exploitable_on(date, version):
                 if version == None or vulnerability.regex().match(version):
                     yet_found = True
-                    for line in vulnerability.graphLines(condition_privilege_lookup):
+                    lines, reached = vulnerability.graphLines(condition_privilege_lookup)
+                    for line in lines:
                         exploitables.append(line)
+                        points_reached = points_reached.union(reached)
+        for origin in points_reached:
+            for vulnerability in hidden_vulnerabilities[origin]:
+                if vulnerability.exploitable_on(date, version):
+                    if version == None or vulnerability.regex().match(version):
+                        lines, reached = vulnerability.graphLines(condition_privilege_lookup)
+                        for line in lines:
+                            exploitables.append(line)
         if yet_found:
             filename = folder_path + '/graph-{:d}-{:02d}.gv'.format(date.year, date.month)
             with open(filename, 'w') as graph_file:
