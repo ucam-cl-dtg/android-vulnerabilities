@@ -11,19 +11,22 @@
   "Reported_on" : [["2015-03-12", "ZDI-15-093"]],
   "Fixed_on" : [["2014-11-15","dhcpd-fix"]],
   "Fix_released_on" : [],
-  "Affected_versions" : [],
-  "Affected_devices" : [],
-  "Affected_versions_regexp" : [],
-  "Affected_manufacturers" : [],
-  "Fixed_versions" : [],
+  "Affected_versions" : [["All versions below 5.1", "dhcpd-circl"]],
+  "Affected_devices" : [["all", "dhcpd-circl"]],
+  "Affected_versions_regexp" : ["([1-4]\\.[0-9]\\.[0-9])|(5\\.0\\.[0-9])"],
+  "Affected_manufacturers" : [["all", "dhcpd-circl"]],
+  "Fixed_versions" : [["5.1", "dhcpd-circl"]],
   "references" : {
     "dhcpd-fix" : {
       "url" : "https://android.googlesource.com/platform/external/dhcpcd/+/73c09dd8067250734511d955d8f792b41c7213f0",
       "component" : "external/dhcpd",
       "commit" : "73c09dd8067250734511d955d8f792b41c7213f0"
-    }
-  , "ZDI-15-093" : {
+    },
+    "ZDI-15-093" : {
       "url" : "http://www.zerodayinitiative.com/advisories/ZDI-15-093/"
+    },
+    "dhcpd-circl" : {
+      "url" : "https://cve.circl.lu/cve/CVE-2014-7912"
     }
   },
   "Surface": ["remote", "webview"],

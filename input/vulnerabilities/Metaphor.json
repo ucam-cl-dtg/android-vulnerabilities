@@ -1,7 +1,7 @@
 {
   "name" : "Metaphor",
   "CVE" : [["CVE-2015-3864", "metaphor-avast"]],
-  "Coordinated_disclosure" : "false",
+  "Coordinated_disclosure" : "true",
   "Categories" : ["system"],
   "Details" : [["A remote-access exploit that uses a vulnerability in libstagefright", "metaphor-report"]],
   "Discovered_by" : [["Hanan Be’er", "metaphor-report"]],
