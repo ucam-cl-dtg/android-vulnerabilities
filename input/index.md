@@ -5,6 +5,7 @@ first-section-id: scores
 ---
 <div class="four columns info">
 <h2>Scores out of ten</h2>
+<p style="text-align: left;">N.B. These scores have not been updated since 2015</p>
 {{score_table(['input/scores/sec_scores_summary.csv', 'input/scores/sec_scores_manufacturer.csv'], ['other','non-Nexus devices'])}}
 </div>
 <div class="eight columns right-cols">
@@ -39,13 +40,12 @@ Further details on how this figure constructed can be found <a href="graph">on a
 <div class="row" markdown="1">
 <div class="row">
  <div class="three columns">
-  <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer" style="max-width:300px; margin:auto;">{% insert_svg('images/da-logo', 'Device Analyzer logo','100%','auto', link=True)%}</a>
+  {% insert_svg('images/da-logo', 'Device Analyzer logo','100%','auto', link=True)%}
  </div>
  <div class="nine columns">
- <h2>Help us, install <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">Device Analyzer</a></h2>
- <p>We are only able to produce these scores due to the contributions made to <a href="https://deviceanalyzer.cl.cam.ac.uk/">Device Analyzer</a> by members of the public.
-If you have an Android device you can install the <a href="https://play.google.com/store/apps/details?id=uk.ac.cam.deviceanalyzer">Device Analyzer app</a> and provide researchers with additional data on which devices are secure.
-Device Analyzer follows <a href="http://deviceanalyzer.cl.cam.ac.uk/collected.htm">best practices in privacy preservation</a>.</p>
+ <h2><a href="https://deviceanalyzer.cl.cam.ac.uk/">Device Analyzer</a></h2>
+ <p>We have only been able to produce these scores due to the contributions made to <a href="https://deviceanalyzer.cl.cam.ac.uk/">Device Analyzer</a> by members of the public.
+ The Device Analyzer app is no longer available, but information about the project is still available from the link above.</p>
  <p>If you have information about a vulnerability not listed on this site then you can <a href="submit">submit it</a>.</p>
  <p>If you have MDM data and want to know which devices used by your organisation are vulnerable then we can help: <a href="#contact">contact us</a>.</p>
  </div>
@@ -83,7 +83,8 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 ### Press releases
 
  * [Thursday 8th October 2015](press/2015-10-08): 87% of Android devices insecure - Manufacturers fail to provide security updates
- * [Light Blue Touchpaper](https://www.lightbluetouchpaper.org/2015/10/08/87-of-android-devices-insecure-because-manufacturers-fail-to-provide-security-updates/): 87% of Android devices insecure because manufacturers fail to provide security updates
+ * [Light Blue Touchpaper, Thursday 8th October 2015](https://www.lightbluetouchpaper.org/2015/10/08/87-of-android-devices-insecure-because-manufacturers-fail-to-provide-security-updates/): 87% of Android devices insecure because manufacturers fail to provide security updates
+   * [Light Blue Touchpaper, Wednesday 10th July 2019](https://www.lightbluetouchpaper.org/2019/07/10/the-lifetime-of-an-android-api-vulnerability/): The lifetime of an Android API vulnerability
 
 </div></div><div class="row" markdown="1"><div class="twelve columns" markdown="1">
 
