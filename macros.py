@@ -396,12 +396,16 @@ class Vulnerability:
         sources = []
         lines = []
         reached = set()
+        manufacturers = self.manufacturers()
+        colour = 'red'
+        if 'all' in  map(lambda x : x[0], manufacturers):
+            colour = 'black'
         for source in self.startPrivileges(condition_privilege_lookup):
             if source not in sources:
                 sources.append(source)
                 reached = set(self.jsn['Privilege'])
                 for privilege in reached:
-                    lines.append('"{origin}" -> "{dest}" [label="{label}"];\n'.format(origin=source, dest=privilege, label=self.name))
+                    lines.append('"{origin}" -> "{dest}" [label="{label}" color="{colour}"];\n'.format(origin=source, dest=privilege, label=self.name, colour=colour))
         return lines, reached
 
     def __str__(self):
