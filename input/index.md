@@ -82,9 +82,9 @@ These are vulnerabilities that allow an app (malicious or compromised) to either
 
 ### Press releases
 
+ * [Light Blue Touchpaper, Wednesday 10th July 2019](https://www.lightbluetouchpaper.org/2019/07/10/the-lifetime-of-an-android-api-vulnerability/): The lifetime of an Android API vulnerability
  * [Thursday 8th October 2015](press/2015-10-08): 87% of Android devices insecure - Manufacturers fail to provide security updates
  * [Light Blue Touchpaper, Thursday 8th October 2015](https://www.lightbluetouchpaper.org/2015/10/08/87-of-android-devices-insecure-because-manufacturers-fail-to-provide-security-updates/): 87% of Android devices insecure because manufacturers fail to provide security updates
-   * [Light Blue Touchpaper, Wednesday 10th July 2019](https://www.lightbluetouchpaper.org/2019/07/10/the-lifetime-of-an-android-api-vulnerability/): The lifetime of an Android API vulnerability
 
 </div></div><div class="row" markdown="1"><div class="twelve columns" markdown="1">
 

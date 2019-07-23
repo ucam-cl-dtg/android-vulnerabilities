@@ -6,7 +6,8 @@ import os
 import utils
 import json
 from collections import defaultdict
-#import numpy as np
+import re
+import urllib.request
 import pprint
 
 MANUAL_KEYS = ['Surface', 'Vector', 'Target', 'Channel', 'Condition', 'Privilege']
@@ -47,7 +48,17 @@ def get_descriptions(cves):
     for year, cves in cve_years.items():
         descriptions.update(load_from_year(year, set(cves)))
     return descriptions
-    
+
+def load_date_from_commit(url):
+    """Given the URL of a commit identifier, returns the date of the commit"""
+    if 'googlesource.com' in url:
+        with urllib.request.urlopen(url + '?format=JSON') as url:
+            data = json.loads(url.read().decode())
+            time_string = data['author']['time']
+            time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
+            # Return only the date, not the time
+    # MORE TO DO HERE
+    raise Exception
 
 def load_manual_data(cve):
     """Returns manually entered data on the vulnerability, to be combined with automatically scraped data"""
@@ -78,8 +89,10 @@ def make_reference(url):
 
 def regexp_versions(versions_string):
     """Converts the list of versions from the bulletin data into a regexp"""
+    if len(versions_string) == 0:
+        return ''
     versions = versions_string.replace(' ', '').replace('.', '\\.').split(',')
-    regexp = ""
+    regexp = ''
     for version in versions:
         dots = version.count('.')
         if dots == 2:
@@ -93,11 +106,12 @@ def regexp_versions(versions_string):
     return regexp[:-1]
 
 def check_blank(text, ref):
+    """Formats a data-reference pair and avoids references being given to blank data items"""
     if text == '':
         return []
     return [[text, ref]]
 
-def write_data_for_website(cve, data, submission):
+def write_data_for_website(cve, data):
     """Process data and write out to a JSON file suitable for loading into androidvulnerabilities.org"""
     export = dict()
 
@@ -117,7 +131,7 @@ def write_data_for_website(cve, data, submission):
     export['Details'] = check_blank(data['Description'], nist_ref)
     # Discovered by
     # Discovered on
-    export['Submission'] = submission
+    export['Submission'] = data['Submission']
     # Reported on
     # Fixed on
     # Fix released on
@@ -143,10 +157,30 @@ def write_data_for_website(cve, data, submission):
     with open('website-data/{cve}.json'.format(cve=cve), 'w') as f:
         json.dump(export, f, indent=2)
 
+def parse_references(table_cell):
+    """Parse the contents of a table cell and produce a reference dictionary"""
+    ref_data = dict()
+    # Take references which link to URLs
+    refs = table_cell.find_elements_by_tag_name('a')
+    for ref in refs:
+        text = ref.get_attribute('innerHTML').replace('\n', ' ')
+        if text != '*':
+            url = make_reference(ref.get_attribute('href'))
+            ref_data[text] = url
+
+    # Strip out links, line breaks and square brackets, and take the remaining sections of the string as references
+    regex = r'(\<a(.*?)\>(.*?)\<\/a\>)|(\<br\>)|(\n)|\[|\]'
+
+    contents = table_cell.get_attribute('innerHTML')
+    text_items = re.sub(regex, ' ', contents).split()
+    for item in text_items:
+        ref_data[item] = make_reference('N/A')
+
+    return ref_data
+
 def process_table(table, category, source_url):
     """Produce a list of dictionaries of vulnerabilities from an HTML table"""
     rows = table.find_elements_by_tag_name('tr')
-    #get_headers = np.vectorize(lambda x : x.get_attribute('innerHTML'))
     headers = []
     for header in table.find_elements_by_tag_name('th'):
         headers.append(header.get_attribute('innerHTML'))
@@ -161,13 +195,8 @@ def process_table(table, category, source_url):
         if(len(items) != len(headers)):
             raise Exception("Invalid table")
         for (header, item) in zip(headers, items):
-            # Check whether item is a list of references
-            refs = item.find_elements_by_tag_name('a')
-            if(len(refs) != 0):
-                ref_data = dict()
-                for ref in refs:
-                    ref_data[ref.get_attribute('innerHTML').replace('\n', ' ')] = make_reference(ref.get_attribute('href'))
-                row_data[header] = ref_data
+            if header == 'References':
+                row_data['References'] = parse_references(item)
             else:
                 row_data[header] = item.get_attribute('innerHTML')
                 if header == 'CVE':
@@ -223,15 +252,22 @@ for cve in descriptions.keys():
 for cve, vulnerability in vulnerabilities.items():
     pprint.pprint(vulnerability)
     if(vulnerability['Severity'] == 'Critical'):
+        # If no stored submission date, assume today
         manual_data = load_manual_data(cve)
+        if 'Submission' not in manual_data.keys()
+        manual_data['Submission'] = submission
         for key in MANUAL_KEYS:
             if key not in manual_data.keys():
-                value = input("Enter {key}: ".format(key=key)).split(',')
+                entered = input("Enter {key}: ".format(key=key))
+                if entered != '':
+                    value = entered.split(',')
+                else:
+                    value = []
                 manual_data[key] = value
         vulnerability.update(manual_data)
         write_manual_data(cve, manual_data)
+        write_data_for_website(cve, vulnerability)
 
     write_data(cve, vulnerability)
-    write_data_for_website(cve, vulnerability, submission)
 
 utils.quitDriver(driver)
