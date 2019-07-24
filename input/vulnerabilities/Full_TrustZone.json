@@ -5,7 +5,7 @@
   "Categories" : ["kernel", "system"],
   "Details" : [["A vulnerability in a modified kernel means that a series of exploits can be used to obtain access to the Trusted Execution Environment", "msm8974-pt1"]],
   "Discovered_by" : [["Gal Beniamini (laginimaineb)", "msm8974-pt3"]],
-  "Discovered_on" : [["2014-09-19", "msm8974-pt3"]],
+  "Discovered_on" : [],
   "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
   "Reported_on" : [["2014-09-19", "msm8974-pt3"]],
   "Fixed_on" : [["2014-10-01", "msm8974-pt3"]],

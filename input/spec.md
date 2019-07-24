@@ -81,7 +81,8 @@ These are obtained from various sources, and give details of the type of vulnera
   * `remote` - attacked over a network by a remote user
   * `physical-access` - requires physical access to the device
   * `shell` - can be exploited via the ADB shell
-  * `file-placement` - placement of a crafted file in a particular location on the filesystem
+  * `file-placement` - placement of a crafted file onto the filesystem (either in a particular location or simply in a place where the user will attempt to open it)
+  * `bluetooth` - attack via a Bluetooth connection
 * Condition:
   * `affected-app-installed` - an app which can exploit the vulnerability has been installed onto the device
   * `unknown-source-install-allowed` - the option to install apps from non-Google Play sources has been enabled
@@ -90,6 +91,9 @@ These are obtained from various sources, and give details of the type of vulnera
   * `file-placed-onto-device` - a crafted file has been placed onto the device's filesystem
   * `app-uses-vulnerable-api-functions` - an app in use makes calls to vulnerable API functions
   * `user-visits-webpage` - the user visits a malicious webpage
+  * `malicious-file-viewed` - the user views a malicious file (which could be delivered in many different ways)
+  * `attacker-in-close-proximity` - the attacker must be located physically close to the device (as with Bluetooth-based attacks)
+  * `user-has-remote-access` - a malicious user already has remote access, and can use this vulnerability to elevate permissions
   * `root` - the exploit must already have root access
   * `none` - attack can be performed with no other access to the device, or use of vulnerable apps
 * Privilege:

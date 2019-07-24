@@ -5,7 +5,7 @@
   "Categories" : ["system"],
   "Details" : [["A vulnerability in the driver for Qualcomm's Trusted Excecution Environment allows code execution in this environment", "qsee-blog"]],
   "Discovered_by" : [["Gal Beniamini (laginimaineb)", "qsee-blog"]],
-  "Discovered_on" : [["2015-09-27", "qsee-blog"]],
+  "Discovered_on" : [],
   "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
   "Reported_on" : [["2015-09-27", "qsee-blog"]],
   "Fixed_on" : [["2015-12-14", "qsee-blog"]],
