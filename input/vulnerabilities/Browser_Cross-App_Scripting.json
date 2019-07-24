@@ -18,7 +18,8 @@
   "Fixed_versions" : [["2.3.5, 3.2"]],
   "references" : {
     "watchfire-crossapp" : {
-      "url" : "http://blog.watchfire.com/files/advisory-android-browser.pdf"
+      "url" : "http://blog.watchfire.com/files/advisory-android-browser.pdf",
+      "archiveurl" : "https://web.archive.org/web/20171115133514/https://blog.watchfire.com/files/advisory-android-browser.pdf"
     }
   , "browser-fix" : {
       "url" : "https://android.googlesource.com/platform/packages/apps/Browser/+/afa4ab1e4c1d645e34bd408ce04cadfd2e5dae1e"

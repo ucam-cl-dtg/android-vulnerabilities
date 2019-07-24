@@ -17,7 +17,8 @@
   "Fixed_versions" : [["4.3_r0.9","patch-apk-dup-file"]],
   "references" : {
     "bluebox-master-key" : {
-      "url" : "http://bluebox.com/corporate-blog/bluebox-uncovers-android-master-key/"
+      "url" : "http://bluebox.com/corporate-blog/bluebox-uncovers-android-master-key/",
+      "archiveurl" : "https://web.archive.org/web/20130703214349/http://bluebox.com/corporate-blog/bluebox-uncovers-android-master-key/"
     },
     "patch-apk-dup-file" : {
       "url" : "https://android.googlesource.com/platform/libcore/+/38cad1eb5cc0c30e034063c14c210912d97acb92",

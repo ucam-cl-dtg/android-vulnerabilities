@@ -5,7 +5,7 @@
   "Categories" : ["kernel"],
   "Details" : [["A Linux kernel privilege escalation vulnerability allows arbitrary code to be executed within the kernel", "qseecom-blog"]],
   "Discovered_by" : [["Gal Beniamini (laginimaineb)", "qseecom-blog"]],
-  "Discovered_on" : [["2014-09-24", "qseecom-blog"]],
+  "Discovered_on" : [],
   "Submission" : [{"by":"dcc52", "on":"2019-07-09"}],
   "Reported_on" : [["2014-09-24", "qseecom-blog"]],
   "Fixed_on" : [["2014-12-22", "qseecom-codeaurora"]],
