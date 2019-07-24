@@ -49,15 +49,25 @@ def get_descriptions(cves):
         descriptions.update(load_from_year(year, set(cves)))
     return descriptions
 
-def load_date_from_commit(url):
+def load_date_from_commit(url, driver):
     """Given the URL of a commit identifier, returns the date of the commit"""
     if 'googlesource.com' in url:
-        with urllib.request.urlopen(url + '?format=JSON') as url:
-            data = json.loads(url.read().decode())
+        with urllib.request.urlopen(url + '?format=JSON') as source:
+            src = source.read()[5:]
+            data = json.loads(src.decode())
             time_string = data['author']['time']
             time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
-            # Return only the date, not the time
-    # MORE TO DO HERE
+            return time.date()
+    elif 'codeaurora.org' in url:
+        utils.fetchPage(driver, url)
+        rows = driver.find_elements_by_xpath('//table[@class="commit-info"]/tbody/tr')
+        for row in rows:
+            if row.find_element_by_tag_name('th').get_attribute('innerHTML') != 'author':
+                continue
+            time_string = row.find_element_by_xpath('./td[@class="right"]').get_attribute('innerHTML')
+            time = datetime.strptime(time_string, '%Y-%m-%d %H:%M:%S %z')
+            return time.date()
+    # If it's not one of these sources, we don't know
     raise Exception
 
 def load_manual_data(cve):
@@ -84,7 +94,8 @@ def write_data(cve, data):
 def make_reference(url):
     """Creates a reference object (stored as a dictionary) for a given URL"""
     ref_dict = dict()
-    ref_dict['url'] = url
+    if url != None:
+        ref_dict['url'] = url
     return ref_dict
 
 def regexp_versions(versions_string):
@@ -123,6 +134,8 @@ def write_data_for_website(cve, data):
     ref_out[nist_ref] = make_reference(NIST_URL)
     bulletin_ref = 'Bulletin-' + cve
     ref_out[bulletin_ref] = make_reference(data['URL'])
+
+    report_date = re.search(r'[0-9]{4}-[0-9]{2}-[0-9]{2}(?=\.html)', data['URL'])
     
     export['name'] = cve
     export['CVE'] = [[cve, bulletin_ref]]
@@ -132,9 +145,10 @@ def write_data_for_website(cve, data):
     # Discovered by
     # Discovered on
     export['Submission'] = data['Submission']
-    # Reported on
-    # Fixed on
-    # Fix released on
+    if report_date != None:
+        export['Reported_on'] = [[report_date.group(), bulletin_ref]]
+    export['Fixed_on'] = [[data['Fixed_on'], data['Fixed_on_ref']]]
+    export['Fixed_released_on'] = [[data['Fix_released_on'], bulletin_ref]]
     export['Affected_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
     # Affected devices
     export['Affected_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
@@ -143,7 +157,7 @@ def write_data_for_website(cve, data):
     elif 'NVIDIA' in data['Category']:
         export['Affected_manufacturers'] = [['NVIDIA', bulletin_ref]]
     else:
-        # If it's not Qualcomm or NVIDIA, assume for this purposes that all other vulnerabilities affect all phones
+        # If it's not Qualcomm or NVIDIA, assume for this purpose that all other vulnerabilities affect all phones
         export['Affected_manufacturers'] = [['all', bulletin_ref]]
     export['Fixed_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
     export['references'] = data['References']
@@ -174,11 +188,11 @@ def parse_references(table_cell):
     contents = table_cell.get_attribute('innerHTML')
     text_items = re.sub(regex, ' ', contents).split()
     for item in text_items:
-        ref_data[item] = make_reference('N/A')
+        ref_data[item] = make_reference(None)
 
     return ref_data
 
-def process_table(table, category, source_url):
+def process_table(table, category, source_url, date_fix_released_on):
     """Produce a list of dictionaries of vulnerabilities from an HTML table"""
     rows = table.find_elements_by_tag_name('tr')
     headers = []
@@ -186,25 +200,43 @@ def process_table(table, category, source_url):
         headers.append(header.get_attribute('innerHTML'))
 
     table_data = dict()
+    multispans = dict()
+    prev_row = None
     cve = None
     # Exclude the top (title) row
     for row in rows[1:]:
         row_data = defaultdict(str)
         # Find each cell of the table
         items = row.find_elements_by_tag_name('td')
-        if(len(items) != len(headers)):
+        if(len(items) + len(multispans)) != len(headers):
             raise Exception("Invalid table")
-        for (header, item) in zip(headers, items):
-            if header == 'References':
-                row_data['References'] = parse_references(item)
+        index = 0
+        for header in headers:
+            if header in multispans:
+                # Data from previous row needs to "spill over"
+                row_data[header] = prev_row[header]
+                multispans[header] -= 1
+                if multispans[header] == 0:
+                    del multispans[header]
             else:
-                row_data[header] = item.get_attribute('innerHTML')
-                if header == 'CVE':
-                    cve = row_data['CVE']
+                item = items[index]
+                index += 1
+                rowspan = item.get_attribute('rowspan')
+                if rowspan != None and int(rowspan) > 1:
+                    # This row needs to "spill over" into the next
+                    multispans[header] = int(rowspan) -1
 
-        if cve != None:
+                if header == 'References':
+                    row_data['References'] = parse_references(item)
+                else:
+                    row_data[header] = item.get_attribute('innerHTML')
+
+        if 'CVE' in row_data:
+            cve = row_data['CVE']
             row_data['Category'] = category
             row_data['URL'] = source_url
+            row_data['Fix_released_on'] = date_fix_released_on
+            prev_row = row_data
             table_data[cve] = row_data
 
     return table_data
@@ -226,22 +258,40 @@ submission = dict()
 submission['by'] = get_submitter_name()
 submission['on'] = date.today().strftime('%Y-%m-%d')
 
-for month in range(1, 8):
-    url = 'https://source.android.com/security/bulletin/2019-{:02d}-01.html'.format(month)
-    utils.fetchPage(driver, url)
+# Fix release dates (done per bulletin)
+fix_dates = dict()
 
-    contents = driver.find_elements_by_xpath('//devsite-heading | //div[@class="devsite-table-wrapper"]/table')
+report_day_of_month = 1
+today = date.today()
 
-    title = None
+for year in range(2018, (today.year)+1):
+    fix_dates[year] = dict()
+    for month in range(1, 13):
+        if date(year, month, report_day_of_month) > today:
+            break
+        url = 'https://source.android.com/security/bulletin/{:d}-{:02d}-{:02d}.html'.format(year, month, report_day_of_month)
+        utils.fetchPage(driver, url)
 
-    for item in contents:
-        if item.get_attribute('level') == 'h3':
-            # If item is a title
-            title = item.get_attribute('text').replace('\n', ' ')
-        elif title != None:
-            # If item is a table, and there hasn't been a table since the last title
-            vulnerabilities.update(process_table(item, title, url))
-            title = None
+        month_fix_date = None
+        search_exp = '{:d}-{:02d}-[0-9][0-9]'.format(year, month)
+        date_para = driver.find_elements_by_xpath('//div[contains(@class, "devsite-article-body")]/p')[1]
+        date_text = re.search(search_exp, date_para.get_attribute('innerHTML'))
+        if date_text != None:
+            month_fix_date = date_text.group()
+            fix_dates[year][month] = month_fix_date
+
+        contents = driver.find_elements_by_xpath('//devsite-heading | //div[@class="devsite-table-wrapper"]/table')
+
+        title = None
+
+        for item in contents:
+            if item.get_attribute('level') == 'h3':
+                # If item is a title
+                title = item.get_attribute('text').replace('\n', ' ')
+            elif title != None:
+                # If item is a table, and there hasn't been a table since the last title
+                vulnerabilities.update(process_table(item, title, url, month_fix_date))
+                title = None
 
 descriptions = get_descriptions(vulnerabilities.keys())
 for cve in descriptions.keys():
@@ -250,14 +300,29 @@ for cve in descriptions.keys():
 #pprint.pprint(vulnerabilities)
 
 for cve, vulnerability in vulnerabilities.items():
-    pprint.pprint(vulnerability)
     if(vulnerability['Severity'] == 'Critical'):
+        # Get the fix date
+        # Using the latest date of any of the commits as "fixed" date
+        fixed = None
+        fixed_ref = None
+        for ref_name, reference in vulnerability['References'].items():
+            if 'url' in reference.keys():
+                commit_date = load_date_from_commit(reference['url'], driver)
+                if fixed == None or commit_date > fixed:
+                    fixed = commit_date
+                    fixed_ref = ref_name
+        if fixed != None:
+            vulnerability['Fixed_on'] = fixed.isoformat()
+            vulnerability['Fixed_on_ref'] = fixed_ref
+
+        pprint.pprint(vulnerability)
+
         # If no stored submission date, assume today
         manual_data = load_manual_data(cve)
-        if 'Submission' not in manual_data.keys()
-        manual_data['Submission'] = submission
+        if 'Submission' not in manual_data.keys():
+            manual_data['Submission'] = submission
         for key in MANUAL_KEYS:
-            if key not in manual_data.keys():
+            if key not in manual_data:
                 entered = input("Enter {key}: ".format(key=key))
                 if entered != '':
                     value = entered.split(',')
