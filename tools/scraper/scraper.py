@@ -8,16 +8,19 @@ import json
 from collections import defaultdict
 import re
 import urllib.request
+import atexit
 import pprint
 
 MANUAL_KEYS = ['Surface', 'Vector', 'Target', 'Channel', 'Condition', 'Privilege']
+MANUAL_KEYS_REQUIRED = {'Surface', 'Target', 'Channel', 'Condition', 'Privilege'}
 NIST_URL = 'https://nvd.nist.gov/vuln/data-feeds'
+KNOWN_MANUFACTURERS = {'Qualcomm', 'NVIDIA', 'Broadcom', 'LG', 'MediaTek'}
 
 def get_subnode(node, key):
     """Returns the requested value from a dictionary, while ignoring null values"""
-    if node == None:
-        return None
-    return node[key]
+    if node != None and key in node:
+        return node[key]
+    return None
 
 def load_from_year(year, cves):
     """Loads descriptions from the NIST data for all vulnerabilities in a given year"""
@@ -31,10 +34,29 @@ def load_from_year(year, cves):
                 cve_data = get_subnode(cve_object, 'CVE_data_meta')
                 cve = get_subnode(cve_data, 'ID')
                 if cve in cves:
+                    #print("Processing " + cve)
+                    cve_output_data = dict()
                     description_data = get_subnode(get_subnode(cve_object, 'description'), 'description_data')
                     if description_data != None and len(description_data) > 0:
                         value = get_subnode(description_data[0], 'value')
-                        descriptions[cve] = value
+                        cve_output_data['Description'] = value
+                    cwe_data = get_subnode(get_subnode(cve_object, 'problemtype'), 'problemtype_data')
+                    if cwe_data != None and len(cwe_data) > 0:
+                        cwe_description_data = get_subnode(cwe_data[0], 'description')
+                        if cwe_description_data != None and len(cwe_description_data) > 0:
+                            value = get_subnode(cwe_description_data[0], 'value')
+                            cve_output_data['CWE'] = value
+                    impact = get_subnode(item, 'impact')
+                    baseMetricV3 = get_subnode(impact, 'baseMetricV3')
+                    if baseMetricV3 != None:
+                        cvssV3 = get_subnode(baseMetricV3, 'cvssV3')
+                        cve_output_data['Attack_method'] = get_subnode(cvssV3, 'attackVector')
+                    else:
+                        baseMetricV2 = get_subnode(impact, 'baseMetricV2')
+                        cvssV2 = get_subnode(baseMetricV2, 'cvssV2')
+                        cve_output_data['Attack_method'] = get_subnode(cvssV2, 'accessVector')
+
+                    descriptions[cve] = cve_output_data
     return descriptions
 
 def get_descriptions(cves):
@@ -122,6 +144,14 @@ def check_blank(text, ref):
         return []
     return [[text, ref]]
 
+def decode_cwe(cwe, dataset):
+    """Convert a CWE reference to a vector description to be used in data files"""
+    if cwe in dataset:
+        return dataset[cwe]
+    decoded = input("Please enter vector for {cwe}: ".format(cwe=cwe))
+    dataset[cwe] = decoded
+    return decoded
+
 def write_data_for_website(cve, data):
     """Process data and write out to a JSON file suitable for loading into androidvulnerabilities.org"""
     export = dict()
@@ -152,13 +182,13 @@ def write_data_for_website(cve, data):
     export['Affected_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
     # Affected devices
     export['Affected_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
-    if 'Qualcomm' in data['Category']:
-        export['Affected_manufacturers'] = [['Qualcomm', bulletin_ref]]
-    elif 'NVIDIA' in data['Category']:
-        export['Affected_manufacturers'] = [['NVIDIA', bulletin_ref]]
-    else:
-        # If it's not Qualcomm or NVIDIA, assume for this purpose that all other vulnerabilities affect all phones
-        export['Affected_manufacturers'] = [['all', bulletin_ref]]
+    # Initially assume all devices are affected
+    manufacturer_affected = 'all'
+    for manufacturer in KNOWN_MANUFACTURERS:
+        if manufacturer in data['Category']:
+            # A specific manufacturer is named, so use that
+            manufacturer_affected = manufacturer
+    export['Affected_manufacturers'] = [[manufacturer_affected, bulletin_ref]]
     export['Fixed_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
     export['references'] = data['References']
     export['Surface'] = data['Surface']
@@ -167,6 +197,7 @@ def write_data_for_website(cve, data):
     export['Channel'] = data['Channel']
     export['Condition'] = data['Condition']
     export['Privilege'] = data['Privilege']
+    export['CWE'] = [data['CWE']]
     
     with open('website-data/{cve}.json'.format(cve=cve), 'w') as f:
         json.dump(export, f, indent=2)
@@ -177,16 +208,16 @@ def parse_references(table_cell):
     # Take references which link to URLs
     refs = table_cell.find_elements_by_tag_name('a')
     for ref in refs:
-        text = ref.get_attribute('innerHTML').replace('\n', ' ')
+        text = ref.get_attribute('innerHTML').replace('\n', ' ').strip()
         if text != '*':
             url = make_reference(ref.get_attribute('href'))
             ref_data[text] = url
 
     # Strip out links, line breaks and square brackets, and take the remaining sections of the string as references
-    regex = r'(\<a(.*?)\>(.*?)\<\/a\>)|(\<br\>)|(\n)|\[|\]'
+    regex = r'(\<a(.*?)\>(.*?)\<\/a\>)|(\<br( *)\/?\>)|(\n)|\[|\]'
 
     contents = table_cell.get_attribute('innerHTML')
-    text_items = re.sub(regex, ' ', contents).split()
+    text_items = re.sub(regex, ' ', contents, flags=re.S).split()
     for item in text_items:
         ref_data[item] = make_reference(None)
 
@@ -295,9 +326,12 @@ for year in range(2018, (today.year)+1):
 
 descriptions = get_descriptions(vulnerabilities.keys())
 for cve in descriptions.keys():
-    vulnerabilities[cve]['Description'] = descriptions[cve]
+    vulnerabilities[cve].update(descriptions[cve])
 
 #pprint.pprint(vulnerabilities)
+
+# Load datasets to give descriptions
+cwe_dataset = load_manual_data('attributes/cwe')
 
 for cve, vulnerability in vulnerabilities.items():
     if(vulnerability['Severity'] == 'Critical'):
@@ -323,16 +357,25 @@ for cve, vulnerability in vulnerabilities.items():
             manual_data['Submission'] = submission
         for key in MANUAL_KEYS:
             if key not in manual_data:
-                entered = input("Enter {key}: ".format(key=key))
-                if entered != '':
-                    value = entered.split(',')
+                if key in MANUAL_KEYS_REQUIRED:
+                    entered = input("Enter {key}: ".format(key=key))
+                    if entered != '':
+                        value = entered.split(',')
+                    else:
+                        value = []
+                    manual_data[key] = value
+                elif key == 'Vector':
+                    manual_data['Vector'] = [decode_cwe(vulnerability['CWE'], cwe_dataset)]
                 else:
-                    value = []
-                manual_data[key] = value
+                    manual_data[key] = []
         vulnerability.update(manual_data)
         write_manual_data(cve, manual_data)
         write_data_for_website(cve, vulnerability)
 
     write_data(cve, vulnerability)
 
-utils.quitDriver(driver)
+@atexit.register
+def cleanup():
+    # Write datasets back to disk
+    write_manual_data('attributes/cwe', cwe_dataset)
+    utils.quitDriver(driver)

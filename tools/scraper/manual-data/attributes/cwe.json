@@ -1,0 +1,15 @@
+{
+  "CWE-787": "memory-corruption",
+  "CWE-416": "memory-corruption",
+  "CWE-119": "memory-corruption",
+  "CWE-20": "insufficient-standards-verification",
+  "CWE-264": "memory-corruption",
+  "CWE-284": "bad-access-control",
+  "CWE-347": "improper-verification",
+  "CWE-200": "bad-access-control",
+  "CWE-476": "memory-corruption",
+  "": "",
+  "CWE-415": "memory-corruption",
+  "CWE-704": "other",
+  "CWE-190": "memory-corruption"
+}
