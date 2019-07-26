@@ -30,7 +30,7 @@
     }
   },
   "Surface": ["usb-debug", "local"],
-  "Vector": ["file-permissions", "symbolic-link"],
+  "Vector": ["bad-access-control", "symbolic-link"],
   "Target": ["system-component"],
   "Channel": ["physical-access", "shell"],
   "Condition": ["usb-debug"],

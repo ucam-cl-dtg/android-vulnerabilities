@@ -14,7 +14,7 @@ import pprint
 MANUAL_KEYS = ['Surface', 'Vector', 'Target', 'Channel', 'Condition', 'Privilege']
 MANUAL_KEYS_REQUIRED = {'Surface', 'Target', 'Channel', 'Condition', 'Privilege'}
 NIST_URL = 'https://nvd.nist.gov/vuln/data-feeds'
-KNOWN_MANUFACTURERS = {'Qualcomm', 'NVIDIA', 'Broadcom', 'LG', 'MediaTek'}
+KNOWN_MANUFACTURERS = {'Qualcomm', 'NVIDIA', 'Broadcom', 'LG', 'MediaTek', 'HTC'}
 
 def get_subnode(node, key):
     """Returns the requested value from a dictionary, while ignoring null values"""
@@ -80,7 +80,7 @@ def load_date_from_commit(url, driver):
             time_string = data['author']['time']
             time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
             return time.date()
-    elif 'codeaurora.org' in url:
+    elif 'codeaurora.org' in url or 'git.kernel.org' in url:
         utils.fetchPage(driver, url)
         rows = driver.find_elements_by_xpath('//table[@class="commit-info"]/tbody/tr')
         for row in rows:
@@ -90,7 +90,7 @@ def load_date_from_commit(url, driver):
             time = datetime.strptime(time_string, '%Y-%m-%d %H:%M:%S %z')
             return time.date()
     # If it's not one of these sources, we don't know
-    raise Exception
+    raise Exception("Don't know how to deal with " + url)
 
 def load_manual_data(cve):
     """Returns manually entered data on the vulnerability, to be combined with automatically scraped data"""
@@ -148,9 +148,10 @@ def decode_cwe(cwe, dataset):
     """Convert a CWE reference to a vector description to be used in data files"""
     if cwe in dataset:
         return dataset[cwe]
-    decoded = input("Please enter vector for {cwe}: ".format(cwe=cwe))
-    dataset[cwe] = decoded
-    return decoded
+    else:
+        decoded = input("Please enter vector for {cwe}: ".format(cwe=cwe))
+        dataset[cwe] = decoded
+        return decoded
 
 def write_data_for_website(cve, data):
     """Process data and write out to a JSON file suitable for loading into androidvulnerabilities.org"""
@@ -165,6 +166,15 @@ def write_data_for_website(cve, data):
     bulletin_ref = 'Bulletin-' + cve
     ref_out[bulletin_ref] = make_reference(data['URL'])
 
+    discovery_date = None
+    if 'Date reported' in data:
+        # Use the date it was reported to Google as the (approximate) date of discovery
+        try:
+            discovery_date = datetime.strptime(data['Date reported'], '%b %d, %Y').date().isoformat()
+        except ValueError:
+            pass
+
+    # N.B. Report date is when it was first reported publicly
     report_date = re.search(r'[0-9]{4}-[0-9]{2}-[0-9]{2}(?=\.html)', data['URL'])
     
     export['name'] = cve
@@ -197,7 +207,7 @@ def write_data_for_website(cve, data):
     export['Channel'] = data['Channel']
     export['Condition'] = data['Condition']
     export['Privilege'] = data['Privilege']
-    export['CWE'] = [data['CWE']]
+    export['CWE'] = check_blank(data['CWE'], nist_ref)
     
     with open('website-data/{cve}.json'.format(cve=cve), 'w') as f:
         json.dump(export, f, indent=2)
@@ -292,24 +302,40 @@ submission['on'] = date.today().strftime('%Y-%m-%d')
 # Fix release dates (done per bulletin)
 fix_dates = dict()
 
-report_day_of_month = 1
-today = date.today()
-
-for year in range(2018, (today.year)+1):
+for year in range(2017, (today.year)+1):
+#for year in range(2016, 2017):
     fix_dates[year] = dict()
-    for month in range(1, 13):
-        if date(year, month, report_day_of_month) > today:
-            break
-        url = 'https://source.android.com/security/bulletin/{:d}-{:02d}-{:02d}.html'.format(year, month, report_day_of_month)
+    urls = []
+
+    url = 'https://source.android.com/security/bulletin/{year}'.format(year=year)
+    utils.fetchPage(driver, url)
+    table = driver.find_element_by_xpath('//div[@class="devsite-table-wrapper"]/table')
+    rows = table.find_elements_by_tag_name('tr')
+
+    for row in rows:
+        cells = row.find_elements_by_tag_name('td')
+        if len(cells) == 0:
+            # We're on the header row, which uses <th> elements
+            continue
+        links = cells[0].find_elements_by_tag_name('a')
+        if len(links) == 0:
+            # No links in this cell, so skip it
+            continue
+        url = links[0].get_attribute('href')
+        urls.append(url)
+
+    for url in urls:
+        date_string = re.search(r'\d{4}-\d{2}-\d{2}(?=\.html)', url).group()
+        report_date = datetime.strptime(date_string, '%Y-%m-%d').date()
         utils.fetchPage(driver, url)
 
         month_fix_date = None
-        search_exp = '{:d}-{:02d}-[0-9][0-9]'.format(year, month)
+        search_exp = '{:d}-{:02d}-[0-9][0-9]'.format(report_date.year, report_date.month)
         date_para = driver.find_elements_by_xpath('//div[contains(@class, "devsite-article-body")]/p')[1]
         date_text = re.search(search_exp, date_para.get_attribute('innerHTML'))
         if date_text != None:
             month_fix_date = date_text.group()
-            fix_dates[year][month] = month_fix_date
+            fix_dates[report_date.year][report_date.month] = month_fix_date
 
         contents = driver.find_elements_by_xpath('//devsite-heading | //div[@class="devsite-table-wrapper"]/table')
 
@@ -332,6 +358,9 @@ for cve in descriptions.keys():
 
 # Load datasets to give descriptions
 cwe_dataset = load_manual_data('attributes/cwe')
+
+# Store previous manual data set for quick repeat operations
+prev_manual_data = None
 
 for cve, vulnerability in vulnerabilities.items():
     if(vulnerability['Severity'] == 'Critical'):
@@ -359,17 +388,33 @@ for cve, vulnerability in vulnerabilities.items():
             if key not in manual_data:
                 if key in MANUAL_KEYS_REQUIRED:
                     entered = input("Enter {key}: ".format(key=key))
-                    if entered != '':
-                        value = entered.split(',')
+                    if entered == '^':
+                        manual_data.update(prev_manual_data)
+                    elif entered != '':
+                        manual_data[key] = entered.split(',')
                     else:
-                        value = []
-                    manual_data[key] = value
+                        manual_data[key] = []
                 elif key == 'Vector':
-                    manual_data['Vector'] = [decode_cwe(vulnerability['CWE'], cwe_dataset)]
+                    cwe = vulnerability['CWE']
+                    if cwe == '' or cwe == 'NVD-CWE-Other':
+                        # No specific CWE, so ask each time
+                        vector = input("Please enter vector for this vulnerability: ")
+                        if vector == '':
+                            manual_data['Vector'] = []
+                        else:
+                            manual_data['Vector'] = [vector]
+                    else:
+                        # Otherwise, as this is automatically generated, we don't add it to manual_data
+                        vector = decode_cwe(cwe, cwe_dataset)
+                        if vector == '':
+                            vulnerability['Vector'] = []
+                        else:
+                            vulnebrability['Vector'] = [vector]
                 else:
                     manual_data[key] = []
         vulnerability.update(manual_data)
         write_manual_data(cve, manual_data)
+        prev_manual_data = manual_data
         write_data_for_website(cve, vulnerability)
 
     write_data(cve, vulnerability)

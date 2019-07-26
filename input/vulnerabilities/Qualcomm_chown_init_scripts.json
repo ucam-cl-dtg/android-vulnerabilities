@@ -45,7 +45,7 @@
     }
   },
   "Surface": ["local", "filesystem"],
-  "Vector": ["file-permissions"],
+  "Vector": ["bad-access-control"],
   "Target": ["system-component"],
   "Channel": ["file-placement"],
   "Condition": ["file-placed-onto-device"],

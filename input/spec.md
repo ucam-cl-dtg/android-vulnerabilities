@@ -62,11 +62,12 @@ These are obtained from various sources, and give details of the type of vulnera
   * `mms` - this vulnerability can be exploited by sending the victim a malicious multimedia message
 * Vector:
   * `insufficient-standards-verification` - a system component does not properly check standards, which allows a non-compliant app or feature to exploit the vulnerability
-  * `improper-verification` - a malicious app is able to impersonate a privileged app because the system does not properly verify whether it (or a message sent by it) is genuine
+  * `improper-verification` - apps or data are not properly verified, allowing malicious apps or data to be used on the system
   * `memory-corruption` - attacks via buffer overflows and similar methods
   * `daemon-abusing` - exploiting a vulnerability in a daemon to gain privileged access to the system
   * `shared-memory` - use of shared memory exploits to escape the sandboxed environment
-  * `file-permissions` - improperly set file permissions allow malicious apps to access or modify files which they should not have access to
+  * `bad-access-control` - improperly set file permissions or other resource access permisions
+  * `concurrency-problem` - race conditions and similar issues
   * `symbolic-link` - crafted symbolic links can override filesystem protection
   * `other` - miscellaneous or not known
 * Target:
@@ -105,5 +106,6 @@ These are obtained from various sources, and give details of the type of vulnera
   * `system` - gain access as the system user
   * `unlock-bootloader` - allows the device's bootloader to be unlocked
   * `control-hardware` - take control of hardware devices
+  * `denial-of-service` - execute a DoS attack
   * `service` - takes the privilege level of system services
   * `tee` - execute within the Trusted Execution Environment

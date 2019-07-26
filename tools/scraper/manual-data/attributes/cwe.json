@@ -8,8 +8,15 @@
   "CWE-347": "improper-verification",
   "CWE-200": "bad-access-control",
   "CWE-476": "memory-corruption",
-  "": "",
   "CWE-415": "memory-corruption",
   "CWE-704": "other",
-  "CWE-190": "memory-corruption"
+  "CWE-190": "memory-corruption",
+  "CWE-287": "improper-verification",
+  "CWE-362": "concurrency-problem",
+  "CWE-682": "other",
+  "CWE-310": "other",
+  "CWE-285": "improper-verification",
+  "CWE-358": "insufficient-standards-verification",
+  "CWE-189": "other",
+  "CWE-254": "bad-access-control"
 }
