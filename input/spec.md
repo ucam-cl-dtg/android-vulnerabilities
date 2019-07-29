@@ -95,6 +95,7 @@ These are obtained from various sources, and give details of the type of vulnera
   * `malicious-file-viewed` - the user views a malicious file (which could be delivered in many different ways)
   * `attacker-in-close-proximity` - the attacker must be located physically close to the device (as with Bluetooth-based attacks)
   * `user-has-remote-access` - a malicious user already has remote access, and can use this vulnerability to elevate permissions
+  * `hardware-used-for-attack` - the attacker can connect a piece of hardware to the device (usually via the USB port)
   * `root` - the exploit must already have root access
   * `none` - attack can be performed with no other access to the device, or use of vulnerable apps
 * Privilege:

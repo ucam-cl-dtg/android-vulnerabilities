@@ -9,12 +9,14 @@ from collections import defaultdict
 import re
 import urllib.request
 import atexit
+import copy
 import pprint
 
 MANUAL_KEYS = ['Surface', 'Vector', 'Target', 'Channel', 'Condition', 'Privilege']
 MANUAL_KEYS_REQUIRED = {'Surface', 'Target', 'Channel', 'Condition', 'Privilege'}
 NIST_URL = 'https://nvd.nist.gov/vuln/data-feeds'
 KNOWN_MANUFACTURERS = {'Qualcomm', 'NVIDIA', 'Broadcom', 'LG', 'MediaTek', 'HTC'}
+REFERENCE_REGEX = r'(References)|((Android )?bug\(?s?\)?( with AOSP link(s)?)?)'
 
 def get_subnode(node, key):
     """Returns the requested value from a dictionary, while ignoring null values"""
@@ -74,12 +76,23 @@ def get_descriptions(cves):
 def load_date_from_commit(url, driver):
     """Given the URL of a commit identifier, returns the date of the commit"""
     if 'googlesource.com' in url:
-        with urllib.request.urlopen(url + '?format=JSON') as source:
-            src = source.read()[5:]
-            data = json.loads(src.decode())
-            time_string = data['author']['time']
-            time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
-            return time.date()
+        try:
+            with urllib.request.urlopen(url + '?format=JSON') as source:
+                src = source.read()[5:]
+                data = json.loads(src.decode())
+                time_string = data['author']['time']
+                time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
+                return time.date()
+        except urllib.error.HTTPError:
+            # Dealing with the fact that Google's JSON links sometimes don't work
+            utils.fetchPage(driver, url)
+            rows = driver.find_elements_by_xpath('//div[contains(@class, "Metadata")]/table/tbody/tr')
+            for row in rows:
+                if row.find_element_by_tag_name('th').get_attribute('innerHTML') != 'author':
+                    continue
+                time_string = row.find_elements_by_xpath('./td')[1].get_attribute('innerHTML')
+                time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
+                return time.date()
     elif 'codeaurora.org' in url or 'git.kernel.org' in url:
         utils.fetchPage(driver, url)
         rows = driver.find_elements_by_xpath('//table[@class="commit-info"]/tbody/tr')
@@ -89,6 +102,12 @@ def load_date_from_commit(url, driver):
             time_string = row.find_element_by_xpath('./td[@class="right"]').get_attribute('innerHTML')
             time = datetime.strptime(time_string, '%Y-%m-%d %H:%M:%S %z')
             return time.date()
+    elif 'github.com' in url:
+        utils.fetchPage(driver, url)
+        time_string = driver.find_element_by_xpath('//div[contains(@class, "commit-meta")]//relative-time').get_attribute('datetime')
+        # Assuming the date is always in UTC (Z) - this is clumsy, but Python pre-3.7 doesn't have anything better
+        time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%SZ')
+        return time.date()
     # If it's not one of these sources, we don't know
     raise Exception("Don't know how to deal with " + url)
 
@@ -224,7 +243,7 @@ def parse_references(table_cell):
             ref_data[text] = url
 
     # Strip out links, line breaks and square brackets, and take the remaining sections of the string as references
-    regex = r'(\<a(.*?)\>(.*?)\<\/a\>)|(\<br( *)\/?\>)|(\n)|\[|\]'
+    regex = r'(\<a(.*?)\>(.*?)\<\/a\>)|(\<br( *)\/?\>)|(\<\/?p\>)|(\n)|\[|\]'
 
     contents = table_cell.get_attribute('innerHTML')
     text_items = re.sub(regex, ' ', contents, flags=re.S).split()
@@ -232,6 +251,20 @@ def parse_references(table_cell):
         ref_data[item] = make_reference(None)
 
     return ref_data
+
+def merge_rows(row1, row2):
+    """Merge two rows of the table of CVE data"""
+    output = copy.deepcopy(row1)
+    for key in row2:
+        if key not in output:
+            output[key] = row2[key]
+        elif output[key] == row2[key]:
+            continue
+        elif key == 'References':
+            output['References'].update(row2['References'])
+        else:
+            output[key] = '{old}, {new}'.format(old=output[key], new=row2[key])
+    return output
 
 def process_table(table, category, source_url, date_fix_released_on):
     """Produce a list of dictionaries of vulnerabilities from an HTML table"""
@@ -243,7 +276,6 @@ def process_table(table, category, source_url, date_fix_released_on):
     table_data = dict()
     multispans = dict()
     prev_row = None
-    cve = None
     # Exclude the top (title) row
     for row in rows[1:]:
         row_data = defaultdict(str)
@@ -252,7 +284,8 @@ def process_table(table, category, source_url, date_fix_released_on):
         if(len(items) + len(multispans)) != len(headers):
             raise Exception("Invalid table")
         index = 0
-        for header in headers:
+        for row_header in headers:
+            header = row_header.replace('*', '')
             if header in multispans:
                 # Data from previous row needs to "spill over"
                 row_data[header] = prev_row[header]
@@ -260,6 +293,7 @@ def process_table(table, category, source_url, date_fix_released_on):
                 if multispans[header] == 0:
                     del multispans[header]
             else:
+                # Take the appropriate column of the table
                 item = items[index]
                 index += 1
                 rowspan = item.get_attribute('rowspan')
@@ -267,7 +301,7 @@ def process_table(table, category, source_url, date_fix_released_on):
                     # This row needs to "spill over" into the next
                     multispans[header] = int(rowspan) -1
 
-                if header == 'References':
+                if re.search(REFERENCE_REGEX, header, flags=re.I) != None:
                     row_data['References'] = parse_references(item)
                 else:
                     row_data[header] = item.get_attribute('innerHTML')
@@ -277,6 +311,8 @@ def process_table(table, category, source_url, date_fix_released_on):
             row_data['Category'] = category
             row_data['URL'] = source_url
             row_data['Fix_released_on'] = date_fix_released_on
+            if prev_row != None and prev_row['CVE'] == cve:
+                row_data = merge_rows(prev_row, row_data)
             prev_row = row_data
             table_data[cve] = row_data
 
@@ -301,9 +337,10 @@ submission['on'] = date.today().strftime('%Y-%m-%d')
 
 # Fix release dates (done per bulletin)
 fix_dates = dict()
+today = date.today()
 
-for year in range(2017, (today.year)+1):
-#for year in range(2016, 2017):
+for year in range(2015, (today.year)+1):
+#for year in range(2015, 2017):
     fix_dates[year] = dict()
     urls = []
 
@@ -409,7 +446,7 @@ for cve, vulnerability in vulnerabilities.items():
                         if vector == '':
                             vulnerability['Vector'] = []
                         else:
-                            vulnebrability['Vector'] = [vector]
+                            vulnerability['Vector'] = [vector]
                 else:
                     manual_data[key] = []
         vulnerability.update(manual_data)

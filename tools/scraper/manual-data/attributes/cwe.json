@@ -18,5 +18,9 @@
   "CWE-285": "improper-verification",
   "CWE-358": "insufficient-standards-verification",
   "CWE-189": "other",
-  "CWE-254": "bad-access-control"
+  "CWE-254": "bad-access-control",
+  "CWE-19": "other",
+  "NVD-CWE-noinfo": "",
+  "CWE-399": "memory-corruption",
+  "CWE-17": "other"
 }
