@@ -28,7 +28,7 @@
     }
   },
   "Surface": ["local", "app", "usb-debug"],
-  "Vector": ["file-permissions"],
+  "Vector": ["bad-access-control"],
   "Target": ["system-component"],
   "Channel": ["app-execution"],
   "Condition": ["usb-debug"],

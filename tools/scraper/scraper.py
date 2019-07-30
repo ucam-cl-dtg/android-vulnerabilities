@@ -8,16 +8,21 @@ import json
 from collections import defaultdict
 import re
 import urllib.request
+import atexit
+import copy
 import pprint
 
 MANUAL_KEYS = ['Surface', 'Vector', 'Target', 'Channel', 'Condition', 'Privilege']
+MANUAL_KEYS_REQUIRED = {'Surface', 'Target', 'Channel', 'Condition', 'Privilege'}
 NIST_URL = 'https://nvd.nist.gov/vuln/data-feeds'
+KNOWN_MANUFACTURERS = {'Qualcomm', 'NVIDIA', 'Broadcom', 'LG', 'MediaTek', 'HTC'}
+REFERENCE_REGEX = r'(References)|((Android )?bug\(?s?\)?( with AOSP link(s)?)?)'
 
 def get_subnode(node, key):
     """Returns the requested value from a dictionary, while ignoring null values"""
-    if node == None:
-        return None
-    return node[key]
+    if node != None and key in node:
+        return node[key]
+    return None
 
 def load_from_year(year, cves):
     """Loads descriptions from the NIST data for all vulnerabilities in a given year"""
@@ -31,10 +36,29 @@ def load_from_year(year, cves):
                 cve_data = get_subnode(cve_object, 'CVE_data_meta')
                 cve = get_subnode(cve_data, 'ID')
                 if cve in cves:
+                    #print("Processing " + cve)
+                    cve_output_data = dict()
                     description_data = get_subnode(get_subnode(cve_object, 'description'), 'description_data')
                     if description_data != None and len(description_data) > 0:
                         value = get_subnode(description_data[0], 'value')
-                        descriptions[cve] = value
+                        cve_output_data['Description'] = value
+                    cwe_data = get_subnode(get_subnode(cve_object, 'problemtype'), 'problemtype_data')
+                    if cwe_data != None and len(cwe_data) > 0:
+                        cwe_description_data = get_subnode(cwe_data[0], 'description')
+                        if cwe_description_data != None and len(cwe_description_data) > 0:
+                            value = get_subnode(cwe_description_data[0], 'value')
+                            cve_output_data['CWE'] = value
+                    impact = get_subnode(item, 'impact')
+                    baseMetricV3 = get_subnode(impact, 'baseMetricV3')
+                    if baseMetricV3 != None:
+                        cvssV3 = get_subnode(baseMetricV3, 'cvssV3')
+                        cve_output_data['Attack_method'] = get_subnode(cvssV3, 'attackVector')
+                    else:
+                        baseMetricV2 = get_subnode(impact, 'baseMetricV2')
+                        cvssV2 = get_subnode(baseMetricV2, 'cvssV2')
+                        cve_output_data['Attack_method'] = get_subnode(cvssV2, 'accessVector')
+
+                    descriptions[cve] = cve_output_data
     return descriptions
 
 def get_descriptions(cves):
@@ -52,13 +76,24 @@ def get_descriptions(cves):
 def load_date_from_commit(url, driver):
     """Given the URL of a commit identifier, returns the date of the commit"""
     if 'googlesource.com' in url:
-        with urllib.request.urlopen(url + '?format=JSON') as source:
-            src = source.read()[5:]
-            data = json.loads(src.decode())
-            time_string = data['author']['time']
-            time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
-            return time.date()
-    elif 'codeaurora.org' in url:
+        try:
+            with urllib.request.urlopen(url + '?format=JSON') as source:
+                src = source.read()[5:]
+                data = json.loads(src.decode())
+                time_string = data['author']['time']
+                time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
+                return time.date()
+        except urllib.error.HTTPError:
+            # Dealing with the fact that Google's JSON links sometimes don't work
+            utils.fetchPage(driver, url)
+            rows = driver.find_elements_by_xpath('//div[contains(@class, "Metadata")]/table/tbody/tr')
+            for row in rows:
+                if row.find_element_by_tag_name('th').get_attribute('innerHTML') != 'author':
+                    continue
+                time_string = row.find_elements_by_xpath('./td')[1].get_attribute('innerHTML')
+                time = datetime.strptime(time_string, '%a %b %d %H:%M:%S %Y %z')
+                return time.date()
+    elif 'codeaurora.org' in url or 'git.kernel.org' in url:
         utils.fetchPage(driver, url)
         rows = driver.find_elements_by_xpath('//table[@class="commit-info"]/tbody/tr')
         for row in rows:
@@ -67,8 +102,14 @@ def load_date_from_commit(url, driver):
             time_string = row.find_element_by_xpath('./td[@class="right"]').get_attribute('innerHTML')
             time = datetime.strptime(time_string, '%Y-%m-%d %H:%M:%S %z')
             return time.date()
+    elif 'github.com' in url:
+        utils.fetchPage(driver, url)
+        time_string = driver.find_element_by_xpath('//div[contains(@class, "commit-meta")]//relative-time').get_attribute('datetime')
+        # Assuming the date is always in UTC (Z) - this is clumsy, but Python pre-3.7 doesn't have anything better
+        time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%SZ')
+        return time.date()
     # If it's not one of these sources, we don't know
-    raise Exception
+    raise Exception("Don't know how to deal with " + url)
 
 def load_manual_data(cve):
     """Returns manually entered data on the vulnerability, to be combined with automatically scraped data"""
@@ -122,6 +163,15 @@ def check_blank(text, ref):
         return []
     return [[text, ref]]
 
+def decode_cwe(cwe, dataset):
+    """Convert a CWE reference to a vector description to be used in data files"""
+    if cwe in dataset:
+        return dataset[cwe]
+    else:
+        decoded = input("Please enter vector for {cwe}: ".format(cwe=cwe))
+        dataset[cwe] = decoded
+        return decoded
+
 def write_data_for_website(cve, data):
     """Process data and write out to a JSON file suitable for loading into androidvulnerabilities.org"""
     export = dict()
@@ -135,6 +185,15 @@ def write_data_for_website(cve, data):
     bulletin_ref = 'Bulletin-' + cve
     ref_out[bulletin_ref] = make_reference(data['URL'])
 
+    discovery_date = None
+    if 'Date reported' in data:
+        # Use the date it was reported to Google as the (approximate) date of discovery
+        try:
+            discovery_date = datetime.strptime(data['Date reported'], '%b %d, %Y').date().isoformat()
+        except ValueError:
+            pass
+
+    # N.B. Report date is when it was first reported publicly
     report_date = re.search(r'[0-9]{4}-[0-9]{2}-[0-9]{2}(?=\.html)', data['URL'])
     
     export['name'] = cve
@@ -152,13 +211,13 @@ def write_data_for_website(cve, data):
     export['Affected_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
     # Affected devices
     export['Affected_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
-    if 'Qualcomm' in data['Category']:
-        export['Affected_manufacturers'] = [['Qualcomm', bulletin_ref]]
-    elif 'NVIDIA' in data['Category']:
-        export['Affected_manufacturers'] = [['NVIDIA', bulletin_ref]]
-    else:
-        # If it's not Qualcomm or NVIDIA, assume for this purpose that all other vulnerabilities affect all phones
-        export['Affected_manufacturers'] = [['all', bulletin_ref]]
+    # Initially assume all devices are affected
+    manufacturer_affected = 'all'
+    for manufacturer in KNOWN_MANUFACTURERS:
+        if manufacturer in data['Category']:
+            # A specific manufacturer is named, so use that
+            manufacturer_affected = manufacturer
+    export['Affected_manufacturers'] = [[manufacturer_affected, bulletin_ref]]
     export['Fixed_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
     export['references'] = data['References']
     export['Surface'] = data['Surface']
@@ -167,6 +226,7 @@ def write_data_for_website(cve, data):
     export['Channel'] = data['Channel']
     export['Condition'] = data['Condition']
     export['Privilege'] = data['Privilege']
+    export['CWE'] = check_blank(data['CWE'], nist_ref)
     
     with open('website-data/{cve}.json'.format(cve=cve), 'w') as f:
         json.dump(export, f, indent=2)
@@ -177,20 +237,34 @@ def parse_references(table_cell):
     # Take references which link to URLs
     refs = table_cell.find_elements_by_tag_name('a')
     for ref in refs:
-        text = ref.get_attribute('innerHTML').replace('\n', ' ')
+        text = ref.get_attribute('innerHTML').replace('\n', ' ').strip()
         if text != '*':
             url = make_reference(ref.get_attribute('href'))
             ref_data[text] = url
 
     # Strip out links, line breaks and square brackets, and take the remaining sections of the string as references
-    regex = r'(\<a(.*?)\>(.*?)\<\/a\>)|(\<br\>)|(\n)|\[|\]'
+    regex = r'(\<a(.*?)\>(.*?)\<\/a\>)|(\<br( *)\/?\>)|(\<\/?p\>)|(\n)|\[|\]'
 
     contents = table_cell.get_attribute('innerHTML')
-    text_items = re.sub(regex, ' ', contents).split()
+    text_items = re.sub(regex, ' ', contents, flags=re.S).split()
     for item in text_items:
         ref_data[item] = make_reference(None)
 
     return ref_data
+
+def merge_rows(row1, row2):
+    """Merge two rows of the table of CVE data"""
+    output = copy.deepcopy(row1)
+    for key in row2:
+        if key not in output:
+            output[key] = row2[key]
+        elif output[key] == row2[key]:
+            continue
+        elif key == 'References':
+            output['References'].update(row2['References'])
+        else:
+            output[key] = '{old}, {new}'.format(old=output[key], new=row2[key])
+    return output
 
 def process_table(table, category, source_url, date_fix_released_on):
     """Produce a list of dictionaries of vulnerabilities from an HTML table"""
@@ -202,7 +276,6 @@ def process_table(table, category, source_url, date_fix_released_on):
     table_data = dict()
     multispans = dict()
     prev_row = None
-    cve = None
     # Exclude the top (title) row
     for row in rows[1:]:
         row_data = defaultdict(str)
@@ -211,7 +284,8 @@ def process_table(table, category, source_url, date_fix_released_on):
         if(len(items) + len(multispans)) != len(headers):
             raise Exception("Invalid table")
         index = 0
-        for header in headers:
+        for row_header in headers:
+            header = row_header.replace('*', '')
             if header in multispans:
                 # Data from previous row needs to "spill over"
                 row_data[header] = prev_row[header]
@@ -219,6 +293,7 @@ def process_table(table, category, source_url, date_fix_released_on):
                 if multispans[header] == 0:
                     del multispans[header]
             else:
+                # Take the appropriate column of the table
                 item = items[index]
                 index += 1
                 rowspan = item.get_attribute('rowspan')
@@ -226,7 +301,7 @@ def process_table(table, category, source_url, date_fix_released_on):
                     # This row needs to "spill over" into the next
                     multispans[header] = int(rowspan) -1
 
-                if header == 'References':
+                if re.search(REFERENCE_REGEX, header, flags=re.I) != None:
                     row_data['References'] = parse_references(item)
                 else:
                     row_data[header] = item.get_attribute('innerHTML')
@@ -236,6 +311,8 @@ def process_table(table, category, source_url, date_fix_released_on):
             row_data['Category'] = category
             row_data['URL'] = source_url
             row_data['Fix_released_on'] = date_fix_released_on
+            if prev_row != None and prev_row['CVE'] == cve:
+                row_data = merge_rows(prev_row, row_data)
             prev_row = row_data
             table_data[cve] = row_data
 
@@ -260,25 +337,42 @@ submission['on'] = date.today().strftime('%Y-%m-%d')
 
 # Fix release dates (done per bulletin)
 fix_dates = dict()
-
-report_day_of_month = 1
 today = date.today()
 
-for year in range(2018, (today.year)+1):
+for year in range(2015, (today.year)+1):
+#for year in range(2015, 2017):
     fix_dates[year] = dict()
-    for month in range(1, 13):
-        if date(year, month, report_day_of_month) > today:
-            break
-        url = 'https://source.android.com/security/bulletin/{:d}-{:02d}-{:02d}.html'.format(year, month, report_day_of_month)
+    urls = []
+
+    url = 'https://source.android.com/security/bulletin/{year}'.format(year=year)
+    utils.fetchPage(driver, url)
+    table = driver.find_element_by_xpath('//div[@class="devsite-table-wrapper"]/table')
+    rows = table.find_elements_by_tag_name('tr')
+
+    for row in rows:
+        cells = row.find_elements_by_tag_name('td')
+        if len(cells) == 0:
+            # We're on the header row, which uses <th> elements
+            continue
+        links = cells[0].find_elements_by_tag_name('a')
+        if len(links) == 0:
+            # No links in this cell, so skip it
+            continue
+        url = links[0].get_attribute('href')
+        urls.append(url)
+
+    for url in urls:
+        date_string = re.search(r'\d{4}-\d{2}-\d{2}(?=\.html)', url).group()
+        report_date = datetime.strptime(date_string, '%Y-%m-%d').date()
         utils.fetchPage(driver, url)
 
         month_fix_date = None
-        search_exp = '{:d}-{:02d}-[0-9][0-9]'.format(year, month)
+        search_exp = '{:d}-{:02d}-[0-9][0-9]'.format(report_date.year, report_date.month)
         date_para = driver.find_elements_by_xpath('//div[contains(@class, "devsite-article-body")]/p')[1]
         date_text = re.search(search_exp, date_para.get_attribute('innerHTML'))
         if date_text != None:
             month_fix_date = date_text.group()
-            fix_dates[year][month] = month_fix_date
+            fix_dates[report_date.year][report_date.month] = month_fix_date
 
         contents = driver.find_elements_by_xpath('//devsite-heading | //div[@class="devsite-table-wrapper"]/table')
 
@@ -295,9 +389,15 @@ for year in range(2018, (today.year)+1):
 
 descriptions = get_descriptions(vulnerabilities.keys())
 for cve in descriptions.keys():
-    vulnerabilities[cve]['Description'] = descriptions[cve]
+    vulnerabilities[cve].update(descriptions[cve])
 
 #pprint.pprint(vulnerabilities)
+
+# Load datasets to give descriptions
+cwe_dataset = load_manual_data('attributes/cwe')
+
+# Store previous manual data set for quick repeat operations
+prev_manual_data = None
 
 for cve, vulnerability in vulnerabilities.items():
     if(vulnerability['Severity'] == 'Critical'):
@@ -323,16 +423,41 @@ for cve, vulnerability in vulnerabilities.items():
             manual_data['Submission'] = submission
         for key in MANUAL_KEYS:
             if key not in manual_data:
-                entered = input("Enter {key}: ".format(key=key))
-                if entered != '':
-                    value = entered.split(',')
+                if key in MANUAL_KEYS_REQUIRED:
+                    entered = input("Enter {key}: ".format(key=key))
+                    if entered == '^':
+                        manual_data.update(prev_manual_data)
+                    elif entered != '':
+                        manual_data[key] = entered.split(',')
+                    else:
+                        manual_data[key] = []
+                elif key == 'Vector':
+                    cwe = vulnerability['CWE']
+                    if cwe == '' or cwe == 'NVD-CWE-Other':
+                        # No specific CWE, so ask each time
+                        vector = input("Please enter vector for this vulnerability: ")
+                        if vector == '':
+                            manual_data['Vector'] = []
+                        else:
+                            manual_data['Vector'] = [vector]
+                    else:
+                        # Otherwise, as this is automatically generated, we don't add it to manual_data
+                        vector = decode_cwe(cwe, cwe_dataset)
+                        if vector == '':
+                            vulnerability['Vector'] = []
+                        else:
+                            vulnerability['Vector'] = [vector]
                 else:
-                    value = []
-                manual_data[key] = value
+                    manual_data[key] = []
         vulnerability.update(manual_data)
         write_manual_data(cve, manual_data)
+        prev_manual_data = manual_data
         write_data_for_website(cve, vulnerability)
 
     write_data(cve, vulnerability)
 
-utils.quitDriver(driver)
+@atexit.register
+def cleanup():
+    # Write datasets back to disk
+    write_manual_data('attributes/cwe', cwe_dataset)
+    utils.quitDriver(driver)
