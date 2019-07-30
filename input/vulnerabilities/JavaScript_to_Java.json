@@ -1,0 +1,36 @@
+{
+  "name" : "JavaScript to Java",
+  "CVE" : [["CVE-2012-6636", "js-to-java-cve"]],
+  "Coordinated_disclosure" : "unknown",
+  "Categories" : ["system"],
+  "Details" : [["The Android API before 17 does not properly restrict the WebView.addJavascriptInterface method, which allows remote attackers to execute arbitrary methods of Java objects by using the Java Reflection API within crafted JavaScript code that is loaded into the WebView component in an application targeted to API level 16 or earlier, a related issue to CVE-2013-4710.", "js-to-java-cve"]],
+  "Discovered_by" : [],
+  "Discovered_on" : [],
+  "Submission" : [{"by": "dcc52", "on" : "2019-07-30"}],
+  "Reported_on" : [["2012-12-21", "d3adend-js-to-java"]],
+  "Fixed_on" : [],
+  "Fix_released_on" : [["2012-10-29", "js-to-java-paper"]],
+  "Affected_versions" : [["4.1 and below", "d3adend-js-to-java"]],
+  "Affected_devices" : [["all", "js-to-java-paper"]],
+  "Affected_versions_regexp" : ["([1-3]\\.[0-9]\\.[0-9])|(4\\.[0-1]\\.[0-9])"],
+  "Affected_manufacturers" : [["all", "js-to-java-paper"]],
+  "Fixed_versions" : [["4.2 and above (additional fix in 4.4.3", "js-to-java-paper"]],
+  "references" : {
+    "js-to-java-cve": {
+      "url" : "https://nvd.nist.gov/vuln/detail/CVE-2012-6636"
+    },
+    "d3adend-js-to-java" : {
+      "url" : "https://d3adend.org/blog/posts/abusing-webview-javascript-bridges/",
+      "archiveurl" : "https://perma.cc/P8LH-7DR9"
+    },
+    "js-to-java-paper" : {
+      "url" : "https://www.cl.cam.ac.uk/~drt24/papers/spw15-07-Thomas.pdf"
+    }
+  },
+  "Surface": ["remote", "webview"],
+  "Vector": ["bad-access-control"],
+  "Target": ["browser"],
+  "Channel": ["remote"],
+  "Condition": ["none"],
+  "Privilege": ["user"]
+}
