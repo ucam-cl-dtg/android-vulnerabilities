@@ -875,8 +875,8 @@ def hook_preconvert_stats():
 
     month_graphs(months_range(first_date, last_date))
     for version, date in release_dates.items():
-        if version == '6.0.0':
-            month_graphs(months_range(date, last_date), version)
+        #if version == '6.0.0':
+        month_graphs(months_range(date, last_date), version)
 
 def month_graphs(dates, version=None, show_before_first_discovery=True):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
