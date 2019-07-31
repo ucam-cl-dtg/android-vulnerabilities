@@ -432,7 +432,7 @@ for cve, vulnerability in vulnerabilities.items():
         # If fixed versions regexp is complicated, do it manually
         affected = vulnerability['Updated AOSP versions']
         if 'below' in affected or 'above' in affected:
-            vulnerability['Affected_versions_regexp'] = decode_lookup(affected, version_dataset, 'regexp')
+            vulnerability['Affected_versions_regexp'] = decode_lookup(affected.strip(), version_dataset, 'regexp')
 
         pprint.pprint(vulnerability)
 
