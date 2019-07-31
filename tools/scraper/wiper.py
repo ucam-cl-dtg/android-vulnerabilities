@@ -30,6 +30,6 @@ for filename in os.listdir('manual-data/'):
     if filename != 'attributes':
         print(filename)
         data = load_manual_data(filename)
-        del data['Vector']
+        del data[key]
         write_manual_data(filename, data)
         

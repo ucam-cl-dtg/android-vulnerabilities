@@ -164,6 +164,48 @@ class Submitter:
         return self.__str__()
 
 
+class GraphLine:
+    """An edge on the graph, representing one or more vulnerabilities"""
+    def __init__(self, origin, dest, label, colour):
+        self.origin = origin
+        self.dest = dest
+        self.label = label
+        self.colour = colour
+
+    def get_string(self):
+        """Convert the GraphLine into a line of a DOT file"""
+        return '"{origin}" -> "{dest}" [label="{label}" color="{colour}"];\n'.format(origin=self.origin, dest=self.dest, label=self.label, colour=self.colour)
+
+    @staticmethod
+    def merge_colours(lines):
+        """Take a set of edges to be merged and identify what colour the merged line should have"""
+        # Black (non-vendor specific) takes priority over red (vendor-specific)
+        for line in lines:
+            if 'black' == line.colour:
+                return 'black'
+        return 'red'
+
+    @staticmethod
+    def merge_set(lines):
+        """Identifies duplicate edges in a set of lines"""
+        sets = defaultdict(lambda: defaultdict(list))
+        for line in lines:
+            sets[line.origin][line.dest].append(line)
+
+        result = []
+        for origin, dest_set in sets.items():
+            for dest, line_set in dest_set.items():
+                if len(line_set) == 1:
+                    result.append(line_set[0])
+                else:
+                    # Alternative layout where there are 2 vulnerabilities
+                    #label = '{a}, {b}'.format(a=line_set[0].label, b=line_set[1].label)
+                    label = '({n} vulnerabilities)'.format(n=len(line_set))
+                    colour = GraphLine.merge_colours(line_set)
+                    result.append(GraphLine(origin, dest, label, colour))
+        return result
+
+
 # Class definition for a vulnerability
 class Vulnerability:
     year_fields = [
@@ -403,9 +445,9 @@ class Vulnerability:
         for source in self.startPrivileges(condition_privilege_lookup):
             if source not in sources:
                 sources.append(source)
-                reached = set(self.jsn['Privilege'])
+                reached = reached.union(set(self.jsn['Privilege']))
                 for privilege in reached:
-                    lines.append('"{origin}" -> "{dest}" [label="{label}" color="{colour}"];\n'.format(origin=source, dest=privilege, label=self.name, colour=colour))
+                    lines.append(GraphLine(source, privilege, self.name, colour))
         return lines, reached
 
     def __str__(self):
@@ -911,8 +953,9 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
             filename = folder_path + '/graph-{:d}-{:02d}.gv'.format(date.year, date.month)
             with open(filename, 'w') as graph_file:
                 graph_file.write('digraph vulnerabilities {\n')
-                for line in exploitables:
-                    graph_file.write(line)
+                merged_exploitables = GraphLine.merge_set(exploitables)
+                for line in merged_exploitables:
+                    graph_file.write(line.get_string())
                 caption = "Android " + version_string
                 if version == None:
                     caption = "All Android versions"
