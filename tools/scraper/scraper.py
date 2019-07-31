@@ -17,6 +17,7 @@ MANUAL_KEYS_REQUIRED = {'Surface', 'Target', 'Channel', 'Condition', 'Privilege'
 NIST_URL = 'https://nvd.nist.gov/vuln/data-feeds'
 KNOWN_MANUFACTURERS = {'Qualcomm', 'NVIDIA', 'Broadcom', 'LG', 'MediaTek', 'HTC'}
 REFERENCE_REGEX = r'(References)|((Android )?bug\(?s?\)?( with AOSP link(s)?)?)'
+VERSION_REGEX = r'(Updated|Affected) (AOSP )?versions'
 
 def get_subnode(node, key):
     """Returns the requested value from a dictionary, while ignoring null values"""
@@ -143,7 +144,7 @@ def regexp_versions(versions_string):
     """Converts the list of versions from the bulletin data into a regexp"""
     if len(versions_string) == 0:
         return ''
-    versions = versions_string.replace(' ', '').replace('.', '\\.').split(',')
+    versions = versions_string.replace('and', ',').replace(' ', '').replace('.', '\\.').split(',')
     regexp = ''
     for version in versions:
         dots = version.count('.')
@@ -159,17 +160,17 @@ def regexp_versions(versions_string):
 
 def check_blank(text, ref):
     """Formats a data-reference pair and avoids references being given to blank data items"""
-    if text == '':
+    if text == None or text == '':
         return []
     return [[text, ref]]
 
-def decode_cwe(cwe, dataset):
-    """Convert a CWE reference to a vector description to be used in data files"""
-    if cwe in dataset:
-        return dataset[cwe]
+def decode_lookup(key, dataset, description):
+    """Convert a reference to a description to be used in data files"""
+    if key in dataset:
+        return dataset[key]
     else:
-        decoded = input("Please enter vector for {cwe}: ".format(cwe=cwe))
-        dataset[cwe] = decoded
+        decoded = input("Please enter {desc} for {key}: ".format(desc=description, key=key))
+        dataset[key] = decoded
         return decoded
 
 def write_data_for_website(cve, data):
@@ -198,19 +199,29 @@ def write_data_for_website(cve, data):
     
     export['name'] = cve
     export['CVE'] = [[cve, bulletin_ref]]
+    # Coordinated disclosure
+    export['Coordinated_disclosure'] = "unknown"
     # Slightly different categories than in original set, but still usable
     export['Categories'] = [data['Category']]
     export['Details'] = check_blank(data['Description'], nist_ref)
     # Discovered by
+    export['Discovered_on'] = []
     # Discovered on
+    export['Discovered_by'] = []
     export['Submission'] = data['Submission']
     if report_date != None:
         export['Reported_on'] = [[report_date.group(), bulletin_ref]]
-    export['Fixed_on'] = [[data['Fixed_on'], data['Fixed_on_ref']]]
-    export['Fixed_released_on'] = [[data['Fix_released_on'], bulletin_ref]]
+    else:
+        export['Reported_on'] = []
+    export['Fixed_on'] = check_blank(data['Fixed_on'], data['Fixed_on_ref'])
+    export['Fix_released_on'] = check_blank(data['Fix_released_on'], bulletin_ref)
     export['Affected_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
     # Affected devices
-    export['Affected_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
+    export['Affected_devices'] = []
+    if 'Affected_versions_regexp' in data:
+        export['Affected_versions_regexp'] = [data['Affected_versions_regexp']]
+    else:
+        export['Affected_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
     # Initially assume all devices are affected
     manufacturer_affected = 'all'
     for manufacturer in KNOWN_MANUFACTURERS:
@@ -219,7 +230,7 @@ def write_data_for_website(cve, data):
             manufacturer_affected = manufacturer
     export['Affected_manufacturers'] = [[manufacturer_affected, bulletin_ref]]
     export['Fixed_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
-    export['references'] = data['References']
+    export['references'] = ref_out
     export['Surface'] = data['Surface']
     export['Vector'] = data['Vector']
     export['Target'] = data['Target']
@@ -303,6 +314,8 @@ def process_table(table, category, source_url, date_fix_released_on):
 
                 if re.search(REFERENCE_REGEX, header, flags=re.I) != None:
                     row_data['References'] = parse_references(item)
+                elif re.search(VERSION_REGEX, header, flags=re.I) != None:
+                    row_data['Updated AOSP versions'] = item.get_attribute('innerHTML')
                 else:
                     row_data[header] = item.get_attribute('innerHTML')
 
@@ -395,6 +408,7 @@ for cve in descriptions.keys():
 
 # Load datasets to give descriptions
 cwe_dataset = load_manual_data('attributes/cwe')
+version_dataset = load_manual_data('attributes/versions')
 
 # Store previous manual data set for quick repeat operations
 prev_manual_data = None
@@ -415,12 +429,17 @@ for cve, vulnerability in vulnerabilities.items():
             vulnerability['Fixed_on'] = fixed.isoformat()
             vulnerability['Fixed_on_ref'] = fixed_ref
 
+        # If fixed versions regexp is complicated, do it manually
+        affected = vulnerability['Updated AOSP versions']
+        if 'below' in affected or 'above' in affected:
+            vulnerability['Affected_versions_regexp'] = decode_lookup(affected, version_dataset, 'regexp')
+
         pprint.pprint(vulnerability)
 
         # If no stored submission date, assume today
         manual_data = load_manual_data(cve)
         if 'Submission' not in manual_data.keys():
-            manual_data['Submission'] = submission
+            manual_data['Submission'] = [submission]
         for key in MANUAL_KEYS:
             if key not in manual_data:
                 if key in MANUAL_KEYS_REQUIRED:
@@ -442,7 +461,7 @@ for cve, vulnerability in vulnerabilities.items():
                             manual_data['Vector'] = [vector]
                     else:
                         # Otherwise, as this is automatically generated, we don't add it to manual_data
-                        vector = decode_cwe(cwe, cwe_dataset)
+                        vector = decode_lookup(cwe, cwe_dataset, 'vector')
                         if vector == '':
                             vulnerability['Vector'] = []
                         else:
@@ -460,4 +479,5 @@ for cve, vulnerability in vulnerabilities.items():
 def cleanup():
     # Write datasets back to disk
     write_manual_data('attributes/cwe', cwe_dataset)
+    write_manual_data('attributes/versions', version_dataset)
     utils.quitDriver(driver)

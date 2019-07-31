@@ -58,8 +58,9 @@ Further details on how this figure constructed can be found <a href="graph">on a
 ## Vulnerabilities and papers
 
 We are collating all critical vulnerabilities in Android and storing this information in a [machine readable format (json)](spec).
-We are only tracking critical vulnerabilities which an app could exploit.
+The original data set only conidered critical vulnerabilities which an app could exploit.
 These are vulnerabilities that allow an app (malicious or compromised) to either gain root or gain privileges which can then be used to obtain root.
+However, we are now including all vulnerabilities marked as critical on Google's [Android security bulletins](https://source.android.com/security/bulletin).
 
 <div class="row" markdown="1">
 <div class="four columns" markdown="1">

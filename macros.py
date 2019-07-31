@@ -389,7 +389,7 @@ class Vulnerability:
         privs = []
         for condition in self.jsn['Condition']:
             privs.append(condition_privilege_lookup[condition])
-            return privs
+        return privs
 
     def graphLines(self, condition_privilege_lookup):
         """Return an array of strings (in DOT graph format) to show which privilege escalations this vulnerability can perform"""
@@ -479,6 +479,7 @@ condition_privilege_lookup["user-visits-webpage"] = "remote"
 condition_privilege_lookup["malicious-file-viewed"] = "remote"
 condition_privilege_lookup["attacker-in-close-proximity"] = "proximity"
 condition_privilege_lookup["user-has-remote-access"] = "user"
+condition_privilege_lookup["hardware-used-for-attack"] = "hardware"
 condition_privilege_lookup["root"] = "root"
 condition_privilege_lookup["none"] = "remote"
 
@@ -874,6 +875,7 @@ def hook_preconvert_stats():
 
     month_graphs(months_range(first_date, last_date))
     for version, date in release_dates.items():
+        #if version == '6.0.0':
         month_graphs(months_range(date, last_date), version)
 
 def month_graphs(dates, version=None, show_before_first_discovery=True):
