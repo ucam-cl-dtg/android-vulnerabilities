@@ -5,6 +5,7 @@ from matplotlib import colors, patches
 import datetime
 import os
 import json
+from collections import OrderedDict
 
 START_YEAR = 2009
 
@@ -44,8 +45,9 @@ versions = []
 if os.path.isfile(path):
     with open(path, 'r') as f:
         rjson = json.load(f)
-        versions = rjson.keys()
+        versions = list(rjson.keys())
 
+#versions.append('all')
 dates = dates_to_today(START_YEAR)
 grid = np.zeros((len(versions), len(dates)))
 
@@ -73,43 +75,55 @@ for vindex, version in enumerate(versions):
         # Remove duplicate edges
         sgraph = strictify(graph)
 
+        if dfs(sgraph, 'remote', 'kernel'):
+            grid[vindex, dindex] = 17
+            continue
         if dfs(sgraph, 'remote', 'system'):
-            #print('{month}/{year}: black'.format(month=date.month, year=date.year))
-            grid[vindex, dindex] = 11
+            grid[vindex, dindex] = 15
             continue
         if dfs(sgraph, 'remote', 'user'):
-            #print('{month}/{year}: red'.format(month=date.month, year=date.year))
-            grid[vindex, dindex] = 9
+            grid[vindex, dindex] = 13
+            continue
+        if dfs(sgraph, 'network', 'kernel'):
+            grid[vindex, dindex] = 11
             continue
         if dfs(sgraph, 'network', 'system'):
-            #print('{month}/{year}: orange'.format(month=date.month, year=date.year))
-            grid[vindex, dindex] = 7
+            grid[vindex, dindex] = 9
             continue
         if dfs(sgraph, 'network', 'user'):
-            #print('{month}/{year}: yellow'.format(month=date.month, year=date.year))
+            grid[vindex, dindex] = 7
+            continue
+        if dfs(sgraph, 'user', 'kernel'):
             grid[vindex, dindex] = 5
             continue
         if dfs(sgraph, 'user', 'system'):
-            #print('{month}/{year}: blue'.format(month=date.month, year=date.year))
             grid[vindex, dindex] = 3
             continue
-        #print('{month}/{year}: white'.format(month=date.month, year=date.year))
         grid[vindex, dindex] = 1
 
+# Store colours
+colours = OrderedDict()
+colours['#808080'] = 'Not yet released'
+colours['#ffffff'] = 'No known serious vulnerabilities'
+colours['#4575b4'] = 'user mode -> system user'
+colours['#74add1'] = 'user mode -> kernel'
+colours['#abd9e9'] = 'local network -> user mode'
+colours['#fee060'] = 'local network -> system user'
+colours['#fdae61'] = 'local network -> kernel'
+colours['#f46d43'] = 'remote -> user mode'
+colours['#d73027'] = 'remote -> system user'
+colours['#000000'] = 'remote -> kernel'
+
+
 # Set up mapping of values to colours
-cmap = colors.ListedColormap(['gray', 'white', 'blue', 'yellow', 'orange', 'red', 'black'])
-bounds = [-2, 0, 2, 4, 6, 8, 10, 12]
+cmap = colors.ListedColormap(colours.keys())
+bounds = [-2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 norm = colors.BoundaryNorm(bounds, cmap.N)
 
 # Prepare legend
 legend = []
-legend.append(patches.Patch(color='gray', label='Not yet released'))
-legend.append(patches.Patch(color='white', label='No known serious vulnerabilities'))
-legend.append(patches.Patch(color='blue', label='user mode -> system user'))
-legend.append(patches.Patch(color='yellow', label='local network -> user mode'))
-legend.append(patches.Patch(color='orange', label='local network -> system user'))
-legend.append(patches.Patch(color='red', label='remote -> user mode'))
-legend.append(patches.Patch(color='black', label='remote -> system user'))
+for key, value in colours.items():
+    legend.append(patches.Patch(color=key, label=value))
 
 # Only show every third date
 datepoints = [str(date) if index % 3 == 0 else '' for index, date in enumerate(dates)]
