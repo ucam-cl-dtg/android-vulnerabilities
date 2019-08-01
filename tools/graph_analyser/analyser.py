@@ -64,6 +64,12 @@ for vindex, version in enumerate(versions):
         # Import graph
         graph = pgv.AGraph(path)
 
+        # Remove red (device-specific) edges
+        graph.delete_edges_from([edge for edge in graph.edges() if edge.attr['color'] == 'red'])
+
+        # Experimental: remove fixed edges
+        #graph.delete_edges_from([edge for edge in graph.edges() if edge.attr['style'] == 'dashed'])
+
         # Add 'backwards' edges
         hierarchy = ['remote', 'proximity', 'network', 'user', 'access-to-data', 'modify-apps', 'control-hardware', 'system', 'unlock-bootloader', 'tee', 'root', 'kernel']
         for start in hierarchy:
@@ -75,6 +81,7 @@ for vindex, version in enumerate(versions):
         # Remove duplicate edges
         sgraph = strictify(graph)
 
+        # Sequence of odd numbered 'priorities' as they are unambiguously between even numbered limits below
         if dfs(sgraph, 'remote', 'kernel'):
             grid[vindex, dindex] = 17
             continue
@@ -103,16 +110,16 @@ for vindex, version in enumerate(versions):
 
 # Store colours
 colours = OrderedDict()
-colours['#808080'] = 'Not yet released'
-colours['#ffffff'] = 'No known serious vulnerabilities'
-colours['#4575b4'] = 'user mode -> system user'
-colours['#74add1'] = 'user mode -> kernel'
-colours['#abd9e9'] = 'local network -> user mode'
-colours['#fee060'] = 'local network -> system user'
-colours['#fdae61'] = 'local network -> kernel'
-colours['#f46d43'] = 'remote -> user mode'
-colours['#d73027'] = 'remote -> system user'
-colours['#000000'] = 'remote -> kernel'
+colours['gray'] = 'Not yet released'
+colours['white'] = 'No known serious vulnerabilities'
+colours['skyblue'] = 'user mode -> system user'
+colours['aqua'] = 'user mode -> kernel'
+colours['blue'] = 'local network -> user mode'
+colours['yellow'] = 'local network -> system user'
+colours['orange'] = 'local network -> kernel'
+colours['red'] = 'remote -> user mode'
+colours['darkred'] = 'remote -> system user'
+colours['black'] = 'remote -> kernel'
 
 
 # Set up mapping of values to colours

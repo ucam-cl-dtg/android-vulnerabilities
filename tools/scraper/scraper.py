@@ -215,13 +215,13 @@ def write_data_for_website(cve, data):
         export['Reported_on'] = []
     export['Fixed_on'] = check_blank(data['Fixed_on'], data['Fixed_on_ref'])
     export['Fix_released_on'] = check_blank(data['Fix_released_on'], bulletin_ref)
-    export['Affected_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
+    export['Affected_versions'] = check_blank(data['Affected versions'], bulletin_ref)
     # Affected devices
     export['Affected_devices'] = []
     if 'Affected_versions_regexp' in data:
         export['Affected_versions_regexp'] = [data['Affected_versions_regexp']]
     else:
-        export['Affected_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
+        export['Affected_versions_regexp'] = [regexp_versions(data['Affected versions'])]
     # Initially assume all devices are affected
     manufacturer_affected = 'all'
     for manufacturer in KNOWN_MANUFACTURERS:
@@ -230,6 +230,10 @@ def write_data_for_website(cve, data):
             manufacturer_affected = manufacturer
     export['Affected_manufacturers'] = [[manufacturer_affected, bulletin_ref]]
     export['Fixed_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
+    if 'Fixed_versions_regexp' in data:
+        export['Fixed_versions_regexp'] = [data['Fixed_versions_regexp']]
+    else:
+        export['Fixed_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
     export['references'] = ref_out
     export['Surface'] = data['Surface']
     export['Vector'] = data['Vector']
@@ -273,6 +277,11 @@ def merge_rows(row1, row2):
             continue
         elif key == 'References':
             output['References'].update(row2['References'])
+        elif key == 'Severity':
+            if output['Severity'] == 'Critical' or row2['Severity'] == 'Critical':
+                output['Severity'] = 'Critical'
+            else:
+                output[key] = '{old}, {new}'.format(old=output[key], new=row2[key])
         else:
             output[key] = '{old}, {new}'.format(old=output[key], new=row2[key])
     return output
@@ -312,9 +321,13 @@ def process_table(table, category, source_url, date_fix_released_on):
                     # This row needs to "spill over" into the next
                     multispans[header] = int(rowspan) -1
 
+                if re.search(VERSION_REGEX, header, flags=re.I) != None:
+                    # Do this in addition to loading the text directly below
+                    row_data['Affected versions'] = item.get_attribute('innerHTML')
+
                 if re.search(REFERENCE_REGEX, header, flags=re.I) != None:
                     row_data['References'] = parse_references(item)
-                elif re.search(VERSION_REGEX, header, flags=re.I) != None:
+                elif header == 'Updated versions':
                     row_data['Updated AOSP versions'] = item.get_attribute('innerHTML')
                 else:
                     row_data[header] = item.get_attribute('innerHTML')
@@ -353,7 +366,7 @@ fix_dates = dict()
 today = date.today()
 
 for year in range(2015, (today.year)+1):
-#for year in range(2015, 2017):
+#for year in range(2017, 2019):
     fix_dates[year] = dict()
     urls = []
 
@@ -430,9 +443,14 @@ for cve, vulnerability in vulnerabilities.items():
             vulnerability['Fixed_on_ref'] = fixed_ref
 
         # If fixed versions regexp is complicated, do it manually
-        affected = vulnerability['Updated AOSP versions']
+        affected = vulnerability['Affected versions']
         if 'below' in affected or 'above' in affected:
             vulnerability['Affected_versions_regexp'] = decode_lookup(affected.strip(), version_dataset, 'regexp')
+
+        fixed = vulnerability['Updated AOSP versions']
+        if 'below' in fixed or 'above' in fixed:
+            vulnerability['Fixed_versions_regexp'] = decode_lookup(fixed.strip(), version_dataset, 'regexp')
+
 
         pprint.pprint(vulnerability)
 
@@ -468,8 +486,12 @@ for cve, vulnerability in vulnerabilities.items():
                             vulnerability['Vector'] = [vector]
                 else:
                     manual_data[key] = []
-        vulnerability.update(manual_data)
+
         write_manual_data(cve, manual_data)
+        if 'References' in manual_data:
+            vulnerability['References'].update(manual_data['References'])
+            del manual_data['References']
+        vulnerability.update(manual_data)
         prev_manual_data = manual_data
         write_data_for_website(cve, vulnerability)
 

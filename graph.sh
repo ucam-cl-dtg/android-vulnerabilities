@@ -22,9 +22,7 @@ echo "Creating images of graph data..."
 mkdir -p graph_temp
 find *.gv | xargs -I {} dot -Gsize=15,10\! -Gdpi=100 -Tgif {} -o ./graph_temp/{}.gif
 echo "Combining into one animated GIF..."
-convert -delay $DELAY -loop 0 ./graph_temp/*.gif -gravity center -background white -extent 1500x1000 graphs.gif
-echo "Creating thumbnail version..."
-convert graphs.gif -scale 150x100 graphs-small.gif
+convert -delay $DELAY -loop 0 ./graph_temp/*.gif -gravity center -background white -extent 1500x1000 -write graphs.gif -thumbnail 150x100 graphs-small.gif
 echo "Clearing up..."
 rm -r graph_temp
 echo "Done"
