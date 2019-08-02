@@ -207,10 +207,9 @@ def write_data_for_website(cve, data):
     # Slightly different categories than in original set, but still usable
     export['Categories'] = [data['Category']]
     export['Details'] = check_blank(data['Description'], nist_ref)
-    # Discovered by
-    export['Discovered_on'] = []
     # Discovered on
-    export['Discovered_by'] = []
+    export['Discovered_on'] = []
+    export['Discovered_by'] = check_blank(data['Discovered_by'] , data['Discovered_by_ref'])
     export['Submission'] = data['Submission']
     if report_date != None:
         export['Reported_on'] = [[report_date.group(), bulletin_ref]]
@@ -355,6 +354,25 @@ def get_submitter_name():
     else:
         return input("Enter the name to record submissions under...")
 
+def get_discoverer_data(driver, url):
+    """Loads the list of people who have discovered bugs"""
+    output = defaultdict(str)
+    utils.fetchPage(driver, url)
+    tables = driver.find_elements_by_xpath('//div[@class="devsite-table-wrapper"]/table')
+
+    for table in tables:
+        rows = table.find_elements_by_tag_name('tr')
+        for row in rows:
+            cells = row.find_elements_by_tag_name('td')
+            if len(cells) < 2:
+                # We're on the header row, which uses <th> elements, or an invalid row
+                continue
+            cves = cells[1].text.split(',')
+            text = cells[0].text.strip()
+            for cve in cves:
+                output[cve.strip()] = text
+    return output
+
 # Setup
 driver = utils.getDriver()
 vulnerabilities = dict()
@@ -367,6 +385,9 @@ submission['on'] = date.today().strftime('%Y-%m-%d')
 # Fix release dates (done per bulletin)
 fix_dates = dict()
 today = date.today()
+
+discoverer_url = 'https://source.android.com/security/overview/acknowledgements'
+discoverers = get_discoverer_data(driver, discoverer_url)
 
 for year in range(2015, (today.year)+1):
 #for year in range(2015, 2018):
@@ -444,6 +465,9 @@ for cve, vulnerability in vulnerabilities.items():
         if fixed != None:
             vulnerability['Fixed_on'] = fixed.isoformat()
             vulnerability['Fixed_on_ref'] = fixed_ref
+
+        vulnerability['Discovered_by'] = discoverers[cve]
+        vulnerability['Discovered_by_ref'] = discoverer_url
 
         # If fixed versions regexp is complicated, do it manually
         affected = vulnerability['Affected versions']
