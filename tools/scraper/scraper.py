@@ -1,3 +1,6 @@
+# Copyright (C) Daniel Carter 2019
+# Licenced under the 2-clause BSD licence
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime, date
@@ -323,14 +326,14 @@ def process_table(table, category, source_url, date_fix_released_on):
 
                 if re.search(VERSION_REGEX, header, flags=re.I) != None:
                     # Do this in addition to loading the text directly below
-                    row_data['Affected versions'] = item.get_attribute('innerHTML')
+                    row_data['Affected versions'] = item.get_attribute('innerHTML').strip()
 
                 if re.search(REFERENCE_REGEX, header, flags=re.I) != None:
                     row_data['References'] = parse_references(item)
                 elif header == 'Updated versions':
-                    row_data['Updated AOSP versions'] = item.get_attribute('innerHTML')
+                    row_data['Updated AOSP versions'] = item.get_attribute('innerHTML').strip()
                 else:
-                    row_data[header] = item.get_attribute('innerHTML')
+                    row_data[header] = item.get_attribute('innerHTML').strip()
 
         if 'CVE' in row_data:
             cve = row_data['CVE']
@@ -366,7 +369,7 @@ fix_dates = dict()
 today = date.today()
 
 for year in range(2015, (today.year)+1):
-#for year in range(2017, 2019):
+#for year in range(2015, 2018):
     fix_dates[year] = dict()
     urls = []
 

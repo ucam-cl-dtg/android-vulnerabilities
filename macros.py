@@ -17,6 +17,7 @@ from uncertainties import ufloat
 from math import sqrt
 import pathlib
 import subprocess
+import multiprocessing as mp
 
 sys.path.append('')# So that we find latex_value
 import latex_value
@@ -965,10 +966,21 @@ def hook_preconvert_stats():
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
+    pool = mp.Pool(4)
+
     month_graphs(months_range(first_date, datetime.date.today()))
     for version, date in release_dates.items():
         #if version == '6.0.0':
-        month_graphs(months_range(date, datetime.date.today()), version)
+        daterange = months_range(date, datetime.date.today())
+        #month_graphs(daterange, version)
+        pool.apply_async(month_graphs, args=(daterange, version))
+
+    pool.close()
+    pool.join()
+
+    #versions = numpy.array(release_dates.keys())
+    #grapher = lambda v : month_graphs(months_range(release_dates[v], datetime.date.today()), version=v)
+    #numpy.vectorize(grapher)(versions)
 
 def month_graphs(dates, version=None, show_before_first_discovery=True):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""

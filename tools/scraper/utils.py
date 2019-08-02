@@ -1,4 +1,6 @@
-# Copyright (C) Daniel Thomas
+# Copyright (C) Sergio Pastrana 2018
+# Copyright (C) Daniel Carter 2019
+# Licenced under the 2-clause BSD licence
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -36,16 +38,6 @@ def fetchPage(driver,url):
 	except:
 		return False;
 	return True
-
-
-def getDBConnection():
-	try:
-		connector=sqlite3.connect(DB_NAME)
-	except Exception as err:
-		print(("Unable to connect to DB "+str(err)))
-	else:
-		return connector
-
 
 def quitDriver(driver):
 	driver.service.process.send_signal(signal.SIGTERM)
