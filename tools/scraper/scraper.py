@@ -188,6 +188,8 @@ def write_data_for_website(cve, data):
     ref_out[nist_ref] = make_reference(NIST_URL)
     bulletin_ref = 'Bulletin-' + cve
     ref_out[bulletin_ref] = make_reference(data['URL'])
+    discovery_ref = 'Discovery-' + cve
+    ref_out[discovery_ref] = make_reference(data['Discovered_by_ref'])
 
     discovery_date = None
     if 'Date reported' in data:
@@ -209,7 +211,7 @@ def write_data_for_website(cve, data):
     export['Details'] = check_blank(data['Description'], nist_ref)
     # Discovered on
     export['Discovered_on'] = []
-    export['Discovered_by'] = check_blank(data['Discovered_by'] , data['Discovered_by_ref'])
+    export['Discovered_by'] = check_blank(data['Discovered_by'], discovery_ref)
     export['Submission'] = data['Submission']
     if report_date != None:
         export['Reported_on'] = [[report_date.group(), bulletin_ref]]

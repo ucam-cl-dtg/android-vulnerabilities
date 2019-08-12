@@ -969,8 +969,11 @@ def hook_preconvert_stats():
     pool = mp.Pool(4)
 
     month_graphs(months_range(first_date, datetime.date.today()))
+    #reached = False
     for version, date in release_dates.items():
-        #if version == '6.0.0':
+        #if version == '7.0.0':
+            #reached = True
+        #if reached:
         daterange = months_range(date, datetime.date.today())
         #month_graphs(daterange, version)
         pool.apply_async(month_graphs, args=(daterange, version))
