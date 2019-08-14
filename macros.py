@@ -17,6 +17,7 @@ from uncertainties import ufloat
 from math import sqrt
 import pathlib
 import subprocess
+import multiprocessing as mp
 
 sys.path.append('')# So that we find latex_value
 import latex_value
@@ -166,15 +167,16 @@ class Submitter:
 
 class GraphLine:
     """An edge on the graph, representing one or more vulnerabilities"""
-    def __init__(self, origin, dest, label, colour):
+    def __init__(self, origin, dest, label, colour, style):
         self.origin = origin
         self.dest = dest
         self.label = label
         self.colour = colour
+        self.style = style
 
     def get_string(self):
         """Convert the GraphLine into a line of a DOT file"""
-        return '"{origin}" -> "{dest}" [label="{label}" color="{colour}"];\n'.format(origin=self.origin, dest=self.dest, label=self.label, colour=self.colour)
+        return '"{origin}" -> "{dest}" [label="{label}" color="{colour}" style="{style}"];\n'.format(origin=self.origin, dest=self.dest, label=self.label, colour=self.colour, style=self.style)
 
     @staticmethod
     def merge_colours(lines):
@@ -184,6 +186,15 @@ class GraphLine:
             if 'black' == line.colour:
                 return 'black'
         return 'red'
+
+    @staticmethod
+    def merge_styles(lines):
+        """Take a set of edges to be merged and identify what style the merged line should have"""
+        # Solid (not fixed) takes priority over dashed (fixed)
+        for line in lines:
+            if 'solid' == line.style:
+                return 'solid'
+        return 'dashed'
 
     @staticmethod
     def merge_set(lines):
@@ -198,11 +209,13 @@ class GraphLine:
                 if len(line_set) == 1:
                     result.append(line_set[0])
                 else:
-                    # Alternative layout where there are 2 vulnerabilities
+                    # Original layout where there are 2 vulnerabilities (show both names)
                     #label = '{a}, {b}'.format(a=line_set[0].label, b=line_set[1].label)
+                    # Now using the 'n vulnerabilities' format for 2 or more vulnerabilities
                     label = '({n} vulnerabilities)'.format(n=len(line_set))
                     colour = GraphLine.merge_colours(line_set)
-                    result.append(GraphLine(origin, dest, label, colour))
+                    style = GraphLine.merge_styles(line_set)
+                    result.append(GraphLine(origin, dest, label, colour, style))
         return result
 
 
@@ -210,6 +223,8 @@ class GraphLine:
 class Vulnerability:
     year_fields = [
         'Discovered_on', 'Reported_on', 'Fixed_on', 'Fix_released_on']
+
+    _date_lookup = None
 
     def __init__(self, jsn):
         self.jsn = jsn
@@ -263,6 +278,18 @@ class Vulnerability:
                     fields.append(year_field)
         return list(zip(*sorted(zip(dates, fields), key=lambda x: x[0])))
 
+    def _dates_dict(self):
+        """Returns a dictionary of date field -> date lookups"""
+        if self._date_lookup == None:
+            dates, fields = self._dates()
+            output = dict()
+            if len(dates) != len(fields):
+                raise Exception('Invalid date fields')
+            for index, field in enumerate(fields):
+                output[field] = dates[index]
+            self._date_lookup = output
+        return self._date_lookup
+
     def raw_vulnerability(self):
         dates, fields = self._dates()
         regex = self.jsn['Affected_versions_regexp']
@@ -290,14 +317,35 @@ class Vulnerability:
         regex = self.regex()
         if (version != None) and not regex.match(version):
             return False
-        if date < self.first_date():
+
+        dates = self._dates_dict()
+        if 'Reported_on' in dates:
+            first_date = dates['Reported_on']
+        elif 'Fixed_on' in dates:
+            first_date = dates['Fixed_on']
+        else:
+            first_date = self.first_date()
+        if date < first_date:
             return False
-        if (version == None) and date >= self.last_date():
+        if (version == None) and self.fixed_on(date, version):
             return False
         return True
 
-    def regex(self):
-        affected_versions_regexp = self.jsn['Affected_versions_regexp']
+    def fixed_on(self, date, version):
+        """Returns a boolean giving whether this vulnerability had been fixed on a particular date,
+        for a particular version of Android"""
+        dates = self._dates_dict()
+        if 'Fix_released_on' not in dates or date < dates['Fix_released_on']:
+            return False
+        regex = self.regex('Fixed_versions_regexp')
+        if version == None or regex.match(version):
+            return True
+        return False
+
+    def regex(self, key='Affected_versions_regexp'):
+        if key not in self.jsn:
+            return re.compile('XXXXXXXX')
+        affected_versions_regexp = self.jsn[key]
         if len(affected_versions_regexp) > 0:
             re_string = r'\A(%s)$' % affected_versions_regexp[0]
             try:
@@ -433,21 +481,24 @@ class Vulnerability:
             privs.append(condition_privilege_lookup[condition])
         return privs
 
-    def graphLines(self, condition_privilege_lookup):
+    def graphLines(self, condition_privilege_lookup, fixed):
         """Return an array of strings (in DOT graph format) to show which privilege escalations this vulnerability can perform"""
         sources = []
         lines = []
         reached = set()
         manufacturers = self.manufacturers()
         colour = 'red'
+        style = 'solid'
         if 'all' in  map(lambda x : x[0], manufacturers):
             colour = 'black'
+        if fixed:
+            style = 'dashed'
         for source in self.startPrivileges(condition_privilege_lookup):
             if source not in sources:
                 sources.append(source)
                 reached = reached.union(set(self.jsn['Privilege']))
                 for privilege in reached:
-                    lines.append(GraphLine(source, privilege, self.name, colour))
+                    lines.append(GraphLine(source, privilege, self.name, colour, style))
         return lines, reached
 
     def __str__(self):
@@ -915,10 +966,24 @@ def hook_preconvert_stats():
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
-    month_graphs(months_range(first_date, last_date))
+    pool = mp.Pool(4)
+
+    month_graphs(months_range(first_date, datetime.date.today()))
+    #reached = False
     for version, date in release_dates.items():
-        #if version == '6.0.0':
-        month_graphs(months_range(date, last_date), version)
+        #if version == '7.0.0':
+            #reached = True
+        #if reached:
+        daterange = months_range(date, datetime.date.today())
+        #month_graphs(daterange, version)
+        pool.apply_async(month_graphs, args=(daterange, version))
+
+    pool.close()
+    pool.join()
+
+    #versions = numpy.array(release_dates.keys())
+    #grapher = lambda v : month_graphs(months_range(release_dates[v], datetime.date.today()), version=v)
+    #numpy.vectorize(grapher)(versions)
 
 def month_graphs(dates, version=None, show_before_first_discovery=True):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
@@ -938,7 +1003,7 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
             if vulnerability.exploitable_on(date, version):
                 if version == None or vulnerability.regex().match(version):
                     yet_found = True
-                    lines, reached = vulnerability.graphLines(condition_privilege_lookup)
+                    lines, reached = vulnerability.graphLines(condition_privilege_lookup, vulnerability.fixed_on(date, version))
                     for line in lines:
                         exploitables.append(line)
                         points_reached = points_reached.union(reached)
@@ -946,7 +1011,7 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
             for vulnerability in hidden_vulnerabilities[origin]:
                 if vulnerability.exploitable_on(date, version):
                     if version == None or vulnerability.regex().match(version):
-                        lines, reached = vulnerability.graphLines(condition_privilege_lookup)
+                        lines, reached = vulnerability.graphLines(condition_privilege_lookup, False)
                         for line in lines:
                             exploitables.append(line)
         if yet_found:

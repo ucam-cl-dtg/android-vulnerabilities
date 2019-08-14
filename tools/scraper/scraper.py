@@ -1,3 +1,6 @@
+# Copyright (C) Daniel Carter 2019
+# Licenced under the 2-clause BSD licence
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime, date
@@ -185,6 +188,8 @@ def write_data_for_website(cve, data):
     ref_out[nist_ref] = make_reference(NIST_URL)
     bulletin_ref = 'Bulletin-' + cve
     ref_out[bulletin_ref] = make_reference(data['URL'])
+    discovery_ref = 'Discovery-' + cve
+    ref_out[discovery_ref] = make_reference(data['Discovered_by_ref'])
 
     discovery_date = None
     if 'Date reported' in data:
@@ -204,10 +209,9 @@ def write_data_for_website(cve, data):
     # Slightly different categories than in original set, but still usable
     export['Categories'] = [data['Category']]
     export['Details'] = check_blank(data['Description'], nist_ref)
-    # Discovered by
-    export['Discovered_on'] = []
     # Discovered on
-    export['Discovered_by'] = []
+    export['Discovered_on'] = []
+    export['Discovered_by'] = check_blank(data['Discovered_by'], discovery_ref)
     export['Submission'] = data['Submission']
     if report_date != None:
         export['Reported_on'] = [[report_date.group(), bulletin_ref]]
@@ -215,13 +219,13 @@ def write_data_for_website(cve, data):
         export['Reported_on'] = []
     export['Fixed_on'] = check_blank(data['Fixed_on'], data['Fixed_on_ref'])
     export['Fix_released_on'] = check_blank(data['Fix_released_on'], bulletin_ref)
-    export['Affected_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
+    export['Affected_versions'] = check_blank(data['Affected versions'], bulletin_ref)
     # Affected devices
     export['Affected_devices'] = []
     if 'Affected_versions_regexp' in data:
         export['Affected_versions_regexp'] = [data['Affected_versions_regexp']]
     else:
-        export['Affected_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
+        export['Affected_versions_regexp'] = [regexp_versions(data['Affected versions'])]
     # Initially assume all devices are affected
     manufacturer_affected = 'all'
     for manufacturer in KNOWN_MANUFACTURERS:
@@ -230,6 +234,10 @@ def write_data_for_website(cve, data):
             manufacturer_affected = manufacturer
     export['Affected_manufacturers'] = [[manufacturer_affected, bulletin_ref]]
     export['Fixed_versions'] = check_blank(data['Updated AOSP versions'], bulletin_ref)
+    if 'Fixed_versions_regexp' in data:
+        export['Fixed_versions_regexp'] = [data['Fixed_versions_regexp']]
+    else:
+        export['Fixed_versions_regexp'] = [regexp_versions(data['Updated AOSP versions'])]
     export['references'] = ref_out
     export['Surface'] = data['Surface']
     export['Vector'] = data['Vector']
@@ -273,6 +281,11 @@ def merge_rows(row1, row2):
             continue
         elif key == 'References':
             output['References'].update(row2['References'])
+        elif key == 'Severity':
+            if output['Severity'] == 'Critical' or row2['Severity'] == 'Critical':
+                output['Severity'] = 'Critical'
+            else:
+                output[key] = '{old}, {new}'.format(old=output[key], new=row2[key])
         else:
             output[key] = '{old}, {new}'.format(old=output[key], new=row2[key])
     return output
@@ -312,12 +325,16 @@ def process_table(table, category, source_url, date_fix_released_on):
                     # This row needs to "spill over" into the next
                     multispans[header] = int(rowspan) -1
 
+                if re.search(VERSION_REGEX, header, flags=re.I) != None:
+                    # Do this in addition to loading the text directly below
+                    row_data['Affected versions'] = item.get_attribute('innerHTML').strip()
+
                 if re.search(REFERENCE_REGEX, header, flags=re.I) != None:
                     row_data['References'] = parse_references(item)
-                elif re.search(VERSION_REGEX, header, flags=re.I) != None:
-                    row_data['Updated AOSP versions'] = item.get_attribute('innerHTML')
+                elif header == 'Updated versions':
+                    row_data['Updated AOSP versions'] = item.get_attribute('innerHTML').strip()
                 else:
-                    row_data[header] = item.get_attribute('innerHTML')
+                    row_data[header] = item.get_attribute('innerHTML').strip()
 
         if 'CVE' in row_data:
             cve = row_data['CVE']
@@ -339,6 +356,25 @@ def get_submitter_name():
     else:
         return input("Enter the name to record submissions under...")
 
+def get_discoverer_data(driver, url):
+    """Loads the list of people who have discovered bugs"""
+    output = defaultdict(str)
+    utils.fetchPage(driver, url)
+    tables = driver.find_elements_by_xpath('//div[@class="devsite-table-wrapper"]/table')
+
+    for table in tables:
+        rows = table.find_elements_by_tag_name('tr')
+        for row in rows:
+            cells = row.find_elements_by_tag_name('td')
+            if len(cells) < 2:
+                # We're on the header row, which uses <th> elements, or an invalid row
+                continue
+            cves = cells[1].text.split(',')
+            text = cells[0].text.strip()
+            for cve in cves:
+                output[cve.strip()] = text
+    return output
+
 # Setup
 driver = utils.getDriver()
 vulnerabilities = dict()
@@ -352,8 +388,11 @@ submission['on'] = date.today().strftime('%Y-%m-%d')
 fix_dates = dict()
 today = date.today()
 
+discoverer_url = 'https://source.android.com/security/overview/acknowledgements'
+discoverers = get_discoverer_data(driver, discoverer_url)
+
 for year in range(2015, (today.year)+1):
-#for year in range(2015, 2017):
+#for year in range(2015, 2018):
     fix_dates[year] = dict()
     urls = []
 
@@ -429,10 +468,18 @@ for cve, vulnerability in vulnerabilities.items():
             vulnerability['Fixed_on'] = fixed.isoformat()
             vulnerability['Fixed_on_ref'] = fixed_ref
 
+        vulnerability['Discovered_by'] = discoverers[cve]
+        vulnerability['Discovered_by_ref'] = discoverer_url
+
         # If fixed versions regexp is complicated, do it manually
-        affected = vulnerability['Updated AOSP versions']
+        affected = vulnerability['Affected versions']
         if 'below' in affected or 'above' in affected:
             vulnerability['Affected_versions_regexp'] = decode_lookup(affected.strip(), version_dataset, 'regexp')
+
+        fixed = vulnerability['Updated AOSP versions']
+        if 'below' in fixed or 'above' in fixed:
+            vulnerability['Fixed_versions_regexp'] = decode_lookup(fixed.strip(), version_dataset, 'regexp')
+
 
         pprint.pprint(vulnerability)
 
@@ -468,8 +515,12 @@ for cve, vulnerability in vulnerabilities.items():
                             vulnerability['Vector'] = [vector]
                 else:
                     manual_data[key] = []
-        vulnerability.update(manual_data)
+
         write_manual_data(cve, manual_data)
+        if 'References' in manual_data:
+            vulnerability['References'].update(manual_data['References'])
+            del manual_data['References']
+        vulnerability.update(manual_data)
         prev_manual_data = manual_data
         write_data_for_website(cve, vulnerability)
 
