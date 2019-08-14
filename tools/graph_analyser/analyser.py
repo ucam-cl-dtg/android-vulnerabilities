@@ -4,6 +4,7 @@
 from graph_utils import *
 
 import numpy as np
+import pandas
 import matplotlib.pyplot as plt
 from matplotlib import colors, patches
 from collections import OrderedDict
@@ -14,7 +15,7 @@ versions = load_version_list('../../input/release_dates.json')
 
 #versions.append('all')
 dates = dates_to_today(START_YEAR)
-grid = np.zeros((len(versions), len(dates)))
+grid = np.zeros((len(versions), len(dates)), dtype=int)
 
 
 for vindex, version in enumerate(versions):
@@ -53,6 +54,10 @@ for vindex, version in enumerate(versions):
             grid[vindex, dindex] = 3
         else:
             grid[vindex, dindex] = 1
+
+# Export table as csv
+data = pandas.DataFrame(grid, columns=dates, index=versions)
+data.to_csv('output.csv')
 
 # Store colours
 colours = OrderedDict()
