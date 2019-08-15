@@ -5,15 +5,17 @@
 
 # Analysis of usage data to plot a graph of the proportion of vulnerable devices
 
-from pyplot_utils import *
+import os
+import json
 
 import numpy as np
 import pandas
 import matplotlib.pyplot as plt
-import os
-import json
+
+from pyplot_utils import load_graph_colours
 
 def get_api_to_os(path):
+    '''Load in a JSON dictionary mapping API versions to OS versions'''
     if not os.path.isfile(path):
         raise Exception('OS to API data not found')
     data = dict()
@@ -28,16 +30,17 @@ def get_api_to_os(path):
     return data
 
 def get_score(date, version, scores):
+    '''Get the exploitation score of a given version on a given date'''
     if version == '4.4W':
         return -1
     # Get the number of the column with the nearest date
     col = scores.columns.get_loc(date, method='backfill')
     # Get the date associated with this column number
-    date = scores.columns[col]
+    lookup_date = scores.columns[col]
     # Look this column up in the table
-    s = scores[date]
+    score_col = scores[lookup_date]
     # Get the coorect row
-    return s.loc[version]
+    return score_col.loc[version]
 
 pandas.plotting.register_matplotlib_converters()
 
@@ -45,9 +48,10 @@ pandas.plotting.register_matplotlib_converters()
 PATH = '../../input/'
 
 # Read data in, remove unnecessary columns and replace blank cells with zeros
-values = pandas.read_csv(PATH+'play/androiddevolperdashboardhistory.csv', header=1, skiprows=[2], usecols=(lambda x: 'Unnamed' not in x), parse_dates=[0], index_col=0)
+values = pandas.read_csv(PATH+'play/androiddevolperdashboardhistory.csv', header=1, skiprows=[2],
+                         usecols=(lambda x: 'Unnamed' not in x), parse_dates=[0], index_col=0)
 #values.rename(columns = {'API version:':'Date'}, inplace = True)
-values.fillna(0,inplace=True)
+values.fillna(0, inplace=True)
 
 # Load in vulnerability scores for each version
 version_scores = pandas.read_csv('version_scores.csv', index_col=0)
@@ -55,7 +59,7 @@ version_scores.columns = pandas.to_datetime(version_scores.columns)
 
 # Convert API versions from spreadsheet into (estimated) OS versions
 api_to_os = get_api_to_os(PATH + 'os_to_api.json')
-values.columns = np.vectorize(lambda x : api_to_os[x])(values.columns)
+values.columns = np.vectorize(lambda x: api_to_os[x])(values.columns)
 
 scores, colours, legend = load_graph_colours()
 
@@ -74,14 +78,18 @@ print(scored_output)
 # Write data to output file
 scored_output.to_csv('vulnerable_device_proportion.csv', index=True)
 
+# Normalise data so graph is constant height
+# (original data may not add up to 100% due to rounding errors)
 percent_output = scored_output.divide(scored_output.sum(axis=1), axis=0)
+
+plt.rc('font', size=20)
+#plt.rc('figure', titlesize=30)
+plt.rc('legend', fontsize=14)
 
 plt.stackplot(percent_output.index, percent_output.transpose(), colors=colours.keys())
 plt.legend(handles=legend)
 plt.title('Proportion of devices vulnerable to attack')
 plt.xlabel('Date')
 plt.ylabel('Proportion of devices')
-#plt.rcParams.update({'font.size': 22})
-#plt.xlim(min(version_scores.columns), max(version_scores.columns))
-plt.ylim(0,1)
+plt.autoscale(enable=True, tight=True)
 plt.show()

@@ -1,16 +1,22 @@
 # Copyright (C) Daniel Carter 2019
 # Licenced under the 2-clause BSD licence
 
-from graph_utils import *
+import math
 
 import numpy as np
 import matplotlib.pyplot as plt
-import math
+
+from graph_utils import *
+
+#def make_color_map(size):
+    # Not currently used and needs more work
+    #colormap = plt.cm.tab20
+    #colors = [colormap(i) for i in np.linspace(0, 1, size)]
+    #return colors
 
 START_YEAR = 2009
 
 versions = load_version_list('../../input/release_dates.json')
-
 dates = dates_to_today(START_YEAR)
 
 #prev = ['','','']
@@ -22,7 +28,7 @@ dates = dates_to_today(START_YEAR)
 
 # Don't use any versions prior to 5.0.0
 found = False
-for version in versions:
+for vindex, version in enumerate(versions):
     if version == '5.0.0':
         found = True
     if not found:
@@ -70,9 +76,9 @@ for version in versions:
         else:
             line[dindex] += 1
 
-    plt.plot(np.array(dates)[line>0], line[line>0], label=version)
+    plt.plot(np.array(dates)[line > 0], line[line > 0], label=version)
 
-plt.ylim([0,2])
+plt.ylim([0, 2])
 plt.legend()
 
 plt.show()

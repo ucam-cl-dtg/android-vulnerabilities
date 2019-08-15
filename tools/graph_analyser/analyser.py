@@ -1,13 +1,13 @@
 # Copyright (C) Daniel Carter 2019
 # Licenced under the 2-clause BSD licence
 
-from graph_utils import *
-
 import numpy as np
 import pandas
 import matplotlib.pyplot as plt
-from matplotlib import colors, patches
-from collections import OrderedDict
+from matplotlib import colors
+
+from graph_utils import *
+from pyplot_utils import load_graph_colours, get_bounds
 
 START_YEAR = 2009
 
@@ -57,31 +57,14 @@ for vindex, version in enumerate(versions):
 
 # Export table as csv
 data = pandas.DataFrame(grid, columns=dates, index=versions)
-data.to_csv('output.csv')
+data.to_csv('version_scores.csv')
 
-# Store colours
-colours = OrderedDict()
-colours['gray'] = 'Not yet released'
-colours['white'] = 'No known serious vulnerabilities'
-colours['skyblue'] = 'user mode -> system user'
-colours['aqua'] = 'user mode -> kernel'
-colours['blue'] = 'local network -> user mode'
-colours['yellow'] = 'local network -> system user'
-colours['orange'] = 'local network -> kernel'
-colours['red'] = 'remote -> user mode'
-colours['darkred'] = 'remote -> system user'
-colours['black'] = 'remote -> kernel'
-
+scores, colours, legend = load_graph_colours()
 
 # Set up mapping of values to colours
 cmap = colors.ListedColormap(colours.keys())
-bounds = [-2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+bounds = get_bounds(scores)
 norm = colors.BoundaryNorm(bounds, cmap.N)
-
-# Prepare legend
-legend = []
-for key, value in colours.items():
-    legend.append(patches.Patch(color=key, label=value))
 
 # Only show every third date
 datepoints = [str(date) if index % 3 == 0 else '' for index, date in enumerate(dates)]
