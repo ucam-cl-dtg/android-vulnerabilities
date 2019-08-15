@@ -4,7 +4,6 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime, date
-import sys
 import os
 import utils
 import json
@@ -36,13 +35,14 @@ def load_from_year(year, cves):
         items = json.load(f)['CVE_Items']
         if items != None:
             for item in items:
-                cve_object = get_subnode(item, 'cve') 
+                cve_object = get_subnode(item, 'cve')
                 cve_data = get_subnode(cve_object, 'CVE_data_meta')
                 cve = get_subnode(cve_data, 'ID')
                 if cve in cves:
                     #print("Processing " + cve)
                     cve_output_data = dict()
-                    description_data = get_subnode(get_subnode(cve_object, 'description'), 'description_data')
+                    description_data = get_subnode(get_subnode(cve_object, 'description'),
+                                                   'description_data')
                     if description_data != None and len(description_data) > 0:
                         value = get_subnode(description_data[0], 'value')
                         cve_output_data['Description'] = value
@@ -108,7 +108,8 @@ def load_date_from_commit(url, driver):
             return time.date()
     elif 'github.com' in url:
         utils.fetchPage(driver, url)
-        time_string = driver.find_element_by_xpath('//div[contains(@class, "commit-meta")]//relative-time').get_attribute('datetime')
+        time_string = driver.find_element_by_xpath(
+            '//div[contains(@class, "commit-meta")]//relative-time').get_attribute('datetime')
         # Assuming the date is always in UTC (Z) - this is clumsy, but Python pre-3.7 doesn't have anything better
         time = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%SZ')
         return time.date()
@@ -201,7 +202,7 @@ def write_data_for_website(cve, data):
 
     # N.B. Report date is when it was first reported publicly
     report_date = re.search(r'[0-9]{4}-[0-9]{2}-[0-9]{2}(?=\.html)', data['URL'])
-    
+
     export['name'] = cve
     export['CVE'] = [[cve, bulletin_ref]]
     # Coordinated disclosure
@@ -209,8 +210,7 @@ def write_data_for_website(cve, data):
     # Slightly different categories than in original set, but still usable
     export['Categories'] = [data['Category']]
     export['Details'] = check_blank(data['Description'], nist_ref)
-    # Discovered on
-    export['Discovered_on'] = []
+    export['Discovered_on'] = check_blank(discovery_date, bulletin_ref)
     export['Discovered_by'] = check_blank(data['Discovered_by'], discovery_ref)
     export['Submission'] = data['Submission']
     if report_date != None:
@@ -246,7 +246,7 @@ def write_data_for_website(cve, data):
     export['Condition'] = data['Condition']
     export['Privilege'] = data['Privilege']
     export['CWE'] = check_blank(data['CWE'], nist_ref)
-    
+
     with open('website-data/{cve}.json'.format(cve=cve), 'w') as f:
         json.dump(export, f, indent=2)
 
@@ -453,7 +453,7 @@ version_dataset = load_manual_data('attributes/versions')
 prev_manual_data = None
 
 for cve, vulnerability in vulnerabilities.items():
-    if(vulnerability['Severity'] == 'Critical'):
+    if vulnerability['Severity'] == 'Critical':
         # Get the fix date
         # Using the latest date of any of the commits as "fixed" date
         fixed = None

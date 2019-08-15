@@ -1,0 +1,42 @@
+{
+  "-1": {
+    "Colour": "gray",
+    "Description": "Not yet released"
+  },
+  "1": {
+    "Colour": "white",
+    "Description": "No known serious vulnerabilities"
+  },
+  "3": {
+    "Colour": "skyblue",
+    "Description": "user mode -> system user"
+  },
+  "5": {
+    "Colour": "aqua",
+    "Description": "user mode -> kernel"
+  },
+  "7": {
+    "Colour": "blue",
+    "Description": "local network -> user mode"
+  },
+  "9": {
+    "Colour": "yellow",
+    "Description": "local network -> system user"
+  },
+  "11": {
+    "Colour": "orange",
+    "Description": "local network -> kernel"
+  },
+  "13": {
+    "Colour": "red",
+    "Description": "remote -> user mode"
+  },
+  "15": {
+    "Colour": "darkred",
+    "Description": "remote -> system user"
+  },
+  "17": {
+    "Colour": "black",
+    "Description": "remote -> kernel"
+  }
+}

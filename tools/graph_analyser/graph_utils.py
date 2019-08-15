@@ -1,14 +1,15 @@
 # Copyright (C) Daniel Carter 2019
 # Licenced under the 2-clause BSD licence
 
-import pygraphviz as pgv
 import datetime
 import json
 import os
 import re
 
-DEVICE_SPECIFIC_COLOR = 'red'
-PATCHED_VULNERABILITY_STYLE = 'dashed'
+import pygraphviz as pgv
+
+_DEVICE_SPECIFIC_COLOR = 'red'
+_PATCHED_VULNERABILITY_STYLE = 'dashed'
 
 def strictify(graph, directed=True):
     '''Make a non-strict graph into a strict graph (with no duplicate edges)'''
@@ -40,6 +41,7 @@ def dates_to_today(start_year):
             if date > today:
                 return dates
             dates.append(date)
+    return dates
 
 def count_edge(edge):
     '''Count the number of vulnerabilities represented by a given edge'''
@@ -48,11 +50,10 @@ def count_edge(edge):
         return 0
     # Look for a number on the label
     number = re.search(r'(?<=\()[0-9]*(?=\ vulnerabilities\))', text)
-    if number == None:
+    if number is None:
         # If there isn't one, it's only for one vulnerability
         return 1
-    else:
-        return int(number.group())
+    return int(number.group())
 
 def load_version_list(path):
     '''Load the list of Android versions from the path given'''
@@ -69,12 +70,14 @@ def import_graph(path, device_specific=False):
     graph = pgv.AGraph(path)
     if not device_specific:
         # Remove red (device-specific) edges
-        graph.delete_edges_from([edge for edge in graph.edges() if edge.attr['color'] == DEVICE_SPECIFIC_COLOR])
+        graph.delete_edges_from([edge for edge in graph.edges()
+                                 if edge.attr['color'] == _DEVICE_SPECIFIC_COLOR])
     return graph
 
 def add_backwards_edges(graph):
     '''Add edges which lower privileges (e.g. an attacker with root access can access user mode'''
-    hierarchy = ['remote', 'proximity', 'network', 'user', 'access-to-data', 'modify-apps', 'control-hardware', 'system', 'unlock-bootloader', 'tee', 'root', 'kernel']
+    hierarchy = ['remote', 'proximity', 'network', 'user', 'access-to-data', 'modify-apps',
+                 'control-hardware', 'system', 'unlock-bootloader', 'tee', 'root', 'kernel']
     for start in hierarchy:
         for end in hierarchy:
             if start == end:
@@ -84,5 +87,6 @@ def add_backwards_edges(graph):
 def remove_patched(graph):
     '''Returns a copy of the graph with only unpatched vulnerabilities'''
     unpatched = graph.copy()
-    unpatched.delete_edges_from([edge for edge in unpatched.edges() if edge.attr['style'] == PATCHED_VULNERABILITY_STYLE])
+    unpatched.delete_edges_from([edge for edge in unpatched.edges()
+                                 if edge.attr['style'] == _PATCHED_VULNERABILITY_STYLE])
     return unpatched
