@@ -1,6 +1,8 @@
 # Copyright (C) Daniel Carter 2019
 # Licenced under the 2-clause BSD licence
 
+# Selection of helper functions for graphviz-based graphs
+
 import datetime
 import json
 import os
@@ -62,6 +64,27 @@ def load_version_list(path):
             rjson = json.load(f)
             return list(rjson.keys())
     return []
+
+def load_version_dates(path):
+    '''Load the release dates of Android versions from the path given'''
+    output = dict()
+    if os.path.isfile(path):
+        with open(path, 'r') as f:
+            rjson = json.load(f)
+            for version, sdateref in rjson.items():
+                sdate = sdateref[0]
+                if len(sdate) == 0:
+                    # Ignore releases with no release date
+                    continue
+                if '?' in sdate or len(sdate) == 0:
+                    # If date is imcomplete
+                    if '?' in sdate[:8]:
+                        # If more than just the day is missing, ignore this release
+                        continue
+                    # If the only problem is a lack of day, then just assume first day of month
+                    sdate = sdate[:8] + '01'
+                output[version] = datetime.datetime.strptime(sdate, '%Y-%m-%d').date()
+    return output
 
 def import_graph(path, device_specific=False):
     '''Import a GraphViz file'''

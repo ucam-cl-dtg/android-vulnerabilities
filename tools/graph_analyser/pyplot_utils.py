@@ -1,6 +1,8 @@
 # Copyright (C) Daniel Carter 2019
 # Licenced under the 2-clause BSD licence
 
+# Helper functions for pyplot graph plotting
+
 import os
 import json
 from collections import OrderedDict

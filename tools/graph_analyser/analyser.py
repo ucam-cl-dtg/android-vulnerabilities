@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+
 # Copyright (C) Daniel Carter 2019
 # Licenced under the 2-clause BSD licence
+
+# Plots a coloured matrix of Android versions over time, showing the types of exploit possible per month per version
 
 import numpy as np
 import pandas
@@ -52,9 +56,17 @@ norm = colors.BoundaryNorm(bounds, cmap.N)
 # Only show every third date
 datepoints = [str(date) if index % 3 == 0 else '' for index, date in enumerate(dates)]
 
+plt.rc('axes', titlesize=24)
+plt.rc('axes', labelsize=18)
+plt.rc('legend', fontsize=14)
+
 plt.matshow(grid, cmap=cmap, norm=norm)
-plt.xticks(np.arange(len(datepoints)), datepoints, rotation=45, ha='left')
+plt.gca().xaxis.tick_bottom()
+plt.title('Android versions vulnerable to attack')
+plt.xticks(np.arange(len(datepoints)), datepoints, rotation=-45, ha='left')
 plt.yticks(np.arange(len(versions)), versions)
+plt.xlabel('Date')
+plt.ylabel('Android version')
 plt.legend(handles=legend)
 
 plt.show()

@@ -63,6 +63,7 @@ values.columns = np.vectorize(lambda x: api_to_os[x])(values.columns)
 
 scores, colours, legend = load_graph_colours()
 
+# Dataframe for output data
 scored_output = pandas.DataFrame(columns=scores, index=values.index, data=0.0)
 
 for date in scored_output.index:
