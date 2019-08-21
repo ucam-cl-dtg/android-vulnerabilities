@@ -35,25 +35,8 @@ for vindex, version in enumerate(versions):
         add_backwards_edges(graph)
         sgraph = strictify(graph)
 
-        # Sequence of odd numbered 'priorities' as they are unambiguously between even numbered limits below
-        if dfs(sgraph, 'remote', 'kernel'):
-            grid[vindex, dindex] = 17
-        elif dfs(sgraph, 'remote', 'system'):
-            grid[vindex, dindex] = 15
-        elif dfs(sgraph, 'remote', 'user'):
-            grid[vindex, dindex] = 13
-        elif dfs(sgraph, 'network', 'kernel'):
-            grid[vindex, dindex] = 11
-        elif dfs(sgraph, 'network', 'system'):
-            grid[vindex, dindex] = 9
-        elif dfs(sgraph, 'network', 'user'):
-            grid[vindex, dindex] = 7
-        elif dfs(sgraph, 'user', 'kernel'):
-            grid[vindex, dindex] = 5
-        elif dfs(sgraph, 'user', 'system'):
-            grid[vindex, dindex] = 3
-        else:
-            grid[vindex, dindex] = 1
+        # Get level of possible exploit
+        grid[vindex, dindex] = get_score(sgraph)
 
 # Export table as csv
 data = pandas.DataFrame(grid, columns=dates, index=versions)

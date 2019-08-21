@@ -90,3 +90,25 @@ def remove_patched(graph):
     unpatched.delete_edges_from([edge for edge in unpatched.edges()
                                  if edge.attr['style'] == _PATCHED_VULNERABILITY_STYLE])
     return unpatched
+
+def get_score(graph):
+    '''Gives a score based on the exploits possible for a particular graph'''
+    # Sequence of odd numbered 'priorities' as they are unambiguously between even numbered limits below
+    if dfs(graph, 'remote', 'kernel'):
+        return 17
+    elif dfs(graph, 'remote', 'system'):
+        return 15
+    elif dfs(graph, 'remote', 'user'):
+        return 13
+    elif dfs(graph, 'network', 'kernel'):
+        return 11
+    elif dfs(graph, 'network', 'system'):
+        return 9
+    elif dfs(graph, 'network', 'user'):
+        return 7
+    elif dfs(graph, 'user', 'kernel'):
+        return 5
+    elif dfs(graph, 'user', 'system'):
+        return 3
+    return 1
+
