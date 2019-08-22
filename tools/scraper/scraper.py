@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+
 # Copyright (C) Daniel Carter 2019
-# Licenced under the 2-clause BSD licence
+# Licensed under the 2-clause BSD licence
+
+# Web scraper for Android Vulnerability Bulletins
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException

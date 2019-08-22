@@ -7,7 +7,7 @@
   "Discovered_by" : [["Christopher Lais (Zinx)", "hackers-handbook"]],
   "Discovered_on" : [],
   "Submission" : [{"by":"dcc52","on":"2019-06-28"}],
-  "Reported_on" : ["2009-12-11", "volez-zen-thought"],
+  "Reported_on" : [["2009-12-11", "volez-zen-thought"]],
   "Fixed_on" : [],
   "Fix_released_on" : [],
   "Affected_versions" : [["2.0-2.0.1", "android-paper"]],

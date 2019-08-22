@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Copyright (C) Daniel Carter 2019
-# Licenced under the 2-clause BSD licence
+# Licensed under the 2-clause BSD licence
 
 # Plots a coloured matrix of Android versions over time, showing the types of exploit possible per month per version
 

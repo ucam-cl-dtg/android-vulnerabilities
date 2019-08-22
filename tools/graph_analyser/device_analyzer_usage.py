@@ -1,34 +1,25 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Copyright (C) Daniel Carter 2019
-# Licenced under the 2-clause BSD licence
+# Licensed under the 2-clause BSD licence
 
 # Analysis of Device Analyzer usage data to plot a graph of the proportion of vulnerable devices
 
-import os
-import json
-
-import numpy as np
 import pandas
 import matplotlib.pyplot as plt
-from datetime import datetime, date
+from datetime import date
 
 from pyplot_utils import load_graph_colours
+from data_utils import load_device_analyzer_data
 
 pandas.plotting.register_matplotlib_converters()
 
 PATH = '../../data/exploitable_devices.json'
 
-if not os.path.isfile(PATH):
-    raise Exception('Device Analyzer data not found')
+records = load_device_analyzer_data(PATH)
 
-# Load data from file
-records = dict()
-with open(PATH, 'r') as f:
-    rjson = json.load(f)
-    for sdate, counts in rjson.items():
-        date = pandas.Timestamp(datetime.strptime(sdate, '%Y-%m-%d'))
-        records[date] = counts
+# Uncomment to only use data from August 2015 onwards (date of first Android Security Bulletin)
+#records = {month:counts for month, counts in records.items() if month >= date(2015,8,1)}
 
 scores, colours, legend = load_graph_colours()
 
@@ -54,6 +45,8 @@ plt.rc('legend', fontsize=14)
 
 plt.stackplot(percent_output.index, percent_output.transpose(), colors=colours.keys())
 plt.legend(handles=legend, loc='lower left')
+# Line below works better if using August 2015 onwards only
+#plt.legend(handles=legend, loc='upper left')
 plt.title('Proportion of devices vulnerable (best-case, using Device Analyzer data)')
 plt.xlabel('Date')
 plt.ylabel('Proportion of devices')

@@ -9,7 +9,7 @@
   "Discovered_on" : [{"date":"2010-08-21","bound":"before","ref":"c-skills-droid2"}],
   "Submission" : [{"by" : "drt24", "on" : "2013-09-05"}],
   "Reported_on" : [],
-  "Fixed_on" : ["2010-08-27","rageagainstthecage-adb-patch"],
+  "Fixed_on" : [["2010-08-27","rageagainstthecage-adb-patch"]],
   "Fix_released_on" : [],
   "Affected_versions" : [["1.6_r1-2.2_r1","adb-setuid-bug-patch"]],
   "Affected_devices" : [["Droid2, backflip and evo","c-skills-droid2"]],
