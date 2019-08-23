@@ -988,7 +988,6 @@ def hook_preconvert_stats():
         for year in range(2011, 2019):
             for month in range(1, 13):
                 testdates.append(datetime.date(year, month, 1))
-        #get_devices_from_file()
         print("Analysing vulnerabilities")
         all_vulnerabilities = vulnerabilities.copy()
         for vset in hidden_vulnerabilities.values():
@@ -997,6 +996,11 @@ def hook_preconvert_stats():
         pprint.pprint(analysis)
         with open('data/exploitable_devices.json', 'w') as f:
             json.dump(analysis, f, indent=2)
+
+        stratified_analysis = analyse_vulnerability_exploits(all_vulnerabilities, testdates, string_keys=True, stratified=True)
+        pprint.pprint(stratified_analysis)
+        with open('data/exploitable_devices_stratified.json', 'w') as f:
+            json.dump(stratified_analysis, f, indent=2)
 
     pool = mp.Pool(4)
 
