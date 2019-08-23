@@ -1,6 +1,6 @@
 # Copyright (C) Sergio Pastrana 2018
 # Copyright (C) Daniel Carter 2019
-# Licenced under the 2-clause BSD licence
+# Licensed under the 2-clause BSD licence
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException

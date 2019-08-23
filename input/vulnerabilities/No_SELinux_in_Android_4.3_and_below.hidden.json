@@ -2,6 +2,7 @@
   "name" : "No SELinux in Android 4.3 and below",
   "CVE" : [],
   "Coordinated_disclosure" : "N/A",
+  "Backportable" : "False",
   "Categories" : ["system"],
   "Details" : [["Android 4.3 and below do not use Security-Enhanced Linux (SELinux) for mandatory access control, which means that a process with root access can gain access to the kernel.", "aosp-selinux"]],
   "Discovered_by" : [["A design feature of the original Android system", "aosp-selinux"]],

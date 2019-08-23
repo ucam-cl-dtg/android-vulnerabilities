@@ -29,11 +29,19 @@ To do so we collect two pieces of information:
 and (2) the date recorded in the Android Open Source Project (AOSP) when the vulnerability was first fixed (or failing that, the date of discovery of the vulnerability).
 If we see an OS version string and build string on any Device Analyzer device before the date of first fix (or discovery) for a vulnerability, we record this as an update which cannot fix that vulnerability; otherwise we record it as an update which might fix that vulnerability.
 
-The {% print(len(raw_vulnerabilities)) %} vulnerabilities we used to plot the figure, together with the dates when they were first fixed or discovered, are:
+The 14 vulnerabilities we used to plot the figure, together with the dates when they were first fixed or discovered, are:
 
-{%
-for vulnerability in raw_vulnerabilities:
-	print('* [' + vulnerability[2] + '](vulnerabilities/' +vulnerability[2].replace(' ', '_') + '), ' + vulnerability[1])
-%}
-
-
+* [KillingInTheNameOf psneuter ashmem](vulnerabilities/KillingInTheNameOf_psneuter_ashmem), 2010-07-13
+* [exploid udev](vulnerabilities/exploid_udev), 2010-07-15
+* [levitator](vulnerabilities/levitator), 2011-03-10
+* [Gingerbreak](vulnerabilities/Gingerbreak), 2011-04-18
+* [zergRush](vulnerabilities/zergRush), 2011-10-06
+* [APK duplicate file](vulnerabilities/APK_duplicate_file), 2013-02-18
+* [APK unchecked name](vulnerabilities/APK_unchecked_name), 2013-06-30
+* [APK unsigned shorts](vulnerabilities/APK_unsigned_shorts), 2013-07-03
+* [Fake ID](vulnerabilities/Fake_ID), 2014-04-17
+* [TowelRoot](vulnerabilities/TowelRoot), 2014-05-03
+* [ObjectInputStream deserializable](vulnerabilities/ObjectInputStream_deserializable), 2014-06-22
+* [Stagefright](vulnerabilities/Stagefright), 2015-04-08
+* [One class to rule them all](vulnerabilities/One_class_to_rule_them_all), 2015-05-22
+* [Stagefright2](vulnerabilities/Stagefright2), 2015-08-15

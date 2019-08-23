@@ -7,7 +7,7 @@
   "Discovered_by" : [["Hiroyuki Ikezoe", "android-paper"]],
   "Discovered_on" : [],
   "Submission" : [{"by":"dcc52", "on":"2019-07-08"}],
-  "Reported_on" : ["2015-03-08", "libmsm-github"],
+  "Reported_on" : [["2015-03-08", "libmsm-github"]],
   "Fixed_on" : [],
   "Fix_released_on" : [],
   "Affected_versions" : [],

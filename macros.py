@@ -18,6 +18,7 @@ from math import sqrt
 import pathlib
 import subprocess
 import multiprocessing as mp
+import pprint
 
 sys.path.append('')# So that we find latex_value
 import latex_value
@@ -25,8 +26,8 @@ from latex_value import set_latex_value, num2word, try_shorten, display_num
 latex_value.latex_value_filename('output/latex.tex')
 latex_value.latex_value_prefix('avo')
 from avohelpers import *
+from builds import analyse_vulnerability_exploits
 sys.path.remove('')
-
 
 def warning(*objs):
     print(*objs, file=sys.stderr)
@@ -310,7 +311,7 @@ class Vulnerability:
         dates, fields = self._dates()
         return dates[-1]
 
-    def exploitable_on(self, date, version=None):
+    def exploitable_on(self, date, version=None, consider_fixes=True):
         """Returns a boolean giving whether this vulnerability was exploitable on a given date,
         using a particular version of Android. If no version is given,
         it is only recorded as exploitable if no Android versions have yet received a patch for it"""
@@ -327,6 +328,9 @@ class Vulnerability:
             first_date = self.first_date()
         if date < first_date:
             return False
+        if not consider_fixes:
+            # If fixes are not considered, it is always exploitable after discovery
+            return True
         if (version == None) and self.fixed_on(date, version):
             return False
         return True
@@ -393,6 +397,12 @@ class Vulnerability:
             else:
                 raise ValueError("unexpected type of ref entry:" + type(entry))
         return results
+
+    def is_backportable(self):
+        """Returns true unless the vulnerability has been specified as non-backportable"""
+        if 'Backportable' in self.jsn and self.jsn['Backportable'] == 'False':
+            return False
+        return True
 
     def _get_reference_url(self, reference):
         return self.jsn['references'][reference]['url']
@@ -475,13 +485,32 @@ class Vulnerability:
             warning("Error in _dateref: " + str(e))
             return "Unknown"
 
-    def startPrivileges(self, condition_privilege_lookup):
+    @staticmethod
+    def condition_privilege_lookup():
+        # For vulnerability analysis, mapping of entry conditions to privilege levels
+        lookup = dict()
+        lookup["affected-app-installed"] = "user"
+        lookup["unknown-source-install-allowed"] = "user"
+        lookup["attacker-on-same-network"] = "network"
+        lookup["usb-debug"] = "system"
+        lookup["file-placed-onto-device"] = "user"
+        lookup["app-uses-vulnerable-api-functions"] = "user"
+        lookup["user-visits-webpage"] = "remote"
+        lookup["malicious-file-viewed"] = "remote"
+        lookup["attacker-in-close-proximity"] = "proximity"
+        lookup["user-has-remote-access"] = "user"
+        lookup["hardware-used-for-attack"] = "hardware"
+        lookup["root"] = "root"
+        lookup["none"] = "remote"
+        return lookup
+
+    def startPrivileges(self):
         privs = []
         for condition in self.jsn['Condition']:
-            privs.append(condition_privilege_lookup[condition])
+            privs.append(Vulnerability.condition_privilege_lookup()[condition])
         return privs
 
-    def graphLines(self, condition_privilege_lookup, fixed):
+    def graphLines(self, fixed):
         """Return an array of strings (in DOT graph format) to show which privilege escalations this vulnerability can perform"""
         sources = []
         lines = []
@@ -493,7 +522,8 @@ class Vulnerability:
             colour = 'black'
         if fixed:
             style = 'dashed'
-        for source in self.startPrivileges(condition_privilege_lookup):
+        #print(self.startPrivileges())
+        for source in self.startPrivileges():
             if source not in sources:
                 sources.append(source)
                 reached = reached.union(set(self.jsn['Privilege']))
@@ -560,23 +590,6 @@ def hook_preconvert_00_os_to_api():
         os_to_api = OrderedDict(rlist)
         python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
 
-# For vulnerability analysis, mapping of entry conditions to privilege levels
-condition_privilege_lookup = dict()
-condition_privilege_lookup["affected-app-installed"] = "user"
-condition_privilege_lookup["unknown-source-install-allowed"] = "user"
-condition_privilege_lookup["attacker-on-same-network"] = "network"
-condition_privilege_lookup["usb-debug"] = "system"
-condition_privilege_lookup["file-placed-onto-device"] = "user"
-condition_privilege_lookup["app-uses-vulnerable-api-functions"] = "user"
-condition_privilege_lookup["user-visits-webpage"] = "remote"
-condition_privilege_lookup["malicious-file-viewed"] = "remote"
-condition_privilege_lookup["attacker-in-close-proximity"] = "proximity"
-condition_privilege_lookup["user-has-remote-access"] = "user"
-condition_privilege_lookup["hardware-used-for-attack"] = "hardware"
-condition_privilege_lookup["root"] = "root"
-condition_privilege_lookup["none"] = "remote"
-
-
 vulnerabilities = []
 # Don't show in lists, and only show on graphs if the required privilege has been already obtained
 hidden_vulnerabilities = defaultdict(list)
@@ -600,7 +613,7 @@ def hook_preconvert_01_vulnerabilities():
             with open('input/vulnerabilities/' + filename, 'r') as f:
                 print("processing: " + filename)
                 vulnerability = Vulnerability(json.load(f))
-                for privilege in vulnerability.startPrivileges(condition_privilege_lookup):
+                for privilege in vulnerability.startPrivileges():
                     hidden_vulnerabilities[privilege].append(vulnerability)
             continue
         with open('input/vulnerabilities/' + filename, 'r') as f:
@@ -630,7 +643,6 @@ def hook_preconvert_01_vulnerabilities():
     last_vuln_date = raw_vulnerabilities[-1][1]
     python_export_file_contents += '\nkey_vuln_labels.append((\'Last AVO\', \'' + last_vuln_date + '\', 1.05, 0))\n'
     python_export_file_contents += '\nkey_vuln_arrows.append((\'' + last_vuln_date + '\', 1.05))\n'
-
 
 submitters = dict()
 
@@ -968,6 +980,24 @@ def hook_preconvert_stats():
     vuln_table += r'\end{tabular} \caption{Critical vulnerabilities in Android} \label{tab:andvulns} \end{table}'
     set_latex_value('TabAndVulns', vuln_table)
 
+    do_device_analyzer_analysis = False
+
+    if do_device_analyzer_analysis:
+        #Simple vulnerabilities-over-time analysis
+        testdates = []
+        for year in range(2011, 2019):
+            for month in range(1, 13):
+                testdates.append(datetime.date(year, month, 1))
+        #get_devices_from_file()
+        print("Analysing vulnerabilities")
+        all_vulnerabilities = vulnerabilities.copy()
+        for vset in hidden_vulnerabilities.values():
+            all_vulnerabilities += vset
+        analysis = analyse_vulnerability_exploits(all_vulnerabilities, testdates, string_keys=True)
+        pprint.pprint(analysis)
+        with open('data/exploitable_devices.json', 'w') as f:
+            json.dump(analysis, f, indent=2)
+
     pool = mp.Pool(4)
 
     month_graphs(months_range(first_date, datetime.date.today()))
@@ -987,6 +1017,7 @@ def hook_preconvert_stats():
     #grapher = lambda v : month_graphs(months_range(release_dates[v], datetime.date.today()), version=v)
     #numpy.vectorize(grapher)(versions)
 
+
 def month_graphs(dates, version=None, show_before_first_discovery=True):
     """Produce a graph per month, showing the exploits that were possible on the first day of that month"""
     version_string = version
@@ -1005,7 +1036,7 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
             if vulnerability.exploitable_on(date, version):
                 if version == None or vulnerability.regex().match(version):
                     yet_found = True
-                    lines, reached = vulnerability.graphLines(condition_privilege_lookup, vulnerability.fixed_on(date, version))
+                    lines, reached = vulnerability.graphLines(vulnerability.fixed_on(date, version))
                     for line in lines:
                         exploitables.append(line)
                         points_reached = points_reached.union(reached)
@@ -1013,7 +1044,7 @@ def month_graphs(dates, version=None, show_before_first_discovery=True):
             for vulnerability in hidden_vulnerabilities[origin]:
                 if vulnerability.exploitable_on(date, version):
                     if version == None or vulnerability.regex().match(version):
-                        lines, reached = vulnerability.graphLines(condition_privilege_lookup, False)
+                        lines, reached = vulnerability.graphLines(False)
                         for line in lines:
                             exploitables.append(line)
         if yet_found:

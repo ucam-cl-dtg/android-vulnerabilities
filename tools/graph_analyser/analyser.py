@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+
 # Copyright (C) Daniel Carter 2019
-# Licenced under the 2-clause BSD licence
+# Licensed under the 2-clause BSD licence
+
+# Plots a coloured matrix of Android versions over time, showing the types of exploit possible per month per version
 
 import numpy as np
 import pandas
@@ -35,25 +39,8 @@ for vindex, version in enumerate(versions):
         add_backwards_edges(graph)
         sgraph = strictify(graph)
 
-        # Sequence of odd numbered 'priorities' as they are unambiguously between even numbered limits below
-        if dfs(sgraph, 'remote', 'kernel'):
-            grid[vindex, dindex] = 17
-        elif dfs(sgraph, 'remote', 'system'):
-            grid[vindex, dindex] = 15
-        elif dfs(sgraph, 'remote', 'user'):
-            grid[vindex, dindex] = 13
-        elif dfs(sgraph, 'network', 'kernel'):
-            grid[vindex, dindex] = 11
-        elif dfs(sgraph, 'network', 'system'):
-            grid[vindex, dindex] = 9
-        elif dfs(sgraph, 'network', 'user'):
-            grid[vindex, dindex] = 7
-        elif dfs(sgraph, 'user', 'kernel'):
-            grid[vindex, dindex] = 5
-        elif dfs(sgraph, 'user', 'system'):
-            grid[vindex, dindex] = 3
-        else:
-            grid[vindex, dindex] = 1
+        # Get level of possible exploit
+        grid[vindex, dindex] = get_score(sgraph)
 
 # Export table as csv
 data = pandas.DataFrame(grid, columns=dates, index=versions)
@@ -69,9 +56,17 @@ norm = colors.BoundaryNorm(bounds, cmap.N)
 # Only show every third date
 datepoints = [str(date) if index % 3 == 0 else '' for index, date in enumerate(dates)]
 
+plt.rc('axes', titlesize=24)
+plt.rc('axes', labelsize=18)
+plt.rc('legend', fontsize=14)
+
 plt.matshow(grid, cmap=cmap, norm=norm)
-plt.xticks(np.arange(len(datepoints)), datepoints, rotation=45, ha='left')
+plt.gca().xaxis.tick_bottom()
+plt.title('Android versions vulnerable to attack')
+plt.xticks(np.arange(len(datepoints)), datepoints, rotation=-45, ha='left')
 plt.yticks(np.arange(len(versions)), versions)
+plt.xlabel('Date')
+plt.ylabel('Android version')
 plt.legend(handles=legend)
 
 plt.show()
