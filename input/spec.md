@@ -108,5 +108,4 @@ These are obtained from various sources, and give details of the type of vulnera
   * `unlock-bootloader` - allows the device's bootloader to be unlocked
   * `control-hardware` - take control of hardware devices
   * `denial-of-service` - execute a DoS attack
-  * `service` - takes the privilege level of system services
   * `tee` - execute within the Trusted Execution Environment
