@@ -228,7 +228,7 @@ def _get_devices():
         # Start by loading in pre-processed devices
         get_devices_from_file()
     start = len(_devices)
-    if start > MAXLEN:
+    if MAXLEN > 0 and start > MAXLEN:
         # If we now have enough devices, stop there
         return _devices[:MAXLEN]
     if start < MAXLEN or MAXLEN == -1:
