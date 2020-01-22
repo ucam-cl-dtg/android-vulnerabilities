@@ -334,7 +334,9 @@ def analyse_vulnerability_exploits(vulnerabilities, dates, string_keys=False, st
             lines += '}\n'
             graph = pgv.AGraph(string=lines)
             add_backwards_edges(graph)
-            graph = strictify(graph)
+            strictgraph = strictify(graph)
+            graph.close() # Otherwise we leak memory
+            graph = strictgraph
             # Find greatest possible exploit
             score = get_score(graph)
             if stratified:
@@ -344,6 +346,7 @@ def analyse_vulnerability_exploits(vulnerabilities, dates, string_keys=False, st
                     number_per_score[version][score] += 1
             else:
                 number_per_score[score] += 1
+            graph.close() # Otherwise we leak memory
         if string_keys:
             score_per_date[str(date)] = number_per_score
         else:

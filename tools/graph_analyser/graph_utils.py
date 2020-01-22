@@ -14,7 +14,10 @@ _DEVICE_SPECIFIC_COLOR = 'red'
 _PATCHED_VULNERABILITY_STYLE = 'dashed'
 
 def strictify(graph, directed=True):
-    '''Make a non-strict graph into a strict graph (with no duplicate edges)'''
+    '''Make a non-strict graph into a strict graph (with no duplicate edges)
+       Call .close() on original graph if not to be reused and ensure .close()
+       is called on the returned graph.
+    '''
     result = pgv.AGraph(strict=True, directed=directed)
     result.add_edges_from(graph.edges())
     return result
@@ -87,7 +90,9 @@ def load_version_dates(path):
     return output
 
 def import_graph(path, device_specific=False):
-    '''Import a GraphViz file'''
+    '''Import a GraphViz file
+       You must call .close() on resulting AGraph when you are finished with it
+    '''
     if not os.path.isfile(path):
         return None
     graph = pgv.AGraph(path)
