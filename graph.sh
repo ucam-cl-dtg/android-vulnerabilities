@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Takes a folder of .DOT graph files and produces an animated GIF of the graph data
 # By default, works on folder of all vulnerabilities
 VERSION=${1:-all}

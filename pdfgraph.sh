@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Takes a folder of .DOT files and produces PDF files with a graph of each one
 
 # By default, works on folder of all vulnerabilities
