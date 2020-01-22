@@ -998,14 +998,14 @@ def hook_preconvert_stats():
         for vset in hidden_vulnerabilities.values():
             all_vulnerabilities += vset
         analysis = analyse_vulnerability_exploits(all_vulnerabilities, testdates, string_keys=True)
-        pprint.pprint(analysis)
+        #pprint.pprint(analysis)
         with open('data/exploitable_devices.json', 'w') as f:
             json.dump(analysis, f, indent=2)
         del analysis # Drop references to assist GC
 
         print('Stratified vulnerability analysis')
         stratified_analysis = analyse_vulnerability_exploits(all_vulnerabilities, testdates, string_keys=True, stratified=True)
-        pprint.pprint(stratified_analysis)
+        #pprint.pprint(stratified_analysis)
         with open('data/exploitable_devices_stratified.json', 'w') as f:
             json.dump(stratified_analysis, f, indent=2)
         del stratified_analysis # Drop references to assist GC
