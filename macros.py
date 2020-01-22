@@ -590,6 +590,23 @@ def hook_preconvert_00_os_to_api():
         os_to_api = OrderedDict(rlist)
         python_export_file_contents += '\nos_to_api = ' + str(rlist) + '\n'
 
+
+submitters = dict()
+def hook_preconvert_01_submitters():
+    for filename in os.listdir('input/submitters'):
+        if not filename.endswith('.json'):
+            continue
+        with open('input/submitters/' + filename, 'r') as f:
+            print("processing submitter: " + filename)
+            submitter = Submitter(json.load(f))
+            submitters[submitter.ID] = submitter
+    set_latex_value('NumSubmitters', len(submitters))
+    for ID, submitter in list(submitters.items()):
+        p = Page("submitters/{ID}.md".format(ID=ID), virtual=str(
+            submitter), title="{name} ({ID})".format(name=submitter.name, ID=ID))
+        pages.append(p)
+
+
 vulnerabilities = []
 # Don't show in lists, and only show on graphs if the required privilege has been already obtained
 hidden_vulnerabilities = defaultdict(list)
@@ -600,10 +617,10 @@ by_version = defaultdict(list)
 by_manufacturer = defaultdict(list)
 by_submitter = defaultdict(list)
 by_category = defaultdict(list)
-raw_vulnerabilities = []
 
-def hook_preconvert_01_vulnerabilities():
-    global raw_vulnerabilities, python_export_file_contents
+def hook_preconvert_02_vulnerabilities():
+    global python_export_file_contents
+    raw_vulnerabilities = []
     for filename in os.listdir('input/vulnerabilities'):
         if filename == 'template.json':  # skip over template
             continue
@@ -611,7 +628,7 @@ def hook_preconvert_01_vulnerabilities():
             continue
         if filename.endswith('.hidden.json'):
             with open('input/vulnerabilities/' + filename, 'r') as f:
-                print("processing: " + filename)
+                print("processing vulnerability: " + filename)
                 vulnerability = Vulnerability(json.load(f))
                 for privilege in vulnerability.startPrivileges():
                     hidden_vulnerabilities[privilege].append(vulnerability)
@@ -644,18 +661,6 @@ def hook_preconvert_01_vulnerabilities():
     python_export_file_contents += '\nkey_vuln_labels.append((\'Last AVO\', \'' + last_vuln_date + '\', 1.05, 0))\n'
     python_export_file_contents += '\nkey_vuln_arrows.append((\'' + last_vuln_date + '\', 1.05))\n'
 
-submitters = dict()
-
-def hook_preconvert_02_submitters():
-    for filename in os.listdir('input/submitters'):
-        if not filename.endswith('.json'):
-            continue
-        with open('input/submitters/' + filename, 'r') as f:
-            print("processing: " + filename)
-            submitter = Submitter(json.load(f))
-            submitters[submitter.ID] = submitter
-    set_latex_value('NumSubmitters', len(submitters))
-
 
 def hook_preconvert_03_by():
     global by_year, by_version, by_manufacturer, by_submitter, by_category
@@ -674,12 +679,6 @@ def hook_preconvert_vulnpages():
             name=vulnerability.urlname), virtual=str(vulnerability), title=vulnerability.name)
         pages.append(p)
 
-
-def hook_preconvert_submitterpages():
-    for ID, submitter in list(submitters.items()):
-        p = Page("submitters/{ID}.md".format(ID=ID), virtual=str(
-            submitter), title="{name} ({ID})".format(name=submitter.name, ID=ID))
-        pages.append(p)
 
 manufacturer_scores = dict()
 
@@ -730,11 +729,17 @@ def hook_preconvert_04_load_scores():
 
 
 def hook_preconvert_bypages():
+    global by_year, by_version, by_manufacturer, by_submitter, by_category
     by_pages(by_year, 'year')
+    del by_year # Drop references after we have finished using them to assist GC
     by_pages(by_version, 'version')
+    del by_version
     by_pages(by_manufacturer, 'manufacturer')
+    #del by_manufacturer # Can't delete as used by embedded python in pages
     by_pages(by_submitter, 'submitter')
+    del by_submitter
     by_pages(by_category, 'category')
+    del by_category
 
 
 max_vulns_per_key = 5
@@ -988,7 +993,7 @@ def hook_preconvert_stats():
         for year in range(2011, 2019):
             for month in range(1, 13):
                 testdates.append(datetime.date(year, month, 1))
-        print("Analysing vulnerabilities")
+        print('Analysing vulnerabilities')
         all_vulnerabilities = vulnerabilities.copy()
         for vset in hidden_vulnerabilities.values():
             all_vulnerabilities += vset
@@ -996,11 +1001,14 @@ def hook_preconvert_stats():
         pprint.pprint(analysis)
         with open('data/exploitable_devices.json', 'w') as f:
             json.dump(analysis, f, indent=2)
+        del analysis # Drop references to assist GC
 
+        print('Stratified vulnerability analysis')
         stratified_analysis = analyse_vulnerability_exploits(all_vulnerabilities, testdates, string_keys=True, stratified=True)
         pprint.pprint(stratified_analysis)
         with open('data/exploitable_devices_stratified.json', 'w') as f:
             json.dump(stratified_analysis, f, indent=2)
+        del stratified_analysis # Drop references to assist GC
 
     pool = mp.Pool(4)
 
