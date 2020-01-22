@@ -269,7 +269,8 @@ def _get_devices():
                 print('Invalid file:', dump)
                 continue
         # Save processed data out to new JSON file
-        save_devices_to_file()
+        if len(dumps) > 0: # Don't rewrite file if we didn't change it
+            save_devices_to_file()
     return _devices
 
 def get_model_details(device_id):
