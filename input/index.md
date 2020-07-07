@@ -130,8 +130,8 @@ However, we are now including all vulnerabilities marked as critical on Google's
     <p><a href="https://dcc52.user.srcf.net">Daniel Carter</a></p></p>
    </div>
    <div class="three columns" style="margin:auto; text-align:center;">
-    <a href="https://www.cl.cam.ac.uk/~drt24/"><img src="images/people/drt24.jpg" alt="Picture of Daniel Thomas"/></a>
-    <p><a href="https://www.cl.cam.ac.uk/~drt24/">Daniel Thomas</a></p>
+    <a href="https://personal.cis.strath.ac.uk/d.thomas/"><img src="images/people/drt24.jpg" alt="Picture of Daniel Thomas"/></a>
+    <p><a href="https://personal.cis.strath.ac.uk/d.thomas/">Daniel Thomas</a></p>
    </div>
    <div class="three columns" style="margin:auto; text-align:center;">
     <a href="https://www.cl.cam.ac.uk/~arb33/"><img src="images/people/arb33.jpg" alt="Picture of Alastair Beresford"/></a>
